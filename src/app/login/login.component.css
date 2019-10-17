@@ -1,0 +1,18 @@
+.login-form {
+  min-width: 150px;
+  max-width: 350px;
+  width: 50%;
+  border: 1px solid lightgray;
+  padding:20px;
+  border-radius: 10px;
+  background: #FFF;
+}
+
+.login-field-full-width {
+  width: 100%;
+}
+
+.register-link{
+  text-decoration: none;
+  color: rgba(0,120,212,1);
+}

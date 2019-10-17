@@ -1,0 +1,87 @@
+<!-- <div class="login-page">
+    <div class="content">
+       <h1 class="app-name">Sb Admin Material</h1>
+        <form class="login-form" fxFlex  >
+            <div class="text-center">
+                <h2 class="app-name">Sb Admin Material</h2>
+            </div>
+            <div fxFlex  fxlayout="row" fxlayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Email">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput type="password" placeholder="Password">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxFlex  fxLayout="row" fxLayout.lt-md="column" style="margin: 20px 0 30px 0">
+                <div fxFlex>
+                    <mat-checkbox color="primary">Remember Me</mat-checkbox>
+                </div>
+                <div fxFlex  fxLayoutAlign="end">
+                    <a href="javascript:void(0)">Forget Password</a>
+                </div>
+            </div>
+            <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <button mat-raised-button color="primary" class="w-100" (click)="onLogin()">Login</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div> -->
+
+<div align="center">
+  <p><br><br></p>
+  <form [formGroup]="loginForm" (keyup.enter)="validateUser()" class="login-form">
+
+      <div class="mat-h1">
+          Login
+      </div>
+
+      <mat-form-field class="login-field-full-width">
+          <mat-label>User Name</mat-label>
+          <input matInput placeholder="Enter User Name" formControlName="userNameFormControl">
+          <mat-error
+              *ngIf="loginForm.controls.userNameFormControl.hasError('pattern') && !loginForm.controls.userNameFormControl.hasError('required')">
+              Please enter a valid User Name
+          </mat-error>
+          <mat-error *ngIf="loginForm.controls.userNameFormControl.hasError('required')">
+              User Name is <strong>required</strong>
+          </mat-error>
+      </mat-form-field>
+
+      <p></p>
+
+      <mat-form-field class="login-field-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Enter Password" [type]="passwordHide? 'password' : 'text'"
+              formControlName="passwordFormControl">
+          <button mat-icon-button matSuffix (click)="passwordHide=!passwordHide">
+              <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error
+              *ngIf="loginForm.controls.passwordFormControl.hasError('pattern') && !loginForm.controls.passwordFormControl.hasError('required')">
+              Please enter a valid password
+          </mat-error>
+          <mat-error *ngIf="loginForm.controls.passwordFormControl.hasError('required')">
+              Password is <strong>required</strong>
+          </mat-error>
+      </mat-form-field>
+
+      <p><br /></p>
+
+      <button mat-raised-button color="primary" class="login-field-full-width" (click)="validateUser()"><b>Login</b></button>
+      <p></p>
+
+      <span class="mat-h3">Create an account? </span><a routerLink="/register" class="register-link  mat-h3"
+          routerActiveLink="active">Sign up</a>
+      <mat-error class="mat-h3">{{errorMsg}}</mat-error>
+  </form>
+</div>

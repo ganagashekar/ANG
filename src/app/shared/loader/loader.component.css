@@ -1,0 +1,9 @@
+.progress-loader
+{
+    top: 65px;
+    position: relative;
+}
+
+.mat-progress-bar {
+    height: 2px;
+}
