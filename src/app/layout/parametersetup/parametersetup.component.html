@@ -1,3 +1,97 @@
-<p>
-  parametersetup works!
-</p>
+        <mat-form-field>
+        <mat-label>Stack Name</mat-label>
+         <mat-select [(ngModel)]="parameterFilter.StackId" (ngModelChange)="StackChange()">
+
+            <mat-option [value]="stacks.id" *ngFor="let stacks of stacksArray">{{stacks.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
+      <div fxFlex>
+      <table mat-table [dataSource]="paramListDataSource" class="mat-elevation-z8 mat-table" matSort matSortStart="desc">
+
+          <!--- Note that these columns can be defined in any order.
+    The actual rendered columns are set as a property on the row definition" -->
+
+          <!-- edit icon -->
+          <ng-container matColumnDef="editAction">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let taskScheduler">
+                  <button mat-icon-button>
+                      <i class="material-icons" title="Edit">create</i>
+                  </button>
+              </td>
+          </ng-container>
+
+          <!-- delete icon -->
+          <ng-container matColumnDef="deleteAction">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let taskScheduler">
+                  <button mat-icon-button class="padding-left-20px">
+                      <i class="material-icons" title="click here to delete Task">close</i>
+                  </button>
+              </td>
+          </ng-container>
+
+          <!-- instanceName Column -->
+          <ng-container matColumnDef="confgid">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> confgid </th>
+              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.confgid}} </td>
+          </ng-container>
+
+          <!-- taskName Column -->
+          <ng-container matColumnDef="paramname">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Param name </th>
+              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.paramname}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="paramunit">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Param Unit </th>
+              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.paramunit}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="paramminval">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Param min val </th>
+              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.paramminval}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="parammaxval">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> param max val </th>
+              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.parammaxval}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="threshholdval">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Threshhold val </th>
+              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.threshholdval}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="paramposition">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Param position </th>
+              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.paramposition}} </td>
+          </ng-container>
+
+          <!-- startDate Column -->
+          <ng-container matColumnDef="creatts">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.creatts | date:'MM/dd/yyyy'}} </td>
+          </ng-container>
+
+          <!-- startTime Column -->
+          <ng-container matColumnDef="updtts">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Modified Time </th>
+              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.updtts |date:'MM/dd/yyyy' }} </td>
+          </ng-container>
+
+          <!-- frequencyTypeName Column -->
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+
