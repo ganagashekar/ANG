@@ -27,6 +27,11 @@ getAllStacks(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
     '/GetStacks?StackId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
   }
 
+  getAllSites(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+    return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+      '/GetSites?SiteId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+    }
+
   getReferencerecords(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
     return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
       '/GetReferenceRecords?ReferenceTypeId=' + referenceRecordsTypeId + '&IncludeAll=' + All);

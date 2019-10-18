@@ -39,6 +39,7 @@ export class ParametersetupComponent implements OnInit , AfterViewInit {
 
     this. getAllStacks();
     this.getAllParameterList();
+    this.parameterFilter.StackId = 0;
   }
 
   ngAfterViewInit(): void {
