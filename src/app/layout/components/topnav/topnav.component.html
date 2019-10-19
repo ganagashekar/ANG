@@ -19,7 +19,7 @@
 
         <mat-form-field>
 
-           <mat-select [value]="SiteId">
+           <mat-select [value]="SiteId" (selectionChange)="RefreshCurrentPage($event)">
 
               <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.name}}
               </mat-option>

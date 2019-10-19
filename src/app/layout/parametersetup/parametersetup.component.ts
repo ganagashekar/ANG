@@ -18,7 +18,7 @@ export class ParametersetupComponent implements OnInit , AfterViewInit {
   stacksArray: ReferenceRecords[] = [];
   paramListDataSource: MatTableDataSource<ParamModel>;
   displayedColumns: string[] = [
-    'editAction', 'confgid', 'paramname', 'paramunit',
+    'editAction', 'StackName', 'paramname', 'paramunit',
     'paramminval', 'parammaxval', 'threshholdval',
     'paramposition', 'creatts', 'updtts',
    'deleteAction'];
@@ -30,7 +30,7 @@ export class ParametersetupComponent implements OnInit , AfterViewInit {
    constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _setupsservices: SetupsService,
     private snackBar: MatSnackBar) {
-    _appcomponent.currenturl = '/taskSchedulerList';
+    _appcomponent.currenturl = '/Paramsetup';
     this.paramListDataSource = new MatTableDataSource<ParamModel>();
     this.parameterFilter = new ParameterFilter();
   }
@@ -40,6 +40,7 @@ export class ParametersetupComponent implements OnInit , AfterViewInit {
     this. getAllStacks();
     this.getAllParameterList();
     this.parameterFilter.StackId = 0;
+    this.parameterFilter.SiteId = this._appcomponent.SiteId;
   }
 
   ngAfterViewInit(): void {
@@ -47,12 +48,13 @@ export class ParametersetupComponent implements OnInit , AfterViewInit {
     this.paramListDataSource.paginator = this.paginator;
   }
 
-  StackChange(event) {
-    // this.schedulerFilter.IsActive = event.checked;
-    // this.getTaskSchedulerList();
+  StackChange() {
+    this.getAllParameterList();
   }
 
   getAllParameterList(): void {
+
+    this.parameterFilter.SiteId = this._appcomponent.SiteId;
     this._setupsservices.getAllParameterList(this.parameterFilter).subscribe(resp => {
      this.paramListDataSource.data = resp.model as ParamModel[];
    }, error => {

@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   dialogRef;
   @Input() userName = '';
   @Input() currenturl = '';
-  @Input() SiteId = '';
+  @Input() SiteId = 0;
   @Input() UserId = 0;
 
     constructor(private translate: TranslateService) {

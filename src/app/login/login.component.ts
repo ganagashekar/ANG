@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('userName', data.model.userName);
         localStorage.setItem('isLoggedin', 'true');
         this._appcomponent.userName = data.model.userName;
-        this._appcomponent.SiteId = data.model.vendorsiteId;
+        this._appcomponent.SiteId = Number(data.model.vendorsiteId);
         this._appcomponent.UserId = data.model.userId;
         this.router.navigate(['/dashboard']);
       } else {

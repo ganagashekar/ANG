@@ -18,7 +18,7 @@ export class TopnavComponent implements OnInit {
 
  constructor( private _appcomponent: AppComponent, public router: Router,
   private _setupsservices: SetupsService, private translate: TranslateService) {
-  _appcomponent.currenturl = '/taskSchedulerList';
+  // _appcomponent.currenturl = '/taskSchedulerList';
   this.router.events.subscribe(val => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
@@ -54,6 +54,11 @@ export class TopnavComponent implements OnInit {
     onLoggedout() {
         localStorage.removeItem('isLoggedin');
         this.router.navigate(['/login']);
+    }
+
+    RefreshCurrentPage(event) {
+      this._appcomponent.SiteId = event.value;
+      this.router.navigate([this._appcomponent.currenturl]);
     }
 
     changeLang(language: string) {

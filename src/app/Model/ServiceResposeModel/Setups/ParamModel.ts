@@ -12,6 +12,7 @@ export class ParamModel {
     length: number;
     creatts: DateTime;
     updtts: DateTime;
+    stackName: string;
 
 
 
