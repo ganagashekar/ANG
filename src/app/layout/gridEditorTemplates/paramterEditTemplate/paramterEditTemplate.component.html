@@ -1,0 +1,107 @@
+<div class="divTaskScheduler">
+    <div fxFlex>
+    <form [formGroup]="schedulerForm" class="scheduler-form">
+        <div class="mat-h2 header">
+            Parameter <b class="selectedEditName"> {{SelectedParam}}</b>
+        </div>
+
+        <!-- <mat-form-field class="full-width">
+            <mat-label>Instance Name</mat-label>
+            <mat-error *ngIf="schedulerForm.controls.instanceId.hasError('required')">
+                Instance Name is
+                <strong>required</strong>
+            </mat-error>
+            <mat-select formControlName="instanceId" (selectionChange)="StackChange($event.value)">
+                <mat-option [value]="stacks.id" *ngFor="let stacks of stacksArray">{{stacks.name}}
+                  </mat-option>
+            </mat-select>
+        </mat-form-field> -->
+
+        <mat-form-field class="full-width">
+            <mat-label>Equipment</mat-label>
+            <mat-error *ngIf="schedulerForm.controls.confgid.hasError('required')">
+                Equipment Name is
+                <strong>required</strong>
+            </mat-error>
+            <mat-select formControlName="confgid" (selectionChange)="StackChange($event.value)">
+                <mat-option [value]="stacks.id" *ngFor="let stacks of stacksArray">{{stacks.name}}
+                  </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="half-width float-left">
+            <mat-label>Parameter</mat-label>
+            <mat-error *ngIf="schedulerForm.controls.paramname.hasError('required')">
+                Parameter Name is
+                <strong>required</strong>
+            </mat-error>
+            <mat-select formControlName="paramname" (selectionChange)="ParamterChange($event.value)" >
+                <mat-option [value]="param.name" *ngFor="let param of paramArray">{{param.name}}
+                  </mat-option>
+            </mat-select>
+        </mat-form-field>
+         <mat-form-field class="half-width float-right">
+            <mat-label>Units</mat-label>
+            <mat-error *ngIf="schedulerForm.controls.paramunit.hasError('required')">
+                ParamUnits Name is
+                <strong>required</strong>
+            </mat-error>
+            <mat-select formControlName="paramunit" >
+                <mat-option [value]="param.name" *ngFor="let param of paramUnitsArray">{{param.name}}
+                  </mat-option>
+            </mat-select>
+
+
+        </mat-form-field>
+         <mat-form-field class="half-width float-left">
+            <mat-label>Paramter Min.</mat-label>
+            <mat-error *ngIf="schedulerForm.controls.paramminval.hasError('required')">
+                Paramter Min is
+                <strong>required</strong>
+            </mat-error>
+            <input matInput type="number" min="1" formControlName="paramminval">
+        </mat-form-field>
+
+         <mat-form-field class="half-width float-right">
+            <mat-label>Parameter Max.</mat-label>
+            <mat-error *ngIf="schedulerForm.controls.parammaxval.hasError('required')">
+                Paramter Min is
+                <strong>required</strong>
+            </mat-error>
+            <input matInput type="number" min="1" formControlName="parammaxval">
+        </mat-form-field>
+        <mat-form-field class="half-width float-left">
+            <mat-label>Parameter Threshhold</mat-label>
+            <mat-error *ngIf="schedulerForm.controls.threshholdval.hasError('required')">
+                Paramter Threshhold is
+                <strong>required</strong>
+            </mat-error>
+            <input matInput type="number" min="1" formControlName="threshholdval">
+        </mat-form-field>
+
+        <mat-form-field class="half-width float-right">
+            <mat-label>Parameter Position</mat-label>
+            <mat-error *ngIf="schedulerForm.controls.paramposition.hasError('required')">
+                Paramter Position is
+                <strong>required</strong>
+            </mat-error>
+            <input matInput type="number" min="1" formControlName="paramposition">
+        </mat-form-field>
+
+        <div layout="row" layout-align="center center" class="divBtnCon float-right">
+            <div fxFlex>
+                <button mat-raised-button color="primary" class="btn add-btn fr" (click)="onFormSubmit()"
+                [disabled]="!schedulerForm.valid ">
+                <mat-icon>save</mat-icon>
+                <b *ngIf="isAdd == true"> Add</b>
+                <b *ngIf="isAdd != true"> Update</b>
+            </button>
+            <button mat-raised-button class="btn cancel-btn fr" (click)="onCloseClick()">
+                <mat-icon>close</mat-icon> <b>Cancel</b>
+            </button>
+
+            </div>
+        </div>
+        </form>
+        </div>
+        </div>

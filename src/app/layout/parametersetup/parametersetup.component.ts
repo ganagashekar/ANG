@@ -7,6 +7,8 @@ import { ParamModel } from 'src/app/Model/ServiceResposeModel/Setups/ParamModel'
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
 import { SetupsService } from 'src/app/shared/services/Setups.service';
+import { ParamterEditTemplateComponent } from '../gridEditorTemplates/paramterEditTemplate/ParamterEditTemplateComponent';
+import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-parametersetup',
@@ -69,5 +71,64 @@ getAllStacks(): void {
   });
 }
 
+editParameter(scheduler: ParamModel): void {
+  const dialogRef = this._dialog.open(ParamterEditTemplateComponent, {
+    width: '500px',
+    data: { action: 'edit', scheduler }
+  });
+  dialogRef.componentInstance.parameterEditorEmitter.subscribe((response: any) => {
+    if (response.model > 0) {
+      this. getAllParameterList();
+      this.showSnackBar('Parameter Updated Successfully.');
+    } else {
+      this.showSnackBar('Error occurred while updating the Parameter.', true);
+    }
+  });
+}
 
+deleteParameter(paramid: number): void {
+  const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
+    width: '420px',
+    data: { Title: 'Confirm', Message: 'Are you sure want to delete this Parameter ?' }
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this._setupsservices.deleteParameter(paramid).subscribe((response: any) => {
+        if (response.model) {
+          this. getAllParameterList();
+          // this.showSnackBar('Scheduled Parameter Deleted Successfully.');
+        } else {
+        // this.showSnackBar('Error occurred while deleting the Parameter.', true);
+        }
+        this.showSnackBar(response.message);
+      }, error => {
+        console.log('Error: ' + error);
+      });
+    }
+  });
+}
+
+NewParameter(): void {
+  const dialogRef = this._dialog.open(ParamterEditTemplateComponent, {
+    width: '500px',
+    data: { action: 'add', ParamModel }
+  });
+  dialogRef.componentInstance.parameterEditorEmitter.subscribe((response: any) => {
+    if (response.model > 0) {
+      this.getAllParameterList();
+      this.showSnackBar(response.message);
+    } else {
+      this.showSnackBar(response.message, true);
+    }
+  });
+}
+showSnackBar(message: string, isError: boolean = false): void {
+  if (isError) {
+    this.snackBar.open(message, 'Ok');
+  } else {
+    this.snackBar.open(message, 'Ok', {
+      duration: 3000
+    });
+  }
+}
 }

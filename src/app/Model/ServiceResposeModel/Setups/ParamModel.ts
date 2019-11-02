@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
 
 export class ParamModel {
-    paramid: bigint;
-    confgid: bigint;
+    paramid: number;
+    confgid: number;
     paramname: string;
     paramunit: string;
     paramminval: string;

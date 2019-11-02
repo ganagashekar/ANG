@@ -13,6 +13,8 @@ import { ParameterFilter } from 'src/app/Model/FilterModels/ParameterFilter';
   })
 
   export class SetupsService {
+
+
     _baseURL: string;
   _headers: any;
   userName: string;
@@ -40,6 +42,17 @@ getAllStacks(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
     getAllParameterList(filter: ParameterFilter): Observable<any> {
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/GetParametersAsync', filter);
+    }
+    saveParameter(paramterDetails: any):  Observable<any> {
+      return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
+        '/SaveParameterAsync', paramterDetails);
+    }
+
+
+    deleteParameter(paramid: number): Observable<boolean> {
+      // const httpOptions = { headers: this._headers };httpOptions
+      return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
+        '/DeleteParameter?paramId=' + paramid);
     }
 
   }

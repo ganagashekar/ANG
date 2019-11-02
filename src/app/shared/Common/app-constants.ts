@@ -4,6 +4,7 @@ export const appConstants = {
     APICONTROLLER_REFERENCE: 'v1/ReferenceRecords',
 
     APICONTROLLER_Admin: 'v1/Admin',
+    APICONTROLLER_Dashboard: 'v1/Dashboard',
 
     DATE_FORMAT: 'MM/DD/YYYY',
     USERNAME_PATTERN: '[a-zA-Z0-9]{3,15}',

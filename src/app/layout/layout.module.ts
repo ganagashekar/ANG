@@ -11,6 +11,9 @@ import { Screen2Component } from './screen2/screen2.component';
 import { ParametersetupModule } from './parametersetup/parametersetup.module';
 
 
+
+
+
 @NgModule({
     imports: [
         CommonModule,
@@ -20,7 +23,7 @@ import { ParametersetupModule } from './parametersetup/parametersetup.module';
         ParametersetupModule,
 
     ],
-    declarations: [Screen2Component,  LayoutComponent, NavComponent, TopnavComponent, SidebarComponent     ]
+    declarations: [Screen2Component, LayoutComponent, NavComponent, TopnavComponent, SidebarComponent     ]
 
 })
 export class LayoutModule { }
