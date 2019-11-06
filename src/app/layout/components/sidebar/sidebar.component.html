@@ -12,6 +12,18 @@
 
         <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/Paramsetup']">
           <mat-icon class="sidenav-icon">settings_input_composite</mat-icon> {{ 'Parameter' | translate }}
-      </a>
+        </a>
+
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/ErrorCodeSetup']">
+          <mat-icon class="sidenav-icon">error</mat-icon> {{ 'ErrorCodeSetup' | translate }}
+        </a>
+
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/Controllersetup']">
+          <mat-icon class="sidenav-icon">settings_input_composite</mat-icon> {{ 'Controller' | translate }}
+        </a>
+
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/ControllerBusSetup']">
+          <mat-icon class="sidenav-icon">settings_input_composite</mat-icon> {{ 'Controller-bus' | translate }}
+        </a>
     </mat-nav-list>
 </div>

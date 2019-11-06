@@ -8,9 +8,15 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
 import { Screen2Component } from './screen2/screen2.component';
+import { ControllerComponent } from './Controller/Controller.component';
+import { ControllerBusComponent } from './Controller-bus/Controller-bus.component';
 import { ParametersetupModule } from './parametersetup/parametersetup.module';
-
-
+import { ErrorCodeSetupComponent } from './ErrorCodeSetup/ErrorCodeSetup.component';
+import { ErrorCodeEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/ErrorCodeEditTemplate/ErrorCodeEditTemplate.Component';
+import { CntrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/CntrEditTemplate/CntrEditTemplate.component';
+import { CntrbusEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/CntrbusEditTemplate/CntrbusEditTemplate.component';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,9 +27,14 @@ import { ParametersetupModule } from './parametersetup/parametersetup.module';
         MaterialModule,
         TranslateModule,
         ParametersetupModule,
+        FormsModule,
+        ReactiveFormsModule,
 
     ],
-    declarations: [Screen2Component, LayoutComponent, NavComponent, TopnavComponent, SidebarComponent     ]
+    entryComponents: [ErrorCodeEditTemplateComponent, CntrEditTemplateComponent , CntrbusEditTemplateComponent],
+    declarations: [Screen2Component, LayoutComponent, NavComponent, TopnavComponent, SidebarComponent,
+      ErrorCodeSetupComponent, ErrorCodeEditTemplateComponent, ControllerComponent, CntrEditTemplateComponent,
+      ControllerBusComponent, CntrbusEditTemplateComponent ]
 
 })
 export class LayoutModule { }

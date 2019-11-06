@@ -4,8 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import { Screen1Component } from './screen1/screen1.component';
 import { Screen2Component } from './screen2/screen2.component';
+import { ControllerComponent } from './Controller/Controller.component';
+import { ControllerBusComponent } from './Controller-bus/Controller-bus.component';
 import { ParametersetupComponent } from './parametersetup/parametersetup.component';
-
+import { ErrorCodeSetupComponent } from './ErrorCodeSetup/ErrorCodeSetup.component';
 
 
 
@@ -32,9 +34,21 @@ const routes: Routes = [
                 component: Screen2Component
             },
             {
+              path: 'Controllersetup',
+              component: ControllerComponent
+            },
+            {
+              path: 'ControllerBusSetup',
+              component: ControllerBusComponent
+            },
+            {
               path: 'Paramsetup',
               component: ParametersetupComponent
-          }
+            },
+            {
+              path: 'ErrorCodeSetup',
+              component: ErrorCodeSetupComponent
+            }
         ]
     }
 ];

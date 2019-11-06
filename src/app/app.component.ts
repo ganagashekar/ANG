@@ -15,6 +15,9 @@ export class AppComponent implements OnInit {
   @Input() currenturl = '';
   @Input() SiteId = 0;
   @Input() UserId = 0;
+  @Input() BusId = 0;
+  @Input() ErrorCode = '';
+  @Input() MacId = '';
 
     constructor(private translate: TranslateService) {
         translate.setDefaultLang('en');
