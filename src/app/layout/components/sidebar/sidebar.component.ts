@@ -51,13 +51,25 @@ export class SidebarComponent implements OnInit {
       },
 
       {
-        displayName: 'Masters',
+        displayName: 'Setups',
         iconName: 'settings_applications',
         children: [
           {
             displayName: 'Parameter',
             iconName: 'settings_input_component',
             route: 'Paramsetup'
+
+          },
+          {
+            displayName: 'Users',
+            iconName: 'user',
+            route: 'Userinfosetup'
+
+          },
+          {
+            displayName: 'Controller',
+            iconName: 'user',
+            route: 'ControllerSetup'
 
           }
 
