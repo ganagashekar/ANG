@@ -78,8 +78,9 @@ editParameter(scheduler: ParamModel): void {
   });
   dialogRef.componentInstance.parameterEditorEmitter.subscribe((response: any) => {
     if (response.model > 0) {
-      this. getAllParameterList();
       this.showSnackBar('Parameter Updated Successfully.');
+      this. getAllParameterList();
+
     } else {
       this.showSnackBar('Error occurred while updating the Parameter.', true);
     }

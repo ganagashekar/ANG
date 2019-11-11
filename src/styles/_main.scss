@@ -17,3 +17,10 @@ body {
 .mb-20 {
     margin-bottom: 20px;
 }
+.mat-row:nth-child(even){
+  background-color:white ;
+  }
+
+.mat-row:nth-child(odd){
+  background-color:#fafafa;
+  }

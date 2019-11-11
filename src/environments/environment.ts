@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:4438/api/',
+  apiUrl: 'https://localhost:44390/api/',
   fromEmailId: 'ganga123081@gmail.com'
 };
 
