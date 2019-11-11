@@ -1,0 +1,94 @@
+
+
+<div class="add">
+<button mat-icon-button class="add-button" (click)="NewUserinfo()">
+    <i class="material-icons" title="Click here to add new user info ">add_circle_outline</i>
+</button>
+<span class="add-title">Add New User info</span>
+</div>
+
+
+<div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
+  <div fxFlex>
+  <table mat-table [dataSource]="UserinfoListDataSource" class="mat-elevation-z8 mat-table" matSort matSortStart="desc">
+
+      <!--- Note that these columns can be defined in any order.
+The actual rendered columns are set as a property on the row definition" -->
+<ng-container matColumnDef="editAction">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let userScheduler">
+        <button mat-icon-button (click)="edituserinfo(userScheduler)">
+            <i class="material-icons" title="Edit">create</i>
+        </button>
+    </td>
+</ng-container>
+
+<ng-container matColumnDef="deleteAction">
+  <th mat-header-cell *matHeaderCellDef></th>
+  <td mat-cell *matCellDef="let userScheduler">
+      <button mat-icon-button (click)="deleteuserinfo(userScheduler.userId)" class="padding-left-20px">
+          <i class="material-icons" title="click here to delete userId">close</i>
+      </button>
+  </td>
+</ng-container>
+
+      <!-- instanceName Column -->
+      <ng-container  matColumnDef="UserId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> User id </th>
+          <td mat-cell *matCellDef="let userScheduler"> {{userScheduler.userId}} </td>
+      </ng-container>
+
+      <!-- taskName Column -->
+      <ng-container matColumnDef="UserName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> User Name </th>
+          <td mat-cell *matCellDef="let userScheduler"> {{userScheduler.userName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="UserPass">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> User Pass </th>
+        <td mat-cell *matCellDef="let userScheduler"> {{userScheduler.userPass}} </td>
+    </ng-container>
+    <ng-container matColumnDef="IsEnabled">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> IsEnabled </th>
+      <td mat-cell *matCellDef="let userScheduler"> {{userScheduler.isEnabled}} </td>
+  </ng-container>
+
+      <ng-container matColumnDef="SiteId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> SiteId </th>
+        <td mat-cell *matCellDef="let userScheduler"> {{userScheduler.siteId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="creatts">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Created date  </th>
+      <td mat-cell *matCellDef="let userScheduler"> {{userScheduler.creatts}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="updtts">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated date  </th>
+    <td mat-cell *matCellDef="let userScheduler"> {{userScheduler.updtts}} </td>
+  </ng-container>
+
+      <!-- startDate Column -->
+     <!--  <ng-container matColumnDef="creatts">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+          <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.creatts | date:'MM/dd/yyyy'}} </td>
+      </ng-container>-->
+
+      <!-- startTime Column -->
+     <!-- <ng-container [style.display]="'none'" matColumnDef="updtts">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Modified Time </th>
+          <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.updtts |date:'MM/dd/yyyy' }} </td>
+      </ng-container>-->
+
+      <!-- frequencyTypeName Column -->
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+  <!--<mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]" showFirstLastButtons>
+  </mat-paginator>-->
+</div>
+</div>
+

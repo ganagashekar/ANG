@@ -5,6 +5,56 @@
 
 
 mat-label {
-  color: #5D1049;
+  color: #6f6296;
   font-size: 18px;
 }
+.mat-icon-button .mat-icon, .mat-icon-button i {
+  font-weight: bold;
+}
+.mat-button-wrapper i{color:#6f6296;}
+.add span {
+  color: #6f6296;
+}
+.mat-sort-header-button{
+color: #6f6296 !important;
+}
+.mat-list-item-content{font-weight: bold;}
+.mat-h2.header {
+  text-align: left !important;
+  background-color: #6f6296;
+  color: #fff;
+  padding: 0px !important;
+}
+tr.mat-header-row {
+  background-color: #6f6296;
+}
+.mat-sort-header-button{
+  color: #fff !important;
+}
+.mat-button:hover{
+  color: #6f6296 !important;
+  background-color: transparent !important;
+  cursor: pointer;
+  border:2px solid #6f6296;
+}
+.mat-button{
+  background-color: #6f6296 !important;
+  border:2px solid #6f6296 !important;
+  color:#fff !important;
+}
+.mat-raised-button:hover{
+  color: #6f6296 !important;
+  background-color: transparent !important;
+  cursor: pointer;
+  border:2px solid #6f6296;
+}
+.mat-raised-button{
+  background-color: #6f6296 !important;
+  border:2px solid #6f6296 !important;
+  color:#fff !important;
+}
+.mat-menu-item:hover{
+  background-color: #6f6296 !important;
+  color: #fff;
+}
+.mat-menu-content{padding: 0px !important;}

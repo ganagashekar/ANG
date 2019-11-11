@@ -1,0 +1,68 @@
+
+
+<div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
+  <div fxFlex>
+  <table mat-table [dataSource]="AuditListDataSource" class="mat-elevation-z8 mat-table" matSort matSortStart="desc">
+
+      <!--- Note that these columns can be defined in any order.
+The actual rendered columns are set as a property on the row definition" -->
+
+
+
+      <!-- instanceName Column -->
+      <ng-container  matColumnDef="auditID">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Audit Id </th>
+          <td mat-cell *matCellDef="let AuditScheduler"> {{AuditScheduler.auditID}} </td>
+      </ng-container>
+
+      <!-- taskName Column -->
+      <ng-container matColumnDef="siteID">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Id </th>
+          <td mat-cell *matCellDef="let AuditScheduler"> {{AuditScheduler.siteID}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="confgID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ConfigId </th>
+        <td mat-cell *matCellDef="let AuditScheduler"> {{AuditScheduler.confgID}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="stack_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Stack_name  </th>
+      <td mat-cell *matCellDef="let AuditScheduler"> {{AuditScheduler.stack_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="param_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Param_name  </th>
+      <td mat-cell *matCellDef="let AuditScheduler"> {{AuditScheduler.param_name}} </td>
+    </ng-container>
+
+
+
+
+
+
+
+      <!-- startDate Column -->
+     <!--  <ng-container matColumnDef="creatts">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+          <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.creatts | date:'MM/dd/yyyy'}} </td>
+      </ng-container>-->
+
+      <!-- startTime Column -->
+     <!-- <ng-container [style.display]="'none'" matColumnDef="updtts">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Modified Time </th>
+          <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.updtts |date:'MM/dd/yyyy' }} </td>
+      </ng-container>-->
+
+      <!-- frequencyTypeName Column -->
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+  <!--<mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]" showFirstLastButtons>
+  </mat-paginator>-->
+</div>
+</div>
+

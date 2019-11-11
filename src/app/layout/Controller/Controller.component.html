@@ -1,0 +1,79 @@
+
+
+<div class="add">
+    <button mat-icon-button class="add-button" (click)="NewController()">
+        <i class="material-icons" title="Click here to add new controller ">add_circle_outline</i>
+    </button>
+    <span class="add-title">Add New Controller</span>
+    </div>
+
+<div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
+  <div fxFlex>
+  <table mat-table [dataSource]="ControllerListDataSource" class="mat-elevation-z8 mat-table" matSort matSortStart="desc">
+
+      <!--- Note that these columns can be defined in any order.
+The actual rendered columns are set as a property on the row definition" -->
+
+
+
+      <!-- instanceName Column -->
+      <ng-container  matColumnDef="MacId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Mac Id </th>
+          <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.macId}} </td>
+      </ng-container>
+
+      <!-- taskName Column -->
+      <ng-container matColumnDef="SiteId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Id </th>
+          <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.siteId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="OsType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> OsType </th>
+        <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.OsType}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cpcb_url">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cpcb_url  </th>
+      <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.cpcb_url}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="spcb_url">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Spcb_url  </th>
+    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.spcb_url}} </td>
+</ng-container>
+
+  <ng-container matColumnDef="licence_key">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Licence_key  </th>
+    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.licence_key}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="updtts">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated time  </th>
+    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.updtts}} </td>
+  </ng-container>
+
+      <!-- startDate Column -->
+     <!--  <ng-container matColumnDef="creatts">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+          <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.creatts | date:'MM/dd/yyyy'}} </td>
+      </ng-container>-->
+
+      <!-- startTime Column -->
+     <!-- <ng-container [style.display]="'none'" matColumnDef="updtts">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Modified Time </th>
+          <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.updtts |date:'MM/dd/yyyy' }} </td>
+      </ng-container>-->
+
+      <!-- frequencyTypeName Column -->
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+  <!--<mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]" showFirstLastButtons>
+  </mat-paginator>-->
+</div>
+</div>
+

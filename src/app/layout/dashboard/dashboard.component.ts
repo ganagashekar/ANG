@@ -1,16 +1,8 @@
-import { Component, Optional, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatSnackBar } from '@angular/material';
-import { DashboardQuickCounts } from 'src/app/Model/ServiceResposeModel/Dashboard/DashboardQuickCounts';
-import { DashboardService } from 'src/app/shared/services/Dashboard.Services';
-import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
 import { DashboardQuickDataModel } from 'src/app/Model/ServiceResposeModel/Dashboard/DashboardQuickDataModel';
 import { DashboardTableRequestModel } from 'src/app/Model/FilterModels/DashboardTableRequestModel';
 import * as Highcharts from 'highcharts/highstock';
-// const IndicatorsCore = require('highcharts/indicators/indicators');
-// IndicatorsCore(Highcharts);
-// const IndicatorZigZag = require('highcharts/indicators/zigzag');
-// IndicatorZigZag(Highcharts);
 
 import * as HC_exporting_ from 'highcharts/modules/exporting';
 const HC_exporting = HC_exporting_;
@@ -18,18 +10,20 @@ HC_exporting(Highcharts);
 import { first } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { interval, Subscription } from 'rxjs';
+import { OnInit, ElementRef, ViewChild, AfterViewInit, Component } from '@angular/core';
+import { DashboardQuickCounts } from 'src/app/Model/ServiceResposeModel/Dashboard/DashboardQuickCounts';
+import { AppComponent } from 'src/app/app.component';
+import { DashboardService } from 'src/app/shared/services/Dashboard.Services';
 
 export interface GroupBy {
   initial: string;
   isGroupBy: boolean;
 }
-
 const ELEMENT_DATA: (DashboardQuickDataModel | GroupBy)[] = [];
-
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
@@ -50,6 +44,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
 
 
+
   @ViewChild('container', { read: ElementRef , static: true }) container: ElementRef;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -59,19 +54,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private _appcomponent: AppComponent,
     private _route: ActivatedRoute,
     private _dashboardService: DashboardService,
-    private snackBar: MatSnackBar
-  ) {
+    private snackBar: MatSnackBar) {
     _appcomponent.currenturl = '/dashboard';
   }
 
-  displayedColumns = ['stackName', 'paramName', 'paramUnits', 'paramValue', 'recordedDate', 'threShholdValue'];
+    displayedColumns = ['stackName', 'paramName', 'paramUnits', 'paramValue', 'recordedDate', 'threShholdValue'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
-
   ngOnInit() {
     this.dashboardTableRequest = new DashboardTableRequestModel();
     this.siteId = this._appcomponent.SiteId;

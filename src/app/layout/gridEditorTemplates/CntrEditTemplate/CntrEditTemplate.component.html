@@ -1,0 +1,85 @@
+<div class="divTaskScheduler">
+    <div fxFlex>
+      <form [formGroup]="schedulerForm" class="scheduler-form">
+        <div class="mat-h2 header">
+          Controller
+        </div>
+         <mat-form-field class="full-width">
+            <mat-label>Mac Id.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+              Errorcode is
+              <strong>required</strong>
+          </mat-error> -->
+            <input matInput type="string" min="1" formControlName="macId">
+        </mat-form-field>
+
+         <mat-form-field class="full-width">
+            <mat-label>Site Id.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
+              Errordesc is
+              <strong>required</strong>
+          </mat-error> -->
+            <input matInput type="bigint" min="1" formControlName="siteId">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Os type.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+             Errorcode is
+            <strong>required</strong>
+            </mat-error> -->
+            <input matInput type="string" min="1" formControlName="OsType">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>CPCB_Url.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+             Errorcode is
+              <strong>required</strong>
+            </mat-error> -->
+            <input matInput type="string" min="1" formControlName="cpcb_url">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+          <mat-label>SPCB_Url.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+            </mat-error> -->
+            <input matInput type="string" min="1" formControlName="spcb_url">
+           </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label>Licence Key.</mat-label>
+              <input matInput type="string" min="1" formControlName="licence_key">
+             </mat-form-field>
+
+              <mat-form-field class="full-width">
+                <mat-label>Update Time.</mat-label>
+                <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+                  Errorcode is
+                  <strong>required</strong>
+                   </mat-error> -->
+                <input matInput type="DateTime" min="1" formControlName="updtts">
+              </mat-form-field>
+        <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+          Errorcode is
+          <strong>required</strong>
+      </mat-error> -->
+
+
+        <div layout="row" layout-align="center center" class="divBtnCon float-right">
+          <div fxFlex>
+          <button mat-raised-button color="primary" class="btn add-btn fr" (click)="onFormSubmit()"
+              [disabled]="!schedulerForm.valid ">
+              <mat-icon>save</mat-icon>
+              <b *ngIf="isAdd == true"> Add</b>
+              <b *ngIf="isAdd != true"> Update</b>
+          </button>
+          <button mat-raised-button class="btn cancel-btn fr" (click)="onCloseClick()">
+              <mat-icon>close</mat-icon> <b>Cancel</b>
+          </button>
+
+
+          </div>
+      </div>
+      </form>
+    </div>
+  </div>
+

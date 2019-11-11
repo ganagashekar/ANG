@@ -52,7 +52,7 @@ getAllStacks(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
     deleteParameter(paramid: number): Observable<boolean> {
       // const httpOptions = { headers: this._headers };httpOptions
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
-        '/DeleteParameter?paramId=' + paramid);
+        '/DeleteParameter?=' + paramid);
     }
 
   }

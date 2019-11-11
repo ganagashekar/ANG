@@ -1,27 +1,32 @@
 <div id="sidebar">
     <mat-nav-list>
-        <!-- <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/dashboard']">
-            <mat-icon class="sidenav-icon">dashboard</mat-icon> {{ 'Dashboard' | translate }}
-        </a>
-        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/screen1']">
-            <mat-icon class="sidenav-icon">build</mat-icon> {{ 'Screen1' | translate }}
-        </a>
-        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/screen2']">
-            <mat-icon class="sidenav-icon">people</mat-icon> {{ 'Screen2' | translate }}
-        </a>
-
-        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/Paramsetup']">
-          <mat-icon class="sidenav-icon">settings_input_composite</mat-icon> {{ 'Parameter' | translate }}
-      </a>
-
-      <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/AverageReport']">
-        <mat-icon class="sidenav-icon">settings_input_composite</mat-icon> {{ 'AverageReport' | translate }}
-    </a> -->
-
-
     <mat-nav-list>
         <app-menu-list-item *ngFor="let item of navItems" [item]="item"></app-menu-list-item>
       </mat-nav-list>
+
+        <!-- </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/Userinfosetup']">
+          <mat-icon class="sidenav-icon">people</mat-icon> {{ 'Userinfo' | translate }}
+        </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/Controllersetup']">
+          <mat-icon class="sidenav-icon">settings_input_composite</mat-icon> {{ 'Controller' | translate }}
+        </a>
+       <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/ControllerBusSetup']">
+          <mat-icon class="sidenav-icon">settings_input_composite</mat-icon> {{ 'Controller-bus' | translate }}
+        </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/ApplicationLogs']">
+          <mat-icon class="sidenav-icon">Logs</mat-icon> {{ 'Application Logs' | translate }}
+        </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/Confg']">
+          <mat-icon class="sidenav-icon">Confg</mat-icon> {{ 'Confg' | translate }}
+        </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/audit']">
+          <mat-icon class="sidenav-icon">Audit</mat-icon> {{ 'Audit' | translate }}
+        </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/Error']">
+          <mat-icon class="sidenav-icon">people</mat-icon> {{ 'Error' | translate }}
+        </a> -->
+
 
     </mat-nav-list>
 </div>

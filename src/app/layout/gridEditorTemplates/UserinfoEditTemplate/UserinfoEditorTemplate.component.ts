@@ -1,0 +1,111 @@
+import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { UserinfoService } from 'src/app/shared/services/Userinfo.service';
+import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { UserModel } from 'src/app/Model/ServiceResposeModel/Setups/userModel';
+import { UserinfoFilter } from 'src/app/Model/FilterModels/UserinfoFilter';
+
+@Component({
+  selector: 'app-UserinfoEditorTemplate',
+  templateUrl: './UserinfoEditorTemplate.component.html',
+  styleUrls: ['./UserinfoEditorTemplate.component.scss']
+})
+export class UserinfoEditorTemplateComponent implements OnInit {
+  @Output()
+  UserinfoEditorEmitter = new EventEmitter<any>();
+  schedulerForm: FormGroup;
+  // stacksArray: ReferenceRecords[] = [];
+  // paramArray: ReferenceRecords[] = [];
+  // paramUnitsArray: ReferenceRecords[] = [];
+  isAdd = true;
+  SelecteduserId: bigint ;
+  // SelecteduserName: string;
+  SelectedvendorsiteId: bigint;
+  editModel: UserModel;
+  UserinfoFilter: UserinfoFilter;
+  constructor(public dialogRef: MatDialogRef<UserinfoEditorTemplateComponent>, private _Userinfoservices: UserinfoService,
+    @Inject(MAT_DIALOG_DATA) private data: any, private formBuilder: FormBuilder,
+     private snackBar: MatSnackBar) {
+      this.UserinfoFilter = new UserinfoFilter();
+    if (data !== undefined && data.action === 'edit') {
+      this.isAdd = false;
+      this.editModel = (data.Scheduler as UserModel );
+      this.SelecteduserId = this.editModel.userId;
+      // this.SelecteduserName = this.editModel.userName;
+      this.SelectedvendorsiteId = this.editModel.siteId;
+    }
+
+
+  }
+  ngOnInit() {
+    // this.getAllStacks();
+    // this.getAllParameterList(0);
+    // this.getAllParameterUnitsList(0);
+    this.schedulerForm = this.formBuilder.group({
+      userId: new FormControl('', [Validators.required]),
+      userPass: new FormControl('', [Validators.required]),
+      isEnabled: new FormControl('', [Validators.required]),
+      userName: new FormControl('', [Validators.required]),
+      siteId: new FormControl('', [Validators.required]),
+
+    });
+
+    if (this.isAdd) { // scheduler add
+      const currentTime = new Date().getHours().toString() + ':' + new Date().getMinutes().toString();
+       this.schedulerForm.patchValue({
+      });
+     } else {
+
+
+      this.schedulerForm.patchValue({
+      userId: this.editModel.userId,
+        userPass: this.editModel.userPass,
+        isEnabled: this.editModel.isEnabled,
+        userName: this.editModel.userName,
+        siteId: this.editModel.siteId,
+
+        });
+
+
+      }
+  }
+
+  showSnackBar(message: string, isError: boolean = false): void {
+    if (isError) {
+      this.snackBar.open(message, 'Ok');
+    } else {
+      this.snackBar.open(message, 'Ok', {
+        duration: 3000
+      });
+    }
+  }
+
+  onFormSubmit(): void {
+    if (this.schedulerForm.valid) {
+      this.schedulerForm.disable();
+      this.saveScheduler();
+
+    }
+  }
+
+  saveScheduler(): void {
+    const schedulerDetails = this.schedulerForm.value;
+   if (!this.isAdd) {
+     schedulerDetails.userId = this.SelecteduserId;
+   }
+   this._Userinfoservices.saveUserinfo(schedulerDetails).subscribe(resp => {
+     this.onCloseClick();
+     this.UserinfoEditorEmitter.emit(resp);
+   }, error => {
+     console.log('Error: ' + error);
+     this.schedulerForm.enable();
+   });
+ }
+
+  onCloseClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+

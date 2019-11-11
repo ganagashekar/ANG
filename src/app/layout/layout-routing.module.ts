@@ -5,8 +5,19 @@ import { LayoutComponent } from './layout.component';
 import { Screen1Component } from './screen1/screen1.component';
 import { Screen2Component } from './screen2/screen2.component';
 import { ParametersetupComponent } from './parametersetup/parametersetup.component';
+
 import { AverageReportComponent } from './Reports/AverageReport/AverageReport.component';
 
+
+
+import { UserinfoComponent } from './Userinfo/Userinfo.component';
+import { ControllerComponent } from './Controller/Controller.component';
+import { SitesetupComponent} from './sitesetup/sitesetup.component';
+import { ControllerBusComponent } from './Controller-bus/Controller-bus.component';
+import { ApplicationLogsComponent } from './ApplicationLogs/ApplicationLogs.component';
+import { ConfgComponent } from './confg/confg.component';
+import { AuditComponent } from './Audit/Audit.component';
+import { ErrorCodeComponent } from './ErrorCode/ErrorCode.component';
 
 
 
@@ -33,12 +44,46 @@ const routes: Routes = [
                 component: Screen2Component
             },
             {
+
               path: 'AverageReport',
               component: AverageReportComponent
           },
             {
+              path: 'SiteSetup',
+              component: SitesetupComponent
+            },
+
+            {
               path: 'Paramsetup',
               component: ParametersetupComponent
+            },
+            {
+              path: 'Userinfosetup',
+              component: UserinfoComponent
+            },
+            {
+              path: 'Controllersetup',
+              component: ControllerComponent
+            },
+            {
+              path: 'ControllerBusSetup',
+              component: ControllerBusComponent
+            },
+            {
+              path: 'ApplicationLogs',
+              component: ApplicationLogsComponent
+            },
+            {
+              path: 'Confg',
+              component: ConfgComponent
+            },
+            {
+              path: 'audit',
+              component: AuditComponent
+            },
+            {
+              path: 'Error',
+              component: ErrorCodeComponent
           }
         ]
     }

@@ -1,5 +1,7 @@
 #sidebar {
+
     width: 200px;
+
     position: fixed;
     top: 56px;
     bottom: 0;
@@ -41,6 +43,11 @@
         }
     }
 }
+a.mat-list-item:hover {
+  background-color: #6f6296 !important;
+  color: #fff;
+}
+a.mat-list-item{cursor: pointer;}
 @media screen and (max-width: 992px) {
     #sidebar {
         left: -250px;
