@@ -17,20 +17,26 @@
 
 <div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column" >
     <div fxFlex>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-table" matSort matSortStart="desc">
+        <table mat-table [dataSource]="dataSource"  matSort matSortStart="desc">
             <ng-container matColumnDef="stackName">
                 <th mat-header-cell *matHeaderCellDef> <button matTooltip="Show All" mat-icon-button>
-                    
+
                     <mat-icon   (click)="showAllSeries()">insert_chart_outlined</mat-icon>
                   </button> StackName. </th>
                 <td mat-cell *matCellDef="let element"><button matTooltip="Show Graph for" mat-icon-button>
                   <mat-icon (click)="SelectedrowDrawCharts(element)">insert_chart_outlined</mat-icon>
                 </button> {{element.stackName}}
-                  
+
                 </td>
             </ng-container>
             <ng-container matColumnDef="paramName">
-                <th mat-header-cell *matHeaderCellDef> Parameter Name </th>
+                <th mat-header-cell *matHeaderCellDef>
+                    <!-- <button matTooltip="Show All" mat-icon-button>
+
+                        <mat-icon>insert_chart_outlined</mat-icon>
+                      </button> -->
+                      Parameter Name </th>
+
                 <td mat-cell *matCellDef="let element"> {{element.paramName}} </td>
             </ng-container>
             <ng-container matColumnDef="paramUnits">
@@ -56,10 +62,10 @@
             <!-- Group header -->
   <ng-container matColumnDef="groupHeader">
     <td colspan="999" mat-cell *matCellDef="let groupBy">
-      
+
       <strong>  {{groupBy.stackName}}
 
-     
+
     </strong>
     <button mat-icon-button>
    <mat-icon (click)="SelectedGroupDrawCharts(groupBy)">insert_chart_outlined</mat-icon></button></td>
@@ -80,5 +86,14 @@
 <button mat-stroked-button (click)="addPoint()">Add Point</button>
 <button mat-stroked-button (click)="removePoint()">Remove Point</button>
 <button mat-stroked-button (click)="changeType()">Update Chart</button> -->
-<div [chart]="chart"></div>
+<!-- <div [chart]="chart"></div> -->
+
+<!-- <highcharts-chart style="width: 99.8%; display: block"
+    [Highcharts]="Highcharts"
+    [(update)]="updateFlag" [oneToOne]="true"
+	[constructorType]="'stockChart'"
+	[options]="chartOptions">
+</highcharts-chart> -->
+
+<div #container></div>
 

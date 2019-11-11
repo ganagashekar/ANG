@@ -28,10 +28,8 @@
             ],
             "styles": [
                 "src/styles/styles.scss"
-            ],
-            "scripts": [
-              "node_modules/chart.js/dist/Chart.js"
             ]
+           
           },
           "configurations": {
             "production": {
@@ -84,9 +82,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "scripts": [
-              "node_modules/chart.js/dist/Chart.js"
-            ],
+           
             "styles": [
                 "styles.scss"
             ],

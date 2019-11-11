@@ -1,4 +1,4 @@
-import { Component, Optional, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Optional, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatSnackBar } from '@angular/material';
 import { DashboardQuickCounts } from 'src/app/Model/ServiceResposeModel/Dashboard/DashboardQuickCounts';
 import { DashboardService } from 'src/app/shared/services/Dashboard.Services';
@@ -6,21 +6,19 @@ import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
 import { DashboardQuickDataModel } from 'src/app/Model/ServiceResposeModel/Dashboard/DashboardQuickDataModel';
 import { DashboardTableRequestModel } from 'src/app/Model/FilterModels/DashboardTableRequestModel';
-import { Chart } from 'angular-highcharts';
-import { Options } from 'highcharts';
+import * as Highcharts from 'highcharts/highstock';
+// const IndicatorsCore = require('highcharts/indicators/indicators');
+// IndicatorsCore(Highcharts);
+// const IndicatorZigZag = require('highcharts/indicators/zigzag');
+// IndicatorZigZag(Highcharts);
+
+import * as HC_exporting_ from 'highcharts/modules/exporting';
+const HC_exporting = HC_exporting_;
+HC_exporting(Highcharts);
 import { first } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { interval, Subscription } from 'rxjs';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-export interface Array<T> {
-  firstOrDefault(predicate: Function): T;
-}
 export interface GroupBy {
   initial: string;
   isGroupBy: boolean;
@@ -34,20 +32,28 @@ const ELEMENT_DATA: (DashboardQuickDataModel | GroupBy)[] = [];
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
+
+
   dashboardQuickCounts: DashboardQuickCounts;
   stackCount: number;
   paramCount: number;
   exceedenceCount: number;
   alertCount: number;
   dashboardTableRequest: DashboardTableRequestModel;
-  chart: Chart;
   siteId: number;
-  options: Options;
+  Highcharts = Highcharts;
+   chatsss: any;
+  updateFlag = true;
   subscription: Subscription;
   DashboardQuickDataResposne: DashboardQuickDataModel[] = [];
 
+
+
+
+  @ViewChild('container', { read: ElementRef , static: true }) container: ElementRef;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+
   constructor(
     private _dialog: MatDialog,
     private _appcomponent: AppComponent,
@@ -56,7 +62,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private snackBar: MatSnackBar
   ) {
     _appcomponent.currenturl = '/dashboard';
-    //this._dashboardService = dashboardService;
   }
 
   displayedColumns = ['stackName', 'paramName', 'paramUnits', 'paramValue', 'recordedDate', 'threShholdValue'];
@@ -72,14 +77,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.siteId = this._appcomponent.SiteId;
     this.init();
     this.getDashboardQuickCounts();
-   // this.getDashboardQuickTableList();
-    const source = interval(5000);
+    this.getDashboardQuickTableList();
+    const source = interval(20000);
     this.subscription = source.subscribe(val => this.getDashboardQuickTableList());
   }
   addPoint() {
     const x = new Date().getTime();
-    const shift = this.chart.ref.series[0].data.length > 100000000;
-    if (this.chart) {
+    const shift = this.chatsss.series[0].data.length > 100000000;
+    if (this.chatsss) {
       if (true) {
         //  region
         // this.chart.addPoint(Math.floor(Math.random() * 10));
@@ -87,11 +92,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         //  endregion
         // element.addPoint(Math.random() * 10);
       }
-      this.chart.ref.series.forEach(element => {
+      this.chatsss.series.forEach(element => {
         if (this.DashboardQuickDataResposne != null) {
-          const result = this.DashboardQuickDataResposne.filter(model => model.paramName + '-' + model.stackName === element.name)[0];
 
-          element.addPoint([x, result.paramValue], true, shift, false);
+          const result = this.DashboardQuickDataResposne.filter(x => x.paramName != null)
+          .filter(model => model.paramName  + '-' + model.stackName === element.name )[0];
+              if (result != null && result.paramValue !== undefined) {
+                element.addPoint([x, result.paramValue]);
+              }
         }
       });
     } else {
@@ -100,105 +108,190 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   addSerie() {
-    this.DashboardQuickDataResposne.forEach(element => {
-      if (element.paramName != null) {
-        const result = this.chart.ref.series.filter(model => model.name === element.paramName + '-' + element.stackName)[0];
-        if (result == null) {
-          this.chart.addSerie({
-            name: element.paramName + '-' + element.stackName,
-            threshold: 1,
-            data: [
-            //   {
-            //   'Sowing Area': "4500 H",
-            //   "Plots Audited": "1200 H"
-            // }
-          ],
-          keys: ['x', 'y', 'extraForTooltip'],
-            softThreshold: true,
-            id: element.configId.toString(),
-            zones: [{
-              value: element.threShholdValue
-          },
-          {
-            color: '#ff0000',
-            dashStyle: 'dot',
-        },
-      ]
-          });
-        }
-      }
-    });
-  }
+    const x = new Date().getTime();
+               this.DashboardQuickDataResposne.forEach(element => {
+                 if (element.paramName != null) {
+                   const seriesfilter = this.chatsss.series
+                   .filter(model => model.name === element.paramName + '-' + element.stackName)[0];
+                   if (seriesfilter == null) {
+
+                     this.chatsss.addSeries({
+                       type: 'line',
+                      id: element.configId,
+                       name: element.paramName + '-' + element.stackName,
+                       data: [
+                         [x, element.paramValue]
+                       ],
+                       marker: {
+                        enabled: true,
+                        radius: 3
+                    },
+                       showInNavigator: true,
+                       softThreshold: true,
+                       zones: [
+                         {
+                           value: element.threShholdValue
+                         },
+                         {
+                           color: '#ff0000'
+                           // dashStyle: 'dot',
+                         }
+                       ]
+                     });
+                    // this.AddPlotline(element);
+
+                   } else {
+                    // this.chatsss.series[0].addPoint([x, 10]);
+                   }
+
+                 }
+               });
+             }
   removePoint() {
-    this.chart.removePoint(this.chart.ref.series[0].data.length - 1);
+    // this.chart.removePoint(this.chart.ref.series[0].data.length - 1);
   }
 
   removeSerie() {
-    this.chart.removeSerie(this.chart.ref.series.length - 1);
+   //  this.chart.removeSerie(this.chart.ref.series.length - 1);
   }
 
   init() {
-    this.options = {
+   this.chatsss = Highcharts.stockChart(this.container.nativeElement, {
+      rangeSelector: {
+        selected: 6,
+        // buttons: [{
+        //   type: 'month',
+        //   count: 1,
+        //   text: '1m',
+        //   events: {
+        //     click: function (e) {
+        //       console.log('button clickd');
+        //     }
+        //   }
+        // }, {
+        //   type: 'month',
+        //   count: 3,
+        //   text: '3m'
+        // }, {
+        //   type: 'month',
+        //   count: 6,
+        //   text: '6m'
+        // }, {
+        //   type: 'ytd',
+        //   text: 'YTD'
+        // }, {
+        //   type: 'year',
+        //   count: 1,
+        //   text: '1y'
+        // }, {
+        //   type: 'all',
+        //   text: 'All1'
+        // }]
+      },
       chart: {
-        type: 'line'
+        zoomType: 'x'
       },
-      title: {
-        text: 'Lve'
-      },
-      xAxis: {
-        type: 'datetime'
+      credits: {
+
       },
 
-      credits: {
-        enabled: false
+      legend: {
+        enabled: true
       },
-      series: [],
+
+
+      plotOptions: {
+        series: {
+          showInLegend: true,
+          marker: {
+            enabled: true,
+            radius: 3
+        },
+        events: {
+          legendItemClick: function() {
+            // this.RemovePlotline();
+            return true;
+          }
+        },
+        }
+      },
+
+
+    //   tooltip: {
+    //     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+    //     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+    //         '<td style="padding:0"><b>{point.y:.2f} TWh</b></td></tr>' +
+    //         '<tr><td>Indikator : </td>' +
+    //         '<td><b>x %</b></td></tr>',
+    //     footerFormat: '</table> ',
+    //     shared: true,
+    //     useHTML: true
+    // },
       tooltip: {
         shared: true,
-        useHTML: true,
-        headerFormat: '<small>{point.key}</small><table>',
-        pointFormat: '<tr><td style="color: {series.color}">{series.name}: </td>' +
-            '<td style="text-align: right"><b>{point.y}</b> {point.extraForTooltip}</td></tr>',
-        footerFormat: '</table>',
+        crosshairs: true,
+    animation: true,
+    // formatter: function() {
+		// 	return this.x + '<br>'
+		// 	+ this.points[0].series.name + ': ' + this.points[0].y + '<br>'
+		// 	+ this.points[1].series.name + ': ' + this.points[1].y;
+		// },
+
+        // useHTML: true,
+        // crosshairs: true,
+        // enabled: true,
+        // headerFormat: '<small>{point.key}</small><table>',
+        // pointFormat:
+        //   '<tr><td style="color: {series.color}">{series.name}: </td>' +
+        //   '<td style="text-align: right"><b>{point.y}</b> {point.extraForTooltip}</td></tr>',
+        // footerFormat: '</table>',
         valueDecimals: 2
+      },
+      series: [],
+
+      yAxis: {
+        title: {
+            text: ''
+        },
+        plotLines: [
+        //   {
+        //     value: minRate,
+        //     color: 'green',
+        //     dashStyle: 'shortdash',
+        //     width: 2,
+        //     label: {
+        //         text: 'Last quarter minimum'
+        //     }
+        // },
+        // {
+        //     value: 0,
+        //     visible: false,
+        //     color: 'red',
+        //     dashStyle: 'shortdash',
+        //     width: 0,
+        //     label: {
+        //         text: 'Last quarter maximum'
+        //     }
+        // }
+      ]
     },
+      xAxis: {
+        events: {
+          afterSetExtremes: (e) => {
+            // console.log(e);
+            // this.button = e.rangeSelectorButton.count;
 
-    };
-    const chart = new Chart(this.options);
-    // chart.addPoint(4);
-    this.chart = chart;
-    // chart.addPoint(5);
-    // setTimeout(() => {
-    //   setTimeout(this.getDashboardQuickTableList, 5000, this._dashboardService);
-    // }, 2000);
-
-    // chart.ref$.subscribe(c => console.log(c.options.chart));
-  }
-
-  changeType = () => {
-    // this.chart.options.chart = {type: 'column'};
-    this.chart.ref$.pipe(first()).subscribe(chart => {
-      // chart.update({ chart: { type: 'column' } });
-      this.updateChart({ chart: { type: 'column' } });
+          }
+        }
+      },
     });
+
+
+
+
   }
-  private updateChart = (options: Options) => {
-    // By default if the value of the object property is undefined lodash won't use this but keeps
-    // the original after using _.merge(). We can customize the merge with _.mergeWith().
-    // If we return undefined inside the customizer function lodash handles the merge like above not keeping the undefined value.
-    // With deleting the property we trick lodash and with this the property gets undefined value after the merge.
-    const customizer = (_objValue: Optional, srcValue: Optional, key: any, object: any) => {
-      if (srcValue === undefined) {
-        delete object[key];
-      }
-    };
 
-    console.log(options.chart, options.plotOptions);
-    const mergedOptions = _.mergeWith(this.options, options, customizer);
-    console.log(mergedOptions.chart, mergedOptions.plotOptions);
 
-    this.chart = new Chart(mergedOptions);
-  };
 
   isGroup(index, item): boolean {
     return item.isGroupby;
@@ -243,28 +336,65 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   SelectedrowDrawCharts(row: DashboardQuickDataModel) {
     this.showAllSeries();
-    this.chart.ref.series.forEach(element => {
+    this.chatsss.series.forEach(element => {
       if (row != null) {
         if  (row.paramName + '-' + row.stackName !== element.options.name) {
           element.hide();
         }
-      }
+    }
     });
+   // this.RemovePlotline(row);
+    this.AddPlotline(row);
+  }
+
+  AddPlotline(row: DashboardQuickDataModel): void {
+    const plotOption = {
+
+      color: '#FF0000',
+      dashStyle: 'ShortDash',
+      width: 2,
+      zIndex: 9999,
+      visible: 'hide',
+      id:  row.paramName + '-' + row.stackName + ' Threshhold',
+      value: row.threShholdValue,
+      // zIndex: 0,
+      label : {
+          text : row.paramName + '-' + row.stackName + ' Threshhold'
+      }
+  };
+  // this.chatsss.yAxis[0].removePlotLine(row.paramName + '-' + row.stackName + ' Threshhold');
+    this.chatsss.yAxis[0].addPlotLine(plotOption) ;
+  }
+
+  RemovePlotline(): void {
+
+    this.chatsss.yAxis[0].plotLinesAndBands.forEach(item => {
+       // if  (row.paramName + '-' + row.stackName + ' Threshhold' !== item.options.id) {
+          item.destroy();
+       // }
+
+    });
+
   }
 
   SelectedGroupDrawCharts(row: DashboardQuickDataModel) {
     this.showAllSeries();
-    this.chart.ref.series.forEach(element => {
+    this.chatsss.series.forEach(element => {
+      if (element.id !== row.paramName + '-' + row.stackName + ' Threshhold') {
+
       if (row != null) {
-        if  (row.configId.toString() !== element.options.id) {
-          element.hide();
+        if  (row.configId.toString() !== element.options.id.toString()) {
+          element.zindex = 999;
         }
       }
+    }
     });
   }
 
   showAllSeries(): void  {
-    this.chart.ref.series.forEach(element => {
+
+    this.RemovePlotline();
+    this.chatsss.series.forEach(element => {
           element.show();
     });
   }

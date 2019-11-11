@@ -9,6 +9,13 @@ import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
 import { Screen2Component } from './screen2/screen2.component';
 import { ParametersetupModule } from './parametersetup/parametersetup.module';
+import { AverageReportComponent } from './Reports/AverageReport/AverageReport.component';
+import { ChartModule } from 'angular-highcharts';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MenuListItemComponent } from './components/menu-list-item/menu-list-item.component';
+import { NavService } from '../shared/services/nav.service';
+
 
 
 
@@ -18,12 +25,17 @@ import { ParametersetupModule } from './parametersetup/parametersetup.module';
     imports: [
         CommonModule,
         LayoutRoutingModule,
+        HighchartsChartModule,
         MaterialModule,
         TranslateModule,
         ParametersetupModule,
-
+        ChartModule,
+        FormsModule,
+        ReactiveFormsModule,
     ],
-    declarations: [Screen2Component, LayoutComponent, NavComponent, TopnavComponent, SidebarComponent     ]
+ providers: [NavService],
+    declarations: [Screen2Component, LayoutComponent, NavComponent, TopnavComponent, SidebarComponent,
+    AverageReportComponent, MenuListItemComponent    ]
 
 })
 export class LayoutModule { }

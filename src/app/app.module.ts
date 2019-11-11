@@ -1,3 +1,4 @@
+import { ChartModule } from 'angular-highcharts';
 import { LayoutModule } from '@angular/cdk/layout';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgModule } from '@angular/core';
@@ -12,8 +13,21 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
+import stock from 'highcharts/modules/stock.src';
+import more from 'highcharts/highcharts-more.src';
+// AoT requires an exported function for factories
+import { HighchartsChartModule } from 'highcharts-angular';
+
+
+
+export function highchartsModules() {
+    // apply Highcharts Modules to this array
+    return [stock, more];
+  }
 // import { LoaderComponent } from './shared/loader/loader.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { LoadingBarHttpClientModule } from './packages/http-client';
+import { LoadingBarRouterModule } from './packages/router';
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
     /* for development
@@ -29,11 +43,16 @@ export const createTranslateLoader = (http: HttpClient) => {
     declarations: [AppComponent],
     imports: [
         MaterialModule,
+        ChartModule,
+        HighchartsChartModule,
         BrowserModule,
         AppRoutingModule,
+        LoadingBarHttpClientModule,
+        LoadingBarRouterModule,
         BrowserAnimationsModule,
         LayoutModule,
         OverlayModule,
+        MaterialModule,
         HttpClientModule,
         FormsModule,
         TranslateModule.forRoot({

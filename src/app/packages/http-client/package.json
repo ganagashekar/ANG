@@ -1,0 +1,14 @@
+{
+  "name": "@ngx-loading-bar/http-client",
+  "version": "LOADING-BAR-VERSION",
+  "description": "Automatic page loading / progress bar for Angular",
+  "keywords": ["angular", "angular2", "ng", "ng2", "loading", "loadingbar", "progress", "progressbar"],
+  "repository": {
+    "url": "https://github.com/aitboudad/ngx-loading-bar.git",
+    "type": "git"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@ngx-loading-bar/core": "LOADING-BAR-VERSION"
+  }
+}

@@ -2,6 +2,7 @@ export const appConstants = {
     APICONTROLLER_MONITORING: 'Monitoring',
     APICONTROLLER_ACCOUNT: 'Account',
     APICONTROLLER_REFERENCE: 'v1/ReferenceRecords',
+    APICONTROLLER_REPORTS: 'v1/Reports',
 
     APICONTROLLER_Admin: 'v1/Admin',
     APICONTROLLER_Dashboard: 'v1/Dashboard',
