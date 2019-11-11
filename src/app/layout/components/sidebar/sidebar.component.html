@@ -9,21 +9,33 @@
         <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/screen2']">
             <mat-icon class="sidenav-icon">people</mat-icon> {{ 'Screen2' | translate }}
         </a>
-
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/SiteSetup']">
+          <mat-icon class="sidenav-icon">home</mat-icon> {{ 'Site Setup' | translate }}
+        </a>
         <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/Paramsetup']">
           <mat-icon class="sidenav-icon">settings_input_composite</mat-icon> {{ 'Parameter' | translate }}
         </a>
-
-        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/ErrorCodeSetup']">
-          <mat-icon class="sidenav-icon">error</mat-icon> {{ 'ErrorCodeSetup' | translate }}
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/Userinfosetup']">
+          <mat-icon class="sidenav-icon">people</mat-icon> {{ 'Userinfo' | translate }}
         </a>
-
         <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/Controllersetup']">
           <mat-icon class="sidenav-icon">settings_input_composite</mat-icon> {{ 'Controller' | translate }}
         </a>
-
-        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/ControllerBusSetup']">
+       <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/ControllerBusSetup']">
           <mat-icon class="sidenav-icon">settings_input_composite</mat-icon> {{ 'Controller-bus' | translate }}
         </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/ApplicationLogs']">
+          <mat-icon class="sidenav-icon">Logs</mat-icon> {{ 'Application Logs' | translate }}
+        </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/Confg']">
+          <mat-icon class="sidenav-icon">Confg</mat-icon> {{ 'Confg' | translate }}
+        </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/audit']">
+          <mat-icon class="sidenav-icon">Audit</mat-icon> {{ 'Audit' | translate }}
+        </a>
+        <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/Error']">
+          <mat-icon class="sidenav-icon">people</mat-icon> {{ 'Error' | translate }}
+        </a>
+
     </mat-nav-list>
 </div>

@@ -35,10 +35,13 @@ import { ControllerBusFilter } from 'src/app/Model/FilterModels/ControllerBusFil
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/GetcontrollerBusAsync', filter);
     }
-
-    DeleteControllerbus(busId: number): Observable<boolean> {
+    saveControllerBus(ControllerBusDetails: any):  Observable<any> {
+      return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
+        '/saveControllerBus', ControllerBusDetails);
+    }
+    deletecontrollerbus(busId: bigint): Observable<boolean> {
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
-        '/DeleteControllerbus?=' + busId);
+        '/DeleteControllerBus?=' + busId);
     }
 
   }

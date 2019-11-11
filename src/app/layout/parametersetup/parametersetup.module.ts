@@ -6,12 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ParamterEditTemplateComponent } from '../gridEditorTemplates/paramterEditTemplate/ParamterEditTemplateComponent';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+ 
   ],
   entryComponents: [ParamterEditTemplateComponent,  ConfirmationDialogComponent],
   declarations: [ParametersetupComponent,  ParamterEditTemplateComponent, ConfirmationDialogComponent ]

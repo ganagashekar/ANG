@@ -3,7 +3,6 @@
 :host .mat-card-header-text {
     width: 100%;
     text-align: right;
-
 }
 
 .icon-lg {
@@ -12,11 +11,6 @@
 
 .mat-card {
     color: #fff;
-    transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
-    display: block;
-    position: relative;
-    padding: 6px 0px 0px 8px;
-    border-radius: 4px;
     .mat-card-header {
         width: 100%;
     }
@@ -26,8 +20,6 @@
     .mat-card-subtitle {
         color: #fff;
     }
-
-
 
     .mat-card-actions {
         a {

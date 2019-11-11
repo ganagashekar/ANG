@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CntrbusEditTemplateComponent } from './cntrbusEditTemplate.component';
+import { CntrBusEditTemplateComponent } from './CntrBusEditTemplate.component';
 
-describe('CntrbusEditTemplateComponent', () => {
-  let component: CntrbusEditTemplateComponent;
-  let fixture: ComponentFixture<CntrbusEditTemplateComponent>;
+describe('CntrBusEditTemplateComponent', () => {
+  let component: CntrBusEditTemplateComponent;
+  let fixture: ComponentFixture<CntrBusEditTemplateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CntrbusEditTemplateComponent ]
+      declarations: [ CntrBusEditTemplateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CntrbusEditTemplateComponent);
+    fixture = TestBed.createComponent(CntrBusEditTemplateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

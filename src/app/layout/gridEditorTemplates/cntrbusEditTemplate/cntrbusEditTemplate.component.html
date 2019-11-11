@@ -2,61 +2,68 @@
     <div fxFlex>
       <form [formGroup]="schedulerForm" class="scheduler-form">
         <div class="mat-h2 header">
-          ControllerBus
+          ControlBus
         </div>
          <mat-form-field class="full-width">
-            <mat-label>BusId.</mat-label>
+            <mat-label>Bus Id.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
+              Errordesc is
+              <strong>required</strong>
+          </mat-error> -->
+            <input matInput type="bigint" min="1" formControlName="busId">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Mac Id.</mat-label>
             <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
               Errorcode is
               <strong>required</strong>
           </mat-error> -->
-            <input matInput type="number" min="1" formControlName="BusId">
+            <input matInput type="string" min="1" formControlName="macId">
         </mat-form-field>
-
-         <mat-form-field class="full-width">
-            <mat-label>MacId.</mat-label>
-            <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
-              Errordesc is
-              <strong>required</strong>
-          </mat-error> -->
-            <input matInput type="string" min="1" formControlName="MacId">
-        </mat-form-field>
-
         <mat-form-field class="full-width">
-            <mat-label>Comport.</mat-label>
-            <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
-              Errordesc is
-              <strong>required</strong>
-          </mat-error> -->
-            <input matInput type="string" min="1" formControlName="comport">
-        </mat-form-field>
+          <mat-label>Com_Port.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="comPort">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+          <mat-label>Protocal.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="protocal">
+      </mat-form-field>
 
-        <mat-form-field class="full-width">
-            <mat-label>Baudrate.</mat-label>
-            <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
-              Errordesc is
-              <strong>required</strong>
-          </mat-error> -->
-            <input matInput type="number" min="1" formControlName="Baudrate">
+      <mat-form-field class="full-width">
+        <mat-label>BaudRate.</mat-label>
+        <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+          Errorcode is
+          <strong>required</strong>
+      </mat-error> -->
+        <input matInput type="bigint" min="1" formControlName="baudRate">
+    </mat-form-field>
 
-            <mat-form-field class="full-width">
-                <mat-label>Timeout.</mat-label>
-                <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
-                  Errordesc is
-                  <strong>required</strong>
-              </mat-error> -->
-                <input matInput type="number" min="1" formControlName="Timeout">
-            </mat-form-field>
-        </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>timeOut.</mat-label>
+      <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+        Errorcode is
+        <strong>required</strong>
+    </mat-error> -->
+      <input matInput type="bigint" min="1" formControlName="timeOut">
+  </mat-form-field>
 
-        <mat-form-field class="full-width">
-            <mat-label>Protocal.</mat-label>
-            <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
-              Errordesc is
-              <strong>required</strong>
-          </mat-error> -->
-            <input matInput type="string" min="1" formControlName="Protocal">
-        </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Start Index.</mat-label>
+    <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+      Errorcode is
+      <strong>required</strong>
+  </mat-error> -->
+    <input matInput type="bigint" min="1" formControlName="startIndex">
+</mat-form-field>
+
         <div layout="row" layout-align="center center" class="divBtnCon float-right">
           <div fxFlex>
           <button mat-raised-button color="primary" class="btn add-btn fr" (click)="onFormSubmit()"
@@ -69,10 +76,9 @@
               <mat-icon>close</mat-icon> <b>Cancel</b>
           </button>
 
+
           </div>
       </div>
       </form>
     </div>
   </div>
-
-

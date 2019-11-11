@@ -10,6 +10,8 @@ import { ControllerService } from 'src/app/shared/services/Controller.service';
 import { CntrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/CntrEditTemplate/CntrEditTemplate.Component';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 
+
+
 @Component({
   selector: 'app-Controller',
   templateUrl: './Controller.component.html',
@@ -19,7 +21,7 @@ export class ControllerComponent implements OnInit {
   ControllerFilter: ControllerFilter;
   ControllerListDataSource: MatTableDataSource<ControllerModel>;
   displayedColumns: string[] = [
-     'MacId', 'SiteId', 'OsType', 'cpcb_url', 'spcb_url', 'licence_key', 'updtts', 'deleteAction'
+     'MacId', 'SiteId', 'OsType', 'cpcb_url', 'spcb_url', 'licence_key', 'updtts',
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _controllerservices: ControllerService,
@@ -42,45 +44,19 @@ export class ControllerComponent implements OnInit {
    });
 
  }
-
- deleteController(macId: string, SiteId: number): void {
-  const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
-    width: '420px',
-    data: { Title: 'Confirm', Message: 'Are you sure want to delete this Parameter ?' }
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      this._controllerservices.deleteController(macId).subscribe((response: any) => {
-        // if (response.model) {
-          // this. getAllParameterList();
-          // this.showSnackBar('Scheduled Parameter Deleted Successfully.');
-        // } else {
-        // this.showSnackBar('Error occurred while deleting the Parameter.', true);
-        // }
-        this.showSnackBar(response.message);
-      }, error => {
-        console.log('Error: ' + error);
-      });
-    }
-  });
-}
-
-NewController(): void {
-  alert('hi');
-  const dialogRef = this._dialog.open(CntrEditTemplateComponent, {
+ NewController(): void {
+  const dialogRef = this._dialog.open( CntrEditTemplateComponent , {
     width: '500px',
     data: { action: 'add', ControllerModel }
   });
   dialogRef.componentInstance.ControllerEditorEmitter.subscribe((response: any) => {
     // if (response.model > 0) {
       // this.getAllParameterList();
-      this.showSnackBar('ErrorCode Updated Successfully.');
-     // this.showSnackBar(response.message);
-    // } else {
-// this.showSnackBar(response.message, true);
-    // }
+      this.showSnackBar('controller details added Successfully.');    // } else {
+    //  this.showSnackBar(response.message, true);
+    // };
   });
-}
+ }
 
 showSnackBar(message: string, isError: boolean = false): void {
   if (isError) {
@@ -92,3 +68,4 @@ showSnackBar(message: string, isError: boolean = false): void {
   }
 }
 }
+

@@ -13,11 +13,15 @@ export class AppComponent implements OnInit {
   dialogRef;
   @Input() userName = '';
   @Input() currenturl = '';
+  @Input() ErrorCode = '';
   @Input() SiteId = 0;
   @Input() UserId = 0;
-  @Input() BusId = 0;
-  @Input() ErrorCode = '';
   @Input() MacId = '';
+  @Input() BusId = 0;
+  @Input() logID = 0;
+  @Input() confgID = 0;
+  @Input() AuditId = 0;
+
 
     constructor(private translate: TranslateService) {
         translate.setDefaultLang('en');

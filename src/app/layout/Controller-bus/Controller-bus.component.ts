@@ -7,7 +7,7 @@ import { ControllerBusModel } from 'src/app/Model/ServiceResposeModel/Setups/Con
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
 import { ControllerBusService } from 'src/app/shared/services/ControllerBus.services';
-import { CntrbusEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/CntrbusEditTemplate/CntrbusEditTemplate.Component';
+import { CntrBusEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/CntrBusEditTemplate/CntrBusEditTemplate.Component';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
@@ -19,7 +19,7 @@ export class ControllerBusComponent implements OnInit {
   ControllerBusFilter: ControllerBusFilter;
   ControllerBusListDataSource: MatTableDataSource<ControllerBusModel>;
   displayedColumns: string[] = [
-     'busId', 'macId', 'comPort', 'baudRate', 'timeOut', 'startIndex', 'protocal', 'updtts', 'deleteAction'
+    'editAction', 'busId', 'macId', 'comPort', 'baudRate', 'timeOut', 'startIndex', 'protocal', 'updtts', 'deleteAction'
    ];
 
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
@@ -45,33 +45,31 @@ export class ControllerBusComponent implements OnInit {
      console.log('Error: ' + error);
    });
   }
-
-  NewControllerbus(): void {
-    const dialogRef = this._dialog.open(CntrbusEditTemplateComponent, {
+  NewControllerBus(): void {
+    const dialogRef = this._dialog.open(CntrBusEditTemplateComponent, {
       width: '500px',
       data: { action: 'add', ControllerBusModel }
     });
-    dialogRef.componentInstance.controllerbusEditorEmitter.subscribe((response: any) => {
+    dialogRef.componentInstance.CntrBusEditorEmitter.subscribe((response: any) => {
       // if (response.model > 0) {
         // this.getAllParameterList();
-        this.showSnackBar('Errorcode added Successfully.');    // } else {
+        this.showSnackBar('ControllerBus details added Successfully.');    // } else {
       //  this.showSnackBar(response.message, true);
       // };
     });
    }
-
-   DeleteControllerbus(busId: number): void {
+   deletecontrollerbus(busId: bigint): void {
     const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
       width: '420px',
-      data: { Title: 'Confirm', Message: 'Are you sure want to delete this Controllerbus ?' }
+      data: { Title: 'Confirm', Message: 'Are you sure want to delete this controllerBus ?' }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this._controllerBusservices.DeleteControllerbus(busId).subscribe((response: any) => {
+        this._controllerBusservices.deletecontrollerbus(busId).subscribe((response: any) => {
          // if (response.model) {
-            // this. getAllParameterList();
+          //   this. getAllUserinfoList();
             // this.showSnackBar('Scheduled Parameter Deleted Successfully.');
-         // } else {
+        // } else {
           // this.showSnackBar('Error occurred while deleting the Parameter.', true);
          // }
           this.showSnackBar(response.message);
@@ -82,6 +80,22 @@ export class ControllerBusComponent implements OnInit {
     });
   }
 
+   editcontrollerbus(Scheduler: ControllerBusModel): void {
+    const dialogRef = this._dialog.open(CntrBusEditTemplateComponent, {
+      width: '500px',
+      data: { action: 'edit', Scheduler }
+    });
+    dialogRef.componentInstance.CntrBusEditorEmitter.subscribe((response: any) => {
+   // if (response.model > 0) {
+      // this. getAllErrorCodeList();
+      this.showSnackBar('Controllerbus Updated Successfully.');
+    // } else {
+  // this.showSnackBar('Error occurred while updating the Parameter.', true);
+    // }
+    });
+  }
+
+
    showSnackBar(message: string, isError: boolean = false): void {
     if (isError) {
       this.snackBar.open(message, 'Ok');
@@ -90,5 +104,6 @@ export class ControllerBusComponent implements OnInit {
         duration: 3000
       });
     }
-}
+  }
+
 }

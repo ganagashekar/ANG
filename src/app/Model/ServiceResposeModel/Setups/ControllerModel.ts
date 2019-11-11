@@ -8,6 +8,9 @@ export class ControllerModel {
     spcb_url: string;
     licence_key: string;
     updtts: DateTime;
+    // length: number;
+    // creatts: DateTime;
+    // updtts: DateTime;
 
 
 

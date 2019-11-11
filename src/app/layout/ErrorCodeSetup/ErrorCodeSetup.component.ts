@@ -42,7 +42,7 @@ export class ErrorCodeSetupComponent implements OnInit , AfterViewInit {
   }
 
   getAllErrorCodeList(): void {
-    this.ErrorCodeFilter.error_code = this._appcomponent.ErrorCode;
+    // this.ErrorCodeFilter.error_code = this._appcomponent.ErrorCode;
     this._errorcodeservices.getAllErrorCodeList(this.ErrorCodeFilter).subscribe(resp => {
      this.ErrorCodeListDataSource.data = resp.model as ErrorCodeSetupModel[];
    }, error => {

@@ -1,0 +1,73 @@
+<div class="divTaskScheduler">
+    <div fxFlex>
+      <form [formGroup]="schedulerForm" class="scheduler-form">
+        <div class="mat-h2 header">
+          Site
+        </div>
+         <mat-form-field class="full-width">
+            <mat-label> siteId.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
+              Errordesc is
+              <strong>required</strong>
+          </mat-error> -->
+            <input matInput type="bigint" min="1" formControlName="siteId">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>siteName.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+              Errorcode is
+              <strong>required</strong>
+          </mat-error> -->
+            <input matInput type="string" min="1" formControlName="siteName">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>site_cpcb_cd.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="site_cpcb_cd">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+          <mat-label>site_city.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="site_city">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+          <mat-label>site_state.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="site_state">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+          <mat-label>site_country.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="site_country">
+      </mat-form-field>
+
+        <div layout="row" layout-align="center center" class="divBtnCon float-right">
+          <div fxFlex>
+          <button mat-raised-button color="primary" class="btn add-btn fr" (click)="onFormSubmit()"
+              [disabled]="!schedulerForm.valid ">
+              <mat-icon>save</mat-icon>
+              <b *ngIf="isAdd == true"> Add</b>
+              <b *ngIf="isAdd != true"> Update</b>
+          </button>
+          <button mat-raised-button class="btn cancel-btn fr" (click)="onCloseClick()">
+              <mat-icon>close</mat-icon> <b>Cancel</b>
+          </button>
+
+
+          </div>
+      </div>
+      </form>
+    </div>
+  </div>

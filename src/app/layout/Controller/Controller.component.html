@@ -1,9 +1,11 @@
+
+
 <div class="add">
-  <button mat-icon-button class="add-button" (click)="NewController()">
-      <i class="material-icons" title="click here to add Parameter">add_circle_outline</i>
-  </button>
-  <span class="add-title">Add Controller</span>
-</div>
+    <button mat-icon-button class="add-button" (click)="NewController()">
+        <i class="material-icons" title="Click here to add new controller ">add_circle_outline</i>
+    </button>
+    <span class="add-title">Add New Controller</span>
+    </div>
 
 <div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
   <div fxFlex>
@@ -12,15 +14,7 @@
       <!--- Note that these columns can be defined in any order.
 The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- delete icon -->
-        <ng-container matColumnDef="deleteAction">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let controllerScheduler">
-              <button mat-icon-button (click)="deleteController(controllerScheduler.macId,siteId)" class="padding-left-20px">
-                  <i class="material-icons" title="click here to delete Parameter">close</i>
-              </button>
-          </td>
-      </ng-container>
+
 
       <!-- instanceName Column -->
       <ng-container  matColumnDef="MacId">
@@ -37,27 +31,27 @@ The actual rendered columns are set as a property on the row definition" -->
       <ng-container matColumnDef="OsType">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> OsType </th>
         <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.OsType}} </td>
-      </ng-container>
+    </ng-container>
 
-      <ng-container matColumnDef="cpcb_url">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cpcb_url  </th>
-        <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.cpcb_url}} </td>
-      </ng-container>
+    <ng-container matColumnDef="cpcb_url">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cpcb_url  </th>
+      <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.cpcb_url}} </td>
+  </ng-container>
 
-      <ng-container matColumnDef="spcb_url">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Spcb_url  </th>
-        <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.spcb_url}} </td>
-      </ng-container>
+  <ng-container matColumnDef="spcb_url">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Spcb_url  </th>
+    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.spcb_url}} </td>
+</ng-container>
 
-      <ng-container matColumnDef="licence_key">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Licence_key  </th>
-        <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.licence_key}} </td>
-      </ng-container>
+  <ng-container matColumnDef="licence_key">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Licence_key  </th>
+    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.licence_key}} </td>
+  </ng-container>
 
-      <ng-container matColumnDef="updtts">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated time  </th>
-        <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.updtts}} </td>
-      </ng-container>
+  <ng-container matColumnDef="updtts">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated time  </th>
+    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.updtts}} </td>
+  </ng-container>
 
       <!-- startDate Column -->
      <!--  <ng-container matColumnDef="creatts">

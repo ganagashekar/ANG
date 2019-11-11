@@ -4,11 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout.component';
 import { Screen1Component } from './screen1/screen1.component';
 import { Screen2Component } from './screen2/screen2.component';
-import { ControllerComponent } from './Controller/Controller.component';
-import { ControllerBusComponent } from './Controller-bus/Controller-bus.component';
 import { ParametersetupComponent } from './parametersetup/parametersetup.component';
-import { ErrorCodeSetupComponent } from './ErrorCodeSetup/ErrorCodeSetup.component';
-
+import { UserinfoComponent } from './Userinfo/Userinfo.component';
+import { ControllerComponent } from './Controller/Controller.component';
+import { SitesetupComponent} from './sitesetup/sitesetup.component';
+import { ControllerBusComponent } from './Controller-bus/Controller-bus.component';
+import { ApplicationLogsComponent } from './ApplicationLogs/ApplicationLogs.component';
+import { ConfgComponent } from './confg/confg.component';
+import { AuditComponent } from './Audit/Audit.component';
+import { ErrorCodeComponent } from './ErrorCode/ErrorCode.component';
 
 
 
@@ -34,6 +38,18 @@ const routes: Routes = [
                 component: Screen2Component
             },
             {
+              path: 'SiteSetup',
+              component: SitesetupComponent
+            },
+            {
+              path: 'Paramsetup',
+              component: ParametersetupComponent
+            },
+            {
+              path: 'Userinfosetup',
+              component: UserinfoComponent
+            },
+            {
               path: 'Controllersetup',
               component: ControllerComponent
             },
@@ -42,13 +58,21 @@ const routes: Routes = [
               component: ControllerBusComponent
             },
             {
-              path: 'Paramsetup',
-              component: ParametersetupComponent
+              path: 'ApplicationLogs',
+              component: ApplicationLogsComponent
             },
             {
-              path: 'ErrorCodeSetup',
-              component: ErrorCodeSetupComponent
-            }
+              path: 'Confg',
+              component: ConfgComponent
+            },
+            {
+              path: 'audit',
+              component: AuditComponent
+            },
+            {
+              path: 'Error',
+              component: ErrorCodeComponent
+          }
         ]
     }
 ];

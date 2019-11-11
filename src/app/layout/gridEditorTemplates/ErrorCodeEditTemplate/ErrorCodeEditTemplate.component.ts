@@ -21,8 +21,8 @@ export class ErrorCodeEditTemplateComponent implements OnInit {
   // paramArray: ReferenceRecords[] = [];
   // paramUnitsArray: ReferenceRecords[] = [];
   isAdd = true;
-  SelectedErrorCode: string;
-  SelectedErrorDesc: string;
+  // SelectedErrorCode: string;
+  // SelectedErrorDesc: string;
   editModel: ErrorCodeSetupModel;
   errorCodeSetupFilter: ErrorCodeSetupFilter;
   constructor(public dialogRef: MatDialogRef<ErrorCodeEditTemplateComponent>, private _errorcodeservices: ErrorCodeSetupService,
@@ -31,37 +31,34 @@ export class ErrorCodeEditTemplateComponent implements OnInit {
       this.errorCodeSetupFilter = new ErrorCodeSetupFilter();
     if (data !== undefined && data.action === 'edit') {
       this.isAdd = false;
-      this.editModel = (data.scheduler as ErrorCodeSetupModel );
-      this.SelectedErrorCode = this.editModel.errorcode;
-      this.SelectedErrorDesc = this.editModel.errordesc;
+      this.editModel = (data.Scheduler as ErrorCodeSetupModel );
+      // this.SelectedErrorCode = this.editModel.errorcode;
+      // this.SelectedErrorDesc = this.editModel.errordesc;
     }
 
 
   }
   ngOnInit() {
-    // this.getAllStacks();
-    // this.getAllParameterList(0);
-    // this.getAllParameterUnitsList(0);
     this.schedulerForm = this.formBuilder.group({
       errorcode: new FormControl('', [Validators.required]),
       errordesc: new FormControl('', [Validators.required]),
     });
 
-    // if (this.isAdd) { // scheduler add
-    //   const currentTime = new Date().getHours().toString() + ':' + new Date().getMinutes().toString();
-    //   this.schedulerForm.patchValue({
-    //   });
-    // } else {
+    if (this.isAdd) { // scheduler add
+      const currentTime = new Date().getHours().toString() + ':' + new Date().getMinutes().toString();
+      this.schedulerForm.patchValue({
+      });
+    } else {
 
 
-    //     this.schedulerForm.patchValue({
-    //       errorcode: this.editModel.errorcode,
-    //       errordesc: this.editModel.errordesc,
+        this.schedulerForm.patchValue({
+          errorcode: this.editModel.errorcode,
+          errordesc: this.editModel.errordesc,
 
-    //     });
+        });
 
 
-    //   }
+      }
   }
 
   showSnackBar(message: string, isError: boolean = false): void {
@@ -85,7 +82,7 @@ export class ErrorCodeEditTemplateComponent implements OnInit {
   saveScheduler(): void {
     const schedulerDetails = this.schedulerForm.value;
    if (!this.isAdd) {
-     schedulerDetails.errorcode = this.SelectedErrorCode;
+     // schedulerDetails.errorcode = this.SelectedErrorCode;
    }
    this._errorcodeservices.saveErrorCode(schedulerDetails).subscribe(resp => {
      this.onCloseClick();
