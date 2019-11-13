@@ -92,12 +92,12 @@ NewApplicationLogs(): void {
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
       this._ApplicationLogsservices.deleteApplicationlog(logID).subscribe((response: any) => {
-       // if (response.model) {
-          // this. getAllParameterList();
-          // this.showSnackBar('Scheduled Parameter Deleted Successfully.');
-       // } else {
-        // this.showSnackBar('Error occurred while deleting the Parameter.', true);
-       // }
+        if (response.model) {
+           this. getAllApplicationLogsinfoList();
+           this.showSnackBar('Scheduled Parameter Deleted Successfully.');
+        } else {
+         this.showSnackBar('Error occurred while deleting the Parameter.', true);
+        }
         this.showSnackBar(response.message);
       }, error => {
         console.log('Error: ' + error);

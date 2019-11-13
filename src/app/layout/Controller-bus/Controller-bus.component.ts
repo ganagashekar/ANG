@@ -51,11 +51,12 @@ export class ControllerBusComponent implements OnInit {
       data: { action: 'add', ControllerBusModel }
     });
     dialogRef.componentInstance.CntrBusEditorEmitter.subscribe((response: any) => {
-      // if (response.model > 0) {
-        // this.getAllParameterList();
-        this.showSnackBar('ControllerBus details added Successfully.');    // } else {
-      //  this.showSnackBar(response.message, true);
-      // };
+       if (response.model > 0) {
+         this.getAllControllerBusinfoList();
+        this.showSnackBar('ControllerBus details added Successfully.');
+         } else {
+        this.showSnackBar(response.message, true);
+       }
     });
    }
    deletecontrollerbus(busId: bigint): void {
@@ -66,13 +67,13 @@ export class ControllerBusComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this._controllerBusservices.deletecontrollerbus(busId).subscribe((response: any) => {
-         // if (response.model) {
-          //   this. getAllUserinfoList();
-            // this.showSnackBar('Scheduled Parameter Deleted Successfully.');
-        // } else {
-          // this.showSnackBar('Error occurred while deleting the Parameter.', true);
-         // }
-          this.showSnackBar(response.message);
+         if (response.model) {
+             this. getAllControllerBusinfoList();
+             this.showSnackBar('Scheduled Controllerbus Deleted Successfully.');
+         } else {
+           this.showSnackBar('Error occurred while deleting the Controllerbus.', true);
+          }
+
         }, error => {
           console.log('Error: ' + error);
         });
@@ -86,12 +87,12 @@ export class ControllerBusComponent implements OnInit {
       data: { action: 'edit', Scheduler }
     });
     dialogRef.componentInstance.CntrBusEditorEmitter.subscribe((response: any) => {
-   // if (response.model > 0) {
-      // this. getAllErrorCodeList();
+    if (response.model > 0) {
       this.showSnackBar('Controllerbus Updated Successfully.');
-    // } else {
-  // this.showSnackBar('Error occurred while updating the Parameter.', true);
-    // }
+      this. getAllControllerBusinfoList();
+     } else {
+   this.showSnackBar('Error occurred while updating the Controllerbus.', true);
+     }
     });
   }
 

@@ -47,11 +47,13 @@ export class SitesetupComponent implements OnInit {
       data: { action: 'add', SiteSetupModel }
     });
     dialogRef.componentInstance.siteEditorEmitter.subscribe((response: any) => {
-      // if (response.model > 0) {
-        // this.getAllParameterList();
-        this.showSnackBar('userinfo details added Successfully.');    // } else {
-      //  this.showSnackBar(response.message, true);
-      // };
+       if (response.model > 0) {
+        this.getAllSitesetupList();
+        // this.showSnackBar(response.message);
+         this.showSnackBar('Site details added Successfully.');
+          } else {
+        this.showSnackBar(response.message, true);
+       }
     });
    }
 
@@ -61,12 +63,12 @@ export class SitesetupComponent implements OnInit {
       data: { action: 'edit', Scheduler }
     });
     dialogRef.componentInstance.siteEditorEmitter.subscribe((response: any) => {
-   // if (response.model > 0) {
-      // this. getAllErrorCodeList();
+    if (response.model > 0) {
+       this. getAllSitesetupList();
       this.showSnackBar('Site Updated Successfully.');
-    // } else {
-  // this.showSnackBar('Error occurred while updating the Parameter.', true);
-    // }
+     } else {
+      this.showSnackBar('Error occurred while updating the Site.', true);
+     }
     });
   }
 
@@ -78,12 +80,12 @@ export class SitesetupComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this._Sitesetupservices.DeleteSite(siteId).subscribe((response: any) => {
-         // if (response.model) {
-            // this. getAllParameterList();
-            // this.showSnackBar('Scheduled Parameter Deleted Successfully.');
-         // } else {
-          // this.showSnackBar('Error occurred while deleting the Parameter.', true);
-         // }
+          if (response.model) {
+             this. getAllSitesetupList();
+             this.showSnackBar('Scheduled Site Deleted Successfully.');
+          } else {
+           this.showSnackBar('Error occurred while deleting the Site.', true);
+          }
           this.showSnackBar(response.message);
         }, error => {
           console.log('Error: ' + error);

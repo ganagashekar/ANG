@@ -40,7 +40,6 @@ import { UserinfoFilter } from 'src/app/Model/FilterModels/UserinfoFilter';
         '/SaveUserinfo', UserinfoDetails);
     }
     deleteuserinfo(userId: number): Observable<boolean> {
-      alert('hi' + userId);
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/DeleteUserinfo?=' + userId);
     }

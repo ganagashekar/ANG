@@ -7,6 +7,7 @@ import { ErrorCodeModel } from 'src/app/Model/ServiceResposeModel/Setups/ErrorCo
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
 import { ErrorCodeService } from 'src/app/shared/services/ErrorCode.services';
+import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 
 
 @Component({
@@ -14,12 +15,12 @@ import { ErrorCodeService } from 'src/app/shared/services/ErrorCode.services';
   templateUrl: './ErrorCode.component.html',
   styleUrls: ['./ErrorCode.component.scss']
 })
-export class ErrorCodeComponent implements OnInit , AfterViewInit{
+export class ErrorCodeComponent implements OnInit , AfterViewInit {
   ErrorCodeFilter: ErrorCodeFilter;
   stacksArray: ReferenceRecords[] = [];
   ErrorCodeListDataSource: MatTableDataSource<ErrorCodeModel>;
   displayedColumns: string[] = [
-     'errorcode', 'errordesc', 'updt_ts'
+     'errorcode', 'errordesc', 'updt_ts', 'deleteAction'
   ];
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -50,4 +51,34 @@ export class ErrorCodeComponent implements OnInit , AfterViewInit{
 
  }
 
+ deleteerrorcode(errorcode: string): void {
+  const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
+    width: '420px',
+    data: { Title: 'Confirm', Message: 'Are you sure want to delete this ErrorCode ?' }
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this._errorcodeservices.deleteerrorcode(errorcode).subscribe((response: any) => {
+        if (response.model) {
+        this. getAllErrorCodeList();
+          this.showSnackBar('Errorcode Deleted Successfully.');
+       } else {
+        this.showSnackBar('Error occurred while deleting the Errorcode.', true);
+        }
+        this.showSnackBar(response.message);
+      }, error => {
+        console.log('Error: ' + error);
+      });
+    }
+  });
+}
+showSnackBar(message: string, isError: boolean = false): void {
+  if (isError) {
+    this.snackBar.open(message, 'Ok');
+  } else {
+    this.snackBar.open(message, 'Ok', {
+      duration: 3000
+    });
+  }
+}
 }

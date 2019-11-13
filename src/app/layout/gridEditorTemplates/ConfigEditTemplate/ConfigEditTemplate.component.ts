@@ -29,7 +29,8 @@ export class ConfigEditTemplateComponent implements OnInit {
   ConfgFilter: ConfgFilter ;
   constructor(public dialogRef: MatDialogRef<ConfigEditTemplateComponent>, private _confgsservices: ConfgService,
     @Inject(MAT_DIALOG_DATA) private data: any, private formBuilder: FormBuilder,
-     private snackBar: MatSnackBar) { this.ConfgFilter = new ConfgFilter();
+     private snackBar: MatSnackBar) {
+       this.ConfgFilter = new ConfgFilter();
       if (data !== undefined && data.action === 'edit') {
         this.isAdd = false;
         this.editModel = (data.Scheduler as  ConfgModel);
@@ -37,7 +38,7 @@ export class ConfigEditTemplateComponent implements OnInit {
        // this.SelecteduserName = this.editModel.userName;
        this.SelectedsiteId = this.editModel.siteID;
        this.SelectedbusId = this.editModel.busID;
-       //this.SelectedvendorisEnabled = this.editModel.isEnabled;
+       // this.SelectedvendorisEnabled = this.editModel.isEnabled;
       }
     }
 
