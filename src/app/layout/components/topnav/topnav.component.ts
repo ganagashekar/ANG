@@ -13,6 +13,7 @@ import { AppComponent } from 'src/app/app.component';
 export class TopnavComponent implements OnInit {
     public pushRightClass: string;
     SiteId: number;
+    SiteName: string;
     sitesArray: ReferenceRecords[] = [];
  loggedusername: string;
 
@@ -31,6 +32,7 @@ export class TopnavComponent implements OnInit {
         this.loggedusername = localStorage.getItem('userName');
         this. getSites();
         this.SiteId = 1;
+        this.SiteName = 'Haritha Bio Products India Private Ltd'; // this.sitesArray[0].name;
     }
 
 

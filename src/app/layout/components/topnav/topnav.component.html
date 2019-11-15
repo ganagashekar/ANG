@@ -12,19 +12,23 @@
     <div class="nav-brand">
         EMSV
     </div>
-    <form class="hidden-sm" style="margin-left: 20px; margin-top: 5px">
+    <form class="hidden-sm" style="margin-left: 20px; margin-top: 0px">
         <!-- <mat-form-field>
             <input matInput [placeholder]="'Search' | translate">
         </mat-form-field> -->
 
-        <mat-form-field>
+        <!-- <mat-form-field>
 
            <mat-select [value]="SiteId" (selectionChange)="RefreshCurrentPage($event)">
 
               <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.name}}
               </mat-option>
           </mat-select>
-      </mat-form-field>
+      </mat-form-field> -->
+
+       <h1>{{SiteName}}</h1>
+
+
 
     </form>
     <span class="nav-spacer"></span>

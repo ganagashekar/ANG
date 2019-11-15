@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
 import { AppComponent } from 'src/app/app.component';
 import { ReportsService } from 'src/app/shared/services/report.services';
@@ -11,27 +11,24 @@ import * as Highcharts from 'highcharts/highstock';
 // IndicatorZigZag(Highcharts);
 
 import * as HC_exporting_ from 'highcharts/modules/exporting';
-import { FormControl } from '@angular/forms';
 import { ReportRequestModel } from '../../../Model/Report/ReportRequestModel';
 import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { ParameterFilter } from 'src/app/Model/FilterModels/ParameterFilter';
 const HC_exporting = HC_exporting_;
 HC_exporting(Highcharts);
-
 @Component({
-  selector: 'app-AverageReport',
-  templateUrl: './AverageReport.component.html',
-  styleUrls: ['./AverageReport.component.scss']
+  selector: 'app-RealtimeReport',
+  templateUrl: './RealtimeReport.component.html',
+  styleUrls: ['./RealtimeReport.component.scss']
 })
 
-export class AverageReportComponent implements OnInit , AfterViewInit {
+export class RealtimeReportComponent implements OnInit , AfterViewInit {
   Highcharts = Highcharts;
    updateFlag = true;
    reportRequestModel: ReportRequestModel;
    stacksArray: ReferenceRecords[] = [];
    paramArray: ReferenceRecords[] = [];
    sitesArray:  ReferenceRecords[] = [];
-   timePeriodArray:  ReferenceRecords[] = [];
    chartOptions: any;
    parameterFilter: ParameterFilter;
    SiteId: number ;
@@ -56,11 +53,11 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
       this.reportRequestModel.StackId  = 0;
       this.reportRequestModel.ParamId = 0;
       this.reportRequestModel.IsExport = false;
-      this.reportRequestModel.SiteCode = 'Ganga';
-      this.reportRequestModel.TimePeriod = (0);
+      this.reportRequestModel.SiteCode = 'MHBP';
+
       this.reportRequestModel.SiteName = 'MHBP';
-      this.reportRequestModel.ReportTitle = 'Vasthi Systems';
-      this.reportRequestModel.ReportType = 'Average Report ';
+      this.reportRequestModel.ReportTitle = 'Vasthi';
+      this.reportRequestModel.ReportType = 'Real time Report ';
       this.reportRequestModel.RequestedUser = 'Ganga';
 
     _appcomponent.currenturl = '/Paramsetup';
@@ -74,12 +71,10 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
      this. getAllStacks();
      this.getAllParameterList(0);
      this.getSites();
-     this.gettimePeriod();
-     this.reportRequestModel.TimePeriod = this.timePeriodArray[0].id;
 
 
 
-    this.getAverageReport();
+    this.getRealtimeReport();
   }
 
   applyFilter(filterValue: string) {
@@ -97,14 +92,6 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
     });
   }
 
-   gettimePeriod(): void {
-
-    this._reportservices.getReferencerecords(17, false).subscribe(resp => {
-      this.timePeriodArray = resp.model as ReferenceRecords[];
-    }, error => {
-      console.log('Error: ' + error);
-    });
-   }
   getSites(): void {
     this._reportservices.getAllSites(this.reportRequestModel.SiteId, false).subscribe(resp => {
       this.sitesArray = resp.model as ReferenceRecords[];
@@ -120,6 +107,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
     this.parameterFilter.StackId = stackcId;
     this.parameterFilter.ParamId = 0;
     this.parameterFilter.IncludeAll = true;
+
     this._reportservices.GetParameterforStack(this.parameterFilter, true).subscribe(resp => {
      this.paramArray = resp.model as ReferenceRecords[];
      this.reportRequestModel.ParamId = Number(this.paramArray[0].id);
@@ -216,10 +204,10 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
    });
    return _series;
   }
-  getAverageReport(): void {
+  getRealtimeReport(): void {
     this.isLoading = true;
     this.reportRequestModel.IsExport = false;
-    this._reportservices.getAverageReport(this.reportRequestModel).subscribe(resp => {
+    this._reportservices.getRealtimeReport(this.reportRequestModel).subscribe(resp => {
       this.chartdata = [];
       this.chartOptions = {};
       this.displayedColumns =  resp.model.length > 0 ? Object.keys( resp.model[0]) : [];
@@ -241,13 +229,13 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   }
 
   OnSearchClick(): void {
-   this.getAverageReport();
+   this.getRealtimeReport();
   }
 
   OnExcelExportClick(): void {
     this.isLoading = true;
     this.reportRequestModel.IsExport = true;
-    this._reportservices.exportAverageReport(this.reportRequestModel).subscribe(resp => {
+    this._reportservices.exportRealtimeReport(this.reportRequestModel).subscribe(resp => {
       saveAs(resp, 'AverageReport.xlsx');
      // this.saveAsBlob(resp);
       this.isLoading = false;

@@ -7,7 +7,7 @@ body {
 
 .main-container {
   position: absolute;
-  top: 64px;
+  top: 40px;
   left: 193px;
   right: 0;
   bottom: 0;
@@ -23,4 +23,18 @@ body {
 
 .mat-row:nth-child(odd){
   background-color:#fafafa;
+  }
+  .mb-20 {
+    margin-bottom: 20px;
+  }
+
+  .mt-20 {
+    margin-top: 20px;
+  }
+  .mb-10 {
+    margin-bottom: 10px;
+  }
+
+  .mb-5 {
+    margin-bottom: 5px;
   }

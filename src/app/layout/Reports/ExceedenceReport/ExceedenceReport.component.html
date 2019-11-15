@@ -1,6 +1,4 @@
-<!-- <h4>Reports</h4> -->
-<!-- <b class="mb-10">Reports</b> -->
-<mat-toolbar   class="mb-10" style="height: 45px; font-size: 16px; background: #fff; font-weight: bold;" >
+<mat-toolbar   class="mb-5"  style="height: 45px; font-size: 16px; background: #fff; border: #0000; font-weight: bold;" >
   <span>
 
     <a  mat-button >
@@ -8,10 +6,9 @@
 
   <span > > </span>
   <span><a  mat-button color="white">
-      <mat-icon>timeline</mat-icon>Average Report</a></span>
+      <mat-icon>timeline</mat-icon>Exceedence Report</a></span>
 
 </mat-toolbar>
-
 <div >
 
 
@@ -45,18 +42,6 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>Time Range</mat-label>
-         <mat-select [(ngModel)]="reportRequestModel.TimePeriod" >
-
-            <mat-option [value]="timePeriod.id" *ngFor="let timePeriod of timePeriodArray">{{timePeriod.name}}
-
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-  </div>
-  <div>
     <mat-form-field>
       <input matInput [matDatepicker]="picker1" placeholder="From Date" [(ngModel)]="reportRequestModel.FromDate">
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -129,47 +114,6 @@
   </div>
 
 
-  <mat-accordion >
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Graph View
-          </mat-panel-title>
-          <mat-panel-description>
-
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <div >
-            <mat-card  *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
-                <mat-progress-spinner [diameter]="30"
-                  color="primary"
-                  mode="indeterminate">
-                </mat-progress-spinner>
-              </mat-card>
-
-        <highcharts-chart *ngIf="!isLoading" style="width: 99.8%; display: block"
-         [Highcharts]="Highcharts"
-         [oneToOne] ="'true'"
-        [constructorType]="'stockChart'"
-        [options]="chartOptions">
-             </highcharts-chart>
-
-
-           </div>
-      </mat-expansion-panel>
-      </mat-accordion>
-
-
-
-  <!-- <div [chart]="stock"></div> -->
-
-  <!-- <highcharts-chart style="width: 100%; display: block"
-	[Highcharts]="Highcharts"
-	[constructorType]="'stockChart'"
-	[options]="chartOptions">
-</highcharts-chart> -->
-  <!-- <div [chart]="chart"></div> -->
 
 
 

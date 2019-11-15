@@ -6,8 +6,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopnavComponent } from './components/topnav/topnav.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
-import { NavComponent } from './nav/nav.component';
-import { Screen2Component } from './screen2/screen2.component';
 import { ParametersetupModule } from './parametersetup/parametersetup.module';
 
 import { AverageReportComponent } from './Reports/AverageReport/AverageReport.component';
@@ -16,10 +14,6 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuListItemComponent } from './components/menu-list-item/menu-list-item.component';
 import { NavService } from '../shared/services/nav.service';
-
-
-
-
 import { UserinfoComponent } from './Userinfo/Userinfo.component';
 import { ControllerComponent } from './Controller/Controller.component';
 import { SitesetupComponent } from './sitesetup/sitesetup.component';
@@ -35,6 +29,8 @@ import { CntrBusEditTemplateComponent } from 'src/app/layout/gridEditorTemplates
 import { SiteEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/SiteEditTemplate/SiteEditTemplate.Component';
 import { ConfigEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/ConfigEditTemplate/ConfigEditTemplate.Component';
 import { ConfirmationDialogComponent } from 'src/app/layout/components/confirmation-dialog/confirmation-dialog.Component';
+import { RealtimeReportComponent } from './Reports/RealtimeReport/RealtimeReport.component';
+import { ExceedenceReportComponent } from './Reports/ExceedenceReport/ExceedenceReport.component';
 
 
 
@@ -47,7 +43,6 @@ import { ConfirmationDialogComponent } from 'src/app/layout/components/confirmat
         MaterialModule,
         TranslateModule,
         ParametersetupModule,
-
         ChartModule,
         FormsModule,
         ReactiveFormsModule,
@@ -61,11 +56,11 @@ import { ConfirmationDialogComponent } from 'src/app/layout/components/confirmat
 
     entryComponents: [UserinfoEditTemplateComponent, CntrBusEditTemplateComponent, LogEditTemplateComponent,
        SiteEditTemplateComponent, ConfigEditTemplateComponent],
-    declarations: [Screen2Component, UserinfoComponent,  LayoutComponent, NavComponent, TopnavComponent, SidebarComponent,
+    declarations: [ UserinfoComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
       ControllerComponent, SitesetupComponent, ControllerBusComponent, ApplicationLogsComponent, ConfgComponent, AuditComponent,
       ErrorCodeComponent, CntrBusEditTemplateComponent, UserinfoEditTemplateComponent, LogEditTemplateComponent,
       SiteEditTemplateComponent, ConfigEditTemplateComponent, AverageReportComponent, MenuListItemComponent
-        ]
+      , RealtimeReportComponent , ExceedenceReportComponent]
 
 
 })
