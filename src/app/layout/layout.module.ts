@@ -44,7 +44,7 @@ import { ContrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/C
         ParametersetupModule,
         ChartModule,
         FormsModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule
     ],
 
 
@@ -55,11 +55,12 @@ import { ContrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/C
 
     entryComponents: [UserinfoEditTemplateComponent, CntrBusEditTemplateComponent, LogEditTemplateComponent,
        SiteEditTemplateComponent, ConfigEditTemplateComponent],
+
     declarations: [ UserinfoComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
       ControllerComponent, SitesetupComponent, ControllerBusComponent, ApplicationLogsComponent, ConfgComponent, AuditComponent,
       ErrorCodeComponent, CntrBusEditTemplateComponent, UserinfoEditTemplateComponent, LogEditTemplateComponent,
-      SiteEditTemplateComponent, ConfigEditTemplateComponent, AverageReportComponent, MenuListItemComponent,
-      , RealtimeReportComponent , ExceedenceReportComponent]
+      SiteEditTemplateComponent, ConfigEditTemplateComponent, AverageReportComponent, MenuListItemComponent
+      , RealtimeReportComponent , ExceedenceReportComponent,ControllerComponent]
      //  SiteEditTemplateComponent, ConfigEditTemplateComponent, ContrEditTemplateComponent ]
     // declarations: [Screen2Component, UserinfoComponent,  LayoutComponent, NavComponent, TopnavComponent, SidebarComponent,
     //   ControllerComponent, SitesetupComponent, ControllerBusComponent, ApplicationLogsComponent, ConfgComponent, AuditComponent,
