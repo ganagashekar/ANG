@@ -28,15 +28,44 @@ import { ReportRequestModel } from '../../Model/Report/ReportRequestModel';
       this._baseURL = environment.apiUrl;
       this.userName = localStorage.getItem('userName');
     }
-    // getAverageReport(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
-    //   return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REPORTS +
-    //     '/GetAverageReports');
-    //   }
+
+     getReferencerecords(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+      return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+        '/GetReferenceRecords?ReferenceTypeId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+      }
 
       getAverageReport(filter: ReportRequestModel): Observable<any> {
         return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_REPORTS +
           '/FetchAverageReports', filter);
       }
+
+      getRealtimeReport(filter: ReportRequestModel): Observable<any> {
+        return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_REPORTS +
+          '/FetchLiveReports', filter);
+      }
+
+      getExceedenceReport(filter: ReportRequestModel): Observable<any> {
+        return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_REPORTS +
+          '/GetExceedenceReport', filter);
+      }
+
+      exportAverageReport(filter: ReportRequestModel):  Observable<Blob> {
+
+
+        return this._httpClient.post<Blob>(this._baseURL + appConstants.APICONTROLLER_REPORTS +
+          '/ExportAverageReport', filter,
+        { responseType: 'blob' as 'json' });
+
+      }
+
+
+      exportRealtimeReport(filter: ReportRequestModel):  Observable<Blob> {
+        return this._httpClient.post<Blob>(this._baseURL + appConstants.APICONTROLLER_REPORTS +
+          '/ExportLiveReport', filter,
+        { responseType: 'blob' as 'json' });
+
+      }
+
       getAllStacks(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
         return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
           '/GetStacks?StackId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
@@ -51,10 +80,6 @@ import { ReportRequestModel } from '../../Model/Report/ReportRequestModel';
         return Promise.resolve(DATA);
       }
 
-      getReferencerecords(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
-        return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
-          '/GetReferenceRecords?ReferenceTypeId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
-        }
 
         getAllSites(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
           return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +

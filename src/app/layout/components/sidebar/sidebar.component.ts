@@ -28,15 +28,15 @@ export class SidebarComponent implements OnInit {
 
           },
           {
-            displayName: 'Live Report',
+            displayName: 'RealTime',
             iconName: 'library_books',
-            route: 'AverageReport'
+            route: 'RealtimeReport'
 
           },
           {
             displayName: 'Exceedence',
             iconName: 'multiline_chart',
-            route: 'AverageReport'
+            route: 'ExceedenceReport'
 
           },
           {

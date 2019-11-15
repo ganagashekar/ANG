@@ -1,5 +1,5 @@
 export class ReferenceRecords {
-    id: bigint;
+    id: number;
     name: string;
-    referenceRecordTyepId: bigint;
+    referenceRecordTyepId: number;
 }

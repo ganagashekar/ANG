@@ -1,6 +1,6 @@
 
 
-<div class="mb-20" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="10px">
+<div class="mb-20 mt-20" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="10px">
     <div fxFlex>
         <app-stat [bgClass]="'success'" [icon]="'dashboard'" [count]="stackCount" [label]="'Monitoring Stations'"></app-stat>
     </div>
@@ -52,7 +52,7 @@
                 <td mat-cell *matCellDef="let element"> {{element.recordedDate}} </td>
             </ng-container>
             <ng-container matColumnDef="threShholdValue">
-              <th mat-header-cell *matHeaderCellDef> ThrshHolde Value </th>
+              <th mat-header-cell *matHeaderCellDef> ThreshHold Value </th>
               <td mat-cell *matCellDef="let element"> {{element.threShholdValue}} </td>
           </ng-container>
 

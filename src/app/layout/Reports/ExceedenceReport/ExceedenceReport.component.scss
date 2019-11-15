@@ -34,13 +34,13 @@ table {
       // display: block !important;
 }
 .mat-cell {
-  width:150px !important;
+  width:200px !important;
   white-space: nowrap;
   min-width: 80px !important;
 }
 
 .mat-header-cell {
-  width:150px !important;
+  width:200px !important;
   white-space: nowrap;
   min-width: 80px !important;
 
@@ -121,14 +121,14 @@ color:#fafafa
 
 mat-cell:nth-child(1),
 mat-header-cell:nth-child(1) {
-    flex: 0 0 12%;
+    flex: 0 0 14%;
 }
 
 mat-cell:nth-child(2),
 mat-header-cell:nth-child(2) {
-    flex: 0 0 100px;
+    flex: 0 0 170px;
 }
 
 .customWidthClass{
-  flex: 0 0 100px;
+  flex: 0 0 180px;
 }

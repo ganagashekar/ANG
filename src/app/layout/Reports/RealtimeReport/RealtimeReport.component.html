@@ -1,0 +1,162 @@
+<mat-toolbar   class="mb-5"  style="height: 45px; font-size: 16px; background: #fff; border: #0000; font-weight: bold;" >
+    <span>
+
+      <a  mat-button >
+          <mat-icon>assessment</mat-icon>Report</a></span>
+
+    <span > > </span>
+    <span><a  mat-button color="white">
+        <mat-icon>timeline</mat-icon>RealTime Report</a></span>
+
+  </mat-toolbar>
+<div >
+
+
+  <mat-card >
+
+    <div>
+      <mat-form-field>
+          <mat-label>Site</mat-label>
+           <mat-select [(ngModel)]="reportRequestModel.SiteId"  (selectionChange)="onSiteChange($event.value)">
+
+              <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.name}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+          <mat-label>Stack Name</mat-label>
+           <mat-select [(ngModel)]="reportRequestModel.StackId"  (selectionChange)="StackChange($event.value)">
+
+              <mat-option [value]="stacks.id" *ngFor="let stacks of stacksArray">{{stacks.name}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field>
+          <mat-label>Parameter</mat-label>
+           <mat-select [(ngModel)]="reportRequestModel.ParamId"  (ngModelChange)="ParameterChange()">
+
+              <mat-option [value]="param.id" *ngFor="let param of paramArray">{{param.name}}
+              <!-- <mat-option [value]="stacks.id" *ngFor="let stacks of stacksArray">{{stacks.name}} -->
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker1" placeholder="From Date" [(ngModel)]="reportRequestModel.FromDate">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker2" placeholder="To Date"
+        [(ngModel)]="reportRequestModel.ToDate">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+  </mat-card>
+  </div>
+    <mat-card   style="height: 60px;padding: 1px;" >
+
+
+          <mat-card-actions align="end" fxFlex style="height: 40px;" >
+            <mat-form-field >
+              <input [disabled]="diableGridFilters" matInput (keyup)="applyFilter($event.target.value)" placeholder="Grid Search">
+            </mat-form-field>
+            <button mat-button color="primary" (click)="OnSearchClick()">
+                <mat-icon>filter_list</mat-icon>
+               Apply
+
+            </button>
+
+            <button  mat-button color="primary" [disabled]="diableGridFilters" (click)="OnExcelExportClick()">
+              <i class="material-icons">
+                file_copy
+                </i>
+              Excel  Export
+
+            </button>
+
+
+          </mat-card-actions>
+          </mat-card>
+
+  <div  flFlex flexLayout="row" flexLayout.lt-md="column" >
+    <mat-paginator [pageSizeOptions]="[10,20,30,50,100]" showFirstLastButtons></mat-paginator>
+              <mat-table table1 *ngIf="!isLoading" [dataSource]="dataSource" matSort matSortStart="desc" class="mat-elevation-z8 mat-table data">
+                  <ng-container [matColumnDef]="columnName" *ngFor="let columnName of displayedColumns">
+                    <mat-header-cell [ngClass]="'customWidthClass'"  mat-sort-header *matHeaderCellDef> {{columnName  | titlecase}} </mat-header-cell>
+                    <mat-cell [ngClass]="'customWidthClass'"  *matCellDef="let element"> {{element[columnName]}} </mat-cell>
+
+
+
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true" ></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                </mat-table>
+
+
+
+
+
+
+                <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+                    <mat-progress-spinner [diameter]="30"
+                      color="primary"
+                      mode="indeterminate">
+                    </mat-progress-spinner>
+                  </mat-card>
+
+    </div>
+
+
+    <mat-accordion >
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Graph View
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div >
+              <mat-card  *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+                  <mat-progress-spinner [diameter]="30"
+                    color="primary"
+                    mode="indeterminate">
+                  </mat-progress-spinner>
+                </mat-card>
+
+          <highcharts-chart *ngIf="!isLoading" style="width: 99.8%; display: block"
+           [Highcharts]="Highcharts"
+           [oneToOne] ="'true'"
+          [constructorType]="'stockChart'"
+          [options]="chartOptions">
+               </highcharts-chart>
+
+
+             </div>
+        </mat-expansion-panel>
+        </mat-accordion>
+
+
+
+    <!-- <div [chart]="stock"></div> -->
+
+    <!-- <highcharts-chart style="width: 100%; display: block"
+    [Highcharts]="Highcharts"
+    [constructorType]="'stockChart'"
+    [options]="chartOptions">
+  </highcharts-chart> -->
+    <!-- <div [chart]="chart"></div> -->
+
+
+
+
+

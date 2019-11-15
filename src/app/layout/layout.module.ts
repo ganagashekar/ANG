@@ -6,8 +6,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TopnavComponent } from './components/topnav/topnav.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
-import { NavComponent } from './nav/nav.component';
-import { Screen2Component } from './screen2/screen2.component';
 import { ParametersetupModule } from './parametersetup/parametersetup.module';
 import { AverageReportComponent } from './Reports/AverageReport/AverageReport.component';
 import { ChartModule } from 'angular-highcharts';
@@ -29,6 +27,9 @@ import { CntrBusEditTemplateComponent } from 'src/app/layout/gridEditorTemplates
 import { SiteEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/SiteEditTemplate/SiteEditTemplate.Component';
 import { ConfigEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/ConfigEditTemplate/ConfigEditTemplate.Component';
 import { ConfirmationDialogComponent } from 'src/app/layout/components/confirmation-dialog/confirmation-dialog.Component';
+import { RealtimeReportComponent } from './Reports/RealtimeReport/RealtimeReport.component';
+import { ExceedenceReportComponent } from './Reports/ExceedenceReport/ExceedenceReport.component';
+
 import { ContrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/ContrEditTemplate/ContrEditTemplate.Component';
 
 
@@ -41,7 +42,6 @@ import { ContrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/C
         MaterialModule,
         TranslateModule,
         ParametersetupModule,
-
         ChartModule,
         FormsModule,
         ReactiveFormsModule,
@@ -54,12 +54,18 @@ import { ContrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/C
     // AverageReportComponent, MenuListItemComponent    ]
 
     entryComponents: [UserinfoEditTemplateComponent, CntrBusEditTemplateComponent, LogEditTemplateComponent,
-       SiteEditTemplateComponent, ConfigEditTemplateComponent, ContrEditTemplateComponent ],
-    declarations: [Screen2Component, UserinfoComponent,  LayoutComponent, NavComponent, TopnavComponent, SidebarComponent,
+       SiteEditTemplateComponent, ConfigEditTemplateComponent],
+    declarations: [ UserinfoComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
       ControllerComponent, SitesetupComponent, ControllerBusComponent, ApplicationLogsComponent, ConfgComponent, AuditComponent,
       ErrorCodeComponent, CntrBusEditTemplateComponent, UserinfoEditTemplateComponent, LogEditTemplateComponent,
-      SiteEditTemplateComponent, ConfigEditTemplateComponent , AverageReportComponent, MenuListItemComponent, ContrEditTemplateComponent
-        ]
+      SiteEditTemplateComponent, ConfigEditTemplateComponent, AverageReportComponent, MenuListItemComponent,
+      , RealtimeReportComponent , ExceedenceReportComponent]
+     //  SiteEditTemplateComponent, ConfigEditTemplateComponent, ContrEditTemplateComponent ]
+    // declarations: [Screen2Component, UserinfoComponent,  LayoutComponent, NavComponent, TopnavComponent, SidebarComponent,
+    //   ControllerComponent, SitesetupComponent, ControllerBusComponent, ApplicationLogsComponent, ConfgComponent, AuditComponent,
+    //   ErrorCodeComponent, CntrBusEditTemplateComponent, UserinfoEditTemplateComponent, LogEditTemplateComponent,
+    //   SiteEditTemplateComponent, ConfigEditTemplateComponent , AverageReportComponent, MenuListItemComponent, ContrEditTemplateComponent
+    //     ]
 
 
 })

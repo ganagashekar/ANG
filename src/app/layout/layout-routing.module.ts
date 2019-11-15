@@ -16,6 +16,8 @@ import { ApplicationLogsComponent } from './ApplicationLogs/ApplicationLogs.comp
 import { ConfgComponent } from './confg/confg.component';
 import { AuditComponent } from './Audit/Audit.component';
 import { ErrorCodeComponent } from './ErrorCode/ErrorCode.component';
+import { RealtimeReportComponent } from './Reports/RealtimeReport/RealtimeReport.component';
+import { ExceedenceReportComponent } from './Reports/ExceedenceReport/ExceedenceReport.component';
 
 
 
@@ -33,15 +35,24 @@ const routes: Routes = [
                 path: 'dashboard',
                 loadChildren: './dashboard/dashboard.module#DashboardModule'
             },
-            {
-                path: 'screen1',
-                loadChildren: './screen1/screen1.module#Screen1Module'
-            },
+
+
             {
 
               path: 'AverageReport',
               component: AverageReportComponent
           },
+
+          {
+
+            path: 'RealtimeReport',
+            component: RealtimeReportComponent
+        },
+        {
+
+          path: 'ExceedenceReport',
+          component: ExceedenceReportComponent
+      },
             {
               path: 'SiteSetup',
               component: SitesetupComponent

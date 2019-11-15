@@ -71,8 +71,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.init();
     this.getDashboardQuickCounts();
     this.getDashboardQuickTableList();
-    const source = interval(20000);
-    this.subscription = source.subscribe(val => this.getDashboardQuickTableList());
+    // const source = interval(20000);
+    // this.subscription = source.subscribe(val => this.getDashboardQuickTableList());
   }
   addPoint() {
     const x = new Date().getTime();
