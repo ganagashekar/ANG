@@ -1,26 +1,27 @@
 <div class="divTaskScheduler">
     <div fxFlex>
       <form [formGroup]="schedulerForm" class="scheduler-form">
+          <div class="close-btn">
+              <button mat-icon-button  (click)="onCloseClick()">
+                  <i class="material-icons" title="Click here to delete Config popup">cancel</i>
+              </button>
+            </div>
         <div class="mat-h2 header">
           Config
         </div>
-         <mat-form-field class="full-width">
-            <mat-label> confgID.</mat-label>
-            <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
-              Errordesc is
-              <strong>required</strong>
-          </mat-error> -->
-            <input matInput type="bigint" min="1" formControlName="confgID">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-            <mat-label>siteID.</mat-label>
-            <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
-              Errorcode is
-              <strong>required</strong>
-          </mat-error> -->
-            <input matInput type="string" min="1" formControlName="siteID">
-        </mat-form-field>
-        <mat-form-field class="full-width">
+        <mat-form-field class="half-width float-left">
+            <mat-label>siteId.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.siteId.hasError('required')">
+                Siteid is
+                <strong>required</strong>
+            </mat-error> -->
+            <mat-select formControlName="siteId" >
+
+               <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.id}}
+               </mat-option>
+           </mat-select>
+       </mat-form-field>
+        <mat-form-field class="half-width float-right">
           <mat-label>busID.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
             Errorcode is
@@ -28,7 +29,7 @@
         </mat-error> -->
           <input matInput type="string" min="1" formControlName="busID">
       </mat-form-field>
-      <mat-form-field class="full-width">
+      <mat-form-field class="half-width float-left">
           <mat-label>vendorID.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
             Errorcode is
@@ -36,7 +37,7 @@
         </mat-error> -->
           <input matInput type="string" min="1" formControlName="vendorID">
       </mat-form-field>
-      <mat-form-field class="full-width">
+      <mat-form-field class="half-width float-right">
           <mat-label>stack_name.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
             Errorcode is
@@ -44,7 +45,7 @@
         </mat-error> -->
           <input matInput type="string" min="1" formControlName="stack_name">
       </mat-form-field>
-      <mat-form-field class="full-width">
+      <mat-form-field class="half-width float-left">
           <mat-label>stack_typ.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
             Errorcode is
@@ -52,7 +53,7 @@
         </mat-error> -->
           <input matInput type="string" min="1" formControlName="stack_typ">
       </mat-form-field>
-      <mat-form-field class="full-width">
+      <mat-form-field class="half-width float-right">
           <mat-label>stack_status.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
             Errorcode is

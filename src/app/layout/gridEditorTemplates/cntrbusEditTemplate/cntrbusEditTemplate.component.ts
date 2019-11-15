@@ -16,15 +16,15 @@ export class CntrBusEditTemplateComponent implements OnInit {
   @Output()
   CntrBusEditorEmitter = new EventEmitter<any>();
   schedulerForm: FormGroup;
-  // stacksArray: ReferenceRecords[] = [];
-  // paramArray: ReferenceRecords[] = [];
+  sitebaudrateArray: ReferenceRecords[] = [];
+  siteprotocalArray: ReferenceRecords[] = [];
   // paramUnitsArray: ReferenceRecords[] = [];
   isAdd = true;
  SelectedbusId: bigint ;
  SelectedmacId: string;
- //SelectedbaudRate: bigint;
- //SelectedtimeOut: bigint;
- //SelectedstartIndex: bigint;
+ // SelectedbaudRate: bigint;
+ // SelectedtimeOut: bigint;
+ // SelectedstartIndex: bigint;
  // SelecteduserName: string;
  // SelectedvendorsiteId: bigint;
   editModel: ControllerBusModel;
@@ -39,7 +39,7 @@ export class CntrBusEditTemplateComponent implements OnInit {
      this.SelectedbusId = this.editModel.busId;
      // this.SelecteduserName = this.editModel.userName;
      this.SelectedmacId = this.editModel.macId;
-     //this.SelectedvendorisEnabled = this.editModel.isEnabled;
+     // this.SelectedvendorisEnabled = this.editModel.isEnabled;
     // this.SelectedbaudRate = this.editModel.baudRate;
     // this.SelectedtimeOut = this.editModel.timeOut;
     // this.SelectedstartIndex = this.editModel.startIndex;
@@ -48,8 +48,8 @@ export class CntrBusEditTemplateComponent implements OnInit {
 
   }
   ngOnInit() {
-    // this.getAllStacks();
-    // this.getAllParameterList(0);
+     this.getAllBaudrateList(0);
+     this.getAllprotocalist(0);
     // this.getAllParameterUnitsList(0);
     this.schedulerForm = this.formBuilder.group({
       busId: new FormControl('', [Validators.required]),
@@ -82,6 +82,25 @@ export class CntrBusEditTemplateComponent implements OnInit {
 
 
       }
+  }
+  getAllBaudrateList(BusId: number): void {
+
+    this.ControllerBusFilter.BusId = 1;
+    this._ControllerBusService.getReferencerecords(9, false).subscribe(resp => {
+      this.sitebaudrateArray = resp.model as ReferenceRecords[];
+   }, error => {
+     console.log('Error: ' + error);
+   });
+  }
+
+  getAllprotocalist(BusId: number): void {
+
+    this.ControllerBusFilter.BusId = 1;
+    this._ControllerBusService.getReferencerecords(5, false).subscribe(resp => {
+      this.siteprotocalArray = resp.model as ReferenceRecords[];
+   }, error => {
+     console.log('Error: ' + error);
+   });
   }
 
   showSnackBar(message: string, isError: boolean = false): void {

@@ -15,7 +15,7 @@ export class ConfigEditTemplateComponent implements OnInit {
   @Output()
   ConfigEditorEmitter = new EventEmitter<any>();
   schedulerForm: FormGroup;
-  // stacksArray: ReferenceRecords[] = [];
+  sitesArray: ReferenceRecords[] = [];
   // paramArray: ReferenceRecords[] = [];
   // paramUnitsArray: ReferenceRecords[] = [];
   isAdd = true;
@@ -43,6 +43,7 @@ export class ConfigEditTemplateComponent implements OnInit {
     }
 
   ngOnInit() {
+  this.getSites();
     this.schedulerForm = this.formBuilder.group({
       confgID: new FormControl('', [Validators.required]),
       siteID: new FormControl('', [Validators.required]),
@@ -69,12 +70,17 @@ export class ConfigEditTemplateComponent implements OnInit {
           stack_name: this.editModel.stack_name,
           stack_typ: this.editModel.stack_typ,
           stack_status: this.editModel.stack_status,
-
-
         });
 
 
       }
+  }
+  getSites(): void {
+    this._confgsservices.getAllSites(0, false).subscribe(resp => {
+      this.sitesArray = resp.model as ReferenceRecords[];
+    }, error => {
+      console.log('Error: ' + error);
+    });
   }
 
   showSnackBar(message: string, isError: boolean = false): void {

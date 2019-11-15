@@ -19,7 +19,8 @@ export class SitesetupComponent implements OnInit {
   siteSetupFilter: SiteSetupFilter;
   SitesetupListDataSource: MatTableDataSource<SiteSetupModel>;
   displayedColumns: string[] = [
-     'editAction', 'SiteId', 'SiteName', 'site_cpcb_cd', 'site_city', 'site_state', 'site_country', 'updt_ts', 'deleteAction'
+     'editAction', 'SiteId', 'SiteName', 'site_cpcb_cd', 'site_city', 'site_state', 'site_country',
+      'updt_ts', 'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _Sitesetupservices: SitesetupService,

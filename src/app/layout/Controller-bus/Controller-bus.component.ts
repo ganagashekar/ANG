@@ -18,6 +18,8 @@ import { ConfirmationDialogComponent } from '../components/confirmation-dialog/c
 export class ControllerBusComponent implements OnInit {
   ControllerBusFilter: ControllerBusFilter;
   ControllerBusListDataSource: MatTableDataSource<ControllerBusModel>;
+  sitesArray: ReferenceRecords[] = [];
+  macidsArray: ReferenceRecords[] = [];
   displayedColumns: string[] = [
     'editAction', 'busId', 'macId', 'comPort', 'baudRate', 'timeOut', 'startIndex', 'protocal', 'updtts', 'deleteAction'
    ];
@@ -34,7 +36,11 @@ export class ControllerBusComponent implements OnInit {
 
   ngOnInit() {
     this.getAllControllerBusinfoList ();
+    this.getSites();
+    this.getMacids();
   }
+
+
 
   getAllControllerBusinfoList(): void {
     this.ControllerBusFilter.MacId = this._appcomponent.MacId;
@@ -45,6 +51,22 @@ export class ControllerBusComponent implements OnInit {
      console.log('Error: ' + error);
    });
   }
+  getSites(): void {
+    this._controllerBusservices.getAllSites(0, false).subscribe(resp => {
+      this.sitesArray = resp.model as ReferenceRecords[];
+    }, error => {
+      console.log('Error: ' + error);
+    });
+  }
+
+  getMacids(): void {
+    this._controllerBusservices.getAllMacids(0, false).subscribe(resp => {
+      this.macidsArray = resp.model as ReferenceRecords[];
+    }, error => {
+      console.log('Error: ' + error);
+    });
+  }
+
   NewControllerBus(): void {
     const dialogRef = this._dialog.open(CntrBusEditTemplateComponent, {
       width: '500px',

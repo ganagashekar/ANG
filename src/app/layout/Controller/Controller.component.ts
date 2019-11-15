@@ -22,8 +22,9 @@ import { ConfirmationDialogComponent } from '../components/confirmation-dialog/c
 export class ControllerComponent implements OnInit {
   ControllerFilter: ControllerFilter;
   ControllerListDataSource: MatTableDataSource<ControllerModel>;
+  sitesArray: ReferenceRecords[] = [];
   displayedColumns: string[] = [
-     'editAction', 'macId', 'siteId', 'OsType', 'cpcb_url', 'spcb_url', 'licence_key', 'updtts', 'deleteAction'
+     'editAction', 'macId', 'siteId', 'OsType', 'cpcbUrl', 'spcburl', 'LicenseKey', 'updtts', 'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _controllerservices: ControllerService,
@@ -35,7 +36,13 @@ export class ControllerComponent implements OnInit {
 
   ngOnInit() {
     this.getAllControllerinfoList ();
+    this.getSites();
   }
+
+  StackChange() {
+    this.getAllControllerinfoList();
+  }
+
   getAllControllerinfoList(): void {
     this.ControllerFilter.MacId = this._appcomponent.MacId;
     this.ControllerFilter.SiteId = this._appcomponent.SiteId;
@@ -46,6 +53,14 @@ export class ControllerComponent implements OnInit {
    });
 
  }
+
+ getSites(): void {
+  this._controllerservices.getAllSites(0, false).subscribe(resp => {
+    this.sitesArray = resp.model as ReferenceRecords[];
+  }, error => {
+    console.log('Error: ' + error);
+  });
+}
  NewController(): void {
   const dialogRef = this._dialog.open(ContrEditTemplateComponent, {
     width: '500px',
@@ -53,8 +68,9 @@ export class ControllerComponent implements OnInit {
   });
   dialogRef.componentInstance.ControllerEditorEmitter.subscribe((response: any) => {
      if (response.model > 0) {
-       this.getAllControllerinfoList();
       this.showSnackBar('Controller details added Successfully.');
+       this.getAllControllerinfoList();
+
           } else {
       this.showSnackBar(response.message, true);
      }
@@ -85,9 +101,9 @@ Deletecontroller(macId: string): void {
       this._controllerservices.Deletecontroller(macId).subscribe((response: any) => {
         if (response.model) {
            this. getAllControllerinfoList();
-           this.showSnackBar('Scheduled Parameter Deleted Successfully.');
+           this.showSnackBar('Scheduled Controller Deleted Successfully.');
         } else {
-        this.showSnackBar('Error occurred while deleting the Parameter.', true);
+        this.showSnackBar('Error occurred while deleting the Controller.', true);
         }
         this.showSnackBar(response.message);
       }, error => {

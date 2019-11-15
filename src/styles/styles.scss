@@ -58,6 +58,24 @@ tr.mat-header-row {
   color: #fff;
 }
 .mat-menu-content{padding: 0px !important;}
+.cdk-overlay-pane {
+  width: auto !important;
+}
+.mat-dialog-container {
+  height: auto !important;
+  overflow-y: auto;
+}
+.close-btn {
+  text-align: right;
+}
+.mat-dialog-container {
+
+  padding-top: 0px !important;
+}
+.add {
+  float: right;
+  margin-right: 20px;
+}
 // .ng-star-inserted:hover{background-color:#0c3c60;}
 // .mat-list-item-content:hover {
 //   color: #fff;

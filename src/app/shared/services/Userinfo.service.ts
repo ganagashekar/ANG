@@ -35,6 +35,10 @@ import { UserinfoFilter } from 'src/app/Model/FilterModels/UserinfoFilter';
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/GetuserinfoAsync', filter);
     }
+    getUserrolerecords(role_id: number  , All: boolean): Observable<any> {
+      return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+        '/GetUserroleRecords?UserroleTypeId=' + role_id + '&IncludeAll=' + All);
+      }
     saveUserinfo(UserinfoDetails: any):  Observable<any> {
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/SaveUserinfo', UserinfoDetails);

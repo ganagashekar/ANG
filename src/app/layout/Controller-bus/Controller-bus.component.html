@@ -1,4 +1,19 @@
+<mat-form-field>
+    <mat-label>SiteId</mat-label>
+    <mat-select [value]="SiteId" >
 
+       <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.id}}
+       </mat-option>
+   </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>MacId</mat-label>
+    <mat-select [value]="MacId" >
+
+       <mat-option [value]="mac.id" *ngFor="let mac of macidsArray">{{mac.id}}
+       </mat-option>
+   </mat-select>
+</mat-form-field>
 
 <div class="add">
     <button mat-icon-button class="add-button" (click)="NewControllerBus()">
