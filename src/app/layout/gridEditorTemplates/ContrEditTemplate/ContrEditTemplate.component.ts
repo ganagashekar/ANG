@@ -16,7 +16,7 @@ export class ContrEditTemplateComponent implements OnInit {
   @Output()
   ControllerEditorEmitter = new EventEmitter<any>();
   schedulerForm: FormGroup;
-  // stacksArray: ReferenceRecords[] = [];
+  sitesArray: ReferenceRecords[] = [];
   // paramArray: ReferenceRecords[] = [];
   // paramUnitsArray: ReferenceRecords[] = [];
   isAdd = true;
@@ -43,13 +43,14 @@ export class ContrEditTemplateComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getSites();
     this.schedulerForm = this.formBuilder.group({
       macId: new FormControl('', [Validators.required]),
       siteId: new FormControl('', [Validators.required]),
       OsType: new FormControl('', [Validators.required]),
-      cpcb_url: new FormControl('', [Validators.required]),
-      spcb_url: new FormControl('', [Validators.required]),
-      licence_key: new FormControl('', [Validators.required]),
+      cpcbUrl: new FormControl('', [Validators.required]),
+      spcburl: new FormControl('', [Validators.required]),
+      LicenseKey: new FormControl('', [Validators.required]),
 
   });
   if (this.isAdd) { // scheduler add
@@ -63,9 +64,9 @@ export class ContrEditTemplateComponent implements OnInit {
         macId: this.editModel.macId,
         siteId: this.editModel.siteId,
         OsType: this.editModel.OsType,
-        cpcb_url: this.editModel.cpcb_url,
-        spcb_url: this.editModel.spcb_url,
-        licence_key: this.editModel.licence_key,
+        cpcb_Url: this.editModel.cpcbUrl,
+        spcb_url: this.editModel.spcburl,
+        Licence_Key: this.editModel.LicenseKey,
 
 
       });
@@ -75,6 +76,14 @@ export class ContrEditTemplateComponent implements OnInit {
 
 
 }
+getSites(): void {
+  this._controllerservices.getAllSites(0, false).subscribe(resp => {
+    this.sitesArray = resp.model as ReferenceRecords[];
+  }, error => {
+    console.log('Error: ' + error);
+  });
+}
+
 showSnackBar(message: string, isError: boolean = false): void {
   if (isError) {
     this.snackBar.open(message, 'Ok');

@@ -1,4 +1,13 @@
 
+
+       <mat-form-field>
+        <mat-label>SiteId</mat-label>
+         <mat-select [value]="SiteId">
+
+            <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.id}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 <div class="add">
   <button mat-icon-button class="add-button" (click)="NewController()">
       <i class="material-icons" title="Click here to add new controller ">add_circle_outline</i>
@@ -47,22 +56,22 @@ The actual rendered columns are set as a property on the row definition" -->
 
       <ng-container matColumnDef="OsType">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> OsType </th>
-        <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.OsType}} </td>
+        <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.osType}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="cpcb_url">
+    <ng-container matColumnDef="cpcbUrl">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Cpcb_url  </th>
-      <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.cpcb_url}} </td>
+      <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.cpcbUrl}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="spcb_url">
+  <ng-container matColumnDef="spcburl">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Spcb_url  </th>
-    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.spcb_url}} </td>
+    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.spcburl}} </td>
 </ng-container>
 
-  <ng-container matColumnDef="licence_key">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Licence_key  </th>
-    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.licence_key}} </td>
+  <ng-container matColumnDef="LicenseKey">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> License_key  </th>
+    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.licenseKey}} </td>
   </ng-container>
 
   <ng-container matColumnDef="updtts">

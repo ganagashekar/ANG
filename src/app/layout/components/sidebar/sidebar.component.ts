@@ -73,15 +73,15 @@ export class SidebarComponent implements OnInit {
 
           },
           {
-            displayName: 'Parameter',
-            iconName: 'settings_input_component',
-            route: 'Paramsetup'
-
-          },
-          {
             displayName: 'Config',
             iconName: 'config',
             route: 'Confg'
+
+          },
+          {
+            displayName: 'Parameter',
+            iconName: 'settings_input_component',
+            route: 'Paramsetup'
 
           }
 

@@ -1,6 +1,11 @@
 <div class="divTaskScheduler">
     <div fxFlex>
     <form [formGroup]="schedulerForm" class="scheduler-form">
+        <div class="close-btn">
+            <button mat-icon-button  (click)="onCloseClick()">
+                <i class="material-icons" title="Click here to delete  user info popup">cancel</i>
+            </button>
+          </div>
         <div class="mat-h2 header">
             Parameter <b class="selectedEditName"> {{SelectedParam}}</b>
         </div>

@@ -21,3 +21,11 @@ table {
 .mb-20 {
   margin-bottom: 20px;
 }
+
+element.style {
+  max-width: 80vw;
+  pointer-events: auto;
+  width: 500px;
+  position: static;
+}
+

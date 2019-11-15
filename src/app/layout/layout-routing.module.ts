@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from './layout.component';
-
 import { ParametersetupComponent } from './parametersetup/parametersetup.component';
 
 import { AverageReportComponent } from './Reports/AverageReport/AverageReport.component';

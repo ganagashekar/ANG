@@ -28,6 +28,11 @@ import { SiteSetupFilter } from 'src/app/Model/FilterModels/SiteSetupFilter';
         '/GetsiteAsync', filter);
     }
 
+    getReferencerecords(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+      return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+        '/GetReferenceRecords?ReferenceTypeId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+      }
+
     savesite(SiteDetails: any):  Observable<any> {
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/saveSite', SiteDetails);

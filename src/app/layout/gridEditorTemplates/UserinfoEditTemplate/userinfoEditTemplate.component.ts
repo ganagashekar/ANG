@@ -5,7 +5,7 @@ import { UserinfoService } from 'src/app/shared/services/Userinfo.service';
 import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { UserModel } from 'src/app/Model/ServiceResposeModel/Setups/userModel';
 import { UserinfoFilter } from 'src/app/Model/FilterModels/UserinfoFilter';
-
+import { UserRole } from 'src/app/Model/ServiceResposeModel/CommonModel/UserRoleModel';
 
 
 @Component({
@@ -17,12 +17,12 @@ export class UserinfoEditTemplateComponent implements OnInit {
   @Output()
   UserinfoEditorEmitter = new EventEmitter<any>();
   schedulerForm: FormGroup;
-  // stacksArray: ReferenceRecords[] = [];
+  userroleArray: UserRole[] = [];
   // paramArray: ReferenceRecords[] = [];
   // paramUnitsArray: ReferenceRecords[] = [];
   isAdd = true;
  SelecteduserId: bigint ;
- //SelectedvendorisEnabled: number;
+ // SelectedvendorisEnabled: number;
  // SelecteduserName: string;
   SelectedvendorsiteId: bigint;
   editModel: UserModel;
@@ -37,7 +37,7 @@ export class UserinfoEditTemplateComponent implements OnInit {
      this.SelecteduserId = this.editModel.userId;
      // this.SelecteduserName = this.editModel.userName;
      this.SelectedvendorsiteId = this.editModel.siteId;
-     //this.SelectedvendorisEnabled = this.editModel.isEnabled;
+     // this.SelectedvendorisEnabled = this.editModel.isEnabled;
     }
 
 
@@ -72,6 +72,16 @@ export class UserinfoEditTemplateComponent implements OnInit {
 
 
       }
+  }
+  getAlluserroleist(UserId: number): void {
+
+    this.UserinfoFilter.UserId = 1;
+    // this.siteSetupFilter.StackId = siteId;
+    this._Userinfoservices.getUserrolerecords(1, false).subscribe(resp => {
+      this.userroleArray = resp.model as UserRole[];
+   }, error => {
+     console.log('Error: ' + error);
+   });
   }
 
   showSnackBar(message: string, isError: boolean = false): void {

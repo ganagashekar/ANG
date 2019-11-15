@@ -35,6 +35,10 @@ import { ControllerFilter } from 'src/app/Model/FilterModels/ControllerFilter';
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/GetcontrollerAsync', filter);
     }
+    getAllSites(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+      return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+        '/GetSites?SiteId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+      }
     savecontroller(ControllerDetails: any):  Observable<any> {
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/SaveController', ControllerDetails);

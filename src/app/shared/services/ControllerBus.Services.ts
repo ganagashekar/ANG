@@ -23,18 +23,23 @@ import { ControllerBusFilter } from 'src/app/Model/FilterModels/ControllerBusFil
       this.userName = localStorage.getItem('userName');
     }
 
-
-  /*getAllSites(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
-    return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
-      '/GetSites?SiteId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
-    }*/
-
-
+    getAllSites(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+      return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+        '/GetSites?SiteId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+      }
 
     getAllControllerBusinfoList(filter: ControllerBusFilter): Observable<any> {
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/GetcontrollerBusAsync', filter);
     }
+    getAllMacids(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+      return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+        '/GetMacs?MaId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+      }
+    getReferencerecords(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+      return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+        '/GetReferenceRecords?ReferenceTypeId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+      }
     saveControllerBus(ControllerBusDetails: any):  Observable<any> {
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/saveControllerBus', ControllerBusDetails);

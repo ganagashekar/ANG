@@ -1,18 +1,23 @@
 <div class="divTaskScheduler">
     <div fxFlex>
       <form [formGroup]="schedulerForm" class="scheduler-form">
+        <div class="close-btn">
+          <button mat-icon-button  (click)="onCloseClick()">
+              <i class="material-icons" title="Click here to delete  user info popup">cancel</i>
+          </button>
+        </div>
         <div class="mat-h2 header">
           Site
         </div>
-         <mat-form-field class="full-width">
+         <mat-form-field class="half-width float-left col-md-3">
             <mat-label> siteId.</mat-label>
             <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
               Errordesc is
               <strong>required</strong>
           </mat-error> -->
-            <input matInput type="bigint" min="1" formControlName="siteId">
+            <input matInput type="number" min="1" formControlName="siteId">
         </mat-form-field>
-        <mat-form-field class="full-width">
+        <mat-form-field class="half-width float-right col-md-3">
             <mat-label>siteName.</mat-label>
             <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
               Errorcode is
@@ -20,7 +25,15 @@
           </mat-error> -->
             <input matInput type="string" min="1" formControlName="siteName">
         </mat-form-field>
-        <mat-form-field class="full-width">
+        <mat-form-field class="half-width float-left col-md-3">
+            <mat-label>siteLogo.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+              Errorcode is
+              <strong>required</strong>
+          </mat-error> -->
+            <input matInput type="string" min="1" formControlName="siteLogo">
+        </mat-form-field>
+        <mat-form-field class="half-width float-right">
           <mat-label>site_cpcb_cd.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
             Errorcode is
@@ -28,23 +41,150 @@
         </mat-error> -->
           <input matInput type="string" min="1" formControlName="site_cpcb_cd">
       </mat-form-field>
-      <mat-form-field class="full-width">
+      <mat-form-field class="half-width float-left">
+          <mat-label>Industry Type.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.site_industry.hasError('required')">
+            SiteIndustry is
+            <strong>required</strong>
+        </mat-error> -->
+          <!-- <input matInput type="string" min="1" formControlName="Industry Type"> -->
+          <mat-select formControlName="industryType">
+              <mat-option [value]="site.name" *ngFor="let site of siteindusriestsArray">{{site.name}}
+                </mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-form-field class="half-width float-right">
+          <mat-label>Site Latitude.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="siteLatitude">
+      </mat-form-field>
+      <mat-form-field class="half-width float-left">
+          <mat-label>Site Longitude.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="siteLongitude">
+      </mat-form-field>
+      <mat-form-field class="half-width float-right">
+          <mat-label>SitePrimaryContactName.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="sitePrimaryContactName">
+      </mat-form-field>
+      <mat-form-field class="half-width float-left">
+          <mat-label>SitePrimaryContactPhone.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="10" formControlName="sitePrimaryContactPhone">
+      </mat-form-field>
+      <mat-form-field class="half-width float-right">
+          <mat-label>SitePrimaryContactEmail.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="sitePrimaryContactEmail">
+      </mat-form-field>
+      <mat-form-field class="half-width float-left">
+          <mat-label>SiteSecondaryContactName.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="siteSecondaryContactName">
+      </mat-form-field>
+      <mat-form-field class="half-width float-right">
+          <mat-label>SiteSecondaryContactPnone.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="10" formControlName="siteSecondaryContactPhone">
+      </mat-form-field>
+      <mat-form-field class="half-width">
+          <mat-label>SiteSecondaryContactEmail.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="siteSecondaryContactEmail">
+      </mat-form-field>
+      <div class="mat-h2 header">
+          Address
+        </div>
+        <mat-form-field class="half-width float-left">
+            <mat-label>siteAddress1.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+              Errorcode is
+              <strong>required</strong>
+          </mat-error> -->
+            <input matInput type="string" min="1" formControlName="siteAddress1">
+        </mat-form-field>
+        <mat-form-field class="half-width float-right">
+            <mat-label>siteAddress2.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+              Errorcode is
+              <strong>required</strong>
+          </mat-error> -->
+            <input matInput type="string" min="1" formControlName="siteAddress2">
+        </mat-form-field>
+      <mat-form-field class="half-width float-left">
           <mat-label>site_city.</mat-label>
-          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
-            Errorcode is
+           <!-- <mat-error *ngIf="schedulerForm.controls.site_city.hasError('required')">
+            Sitecity is
             <strong>required</strong>
         </mat-error> -->
-          <input matInput type="string" min="1" formControlName="site_city">
+          <!-- <input matInput type="string" min="1" formControlName="site_city"> -->
+          <mat-select formControlName="site_city" >
+              <mat-option [value]="site.name" *ngFor="let site of siteCitiesArray">{{site.name}}
+                </mat-option>
+          </mat-select>
       </mat-form-field>
-      <mat-form-field class="full-width">
+
+       <mat-form-field class="half-width float-right">
+          <mat-label>site_District.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.site_District.hasError('required')">
+              Sitedistrict is
+              <strong>required</strong>
+          </mat-error> -->
+          <!-- <input matInput type="string" min="1" formControlName="site District">
+           -->
+            <mat-select formControlName="site_District" >
+              <mat-option [value]="site.name" *ngFor="let site of siteDistrictsArray">{{site.name}}
+                </mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="half-width float-left">
           <mat-label>site_state.</mat-label>
+          <mat-error *ngIf="schedulerForm.controls.site_state.hasError('required')">
+            Sitestate is
+            <strong>required</strong>
+        </mat-error>
+          <!-- <input matInput type="string" min="1" formControlName="site_state"> -->
+          <mat-select formControlName="site_state" >
+              <mat-option [value]="site.name" *ngFor="let site of siteStatesArray">{{site.name}}
+                </mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="half-width float-right">
+          <mat-label>site Pincode.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
             Errorcode is
             <strong>required</strong>
         </mat-error> -->
-          <input matInput type="string" min="1" formControlName="site_state">
+          <input matInput type="string" min="1" formControlName="sitePinCode">
       </mat-form-field>
-      <mat-form-field class="full-width">
+      <mat-form-field class="half-width float-left">
           <mat-label>site_country.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
             Errorcode is
