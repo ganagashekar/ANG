@@ -34,6 +34,7 @@ import { ContrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/C
 
 
 
+
 @NgModule({
     imports: [
         CommonModule,
@@ -60,7 +61,7 @@ import { ContrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/C
       ControllerComponent, SitesetupComponent, ControllerBusComponent, ApplicationLogsComponent, ConfgComponent, AuditComponent,
       ErrorCodeComponent, CntrBusEditTemplateComponent, UserinfoEditTemplateComponent, LogEditTemplateComponent,
       SiteEditTemplateComponent, ConfigEditTemplateComponent, AverageReportComponent, MenuListItemComponent
-      , RealtimeReportComponent , ExceedenceReportComponent,ControllerComponent]
+      , RealtimeReportComponent , ExceedenceReportComponent, ControllerComponent]
      //  SiteEditTemplateComponent, ConfigEditTemplateComponent, ContrEditTemplateComponent ]
     // declarations: [Screen2Component, UserinfoComponent,  LayoutComponent, NavComponent, TopnavComponent, SidebarComponent,
     //   ControllerComponent, SitesetupComponent, ControllerBusComponent, ApplicationLogsComponent, ConfgComponent, AuditComponent,

@@ -19,6 +19,7 @@ import { AuditComponent } from './Audit/Audit.component';
 import { ErrorCodeComponent } from './ErrorCode/ErrorCode.component';
 import { RealtimeReportComponent } from './Reports/RealtimeReport/RealtimeReport.component';
 import { ExceedenceReportComponent } from './Reports/ExceedenceReport/ExceedenceReport.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
@@ -34,7 +35,7 @@ const routes: Routes = [
             },
             {
                 path: 'dashboard',
-               // loadChildren: './dashboard/dashboard.module#DashboardModule'
+                loadChildren: './dashboard/dashboard.module#DashboardModule'
             },
 
 
