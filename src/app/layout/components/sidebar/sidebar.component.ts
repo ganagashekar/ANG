@@ -55,26 +55,75 @@ export class SidebarComponent implements OnInit {
         iconName: 'settings_applications',
         children: [
           {
+            displayName: 'Site',
+            iconName: 'user',
+            route: 'SiteSetup'
+
+          },
+          {
+            displayName: 'Controller',
+            iconName: 'settings_input_composite',
+            route: 'Controllersetup'
+
+          },
+          {
+            displayName: 'Controller-Bus',
+            iconName: 'settings_input_composite',
+            route: 'ControllerBusSetup'
+
+          },
+          {
             displayName: 'Parameter',
             iconName: 'settings_input_component',
             route: 'Paramsetup'
 
           },
           {
-            displayName: 'Users',
-            iconName: 'user',
-            route: 'Userinfosetup'
-
-          },
-          {
-            displayName: 'Controller',
-            iconName: 'user',
-            route: 'ControllerSetup'
+            displayName: 'Config',
+            iconName: 'config',
+            route: 'Confg'
 
           }
 
         ]
       },
+      {
+        displayName: 'UserSetup',
+        iconName: 'settings_applications',
+        children: [
+          {
+            displayName: 'Users',
+            iconName: 'people',
+            route: 'Userinfosetup'
+
+          },
+          {
+            displayName: 'Error-Code',
+            iconName: 'error',
+            route: 'Error'
+
+          },
+          {
+            displayName: 'Audit',
+            iconName: 'Audit',
+            route: 'audit'
+
+          },
+
+        ]
+      },
+      {
+        displayName: 'Logs',
+        iconName: 'settings_applications',
+        children: [
+          {
+            displayName: 'ApplicationLogs',
+            iconName: 'Logs',
+            route: 'ApplicationLogs'
+
+          },
+        ]
+      }
       // {
       //   displayName: 'Maleficent',
       //   disabled: true,

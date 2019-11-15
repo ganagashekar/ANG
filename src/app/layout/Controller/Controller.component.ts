@@ -6,22 +6,24 @@ import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } fro
 import { ControllerModel } from 'src/app/Model/ServiceResposeModel/Setups/ControllerModel';
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
-import { ControllerService } from 'src/app/shared/services/Controller.service';
-import { CntrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/CntrEditTemplate/CntrEditTemplate.Component';
+import { ControllerService } from 'src/app/shared/services/controller.service';
+import { ContrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/ContrEditTemplate/ContrEditTemplate.Component';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 
 
 
+
+
 @Component({
-  selector: 'app-Controller',
-  templateUrl: './Controller.component.html',
-  styleUrls: ['./Controller.component.scss']
+  selector: 'app-controller',
+  templateUrl: './controller.component.html',
+  styleUrls: ['./controller.component.scss']
 })
 export class ControllerComponent implements OnInit {
   ControllerFilter: ControllerFilter;
   ControllerListDataSource: MatTableDataSource<ControllerModel>;
   displayedColumns: string[] = [
-     'MacId', 'SiteId', 'OsType', 'cpcb_url', 'spcb_url', 'licence_key', 'updtts',
+     'editAction', 'macId', 'siteId', 'OsType', 'cpcb_url', 'spcb_url', 'licence_key', 'updtts', 'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _controllerservices: ControllerService,
@@ -45,18 +47,55 @@ export class ControllerComponent implements OnInit {
 
  }
  NewController(): void {
-  const dialogRef = this._dialog.open( CntrEditTemplateComponent , {
+  const dialogRef = this._dialog.open(ContrEditTemplateComponent, {
     width: '500px',
     data: { action: 'add', ControllerModel }
   });
   dialogRef.componentInstance.ControllerEditorEmitter.subscribe((response: any) => {
-    // if (response.model > 0) {
-      // this.getAllParameterList();
-      this.showSnackBar('controller details added Successfully.');    // } else {
-    //  this.showSnackBar(response.message, true);
-    // };
+     if (response.model > 0) {
+       this.getAllControllerinfoList();
+      this.showSnackBar('Controller details added Successfully.');
+          } else {
+      this.showSnackBar(response.message, true);
+     }
   });
  }
+
+ editcontroller(Scheduler: ControllerModel): void {
+  const dialogRef = this._dialog.open(ContrEditTemplateComponent, {
+    width: '500px',
+    data: { action: 'edit', Scheduler }
+  });
+  dialogRef.componentInstance.ControllerEditorEmitter.subscribe((response: any) => {
+  if (response.model > 0) {
+     this. getAllControllerinfoList();
+    this.showSnackBar('Controller Updated Successfully.');
+   } else {
+ this.showSnackBar('Error occurred while updating the Controller.', true);
+   }
+  });
+}
+Deletecontroller(macId: string): void {
+  const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
+    width: '420px',
+    data: { Title: 'Confirm', Message: 'Are you sure want to delete this Controller ?' }
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this._controllerservices.Deletecontroller(macId).subscribe((response: any) => {
+        if (response.model) {
+           this. getAllControllerinfoList();
+           this.showSnackBar('Scheduled Parameter Deleted Successfully.');
+        } else {
+        this.showSnackBar('Error occurred while deleting the Parameter.', true);
+        }
+        this.showSnackBar(response.message);
+      }, error => {
+        console.log('Error: ' + error);
+      });
+    }
+  });
+}
 
 showSnackBar(message: string, isError: boolean = false): void {
   if (isError) {

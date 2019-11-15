@@ -1,55 +1,58 @@
 <div class="divTaskScheduler">
   <div fxFlex>
     <form [formGroup]="schedulerForm" class="scheduler-form">
-       <!-- <div class="close-btn"  (click)="onCloseClick()">
-         <mat-icon class="sidenav-icon">cancel</mat-icon>
-       </div> -->
-       <!-- <button mat-icon-button class="close-btn" (click)="onCloseClick()">
-          <i class="material-icons" title="Click here to delete  user info popup">cancel</i>
-      </button> -->
       <div class="mat-h2 header">
-        Userinfo
+        Controller
       </div>
        <mat-form-field class="full-width">
-          <mat-label>User Id.</mat-label>
+          <mat-label> macId.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
             Errordesc is
             <strong>required</strong>
         </mat-error> -->
-          <input matInput type="bigint" min="1" formControlName="userId">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <mat-label>User Name.</mat-label>
-          <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
-            Errordesc is
-            <strong>required</strong>
-        </mat-error> -->
-          <input matInput type="string" min="1" formControlName="userName">
+          <input matInput type="string" min="1" formControlName="macId">
       </mat-form-field>
       <mat-form-field class="full-width">
-          <mat-label>User Pass.</mat-label>
+          <mat-label>siteId.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
             Errorcode is
             <strong>required</strong>
         </mat-error> -->
-          <input matInput type="string" min="1" formControlName="userPass">
+          <input matInput type="number" min="1" formControlName="siteId">
       </mat-form-field>
       <mat-form-field class="full-width">
-        <mat-label>Site Id.</mat-label>
+        <mat-label>OsType.</mat-label>
         <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
           Errorcode is
           <strong>required</strong>
       </mat-error> -->
-        <input matInput type="bigint" min="1" formControlName="siteId">
+        <input matInput type="string" min="1" formControlName="OsType">
     </mat-form-field>
     <mat-form-field class="full-width">
-        <mat-label>IsEnabled.</mat-label>
+        <mat-label>cpcb_url.</mat-label>
         <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
           Errorcode is
           <strong>required</strong>
       </mat-error> -->
-        <input matInput type="number" min="1" formControlName="isEnabled">
+        <input matInput type="string" min="1" formControlName="cpcb_url">
     </mat-form-field>
+    <mat-form-field class="full-width">
+        <mat-label>spcb_url.</mat-label>
+        <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+          Errorcode is
+          <strong>required</strong>
+      </mat-error> -->
+        <input matInput type="string" min="1" formControlName="spcb_url">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <mat-label>licence_key.</mat-label>
+        <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+          Errorcode is
+          <strong>required</strong>
+      </mat-error> -->
+        <input matInput type="string" min="1" formControlName="licence_key">
+    </mat-form-field>
+
 
       <div layout="row" layout-align="center center" class="divBtnCon float-right">
         <div fxFlex>

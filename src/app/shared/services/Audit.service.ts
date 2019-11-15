@@ -36,4 +36,9 @@ import { AuditFilter } from 'src/app/Model/FilterModels/AuditFilter';
         '/GetAuditAsync', filter);
     }
 
+    deleteaudit(auditID: bigint): Observable<boolean> {
+      return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
+        '/Deleteaudit?=' + auditID);
+    }
+
   }

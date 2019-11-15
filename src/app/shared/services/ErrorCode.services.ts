@@ -27,5 +27,9 @@ import { ErrorCodeFilter } from 'src/app/Model/FilterModels/ErrorCodeFilter';
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/GeterrorcodeAsync', filter);
     }
+    deleteerrorcode(errorcode: any): Observable<boolean> {
+      return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
+        '/DeleteErrorCode?=' + errorcode);
+    }
 
   }

@@ -49,11 +49,12 @@ export class UserinfoComponent implements OnInit {
     data: { action: 'add', UserModel }
   });
   dialogRef.componentInstance.UserinfoEditorEmitter.subscribe((response: any) => {
-    // if (response.model > 0) {
-      // this.getAllParameterList();
-      this.showSnackBar('userinfo details added Successfully.');    // } else {
-    //  this.showSnackBar(response.message, true);
-    // };
+     if (response.model > 0) {
+      this.getAllUserinfoList();
+      this.showSnackBar('userinfo details added Successfully.');
+      } else {
+    this.showSnackBar(response.message, true);
+    }
   });
  }
  showSnackBar(message: string, isError: boolean = false): void {
@@ -71,16 +72,15 @@ edituserinfo(Scheduler: UserModel): void {
     data: { action: 'edit', Scheduler }
   });
   dialogRef.componentInstance.UserinfoEditorEmitter.subscribe((response: any) => {
- // if (response.model > 0) {
-    // this. getAllErrorCodeList();
+  if (response.model > 0) {
+    this. getAllUserinfoList();
     this.showSnackBar('Userinfo Updated Successfully.');
-  // } else {
-// this.showSnackBar('Error occurred while updating the Parameter.', true);
-  // }
+   } else {
+this.showSnackBar('Error occurred while updating the Userdetails.', true);
+   }
   });
 }
 deleteuserinfo(userId: number): void {
-  alert('hi' + userId);
   const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
     width: '420px',
     data: { Title: 'Confirm', Message: 'Are you sure want to delete this userinfo ?' }
@@ -88,12 +88,12 @@ deleteuserinfo(userId: number): void {
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
       this._userinfoservices.deleteuserinfo(userId).subscribe((response: any) => {
-       // if (response.model) {
-        //   this. getAllUserinfoList();
-          // this.showSnackBar('Scheduled Parameter Deleted Successfully.');
-      // } else {
-        // this.showSnackBar('Error occurred while deleting the Parameter.', true);
-       // }
+        if (response.model) {
+        this. getAllUserinfoList();
+          this.showSnackBar('Scheduled User Deleted Successfully.');
+       } else {
+        this.showSnackBar('Error occurred while deleting the User.', true);
+        }
         this.showSnackBar(response.message);
       }, error => {
         console.log('Error: ' + error);

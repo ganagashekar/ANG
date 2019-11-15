@@ -51,11 +51,12 @@ export class ConfgComponent implements OnInit {
       data: { action: 'add',  ConfgModel }
     });
     dialogRef.componentInstance. ConfigEditorEmitter.subscribe((response: any) => {
-      // if (response.model > 0) {
-        // this.getAllParameterList();
-        this.showSnackBar('Config added Successfully.');    // } else {
-      //  this.showSnackBar(response.message, true);
-      // };
+       if (response.model > 0) {
+         this.getAllconfgList();
+        this.showSnackBar('Config added Successfully.');
+          } else {
+      this.showSnackBar(response.message, true);
+       }
     });
    }
 
@@ -65,12 +66,12 @@ export class ConfgComponent implements OnInit {
       data: { action: 'edit', Scheduler }
     });
     dialogRef.componentInstance.ConfigEditorEmitter.subscribe((response: any) => {
-   // if (response.model > 0) {
-      // this. getAllErrorCodeList();
+    if (response.model > 0) {
+       this. getAllconfgList();
       this.showSnackBar('Config Updated Successfully.');
-    // } else {
-  // this.showSnackBar('Error occurred while updating the Parameter.', true);
-    // }
+     } else {
+   this.showSnackBar('Error occurred while updating the Config.', true);
+     }
     });
   }
   Deleteconfig(confgID: number): void {
@@ -81,12 +82,12 @@ export class ConfgComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this._confgsservices.Deleteconfig(confgID).subscribe((response: any) => {
-         // if (response.model) {
-            // this. getAllParameterList();
-            // this.showSnackBar('Scheduled Parameter Deleted Successfully.');
-         // } else {
-          // this.showSnackBar('Error occurred while deleting the Parameter.', true);
-         // }
+          if (response.model) {
+             this. getAllconfgList();
+             this.showSnackBar('Scheduler Config Deleted Successfully.');
+         } else {
+          this.showSnackBar('Error occurred while deleting the Config.', true);
+          }
           this.showSnackBar(response.message);
         }, error => {
           console.log('Error: ' + error);

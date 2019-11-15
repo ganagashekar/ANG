@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { SitesetupService } from 'src/app/shared/services/Sitesetup.service';
 import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { SiteSetupModel } from 'src/app/Model/ServiceResposeModel/Setups/SiteSetupModel';
+import { SiteSetupFilter } from 'src/app/Model/FilterModels/SiteSetupFilter';
 
 @Component({
   selector: 'app-SiteEditTemplate',
@@ -22,19 +23,20 @@ export class SiteEditTemplateComponent implements OnInit {
  // SelecteduserName: string;
  // SelectedvendorsiteId: bigint;
   editModel: SiteSetupModel;
-  // siteSetupFilter: SiteSetupFilter ;
+   siteSetupFilter: SiteSetupFilter ;
   constructor(public dialogRef: MatDialogRef<SiteEditTemplateComponent>, private _Sitesetupservices: SitesetupService,
     @Inject(MAT_DIALOG_DATA) private data: any, private formBuilder: FormBuilder,
      private snackBar: MatSnackBar) {
-      // this.siteSetupFilter = new SiteSetupFilter();
-      // if (data !== undefined && data.action === 'edit') {
-      //   this.isAdd = false;
-      //   this.editModel = (data.Scheduler as  SiteSetupModel);
-      //  this.SelectedsiteId = this.editModel.siteId;
+       this.siteSetupFilter = new SiteSetupFilter();
+       if (data !== undefined && data.action === 'edit') {
+         this.isAdd = false;
+         this.editModel = (data.Scheduler as  SiteSetupModel);
+        this.SelectedsiteId = this.editModel.siteId;
       //  // this.SelecteduserName = this.editModel.userName;
       //  // this.SelectedvendorisEnabled = this.editModel.isEnabled;
       // }
     }
+  }
   ngOnInit() {
     this.schedulerForm = this.formBuilder.group({
       siteId: new FormControl('', [Validators.required]),

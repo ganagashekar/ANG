@@ -10,7 +10,7 @@ import { AverageReportComponent } from './Reports/AverageReport/AverageReport.co
 
 
 import { UserinfoComponent } from './Userinfo/Userinfo.component';
-import { ControllerComponent } from './Controller/Controller.component';
+import { ControllerComponent } from './controller/Controller.component';
 import { SitesetupComponent} from './sitesetup/sitesetup.component';
 import { ControllerBusComponent } from './Controller-bus/Controller-bus.component';
 import { ApplicationLogsComponent } from './ApplicationLogs/ApplicationLogs.component';
