@@ -97,3 +97,10 @@
   text-decoration: underline;
 }
 
+.cdk-overlay-pane {
+  width: auto !important;
+}
+.mat-dialog-container {
+  height: auto !important;
+  overflow-y: auto;
+}

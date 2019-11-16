@@ -67,7 +67,7 @@ The actual rendered columns are set as a property on the row definition" -->
 
   <ng-container matColumnDef="stack_status">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Stack_Status  </th>
-    <td mat-cell *matCellDef="let confgScheduler"> {{confgScheduler.stack_status}} </td>
+    <td mat-cell *matCellDef="let confgScheduler" class="config-data"> {{confgScheduler.stack_status}} </td>
   </ng-container>
 
   <ng-container matColumnDef="createts">
@@ -77,12 +77,7 @@ The actual rendered columns are set as a property on the row definition" -->
 
   <ng-container matColumnDef="input_format">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Input Format  </th>
-    <td mat-cell *matCellDef="let confgScheduler"> {{confgScheduler.input_format}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="cnfg_input_str">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> cnfg_input_str  </th>
-    <td mat-cell *matCellDef="let confgScheduler"> {{confgScheduler.cnfg_input_str}} </td>
+    <td mat-cell *matCellDef="let confgScheduler" class="config-data"> {{confgScheduler.input_format}} </td>
   </ng-container>
 
   <ng-container matColumnDef="output_format">

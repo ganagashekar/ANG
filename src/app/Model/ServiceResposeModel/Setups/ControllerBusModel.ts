@@ -4,10 +4,10 @@ export class ControllerBusModel {
     busId: bigint;
     macId: string;
     comPort: string;
+    protocal: string;
     baudRate: bigint;
     timeOut: bigint;
     startIndex: bigint;
-    protocal: string;
     updtts: DateTime;
     // length: number;
     // creatts: DateTime;

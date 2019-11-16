@@ -39,29 +39,30 @@
       </mat-form-field>
       <mat-form-field class="half-width float-left">
           <mat-label>Protocal.</mat-label>
-           <!-- <mat-error *ngIf="schedulerForm.controls.protocal.hasError('required')">
+           <mat-error *ngIf="schedulerForm.controls.protocal.hasError('required')">
             Protocal is
             <strong>required</strong>
-        </mat-error> -->
-          <input matInput type="string" min="1" formControlName="protocal">
-          <!-- <mat-select formControlName="protocal">
+        </mat-error>
+          <!-- <input matInput type="string" min="1" formControlName="protocal"> -->
+          <mat-select formControlName="protocal">
               <mat-option [value]="controllerbus.name" *ngFor="let controllerbus of siteprotocalArray">{{controllerbus.name}}
                 </mat-option>
-          </mat-select> -->
+          </mat-select>
       </mat-form-field>
 
       <mat-form-field class="half-width float-right">
         <mat-label>BaudRate.</mat-label>
-         <!-- <mat-error *ngIf="schedulerForm.controls.baudRate.hasError('required')">
+         <mat-error *ngIf="schedulerForm.controls.baudRate.hasError('required')">
           Baudrate is
           <strong>required</strong>
-      </mat-error> -->
+      </mat-error>
         <!-- <input matInput type="bigint" min="1" formControlName="baudRate"> -->
         <mat-select formControlName="baudRate">
             <mat-option [value]="controllerbus.name" *ngFor="let controllerbus of sitebaudrateArray">{{controllerbus.name}}
               </mat-option>
         </mat-select>
     </mat-form-field>
+
 
     <mat-form-field class="half-width float-left">
       <mat-label>timeOut.</mat-label>

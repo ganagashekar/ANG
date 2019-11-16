@@ -3,11 +3,12 @@ import { DateTime } from 'luxon';
 export class ControllerModel {
     macId: string;
     siteId: bigint;
-    OsType: string;
+    osType: string;
     cpcbUrl: string;
     spcburl: string;
-    LicenseKey: string;
+    licenseKey: string;
     updtts: DateTime;
+
     // length: number;
     // creatts: DateTime;
     // updtts: DateTime;

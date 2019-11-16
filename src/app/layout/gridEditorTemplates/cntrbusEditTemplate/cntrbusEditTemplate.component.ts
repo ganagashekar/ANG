@@ -83,9 +83,22 @@ export class CntrBusEditTemplateComponent implements OnInit {
 
       }
   }
+
+  getAllprotocalist(BusId: number): void {
+
+    this.ControllerBusFilter.BusId = 1;
+    this.ControllerBusFilter.BusId = BusId;
+    this._ControllerBusService.getReferencerecords(5, false).subscribe(resp => {
+      this.siteprotocalArray = resp.model as ReferenceRecords[];
+   }, error => {
+     console.log('Error: ' + error);
+   });
+  }
+
   getAllBaudrateList(BusId: number): void {
 
     this.ControllerBusFilter.BusId = 1;
+    this.ControllerBusFilter.BusId = BusId;
     this._ControllerBusService.getReferencerecords(9, false).subscribe(resp => {
       this.sitebaudrateArray = resp.model as ReferenceRecords[];
    }, error => {
@@ -93,15 +106,7 @@ export class CntrBusEditTemplateComponent implements OnInit {
    });
   }
 
-  getAllprotocalist(BusId: number): void {
 
-    this.ControllerBusFilter.BusId = 1;
-    this._ControllerBusService.getReferencerecords(5, false).subscribe(resp => {
-      this.siteprotocalArray = resp.model as ReferenceRecords[];
-   }, error => {
-     console.log('Error: ' + error);
-   });
-  }
 
   showSnackBar(message: string, isError: boolean = false): void {
     if (isError) {

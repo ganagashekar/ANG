@@ -24,7 +24,7 @@ export class ControllerComponent implements OnInit {
   ControllerListDataSource: MatTableDataSource<ControllerModel>;
   sitesArray: ReferenceRecords[] = [];
   displayedColumns: string[] = [
-     'editAction', 'macId', 'siteId', 'OsType', 'cpcbUrl', 'spcburl', 'LicenseKey', 'updtts', 'deleteAction'
+     'editAction', 'macId', 'siteId', 'osType', 'cpcbUrl', 'spcburl', 'licenseKey', 'updtts', 'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _controllerservices: ControllerService,

@@ -22,7 +22,7 @@ export class ConfgComponent implements OnInit {
   displayedColumns: string[] = [
     'editAction', 'confgID', 'siteID', 'busID', 'vendorID',
     'stack_name', 'stack_typ', 'stack_status',
-    'createts', 'input_format', 'cnfg_input_str', 'output_format', 'disp_output_typ', 'deleteAction'
+    'createts', 'input_format', 'output_format', 'disp_output_typ', 'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _confgsservices: ConfgService,

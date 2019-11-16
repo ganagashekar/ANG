@@ -55,13 +55,13 @@ import { ContrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/C
     // AverageReportComponent, MenuListItemComponent    ]
 
     entryComponents: [UserinfoEditTemplateComponent, CntrBusEditTemplateComponent, LogEditTemplateComponent,
-       SiteEditTemplateComponent, ConfigEditTemplateComponent],
+       SiteEditTemplateComponent, ConfigEditTemplateComponent, ContrEditTemplateComponent],
 
     declarations: [ UserinfoComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
       ControllerComponent, SitesetupComponent, ControllerBusComponent, ApplicationLogsComponent, ConfgComponent, AuditComponent,
       ErrorCodeComponent, CntrBusEditTemplateComponent, UserinfoEditTemplateComponent, LogEditTemplateComponent,
       SiteEditTemplateComponent, ConfigEditTemplateComponent, AverageReportComponent, MenuListItemComponent
-      , RealtimeReportComponent , ExceedenceReportComponent, ControllerComponent]
+      , RealtimeReportComponent , ExceedenceReportComponent, ControllerComponent, ContrEditTemplateComponent]
      //  SiteEditTemplateComponent, ConfigEditTemplateComponent, ContrEditTemplateComponent ]
     // declarations: [Screen2Component, UserinfoComponent,  LayoutComponent, NavComponent, TopnavComponent, SidebarComponent,
     //   ControllerComponent, SitesetupComponent, ControllerBusComponent, ApplicationLogsComponent, ConfgComponent, AuditComponent,

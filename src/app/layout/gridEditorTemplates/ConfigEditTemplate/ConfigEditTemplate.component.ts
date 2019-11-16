@@ -52,7 +52,11 @@ export class ConfigEditTemplateComponent implements OnInit {
       stack_name: new FormControl('', [Validators.required]),
       stack_typ: new FormControl('', [Validators.required]),
       stack_status: new FormControl('', [Validators.required]),
-
+      input_format: new FormControl('', [Validators.required]),
+      output_format: new FormControl('', [Validators.required]),
+      slaveid: new FormControl('', [Validators.required]),
+      holdingreg: new FormControl('', [Validators.required]),
+      firstreg: new FormControl('', [Validators.required]),
     });
 
     if (this.isAdd) { // scheduler add
@@ -70,6 +74,11 @@ export class ConfigEditTemplateComponent implements OnInit {
           stack_name: this.editModel.stack_name,
           stack_typ: this.editModel.stack_typ,
           stack_status: this.editModel.stack_status,
+          input_format: this.editModel.input_format,
+          output_format: this.editModel.output_format,
+          slaveid: this.editModel.slaveid,
+          holdingreg: this.editModel.holdingreg,
+          firstreg: this.editModel.firstreg,
         });
 
 

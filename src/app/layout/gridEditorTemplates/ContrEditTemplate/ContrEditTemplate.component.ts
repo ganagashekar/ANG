@@ -43,14 +43,15 @@ export class ContrEditTemplateComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getSites();
+    this.getSites(0);
     this.schedulerForm = this.formBuilder.group({
       macId: new FormControl('', [Validators.required]),
       siteId: new FormControl('', [Validators.required]),
-      OsType: new FormControl('', [Validators.required]),
+      osType: new FormControl('', [Validators.required]),
       cpcbUrl: new FormControl('', [Validators.required]),
       spcburl: new FormControl('', [Validators.required]),
-      LicenseKey: new FormControl('', [Validators.required]),
+      licenseKey: new FormControl('', [Validators.required]),
+
 
   });
   if (this.isAdd) { // scheduler add
@@ -63,10 +64,10 @@ export class ContrEditTemplateComponent implements OnInit {
       this.schedulerForm.patchValue({
         macId: this.editModel.macId,
         siteId: this.editModel.siteId,
-        OsType: this.editModel.OsType,
-        cpcb_Url: this.editModel.cpcbUrl,
-        spcb_url: this.editModel.spcburl,
-        Licence_Key: this.editModel.LicenseKey,
+        osType: this.editModel.osType,
+        cpcbUrl: this.editModel.cpcbUrl,
+        spcburl: this.editModel.spcburl,
+        licenseKey: this.editModel.licenseKey,
 
 
       });
@@ -76,7 +77,9 @@ export class ContrEditTemplateComponent implements OnInit {
 
 
 }
-getSites(): void {
+getSites(SiteId: number): void {
+  this.ControllerFilter.SiteId = 1;
+    this.ControllerFilter.SiteId = SiteId;
   this._controllerservices.getAllSites(0, false).subscribe(resp => {
     this.sitesArray = resp.model as ReferenceRecords[];
   }, error => {

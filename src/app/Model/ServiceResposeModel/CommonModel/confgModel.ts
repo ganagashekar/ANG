@@ -8,6 +8,11 @@ export class ConfgModel {
     stack_name: string;
     stack_typ: string;
     stack_status: string;
+    input_format: string;
+    output_format: string;
+    slaveid: bigint;
+    holdingreg: bigint;
+    firstreg: bigint;
     createts: DateTime;
 
 }
