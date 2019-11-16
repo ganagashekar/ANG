@@ -1,17 +1,12 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
-import { AppComponent } from 'src/app/app.component';
 import { ReportsService } from 'src/app/shared/services/report.services';
 import { ActivatedRoute } from '@angular/router';
 import { saveAs } from 'file-saver';
 import * as Highcharts from 'highcharts/highstock';
-// const IndicatorsCore = require('highcharts/indicators/indicators');
-// IndicatorsCore(Highcharts);
-// const IndicatorZigZag = require('highcharts/indicators/zigzag');
-// IndicatorZigZag(Highcharts);
+
 
 import * as HC_exporting_ from 'highcharts/modules/exporting';
-import { FormControl } from '@angular/forms';
 import { ReportRequestModel } from '../../../Model/Report/ReportRequestModel';
 import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { ParameterFilter } from 'src/app/Model/FilterModels/ParameterFilter';
@@ -34,7 +29,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
    timePeriodArray:  ReferenceRecords[] = [];
    chartOptions: any;
    parameterFilter: ParameterFilter;
-   SiteId: number ;
+
    chartdata: any = [];
    isLoading = false;
    diableGridFilters = true;
@@ -45,35 +40,35 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
     @ViewChild(MatSort, { static: false }) sort: MatSort;
    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   //  @ViewChild('charts', { static: false }) public chartEl: ElementRef;
-  constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
+  constructor(private _dialog: MatDialog,  private _route: ActivatedRoute,
     private _reportservices: ReportsService,
     private snackBar: MatSnackBar) {
       this.reportRequestModel = new ReportRequestModel();
       this.parameterFilter =  new ParameterFilter();
-      this.SiteId = _appcomponent.SiteId;
+      this.reportRequestModel.SiteId = Number(localStorage.getItem('SiteId'));
       this.reportRequestModel.FromDate = (new Date());
       this.reportRequestModel.ToDate = (new Date());
       this.reportRequestModel.StackId  = 0;
       this.reportRequestModel.ParamId = 0;
       this.reportRequestModel.IsExport = false;
-      this.reportRequestModel.SiteCode = 'Ganga';
+      this.reportRequestModel.SiteCode = localStorage.getItem('SiteName');
       this.reportRequestModel.TimePeriod = (0);
-      this.reportRequestModel.SiteName = 'MHBP';
-      this.reportRequestModel.ReportTitle = 'Vasthi Systems';
+      this.reportRequestModel.SiteName =  localStorage.getItem('SiteName');
+      this.reportRequestModel.ReportTitle = localStorage.getItem('VendorName');
       this.reportRequestModel.ReportType = 'Average Report ';
-      this.reportRequestModel.RequestedUser = 'Ganga';
+      this.reportRequestModel.RequestedUser =  localStorage.getItem('username');
+        localStorage.setItem('currentUrl', '/AverageReport');
 
-    _appcomponent.currenturl = '/Paramsetup';
     this.dataSource =  new MatTableDataSource();
 
   }
   ngOnInit() {
 
-    this.reportRequestModel.SiteId = 1 ;
 
+    this.getSites();
      this. getAllStacks();
-     this.getAllParameterList(0);
-     this.getSites();
+     this.getAllParameterList(this.reportRequestModel.StackId);
+
      this.gettimePeriod();
      this.reportRequestModel.TimePeriod = this.timePeriodArray[0].id;
 
@@ -89,7 +84,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
 
   }
   getAllStacks(): void {
-    this._reportservices.getAllStacks(0, true).subscribe(resp => {
+    this._reportservices.getSiteStacks( this.reportRequestModel.SiteId,this.reportRequestModel.StackId, true).subscribe(resp => {
       this.stacksArray = resp.model as ReferenceRecords[];
       this.reportRequestModel.StackId = Number(this.stacksArray[0].id);
     }, error => {
@@ -106,7 +101,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
     });
    }
   getSites(): void {
-    this._reportservices.getAllSites(this.reportRequestModel.SiteId, false).subscribe(resp => {
+    this._reportservices.getAllSites( this.reportRequestModel.SiteId, false).subscribe(resp => {
       this.sitesArray = resp.model as ReferenceRecords[];
     }, error => {
       console.log('Error: ' + error);
@@ -114,7 +109,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   }
 
 
-  getAllParameterList(stackcId): void {
+  getAllParameterList(stackcId: number): void {
 
     this.parameterFilter.SiteId = this.reportRequestModel.SiteId;
     this.parameterFilter.StackId = stackcId;
@@ -220,18 +215,25 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
     this.isLoading = true;
     this.reportRequestModel.IsExport = false;
     this._reportservices.getAverageReport(this.reportRequestModel).subscribe(resp => {
+      this.isLoading = false;
       this.chartdata = [];
       this.chartOptions = {};
       this.displayedColumns =  resp.model.length > 0 ? Object.keys( resp.model[0]) : [];
+
       if (resp.model.length > 0) {
                                   this.diableGridFilters = false;
                                   this.dataSource.data = resp.model;
                                   this.dataSource.sort = this.sort;
                                   this.dataSource.paginator = this.paginator;
+                                  if (this.displayedColumns.length === 1) {
+                                    this.showSnackBar('No data available ', true);
+                                    return;
+                                  } else {
                                   this.chartdata = this.bindChartSeries(
                                     resp.model
                                   );
                                   this.initChart();
+                                  }
                                 }
       this.isLoading = false;
     }, error => {
@@ -259,6 +261,14 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
     });
 
   }
-
+  showSnackBar(message: string, isError: boolean = false): void {
+    if (isError) {
+      this.snackBar.open(message, 'Ok');
+    } else {
+      this.snackBar.open(message, 'Ok', {
+        duration: 3000
+      });
+    }
+  }
 }
 

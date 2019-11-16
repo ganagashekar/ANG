@@ -12,7 +12,6 @@ import * as _ from 'lodash';
 import { interval, Subscription } from 'rxjs';
 import { OnInit, ElementRef, ViewChild, AfterViewInit, Component } from '@angular/core';
 import { DashboardQuickCounts } from 'src/app/Model/ServiceResposeModel/Dashboard/DashboardQuickCounts';
-import { AppComponent } from 'src/app/app.component';
 import { DashboardService } from 'src/app/shared/services/Dashboard.Services';
 
 export interface GroupBy {
@@ -51,11 +50,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _dialog: MatDialog,
-    private _appcomponent: AppComponent,
     private _route: ActivatedRoute,
     private _dashboardService: DashboardService,
     private snackBar: MatSnackBar) {
-    _appcomponent.currenturl = '/dashboard';
+
+      localStorage.setItem('currentUrl', '/dashboard');
+
   }
 
     displayedColumns = ['stackName', 'paramName', 'paramUnits', 'paramValue', 'recordedDate', 'threShholdValue'];
@@ -67,7 +67,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
   ngOnInit() {
     this.dashboardTableRequest = new DashboardTableRequestModel();
-    this.siteId = this._appcomponent.SiteId;
+    this.siteId = Number(localStorage.getItem('SiteId'));
     this.init();
     this.getDashboardQuickCounts();
     this.getDashboardQuickTableList();
@@ -295,7 +295,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   getDashboardQuickCounts(): void {
-    this.dashboardTableRequest.siteId = this._appcomponent.SiteId;
+    this.dashboardTableRequest.siteId = Number(localStorage.getItem('SiteId'));
     this._dashboardService.getDashboardQuickCounts(this.dashboardTableRequest).subscribe(
       resp => {
         this.dashboardQuickCounts = resp.model as DashboardQuickCounts;
@@ -312,12 +312,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   getDashboardQuickTableList(): void {
     this.DashboardQuickDataResposne = null;
     this.dashboardTableRequest = new DashboardTableRequestModel();
-    this.dashboardTableRequest.siteId = 1;
+    this.dashboardTableRequest.siteId = this.siteId;
     this.dashboardTableRequest.fromDate = new Date();
     this._dashboardService.getDashboardQuickTableData(this.dashboardTableRequest).subscribe(
       resp => {
+        if (resp.model.length === 0) {
+          this.showSnackBar('No data available ', true);
+          return;
+        }
         this.DashboardQuickDataResposne = resp.model as DashboardQuickDataModel[];
         this.dataSource.data = resp.model as DashboardQuickDataModel[];
+
         this.addSerie();
         this.addPoint();
       },
@@ -390,5 +395,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.chatsss.series.forEach(element => {
           element.show();
     });
+  }
+
+  showSnackBar(message: string, isError: boolean = false): void {
+    if (isError) {
+      this.snackBar.open(message, 'Ok');
+    } else {
+      this.snackBar.open(message, 'Ok', {
+        duration: 3000
+      });
+    }
   }
 }

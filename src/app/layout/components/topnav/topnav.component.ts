@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { SetupsService } from 'src/app/shared/services/Setups.service';
 import { AppComponent } from 'src/app/app.component';
+import { Loginresponse } from '../../../Model/Account/UserModel';
 
 @Component({
     selector: 'app-topnav',
@@ -12,8 +13,10 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class TopnavComponent implements OnInit {
     public pushRightClass: string;
+    @Input() userdetails: Loginresponse;
     SiteId: number;
     SiteName: string;
+    SiteCity: string;
     sitesArray: ReferenceRecords[] = [];
  loggedusername: string;
 
@@ -30,9 +33,11 @@ export class TopnavComponent implements OnInit {
     ngOnInit() {
         this.pushRightClass = 'push-right';
         this.loggedusername = localStorage.getItem('userName');
-        this. getSites();
-        this.SiteId = 1;
-        this.SiteName = 'Haritha Bio Products India Private Ltd'; // this.sitesArray[0].name;
+        this.SiteId = Number(localStorage.getItem('SiteId'));
+        this.SiteName = localStorage.getItem('SiteName');
+        this.SiteCity = localStorage.getItem('SiteCity');
+        // this.SiteName = this.userdetails.model.site.siteName; // this.sitesArray[0].name;
+        // this.SiteCity = this.userdetails.model.site.site_city;
     }
 
 
