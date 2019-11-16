@@ -26,8 +26,13 @@ export class AccountService {
 
 
   verifyUser(userName: string, password: string): Observable<any> {
+
     return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_ACCOUNT
       + '/ValidateUser?userName=' + encodeURIComponent(userName) + '&password=' + encodeURIComponent(password));
-  }
+   }
+  //  ValidateUser(userName: string, password: string): Observable<any> {
+  //   return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_ACCOUNT
+  //     + '/ValidateUser?userName=' + encodeURIComponent(userName) + '&password=' + encodeURIComponent(password));
+  //  }
 
 }

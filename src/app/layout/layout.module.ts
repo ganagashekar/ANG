@@ -29,11 +29,7 @@ import { ConfigEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/
 import { ConfirmationDialogComponent } from 'src/app/layout/components/confirmation-dialog/confirmation-dialog.Component';
 import { RealtimeReportComponent } from './Reports/RealtimeReport/RealtimeReport.component';
 import { ExceedenceReportComponent } from './Reports/ExceedenceReport/ExceedenceReport.component';
-
 import { ContrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/ContrEditTemplate/ContrEditTemplate.Component';
-
-
-
 
 @NgModule({
     imports: [

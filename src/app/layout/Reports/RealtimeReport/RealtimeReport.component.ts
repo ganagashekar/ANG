@@ -47,30 +47,31 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
     private snackBar: MatSnackBar) {
       this.reportRequestModel = new ReportRequestModel();
       this.parameterFilter =  new ParameterFilter();
-      this.SiteId = _appcomponent.SiteId;
+      this.reportRequestModel.SiteId = Number(localStorage.getItem('SiteId'))
       this.reportRequestModel.FromDate = (new Date());
       this.reportRequestModel.ToDate = (new Date());
       this.reportRequestModel.StackId  = 0;
       this.reportRequestModel.ParamId = 0;
       this.reportRequestModel.IsExport = false;
-      this.reportRequestModel.SiteCode = 'MHBP';
-
-      this.reportRequestModel.SiteName = 'MHBP';
-      this.reportRequestModel.ReportTitle = 'Vasthi';
+      this.reportRequestModel.SiteCode = localStorage.getItem('SiteName');
+      this.reportRequestModel.TimePeriod = (0);
+      this.reportRequestModel.SiteName =  localStorage.getItem('SiteName');
+      this.reportRequestModel.ReportTitle = localStorage.getItem('VendorName');
       this.reportRequestModel.ReportType = 'Real time Report ';
-      this.reportRequestModel.RequestedUser = 'Ganga';
+      this.reportRequestModel.RequestedUser =  localStorage.getItem('username');
+        localStorage.setItem('currentUrl', '/ExceedenceReport');
 
-    _appcomponent.currenturl = '/Paramsetup';
+    _appcomponent.currenturl = '/RealtimeReport';
     this.dataSource =  new MatTableDataSource();
 
   }
   ngOnInit() {
 
-    this.reportRequestModel.SiteId = 1 ;
 
-     this. getAllStacks();
-     this.getAllParameterList(0);
      this.getSites();
+     this. getAllStacks();
+     this.getAllParameterList(this.reportRequestModel.StackId);
+
 
 
 
@@ -84,7 +85,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
 
   }
   getAllStacks(): void {
-    this._reportservices.getAllStacks(0, true).subscribe(resp => {
+    this._reportservices.getSiteStacks( this.reportRequestModel.SiteId,this.reportRequestModel.StackId, true).subscribe(resp => {
       this.stacksArray = resp.model as ReferenceRecords[];
       this.reportRequestModel.StackId = Number(this.stacksArray[0].id);
     }, error => {
@@ -101,7 +102,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
   }
 
 
-  getAllParameterList(stackcId): void {
+  getAllParameterList(stackcId: number): void {
 
     this.parameterFilter.SiteId = this.reportRequestModel.SiteId;
     this.parameterFilter.StackId = stackcId;
@@ -211,16 +212,23 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
       this.chartdata = [];
       this.chartOptions = {};
       this.displayedColumns =  resp.model.length > 0 ? Object.keys( resp.model[0]) : [];
+
       if (resp.model.length > 0) {
                                   this.diableGridFilters = false;
                                   this.dataSource.data = resp.model;
                                   this.dataSource.sort = this.sort;
                                   this.dataSource.paginator = this.paginator;
+                                  if(this.displayedColumns.length == 1) {
+                                    this.showSnackBar('No data available ', true);
+                                    this.isLoading = false;
+                                    return;
+                                  }
                                   this.chartdata = this.bindChartSeries(
                                     resp.model
                                   );
                                   this.initChart();
-                                }
+                                } else {
+                                  this.showSnackBar('No data available ', true);}
       this.isLoading = false;
     }, error => {
       this.isLoading = false;
@@ -247,6 +255,14 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
     });
 
   }
-
+  showSnackBar(message: string, isError: boolean = false): void {
+    if (isError) {
+      this.snackBar.open(message, 'Ok');
+    } else {
+      this.snackBar.open(message, 'Ok', {
+        duration: 3000
+      });
+    }
+  }
 }
 

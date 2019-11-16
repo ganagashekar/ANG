@@ -71,6 +71,11 @@ import { ReportRequestModel } from '../../Model/Report/ReportRequestModel';
           '/GetStacks?StackId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
         }
 
+        getSiteStacks(SiteId: Number , StackId: number  , All: boolean): Observable<any> {
+          return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+            '/GetStacksBySite?SiteId='+ SiteId +'&StackId=' + StackId + '&IncludeAll=' + All);
+          }
+
         GetParameterforStack(filter: ParameterFilter, All: boolean): Observable<any> {
         return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
           '/GetParameterforStack', filter);
