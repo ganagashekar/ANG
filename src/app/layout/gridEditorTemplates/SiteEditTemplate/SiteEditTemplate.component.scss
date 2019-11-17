@@ -1,3 +1,12 @@
+@media  all and (max-width: 1500px) and (min-width: 1306px) {
+  .siteedit-field {
+    width: 31% !important;
+    margin-right: 23px;
+  }
+}
+.cdk-overlay-pane {
+  max-height: fit-content !important;
+}
 .divTaskScheduler{
   padding: 5px;
 }
@@ -83,11 +92,6 @@
   flex-direction: row;
   align-items: center; */
 }
-
-/* gnga*/
-/* Satessh*/
-
-/*rwar sRW*/
 .header{
   padding-bottom: 10px;
   text-align: center;
@@ -97,10 +101,7 @@
   text-decoration: underline;
 }
 
-.cdk-overlay-pane {
-  width: auto !important;
-}
-.mat-dialog-container {
-  height: auto !important;
-  overflow-y: auto;
-}
+
+
+
+

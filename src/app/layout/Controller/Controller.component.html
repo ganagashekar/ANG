@@ -45,38 +45,38 @@ The actual rendered columns are set as a property on the row definition" -->
       <!-- instanceName Column -->
       <ng-container  matColumnDef="macId">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Mac Id </th>
-          <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.macId}} </td>
+          <td mat-cell *matCellDef="let controllerScheduler" class="controller-data"> {{controllerScheduler.macId}} </td>
       </ng-container>
 
       <!-- taskName Column -->
       <ng-container matColumnDef="siteId">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Id </th>
-          <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.siteId}} </td>
+          <td mat-cell *matCellDef="let controllerScheduler" class="controller-data"> {{controllerScheduler.siteId}} </td>
       </ng-container>
 
       <ng-container matColumnDef="osType">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> OsType </th>
-        <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.osType}} </td>
+        <td mat-cell *matCellDef="let controllerScheduler" class="controller-data"> {{controllerScheduler.osType}} </td>
     </ng-container>
 
     <ng-container matColumnDef="cpcbUrl">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Cpcb_url  </th>
-      <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.cpcbUrl}} </td>
+      <td mat-cell *matCellDef="let controllerScheduler" class="controller-data"> {{controllerScheduler.cpcbUrl}} </td>
   </ng-container>
 
   <ng-container matColumnDef="spcburl">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Spcb_url  </th>
-    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.spcburl}} </td>
+    <td mat-cell *matCellDef="let controllerScheduler" class="controller-data"> {{controllerScheduler.spcburl}} </td>
 </ng-container>
 
   <ng-container matColumnDef="licenseKey">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> License_key  </th>
-    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.licenseKey}} </td>
+    <td mat-cell *matCellDef="let controllerScheduler" class="controller-data"> {{controllerScheduler.licenseKey}} </td>
   </ng-container>
 
   <ng-container matColumnDef="updtts">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated time  </th>
-    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.updtts}} </td>
+    <td mat-cell *matCellDef="let controllerScheduler" class="controller-data"> {{controllerScheduler.updtts}} </td>
   </ng-container>
 
       <!-- startDate Column -->

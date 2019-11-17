@@ -36,18 +36,18 @@ The actual rendered columns are set as a property on the row definition" -->
       <!-- instanceName Column -->
       <ng-container  matColumnDef="confgID">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Config Id </th>
-          <td mat-cell *matCellDef="let confgScheduler"> {{confgScheduler.confgID}} </td>
+          <td mat-cell *matCellDef="let confgScheduler" class="config-data"> {{confgScheduler.confgID}} </td>
       </ng-container>
 
       <!-- taskName Column -->
       <ng-container matColumnDef="siteID">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Id </th>
-          <td mat-cell *matCellDef="let confgScheduler"> {{confgScheduler.siteID}} </td>
+          <td mat-cell *matCellDef="let confgScheduler" class="config-data"> {{confgScheduler.siteID}} </td>
       </ng-container>
 
       <ng-container matColumnDef="busID">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Bus Id </th>
-        <td mat-cell *matCellDef="let confgScheduler"> {{confgScheduler.busID}} </td>
+        <td mat-cell *matCellDef="let confgScheduler" class="config-data"> {{confgScheduler.busID}} </td>
     </ng-container>
 
       <!-- <ng-container matColumnDef="vendorID">
@@ -57,12 +57,12 @@ The actual rendered columns are set as a property on the row definition" -->
 
     <ng-container matColumnDef="stack_name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Stack name  </th>
-      <td mat-cell *matCellDef="let confgScheduler"> {{confgScheduler.stack_name}} </td>
+      <td mat-cell *matCellDef="let confgScheduler" class="config-data"> {{confgScheduler.stack_name}} </td>
   </ng-container>
 
   <ng-container matColumnDef="stack_typ">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Stack_type  </th>
-    <td mat-cell *matCellDef="let confgScheduler"> {{confgScheduler.stack_typ}} </td>
+    <td mat-cell *matCellDef="let confgScheduler" class="config-data"> {{confgScheduler.stack_typ}} </td>
 </ng-container>
 
   <ng-container matColumnDef="stack_status">
@@ -72,7 +72,7 @@ The actual rendered columns are set as a property on the row definition" -->
 
   <ng-container matColumnDef="createts">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Createts  </th>
-    <td mat-cell *matCellDef="let confgScheduler"> {{confgScheduler.createts}} </td>
+    <td mat-cell *matCellDef="let confgScheduler" class="config-data"> {{confgScheduler.createts}} </td>
   </ng-container>
 
   <ng-container matColumnDef="input_format">
@@ -82,12 +82,12 @@ The actual rendered columns are set as a property on the row definition" -->
 
   <ng-container matColumnDef="output_format">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Output_format  </th>
-    <td mat-cell *matCellDef="let confgScheduler"> {{confgScheduler.output_format}} </td>
+    <td mat-cell *matCellDef="let confgScheduler" class="config-data"> {{confgScheduler.output_format}} </td>
   </ng-container>
 
   <ng-container matColumnDef="disp_output_typ">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Createts  </th>
-    <td mat-cell *matCellDef="let confgScheduler"> {{confgScheduler.createts}} </td>
+    <td mat-cell *matCellDef="let confgScheduler" class="config-data"> {{confgScheduler.createts}} </td>
   </ng-container>
 
 

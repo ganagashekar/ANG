@@ -44,50 +44,50 @@
           <!-- instanceName Column -->
           <ng-container  matColumnDef="StackName">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Stack Name </th>
-              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.stackName}} </td>
+              <td mat-cell *matCellDef="let taskScheduler" class="parameter-data"> {{taskScheduler.stackName}} </td>
           </ng-container>
 
           <!-- taskName Column -->
           <ng-container matColumnDef="paramname">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Param Name </th>
-              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.paramname}} </td>
+              <td mat-cell *matCellDef="let taskScheduler" class="parameter-data"> {{taskScheduler.paramname}} </td>
           </ng-container>
 
           <ng-container matColumnDef="paramunit">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Param Unit </th>
-              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.paramunit}} </td>
+              <td mat-cell *matCellDef="let taskScheduler" class="parameter-data"> {{taskScheduler.paramunit}} </td>
           </ng-container>
 
           <ng-container matColumnDef="paramminval">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Param min </th>
-              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.paramminval}} </td>
+              <td mat-cell *matCellDef="let taskScheduler" class="parameter-data"> {{taskScheduler.paramminval}} </td>
           </ng-container>
 
           <ng-container matColumnDef="parammaxval">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> param max  </th>
-              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.parammaxval}} </td>
+              <td mat-cell *matCellDef="let taskScheduler" class="parameter-data"> {{taskScheduler.parammaxval}} </td>
           </ng-container>
 
           <ng-container matColumnDef="threshholdval">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Threshhold </th>
-              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.threshholdval}} </td>
+              <td mat-cell *matCellDef="let taskScheduler" class="parameter-data"> {{taskScheduler.threshholdval}} </td>
           </ng-container>
 
           <ng-container matColumnDef="paramposition">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Param position </th>
-              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.paramposition}} </td>
+              <td mat-cell *matCellDef="let taskScheduler" class="parameter-data"> {{taskScheduler.paramposition}} </td>
           </ng-container>
 
           <!-- startDate Column -->
           <ng-container matColumnDef="creatts">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
-              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.creatts | date:'MM/dd/yyyy'}} </td>
+              <td mat-cell *matCellDef="let taskScheduler" class="parameter-data"> {{taskScheduler.creatts | date:'MM/dd/yyyy'}} </td>
           </ng-container>
 
           <!-- startTime Column -->
           <ng-container [style.display]="'none'" matColumnDef="updtts">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Modified Time </th>
-              <td mat-cell *matCellDef="let taskScheduler"> {{taskScheduler.updtts |date:'MM/dd/yyyy' }} </td>
+              <td mat-cell *matCellDef="let taskScheduler" class="parameter-data"> {{taskScheduler.updtts |date:'MM/dd/yyyy' }} </td>
           </ng-container>
 
           <!-- frequencyTypeName Column -->

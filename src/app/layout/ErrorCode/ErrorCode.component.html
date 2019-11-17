@@ -18,18 +18,18 @@ The actual rendered columns are set as a property on the row definition" -->
 
  <ng-container matColumnDef="errorcode">
   <th mat-header-cell *matHeaderCellDef mat-sort-header> Error code </th>
-  <td mat-cell *matCellDef="let errorcodetaskScheduler"> {{errorcodetaskScheduler.errorcode}} </td>
+  <td mat-cell *matCellDef="let errorcodetaskScheduler" class="error-data"> {{errorcodetaskScheduler.errorcode}} </td>
 </ng-container>
 
 <!-- startTime Column -->
 <ng-container [style.display]="'none'" matColumnDef="errordesc">
   <th mat-header-cell *matHeaderCellDef mat-sort-header> Error desc </th>
-  <td mat-cell *matCellDef="let errorcodetaskScheduler"> {{errorcodetaskScheduler.errordesc }} </td>
+  <td mat-cell *matCellDef="let errorcodetaskScheduler" class="error-data"> {{errorcodetaskScheduler.errordesc }} </td>
 </ng-container>
 
 <ng-container [style.display]="'none'" matColumnDef="updt_ts">
   <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated date </th>
-  <td mat-cell *matCellDef="let errorcodetaskScheduler"> {{errorcodetaskScheduler.updt_ts }} </td>
+  <td mat-cell *matCellDef="let errorcodetaskScheduler" class="error-data"> {{errorcodetaskScheduler.updt_ts }} </td>
 </ng-container>
 
       <!-- startDate Column -->

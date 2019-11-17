@@ -1,7 +1,6 @@
-<mat-form-field>
+<mat-form-field class="cntrbus-siteid">
     <mat-label>SiteId</mat-label>
     <mat-select [value]="SiteId" >
-
        <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.id}}
        </mat-option>
    </mat-select>
@@ -50,43 +49,43 @@ The actual rendered columns are set as a property on the row definition" -->
       <!-- instanceName Column -->
       <ng-container  matColumnDef="busId">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Bus Id </th>
-          <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.busId}} </td>
+          <td mat-cell *matCellDef="let controllerScheduler" class="controller-busvalues"> {{controllerScheduler.busId}} </td>
       </ng-container>
 
       <!-- taskName Column -->
       <ng-container matColumnDef="macId">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Mac Id </th>
-          <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.macId}} </td>
+          <td mat-cell *matCellDef="let controllerScheduler" class="controller-busvalues"> {{controllerScheduler.macId}} </td>
       </ng-container>
 
       <ng-container matColumnDef="comPort">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Com Port </th>
-        <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.comPort}} </td>
+        <td mat-cell *matCellDef="let controllerScheduler" class="controller-busvalues"> {{controllerScheduler.comPort}} </td>
     </ng-container>
 
     <ng-container matColumnDef="baudrate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Baud Rate  </th>
-      <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.baudrate}} </td>
+      <td mat-cell *matCellDef="let controllerScheduler" class="controller-busvalues"> {{controllerScheduler.baudrate}} </td>
   </ng-container>
 
   <ng-container matColumnDef="timeOut">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Time Out  </th>
-    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.timeOut}} </td>
+    <td mat-cell *matCellDef="let controllerScheduler" class="controller-busvalues"> {{controllerScheduler.timeOut}} </td>
 </ng-container>
 
   <ng-container matColumnDef="startIndex">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Data Byte Start Index  </th>
-    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.startIndex}} </td>
+    <td mat-cell *matCellDef="let controllerScheduler" class="controller-busvalues"> {{controllerScheduler.startIndex}} </td>
   </ng-container>
 
   <ng-container matColumnDef="protocal">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Protocal  </th>
-    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.protocal}} </td>
+    <td mat-cell *matCellDef="let controllerScheduler" class="controller-busvalues"> {{controllerScheduler.protocal}} </td>
   </ng-container>
 
   <ng-container matColumnDef="updtts">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated TimeStamp  </th>
-    <td mat-cell *matCellDef="let controllerScheduler"> {{controllerScheduler.updtts}} </td>
+    <td mat-cell *matCellDef="let controllerScheduler" class="controller-busvalues"> {{controllerScheduler.updtts}} </td>
   </ng-container>
 
       <!-- startDate Column -->

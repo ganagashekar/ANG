@@ -7,7 +7,7 @@ import { AuditModel } from 'src/app/Model/ServiceResposeModel/CommonModel/AuditM
 import { AuditFilter } from 'src/app/Model/FilterModels/AuditFilter';
 
 @Component({
-  selector: 'app-AuditEditTemplate',
+  selector: 'app-auditedittemplate',
   templateUrl: './AuditEditTemplate.component.html',
   styleUrls: ['./AuditEditTemplate.component.scss']
 })
