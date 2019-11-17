@@ -56,7 +56,7 @@ export class CntrBusEditTemplateComponent implements OnInit {
       macId: new FormControl('', [Validators.required]),
       comPort: new FormControl('', [Validators.required]),
       protocal: new FormControl('', [Validators.required]),
-      baudRate: new FormControl('', [Validators.required]),
+      baudrate: new FormControl('', [Validators.required]),
       timeOut: new FormControl('', [Validators.required]),
       startIndex: new FormControl('', [Validators.required]),
 
@@ -74,7 +74,7 @@ export class CntrBusEditTemplateComponent implements OnInit {
           macId: this.editModel.macId,
           comPort: this.editModel.comPort,
           protocal: this.editModel.protocal,
-          baudRate: this.editModel.baudRate,
+          baudrate: this.editModel.baudrate,
           timeOut: this.editModel.timeOut,
           startIndex: this.editModel.startIndex,
 

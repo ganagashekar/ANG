@@ -57,6 +57,7 @@ export class ConfigEditTemplateComponent implements OnInit {
       slaveid: new FormControl('', [Validators.required]),
       holdingreg: new FormControl('', [Validators.required]),
       firstreg: new FormControl('', [Validators.required]),
+      displayoutputtype: new FormControl('', [Validators.required]),
     });
 
     if (this.isAdd) { // scheduler add
@@ -79,6 +80,7 @@ export class ConfigEditTemplateComponent implements OnInit {
           slaveid: this.editModel.slaveid,
           holdingreg: this.editModel.holdingreg,
           firstreg: this.editModel.firstreg,
+          displayoutputtype: this.editModel.displayoutputtype,
         });
 
 

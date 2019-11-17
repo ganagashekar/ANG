@@ -5,7 +5,7 @@ export class UserModel {
     userPass: string;
     isEnabled: number;
     userName: string;
-    siteId: bigint;
+    vendorSiteId: bigint;
     creatts: DateTime;
     updtts: DateTime;
      // length: number;

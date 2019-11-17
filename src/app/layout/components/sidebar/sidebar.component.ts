@@ -56,7 +56,7 @@ export class SidebarComponent implements OnInit {
         children: [
           {
             displayName: 'Site',
-            iconName: 'user',
+            iconName: 'settings_input_composite',
             route: 'SiteSetup'
 
           },
@@ -74,7 +74,7 @@ export class SidebarComponent implements OnInit {
           },
           {
             displayName: 'Config',
-            iconName: 'config',
+            iconName: 'settings_system_daydream',
             route: 'Confg'
 
           },

@@ -19,7 +19,7 @@ export class UserinfoComponent implements OnInit {
   UserinfoFilter: UserinfoFilter;
   UserinfoListDataSource: MatTableDataSource<UserModel>;
   displayedColumns: string[] = [
-     'editAction', 'UserId', 'UserPass', 'IsEnabled', 'UserName', 'SiteId', 'creatts', 'updtts', 'deleteAction',
+     'editAction', 'UserId', 'UserPass', 'isEnabled', 'UserName', 'vendorSiteId', 'creatts', 'updtts', 'deleteAction',
    ];
    constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _userinfoservices: UserinfoService,

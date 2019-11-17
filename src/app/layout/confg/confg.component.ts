@@ -20,7 +20,7 @@ export class ConfgComponent implements OnInit {
   stacksArray: ReferenceRecords[] = [];
   confgListDataSource: MatTableDataSource<ConfgModel>;
   displayedColumns: string[] = [
-    'editAction', 'confgID', 'siteID', 'busID', 'vendorID',
+    'editAction', 'confgID', 'siteID', 'busID',
     'stack_name', 'stack_typ', 'stack_status',
     'createts', 'input_format', 'output_format', 'disp_output_typ', 'deleteAction'
    ];

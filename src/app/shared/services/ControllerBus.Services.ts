@@ -32,10 +32,10 @@ import { ControllerBusFilter } from 'src/app/Model/FilterModels/ControllerBusFil
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/GetcontrollerBusAsync', filter);
     }
-    getAllMacids(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
-      return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
-        '/GetMacs?MaId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
-      }
+    // getAllMacids(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+    //   return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+    //     '/GetMacs?MaId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+    //   }
     getReferencerecords(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
       return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
         '/GetReferenceRecords?ReferenceTypeId=' + referenceRecordsTypeId + '&IncludeAll=' + All);

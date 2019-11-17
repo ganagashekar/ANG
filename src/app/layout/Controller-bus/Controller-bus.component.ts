@@ -21,7 +21,7 @@ export class ControllerBusComponent implements OnInit {
   sitesArray: ReferenceRecords[] = [];
   macidsArray: ReferenceRecords[] = [];
   displayedColumns: string[] = [
-    'editAction', 'busId', 'macId', 'comPort', 'baudRate', 'timeOut', 'startIndex', 'protocal', 'updtts', 'deleteAction'
+    'editAction', 'busId', 'macId', 'comPort', 'baudrate', 'timeOut', 'startIndex', 'protocal', 'updtts', 'deleteAction'
    ];
 
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
@@ -37,7 +37,7 @@ export class ControllerBusComponent implements OnInit {
   ngOnInit() {
     this.getAllControllerBusinfoList ();
     this.getSites();
-    this.getMacids();
+    // this.getMacids();
   }
 
 
@@ -59,13 +59,13 @@ export class ControllerBusComponent implements OnInit {
     });
   }
 
-  getMacids(): void {
-    this._controllerBusservices.getAllMacids(0, false).subscribe(resp => {
-      this.macidsArray = resp.model as ReferenceRecords[];
-    }, error => {
-      console.log('Error: ' + error);
-    });
-  }
+  // getMacids(): void {
+  //   this._controllerBusservices.getAllMacids(0, false).subscribe(resp => {
+  //     this.macidsArray = resp.model as ReferenceRecords[];
+  //   }, error => {
+  //     console.log('Error: ' + error);
+  //   });
+  // }
 
   NewControllerBus(): void {
     const dialogRef = this._dialog.open(CntrBusEditTemplateComponent, {

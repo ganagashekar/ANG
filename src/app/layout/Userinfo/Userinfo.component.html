@@ -47,14 +47,14 @@ The actual rendered columns are set as a property on the row definition" -->
         <th mat-header-cell *matHeaderCellDef mat-sort-header> User Pass </th>
         <td mat-cell *matCellDef="let userScheduler"> {{userScheduler.userPass}} </td>
     </ng-container>
-    <ng-container matColumnDef="IsEnabled">
+    <ng-container matColumnDef="isEnabled">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> IsEnabled </th>
       <td mat-cell *matCellDef="let userScheduler"> {{userScheduler.isEnabled}} </td>
   </ng-container>
 
-      <ng-container matColumnDef="SiteId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> SiteId </th>
-        <td mat-cell *matCellDef="let userScheduler"> {{userScheduler.siteId}} </td>
+      <ng-container matColumnDef="vendorSiteId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> VendorSite Id </th>
+        <td mat-cell *matCellDef="let userScheduler"> {{userScheduler.vendorSiteId}} </td>
     </ng-container>
 
     <ng-container matColumnDef="creatts">

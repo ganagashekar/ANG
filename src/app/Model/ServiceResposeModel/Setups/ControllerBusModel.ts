@@ -5,7 +5,7 @@ export class ControllerBusModel {
     macId: string;
     comPort: string;
     protocal: string;
-    baudRate: bigint;
+    baudrate: bigint;
     timeOut: bigint;
     startIndex: bigint;
     updtts: DateTime;

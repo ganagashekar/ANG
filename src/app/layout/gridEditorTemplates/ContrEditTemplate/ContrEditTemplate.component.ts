@@ -78,7 +78,6 @@ export class ContrEditTemplateComponent implements OnInit {
 
 }
 getSites(SiteId: number): void {
-  this.ControllerFilter.SiteId = 1;
     this.ControllerFilter.SiteId = SiteId;
   this._controllerservices.getAllSites(0, false).subscribe(resp => {
     this.sitesArray = resp.model as ReferenceRecords[];
