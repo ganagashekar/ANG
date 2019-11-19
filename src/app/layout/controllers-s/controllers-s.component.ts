@@ -19,7 +19,7 @@ export class ControllersSComponent implements OnInit {
   ControllerListDataSource: MatTableDataSource<ControllerModel>;
   sitesArray: ReferenceRecords[] = [];
   displayedColumns: string[] = [
-     'editAction', 'macId', 'siteId', 'osType', 'cpcbUrl', 'spcburl', 'licenseKey', 'updtts', 'deleteAction'
+     'editAction', 'siteId', 'macId', 'osType', 'cpcbUrl', 'spcburl', 'licenseKey', 'updtts', 'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _controllerservices: ControllerService,
@@ -63,9 +63,8 @@ export class ControllersSComponent implements OnInit {
   });
   dialogRef.componentInstance.ControllerEditorEmitter.subscribe((response: any) => {
      if (response.model > 0) {
+      this.getAllControllerinfoList();
       this.showSnackBar('Controller details added Successfully.');
-       this.getAllControllerinfoList();
-
           } else {
       this.showSnackBar(response.message, true);
      }

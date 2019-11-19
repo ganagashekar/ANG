@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ApplicationLogsComponent } from './ApplicationLogs.component';
+import { ApplicationLogsComponent } from './applicationLogs.component';
 
 describe('ApplicationLogsComponent', () => {
   let component: ApplicationLogsComponent;

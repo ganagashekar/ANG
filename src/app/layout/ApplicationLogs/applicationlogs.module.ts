@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApplicationLogsComponent } from './applicationlogs.component';
+import { ApplicationLogsComponent } from './applicationLogs.component';
 import { ApplogsEditTemplateComponent } from '../gridEditorTemplates/applogsEditTemplate/applogsEditTemplate.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material/material.module';

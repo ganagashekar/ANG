@@ -20,9 +20,9 @@ export class ConfigurationSComponent implements OnInit {
   stacksArray: ReferenceRecords[] = [];
   confgListDataSource: MatTableDataSource<ConfgModel>;
   displayedColumns: string[] = [
-    'editAction', 'confgID', 'siteID', 'busID',
+    'editAction', 'siteID', 'busID',
     'stack_name', 'stack_typ', 'stack_status',
-    'createts', 'input_format', 'output_format', 'disp_output_typ', 'deleteAction'
+     'input_format', 'output_format', 'createts', 'updatets', 'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _confgsservices: ConfgService,

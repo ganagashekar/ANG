@@ -8,6 +8,7 @@ export class UserModel {
     vendorSiteId: bigint;
     creatts: DateTime;
     updtts: DateTime;
+    validityts: DateTime;
      // length: number;
      // creatts: DateTime;
      // updtts: DateTime;

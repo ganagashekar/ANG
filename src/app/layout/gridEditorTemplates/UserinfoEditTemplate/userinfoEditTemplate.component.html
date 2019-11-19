@@ -1,3 +1,58 @@
-<p>
-  userinfoEditTemplate works!
-</p>
+<div class="divTaskScheduler">
+  <div fxFlex>
+    <form [formGroup]="schedulerForm" class="scheduler-form">
+        <div class="close-btn">
+            <button mat-icon-button  (click)="onCloseClick()">
+                <i class="material-icons" title="Click here to delete userinfo popup">cancel</i>
+            </button>
+          </div>
+       <!-- <div class="close-btn"  (click)="onCloseClick()">
+         <mat-icon class="sidenav-icon">cancel</mat-icon>
+       </div> -->
+       <!-- <button mat-icon-button class="close-btn" (click)="onCloseClick()">
+          <i class="material-icons" title="Click here to delete  user info popup">cancel</i>
+      </button> -->
+      <div class="mat-h2 header">
+        Userinfo
+      </div>
+        <mat-form-field class="half-width float-left">
+          <mat-label>User Name.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
+            Errordesc is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="userName">
+      </mat-form-field>
+      <mat-form-field class="half-width float-right">
+          <mat-label>User Pass.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="userPass">
+      </mat-form-field>
+    <mat-form-field class="half-width float-left">
+        <mat-label>IsEnabled.</mat-label>
+        <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+          Errorcode is
+          <strong>required</strong>
+      </mat-error> -->
+        <input matInput type="number" min="1" formControlName="isEnabled">
+    </mat-form-field>
+
+      <div layout="row" layout-align="center center" class="divBtnCon float-right">
+        <div fxFlex>
+        <button mat-raised-button color="primary" class="btn add-btn fr" (click)="onFormSubmit()"
+            [disabled]="!schedulerForm.valid ">
+            <mat-icon>save</mat-icon>
+            <b *ngIf="isAdd == true"> Add</b>
+            <b *ngIf="isAdd != true"> Update</b>
+        </button>
+        <button mat-raised-button class="btn cancel-btn fr" (click)="onCloseClick()">
+            <mat-icon>close</mat-icon> <b>Cancel</b>
+        </button>
+        </div>
+    </div>
+    </form>
+  </div>
+</div>

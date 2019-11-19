@@ -23,7 +23,7 @@ export class ControllerBusComponent implements OnInit {
   sitesArray: ReferenceRecords[] = [];
   macidsArray: ReferenceRecords[] = [];
   displayedColumns: string[] = [
-    'editAction', 'busId', 'macId', 'comPort', 'baudrate', 'timeOut', 'startIndex', 'protocal', 'updtts', 'deleteAction'
+    'editAction', 'macId', 'protocal', 'comPort', 'baudrate', 'timeOut', 'startIndex', 'updtts', 'deleteAction'
    ];
 
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,

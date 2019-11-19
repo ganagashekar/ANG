@@ -13,7 +13,7 @@ import { ControllersSComponent } from './controllers-s/controllers-s.component';
 import { ConfigurationSComponent } from './configuration-s/configuration-s.component';
 import { AuditsComponent } from './audits/audits.component';
 import { ErrorcodesComponent } from './errorcodes/errorcodes.component';
-import { ApplicationLogsComponent } from './applicationlogs/applicationlogs.component';
+import { ApplicationLogsComponent } from './applicationlogs/applicationLogs.component';
 
 
 const routes: Routes = [

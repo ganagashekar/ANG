@@ -52,7 +52,6 @@ export class ControllerbusEditTemplateComponent implements OnInit {
      this.getAllprotocalist(0);
     // this.getAllParameterUnitsList(0);
     this.schedulerForm = this.formBuilder.group({
-      busId: new FormControl('', [Validators.required]),
       macId: new FormControl('', [Validators.required]),
       comPort: new FormControl('', [Validators.required]),
       protocal: new FormControl('', [Validators.required]),
@@ -70,7 +69,6 @@ export class ControllerbusEditTemplateComponent implements OnInit {
 
 
         this.schedulerForm.patchValue({
-          busId: this.editModel.busId,
           macId: this.editModel.macId,
           comPort: this.editModel.comPort,
           protocal: this.editModel.protocal,

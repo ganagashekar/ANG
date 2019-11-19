@@ -43,9 +43,7 @@ export class UserinfoEditTemplateComponent implements OnInit {
     // this.getAllParameterList(0);
     // this.getAllParameterUnitsList(0);
     this.schedulerForm = this.formBuilder.group({
-      userId: new FormControl('', [Validators.required]),
       userName: new FormControl('', [Validators.required]),
-      vendorSiteId: new FormControl('', [Validators.required]),
       userPass: new FormControl('', [Validators.required]),
       isEnabled: new FormControl('', [Validators.required]),
     });
@@ -58,9 +56,7 @@ export class UserinfoEditTemplateComponent implements OnInit {
 
 
         this.schedulerForm.patchValue({
-          userId: this.editModel.userId,
           userName: this.editModel.userName,
-          vendorSiteId: this.editModel.vendorSiteId,
           userPass: this.editModel.userPass,
           isEnabled: this.editModel.isEnabled,
 

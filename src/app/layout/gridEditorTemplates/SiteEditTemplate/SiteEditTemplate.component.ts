@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule ,FormArray, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule , FormArray, ValidatorFn } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { SitesetupService } from 'src/app/shared/services/Sitesetup.service';
 import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
@@ -49,6 +49,7 @@ export class SiteEditTemplateComponent implements OnInit {
       siteId: new FormControl('', [Validators.required]),
       siteName: new FormControl('', [Validators.required]),
       site_cpcb_cd: new FormControl('', [Validators.required]),
+      site_in_ganga_basin: new FormControl('', [Validators.required]),
       site_city: new FormControl('', [Validators.required]),
       site_state: new FormControl('', [Validators.required]),
       site_country: new FormControl('', [Validators.required]),
@@ -79,6 +80,7 @@ export class SiteEditTemplateComponent implements OnInit {
         siteId: this.editModel.siteId,
         siteName: this.editModel.siteName,
         site_cpcb_cd: this.editModel.site_cpcb_cd,
+        site_in_ganga_basin: this.editModel.site_in_ganga_basin,
         site_city: this.editModel.site_city,
         site_state: this.editModel.site_state,
         site_country: this.editModel.site_country,

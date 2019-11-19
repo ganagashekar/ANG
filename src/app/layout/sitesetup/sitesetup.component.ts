@@ -18,8 +18,8 @@ export class SitesetupComponent implements OnInit {
   siteSetupFilter: SiteSetupFilter;
   sitesetupListDataSource: MatTableDataSource<SiteSetupModel>;
   displayedColumns: string[] = [
-     'editAction', 'SiteId', 'SiteName', 'site_cpcb_cd', 'site_city', 'site_state', 'site_country',
-      'updt_ts', 'deleteAction'
+     'editAction', 'siteId', 'siteName', 'site_cpcb_cd', 'site_city', 'site_state', 'site_country',
+      'create_ts', 'updt_ts', 'deleteAction'
    ];
    @ViewChild(MatSort, { static: false }) sort: MatSort;
    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;

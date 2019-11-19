@@ -9,37 +9,25 @@
       <div class="mat-h2 header">
         Controller
       </div>
-
-    <mat-form-field class="full-width">
-        <mat-label> Mac Id.</mat-label>
-        <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
-          Errordesc is
-          <strong>required</strong>
-      </mat-error> -->
-        <input matInput type="string" min="1" formControlName="macId">
-    </mat-form-field>
-      <!-- <mat-form-field class="half-width float-left">
-          <mat-label>siteId.</mat-label>
-          <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
-            Errorcode is
-            <strong>required</strong>
-        </mat-error>
-          <input matInput type="string" min="1" formControlName="siteId">
-      </mat-form-field> -->
       <mat-form-field class="half-width">
           <mat-label>Site Id.</mat-label>
-          <mat-error *ngIf="schedulerForm.controls.siteId.hasError('required')">
+          <!-- <mat-error *ngIf="schedulerForm.controls.siteId.hasError('required')">
               Siteid is
               <strong>required</strong>
-          </mat-error>
+          </mat-error> -->
           <mat-select formControlName="siteId" >
-
              <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.id}}
              </mat-option>
-
          </mat-select>
-
      </mat-form-field>
+     <mat-form-field class="full-width">
+      <mat-label> Mac Id.</mat-label>
+      <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
+        Errordesc is
+        <strong>required</strong>
+    </mat-error> -->
+      <input matInput type="string" min="1" formControlName="macId">
+  </mat-form-field>
       <mat-form-field class="half-width float-right">
         <mat-label>Os Type.</mat-label>
         <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">

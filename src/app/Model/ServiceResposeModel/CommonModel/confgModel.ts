@@ -4,7 +4,6 @@ export class ConfgModel {
     confgID: bigint;
     siteID: string;
     busID: bigint;
-    vendorID: string;
     stack_name: string;
     stack_typ: string;
     slaveid: bigint;

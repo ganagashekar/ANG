@@ -1,11 +1,18 @@
 <mat-form-field class="cntrbus-siteid">
   <mat-label>SiteId</mat-label>
-  <!-- <mat-select [value]="SiteId" >
+  <mat-select >
      <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.id}}
      </mat-option>
- </mat-select> -->
+ </mat-select>
 </mat-form-field>
+<mat-form-field>
+  <mat-label>MacId</mat-label>
+  <mat-select >
 
+     <mat-option [value]="mac.id" *ngFor="let mac of macidsArray">{{mac.id}}
+     </mat-option>
+ </mat-select>
+</mat-form-field>
 
 <div class="add">
   <button mat-icon-button class="add-button" (click)="NewControllerBus()">
@@ -18,7 +25,8 @@
 <div fxFlex>
 <table mat-table [dataSource]="ControllerBusListDataSource" class="mat-elevation-z8 mat-table" matSort matSortStart="desc">
 
-
+    <!--- Note that these columns can be defined in any order.
+The actual rendered columns are set as a property on the row definition" -->
 <ng-container matColumnDef="deleteAction">
 <th mat-header-cell *matHeaderCellDef></th>
 <td mat-cell *matCellDef="let controllerScheduler">
@@ -38,13 +46,7 @@
   </td>
 </ng-container>
 
-
-    <ng-container  matColumnDef="busId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Bus Id </th>
-        <td mat-cell *matCellDef="let controllerScheduler" class="controller-busvalues"> {{controllerScheduler.busId}} </td>
-    </ng-container>
-
-
+    <!-- taskName Column -->
     <ng-container matColumnDef="macId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Mac Id </th>
         <td mat-cell *matCellDef="let controllerScheduler" class="controller-busvalues"> {{controllerScheduler.macId}} </td>
@@ -76,18 +78,17 @@
 </ng-container>
 
 <ng-container matColumnDef="updtts">
-  <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated TimeStamp  </th>
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated Time </th>
   <td mat-cell *matCellDef="let controllerScheduler" class="controller-busvalues"> {{controllerScheduler.updtts}} </td>
 </ng-container>
-
-
 
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
-
+<!--<mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]" showFirstLastButtons>
+</mat-paginator>-->
 </div>
 </div>
 

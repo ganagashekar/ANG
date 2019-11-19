@@ -12,6 +12,7 @@ import { ConfirmationDialogComponent } from '../components/confirmation-dialog/c
 import { ApplogsEditTemplateComponent } from '../gridEditorTemplates/applogsEditTemplate/applogsEditTemplate.component';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'app-ApplicationLogs',
   templateUrl: './ApplicationLogs.component.html',
   styleUrls: ['./ApplicationLogs.component.scss']

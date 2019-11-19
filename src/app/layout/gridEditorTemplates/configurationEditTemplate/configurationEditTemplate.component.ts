@@ -45,10 +45,8 @@ export class ConfigurationEditTemplateComponent implements OnInit {
   ngOnInit() {
   this.getSites();
     this.schedulerForm = this.formBuilder.group({
-      confgID: new FormControl('', [Validators.required]),
       siteID: new FormControl('', [Validators.required]),
-      busID: new FormControl('', [Validators.required]),
-      vendorID: new FormControl('', [Validators.required]),
+     busID: new FormControl('', [Validators.required]),
       stack_name: new FormControl('', [Validators.required]),
       stack_typ: new FormControl('', [Validators.required]),
       stack_status: new FormControl('', [Validators.required]),
@@ -68,10 +66,8 @@ export class ConfigurationEditTemplateComponent implements OnInit {
 
 
         this.schedulerForm.patchValue({
-          confgID: this.editModel.confgID,
           siteID: this.editModel.siteID,
           busID: this.editModel.busID,
-          vendorID: this.editModel.vendorID,
           stack_name: this.editModel.stack_name,
           stack_typ: this.editModel.stack_typ,
           stack_status: this.editModel.stack_status,
