@@ -1,79 +1,78 @@
 <div class="add">
-    <button mat-icon-button class="add-button" (click)="newsite()">
-        <i class="material-icons" title="Click here to add new site ">add_circle_outline</i>
-    </button>
-    <span class="add-title">Add New Site</span>
-    </div>
+  <button mat-icon-button class="add-button" (click)="newsite()">
+      <i class="material-icons" title="Click here to add new site ">add_circle_outline</i>
+  </button>
+  <span class="add-title">Add New Site</span>
+  </div>
 
 <div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
-  <div fxFlex>
-  <table mat-table [dataSource]="SitesetupListDataSource" class="mat-elevation-z8 mat-table" matSort matSortStart="desc">
+<div fxFlex>
+<table mat-table [dataSource]="sitesetupListDataSource" class="mat-elevation-z8 mat-table" matSort matSortStart="desc">
 
-      <!--- Note that these columns can be defined in any order.
+    <!--- Note that these columns can be defined in any order.
 The actual rendered columns are set as a property on the row definition" -->
 
 <ng-container matColumnDef="editAction">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let siteSetupScheduler">
-        <button mat-icon-button (click)="editsite(siteSetupScheduler)">
-            <i class="material-icons" title="Edit">create</i>
-        </button>
-    </td>
+  <th mat-header-cell *matHeaderCellDef></th>
+  <td mat-cell *matCellDef="let siteSetupScheduler">
+      <button mat-icon-button (click)="editsite(siteSetupScheduler)">
+          <i class="material-icons" title="Edit">create</i>
+      </button>
+  </td>
 </ng-container>
 
 <ng-container matColumnDef="deleteAction">
-  <th mat-header-cell *matHeaderCellDef></th>
-  <td mat-cell *matCellDef="let siteSetupScheduler">
-     <button mat-icon-button (click)="DeleteSite(siteSetupScheduler.siteId)" class="padding-left-20px">
-       <i class="material-icons" title="click here to delete Site">close</i>
-      </button>
-   </td>
+<th mat-header-cell *matHeaderCellDef></th>
+<td mat-cell *matCellDef="let siteSetupScheduler">
+   <button mat-icon-button (click)="DeleteSite(siteSetupScheduler.siteId)" class="padding-left-20px">
+     <i class="material-icons" title="click here to delete Site">close</i>
+    </button>
+ </td>
 </ng-container>
 
-      <!-- instanceName Column -->
-      <ng-container  matColumnDef="SiteId">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Id </th>
-          <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.siteId}} </td>
-      </ng-container>
+    <!-- instanceName Column -->
+    <ng-container  matColumnDef="SiteId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Id </th>
+        <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.siteId}} </td>
+    </ng-container>
 
-      <!-- taskName Column -->
-      <ng-container matColumnDef="SiteName">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Name </th>
-          <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.siteName}} </td>
-      </ng-container>
+    <!-- taskName Column -->
+    <ng-container matColumnDef="SiteName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Name </th>
+        <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.siteName}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="site_cpcb_cd">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Site_cpcb_cd </th>
-        <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.site_cpcb_cd}} </td>
-      </ng-container>
+    <ng-container matColumnDef="site_cpcb_cd">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Site_cpcb_cd </th>
+      <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.site_cpcb_cd}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="site_city">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> site_city </th>
-        <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.site_city}} </td>
-      </ng-container>
+    <ng-container matColumnDef="site_city">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> site_city </th>
+      <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.site_city}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="site_state">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Site_state </th>
-        <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.site_state}} </td>
-      </ng-container>
+    <ng-container matColumnDef="site_state">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Site_state </th>
+      <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.site_state}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="site_country">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> site_country </th>
-        <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.site_country}} </td>
-      </ng-container>
+    <ng-container matColumnDef="site_country">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> site_country </th>
+      <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.site_country}} </td>
+    </ng-container>
 
-      <ng-container matColumnDef="updt_ts">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated time </th>
-        <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.updt_ts}} </td>
-      </ng-container>
+    <ng-container matColumnDef="updt_ts">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated time </th>
+      <td mat-cell *matCellDef="let siteSetupScheduler" class="site-data"> {{siteSetupScheduler.updt_ts}} </td>
+    </ng-container>
 
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-  </table>
-  <!--<mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]" showFirstLastButtons>
-  </mat-paginator>-->
+</table>
+<!--<mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]" showFirstLastButtons>
+</mat-paginator>-->
 </div>
 </div>
-

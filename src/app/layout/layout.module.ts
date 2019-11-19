@@ -10,60 +10,52 @@ import { ParametersetupModule } from './parametersetup/parametersetup.module';
 import { AverageReportComponent } from './Reports/AverageReport/AverageReport.component';
 import { ChartModule } from 'angular-highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { MenuListItemComponent } from './components/menu-list-item/menu-list-item.component';
 import { NavService } from '../shared/services/nav.service';
-import { UserinfoComponent } from './Userinfo/Userinfo.component';
-import { ControllerComponent } from './controller/Controller.component';
-import { SitesetupComponent } from './sitesetup/sitesetup.component';
-import { ControllerBusComponent } from './Controller-bus/Controller-bus.component';
-import { ApplicationLogsComponent } from './ApplicationLogs/ApplicationLogs.component';
-import { ConfgComponent } from './confg/confg.component';
-import { AuditComponent } from './Audit/Audit.component';
-import { ErrorCodeComponent } from './ErrorCode/ErrorCode.component';
-import { UserinfoEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/userinfoEditTemplate/userinfoEditTemplate.Component';
-import { LogEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/logEditTemplate/logEditTemplate.Component';
-import { CntrBusEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/CntrBusEditTemplate/CntrBusEditTemplate.Component';
-import { SiteEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/SiteEditTemplate/SiteEditTemplate.Component';
-import { ConfigEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/ConfigEditTemplate/ConfigEditTemplate.Component';
-import { ConfirmationDialogComponent } from 'src/app/layout/components/confirmation-dialog/confirmation-dialog.Component';
+
+import { ConfirmationDialogComponent } from 'src/app/layout/components/confirmation-dialog/confirmation-dialog.component';
 import { RealtimeReportComponent } from './Reports/RealtimeReport/RealtimeReport.component';
 import { ExceedenceReportComponent } from './Reports/ExceedenceReport/ExceedenceReport.component';
-import { ContrEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/ContrEditTemplate/ContrEditTemplate.Component';
-
+import { SitesetupModule } from './sitesetup/sitesetup.module';
+import { UserinfoModule } from './userinfo/userinfo.module';
+import { ControllerbusModule } from './controllerbus/controllerbus.module';
+import { ControllersSModule } from './controllers-s/controllers-s.module';
+import { ConfigurationSModule } from './configuration-s/configuration-s.module';
+import { AuditsModule } from './audits/audits.module';
+import { ApplicationlogsModule } from './applicationlogs/applicationlogs.module';
+import { ErrorcodesModule } from './errorcodes/errorcodes.module';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 @NgModule({
     imports: [
         CommonModule,
+        SitesetupModule,
+        UserinfoModule,
+        AuditsModule,
+        FormsModule,
+        ReactiveFormsModule,
         LayoutRoutingModule,
         HighchartsChartModule,
         MaterialModule,
         TranslateModule,
         ParametersetupModule,
         ChartModule,
+        ErrorcodesModule,
+        ApplicationlogsModule,
+        ConfigurationSModule,
+        ControllersSModule,
         FormsModule,
-        ReactiveFormsModule
+        ControllerbusModule,
+
     ],
-
-
-
     providers: [NavService],
-    // declarations: [Screen2Component, LayoutComponent, NavComponent, TopnavComponent, SidebarComponent,
-    // AverageReportComponent, MenuListItemComponent    ]
 
-    entryComponents: [UserinfoEditTemplateComponent, CntrBusEditTemplateComponent, LogEditTemplateComponent,
-       SiteEditTemplateComponent, ConfigEditTemplateComponent, ContrEditTemplateComponent],
+    entryComponents: [
+         ConfirmationDialogComponent],
 
-    declarations: [ UserinfoComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
-      ControllerComponent, SitesetupComponent, ControllerBusComponent, ApplicationLogsComponent, ConfgComponent, AuditComponent,
-      ErrorCodeComponent, CntrBusEditTemplateComponent, UserinfoEditTemplateComponent, LogEditTemplateComponent,
-      SiteEditTemplateComponent, ConfigEditTemplateComponent, AverageReportComponent, MenuListItemComponent
-      , RealtimeReportComponent , ExceedenceReportComponent, ControllerComponent, ContrEditTemplateComponent]
-     //  SiteEditTemplateComponent, ConfigEditTemplateComponent, ContrEditTemplateComponent ]
-    // declarations: [Screen2Component, UserinfoComponent,  LayoutComponent, NavComponent, TopnavComponent, SidebarComponent,
-    //   ControllerComponent, SitesetupComponent, ControllerBusComponent, ApplicationLogsComponent, ConfgComponent, AuditComponent,
-    //   ErrorCodeComponent, CntrBusEditTemplateComponent, UserinfoEditTemplateComponent, LogEditTemplateComponent,
-    //   SiteEditTemplateComponent, ConfigEditTemplateComponent , AverageReportComponent, MenuListItemComponent, ContrEditTemplateComponent
-    //     ]
+    declarations: [ ConfirmationDialogComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
+        AverageReportComponent, MenuListItemComponent
+      , RealtimeReportComponent , ExceedenceReportComponent]
 
 
 })

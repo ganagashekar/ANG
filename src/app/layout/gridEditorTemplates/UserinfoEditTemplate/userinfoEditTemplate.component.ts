@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
@@ -6,9 +7,8 @@ import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/
 import { UserModel } from 'src/app/Model/ServiceResposeModel/Setups/userModel';
 import { UserinfoFilter } from 'src/app/Model/FilterModels/UserinfoFilter';
 
-
 @Component({
-  selector: 'app-userinfoEditTemplate',
+  selector: 'app-userinfoedittemplate',
   templateUrl: './userinfoEditTemplate.component.html',
   styleUrls: ['./userinfoEditTemplate.component.scss']
 })

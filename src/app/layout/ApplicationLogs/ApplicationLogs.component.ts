@@ -7,8 +7,9 @@ import { ApplicationLogsModel } from 'src/app/Model/ServiceResposeModel/CommonMo
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
 import { ApplicationLogsService } from 'src/app/shared/services/ApplicationLogs.service';
-import { LogEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/logEditTemplate/logEditTemplate.Component';
+
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
+import { ApplogsEditTemplateComponent } from '../gridEditorTemplates/applogsEditTemplate/applogsEditTemplate.component';
 
 @Component({
   selector: 'app-ApplicationLogs',
@@ -56,7 +57,7 @@ export class ApplicationLogsComponent implements OnInit , AfterViewInit  {
   }
 
 NewApplicationLogs(): void {
-  const dialogRef = this._dialog.open( LogEditTemplateComponent, {
+  const dialogRef = this._dialog.open( ApplogsEditTemplateComponent, {
     width: '500px',
     data: { action: 'add',  ApplicationLogsModel }
   });
@@ -70,7 +71,7 @@ NewApplicationLogs(): void {
  }
 
  editlogs(Scheduler: ApplicationLogsModel): void {
-  const dialogRef = this._dialog.open(LogEditTemplateComponent, {
+  const dialogRef = this._dialog.open(ApplogsEditTemplateComponent, {
     width: '500px',
     data: { action: 'edit', Scheduler }
   });

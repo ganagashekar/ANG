@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { UserinfoFilter } from 'src/app/Model/FilterModels/UserinfoFilter';
 import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
@@ -7,13 +8,14 @@ import { UserModel } from 'src/app/Model/ServiceResposeModel/Setups/UserModel';
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
 import { UserinfoService } from 'src/app/shared/services/Userinfo.service';
-import { UserinfoEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/userinfoEditTemplate/userinfoEditTemplate.Component';
+
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
+import { UserinfoEditTemplateComponent } from '../gridEditorTemplates/userinfoEditTemplate/userinfoEditTemplate.component';
 
 @Component({
-  selector: 'app-Userinfo',
-  templateUrl: './Userinfo.component.html',
-  styleUrls: ['./Userinfo.component.scss']
+  selector: 'app-userinfo',
+  templateUrl: './userinfo.component.html',
+  styleUrls: ['./userinfo.component.scss']
 })
 export class UserinfoComponent implements OnInit {
   UserinfoFilter: UserinfoFilter;

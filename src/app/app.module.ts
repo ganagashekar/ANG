@@ -12,7 +12,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import stock from 'highcharts/modules/stock.src';
 import more from 'highcharts/highcharts-more.src';
 // AoT requires an exported function for factories
@@ -44,6 +44,8 @@ export const createTranslateLoader = (http: HttpClient) => {
     imports: [
         MaterialModule,
         ChartModule,
+        ReactiveFormsModule,
+        FormsModule,
         HighchartsChartModule,
         BrowserModule,
         AppRoutingModule,

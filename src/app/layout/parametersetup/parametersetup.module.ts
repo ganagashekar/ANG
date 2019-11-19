@@ -4,7 +4,7 @@ import { ParametersetupComponent } from './parametersetup.component';
 import {MaterialModule} from '../../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ParamterEditTemplateComponent } from '../gridEditorTemplates/paramterEditTemplate/ParamterEditTemplateComponent';
-import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
+
 
 
 @NgModule({
@@ -15,8 +15,8 @@ import { ConfirmationDialogComponent } from '../components/confirmation-dialog/c
     ReactiveFormsModule,
  
   ],
-  entryComponents: [ParamterEditTemplateComponent,  ConfirmationDialogComponent],
-  declarations: [ParametersetupComponent,  ParamterEditTemplateComponent, ConfirmationDialogComponent ]
+  entryComponents: [ParamterEditTemplateComponent],
+  declarations: [ParametersetupComponent,  ParamterEditTemplateComponent ]
 })
 export class ParametersetupModule {
 

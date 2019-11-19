@@ -1,26 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { LayoutComponent } from './layout.component';
 import { ParametersetupComponent } from './parametersetup/parametersetup.component';
-
 import { AverageReportComponent } from './Reports/AverageReport/AverageReport.component';
-
-
-
-import { UserinfoComponent } from './Userinfo/Userinfo.component';
-import { ControllerComponent } from './controller/Controller.component';
+import { UserinfoComponent } from './userinfo/userinfo.component';
 import { SitesetupComponent} from './sitesetup/sitesetup.component';
-import { ControllerBusComponent } from './Controller-bus/Controller-bus.component';
-import { ApplicationLogsComponent } from './ApplicationLogs/ApplicationLogs.component';
-import { ConfgComponent } from './confg/confg.component';
-import { AuditComponent } from './Audit/Audit.component';
-import { ErrorCodeComponent } from './ErrorCode/ErrorCode.component';
 import { RealtimeReportComponent } from './Reports/RealtimeReport/RealtimeReport.component';
 import { ExceedenceReportComponent } from './Reports/ExceedenceReport/ExceedenceReport.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
-
+import { ControllerBusComponent } from './controllerbus/controllerbus.component';
+import { ControllersSComponent } from './controllers-s/controllers-s.component';
+import { ConfigurationSComponent } from './configuration-s/configuration-s.component';
+import { AuditsComponent } from './audits/audits.component';
+import { ErrorcodesComponent } from './errorcodes/errorcodes.component';
+import { ApplicationLogsComponent } from './applicationlogs/applicationlogs.component';
 
 
 const routes: Routes = [
@@ -36,7 +29,6 @@ const routes: Routes = [
                 path: 'dashboard',
                 loadChildren: './dashboard/dashboard.module#DashboardModule'
             },
-
 
             {
 
@@ -69,7 +61,7 @@ const routes: Routes = [
             },
             {
               path: 'Controllersetup',
-              component: ControllerComponent
+              component: ControllersSComponent
             },
             {
               path: 'ControllerBusSetup',
@@ -81,15 +73,15 @@ const routes: Routes = [
             },
             {
               path: 'Confg',
-              component: ConfgComponent
+              component: ConfigurationSComponent
             },
             {
               path: 'audit',
-              component: AuditComponent
+              component: AuditsComponent
             },
             {
               path: 'Error',
-              component: ErrorCodeComponent
+              component: ErrorcodesComponent
           }
         ]
     }

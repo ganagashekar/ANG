@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule ,FormArray, ValidatorFn } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { SitesetupService } from 'src/app/shared/services/Sitesetup.service';
 import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
@@ -7,9 +7,9 @@ import { SiteSetupModel } from 'src/app/Model/ServiceResposeModel/Setups/SiteSet
 import { SiteSetupFilter } from 'src/app/Model/FilterModels/SiteSetupFilter';
 
 @Component({
-  selector: 'app-SiteEditTemplate',
-  templateUrl: './SiteEditTemplate.component.html',
-  styleUrls: ['./SiteEditTemplate.component.scss']
+  selector: 'app-siteedittemplate',
+  templateUrl: './siteEditTemplate.component.html',
+  styleUrls: ['./siteEditTemplate.component.scss']
 })
 export class SiteEditTemplateComponent implements OnInit {
   @Output()

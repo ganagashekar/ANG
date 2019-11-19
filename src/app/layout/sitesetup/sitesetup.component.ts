@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { SiteSetupFilter } from 'src/app/Model/FilterModels/SiteSetupFilter';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
 import { SiteSetupModel } from 'src/app/Model/ServiceResposeModel/Setups/SiteSetupModel';
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
 import { SitesetupService } from 'src/app/shared/services/Sitesetup.service';
-import { SiteEditTemplateComponent } from 'src/app/layout/gridEditorTemplates/SiteEditTemplate/SiteEditTemplate.Component';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
+import { SiteEditTemplateComponent } from '../gridEditorTemplates/siteEditTemplate/siteEditTemplate.component';
 
 @Component({
   selector: 'app-sitesetup',
@@ -17,26 +16,32 @@ import { ConfirmationDialogComponent } from '../components/confirmation-dialog/c
 })
 export class SitesetupComponent implements OnInit {
   siteSetupFilter: SiteSetupFilter;
-  SitesetupListDataSource: MatTableDataSource<SiteSetupModel>;
+  sitesetupListDataSource: MatTableDataSource<SiteSetupModel>;
   displayedColumns: string[] = [
      'editAction', 'SiteId', 'SiteName', 'site_cpcb_cd', 'site_city', 'site_state', 'site_country',
       'updt_ts', 'deleteAction'
    ];
+   @ViewChild(MatSort, { static: false }) sort: MatSort;
+   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _Sitesetupservices: SitesetupService,
     private snackBar: MatSnackBar) {
     _appcomponent.currenturl = '/sitesetup';
-    this.SitesetupListDataSource = new MatTableDataSource<SiteSetupModel>();
+    this.sitesetupListDataSource = new MatTableDataSource<SiteSetupModel>();
     this.siteSetupFilter = new SiteSetupFilter();
   }
 
   ngOnInit() {
     this.getAllSitesetupList();
   }
+  ngAfterViewInit(): void {
+    this.sitesetupListDataSource.sort = this.sort;
+    this.sitesetupListDataSource.paginator = this.paginator;
+  }
   getAllSitesetupList(): void {
     this.siteSetupFilter.SiteId = this._appcomponent.SiteId;
     this._Sitesetupservices.getAllSitesetupList(this.siteSetupFilter).subscribe(resp => {
-     this.SitesetupListDataSource.data = resp.model as SiteSetupModel[];
+     this.sitesetupListDataSource.data = resp.model as SiteSetupModel[];
    }, error => {
      console.log('Error: ' + error);
    });
