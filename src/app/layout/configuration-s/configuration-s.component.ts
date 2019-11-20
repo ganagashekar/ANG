@@ -18,6 +18,7 @@ export class ConfigurationSComponent implements OnInit {
 
   confgFilter: ConfgFilter;
   stacksArray: ReferenceRecords[] = [];
+  busesArray: ReferenceRecords[] = [];
   confgListDataSource: MatTableDataSource<ConfgModel>;
   displayedColumns: string[] = [
     'editAction', 'siteID', 'busID',
@@ -32,8 +33,14 @@ export class ConfigurationSComponent implements OnInit {
       this.confgFilter = new ConfgFilter();
      }
 
+     BusChange() {
+      this.getAllconfgList();
+    }
+
   ngOnInit() {
+    this. getAllBuses();
     this.getAllconfgList();
+    this.confgFilter.BusId = 0;
   }
 
   getAllconfgList(): void {
@@ -43,6 +50,14 @@ export class ConfigurationSComponent implements OnInit {
    }, error => {
      console.log('Error: ' + error);
    });
+  }
+
+  getAllBuses(): void {
+    this._confgsservices.getAllBuses(0, true).subscribe(resp => {
+      this.busesArray = resp.model as ReferenceRecords[];
+    }, error => {
+      console.log('Error: ' + error);
+    });
   }
 
   Newconfig(): void {

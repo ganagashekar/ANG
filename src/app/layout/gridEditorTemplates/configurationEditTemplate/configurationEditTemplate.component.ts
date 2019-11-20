@@ -26,11 +26,11 @@ export class ConfigurationEditTemplateComponent implements OnInit {
  // SelecteduserName: string;
  // SelectedvendorsiteId: bigint;
   editModel: ConfgModel;
-  ConfgFilter: ConfgFilter ;
+  confgFilter: ConfgFilter ;
   constructor(public dialogRef: MatDialogRef<ConfigurationEditTemplateComponent>, private _confgsservices: ConfgService,
     @Inject(MAT_DIALOG_DATA) private data: any, private formBuilder: FormBuilder,
      private snackBar: MatSnackBar) {
-       this.ConfgFilter = new ConfgFilter();
+       this.confgFilter = new ConfgFilter();
       if (data !== undefined && data.action === 'edit') {
         this.isAdd = false;
         this.editModel = (data.Scheduler as  ConfgModel);

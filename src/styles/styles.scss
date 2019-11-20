@@ -68,11 +68,15 @@ tr.mat-header-row {
 .mat-dialog-container{
   padding-top: 0px !important;
 }
-.add{float:right;margin-right: 25px;}
+.add{float:right;margin-right: 25px;cursor: pointer;}
 .mat-sort-header-container{
   margin: 0 auto !important;
   width: fit-content !important;
   }
+  .mat-sort-header-container {
+    font-size: 18px !important;
+  }
+  .mat-list-item-content{cursor: pointer;}
 
 // .ng-star-inserted:hover{background-color:#0c3c60;}
 // .mat-list-item-content:hover {

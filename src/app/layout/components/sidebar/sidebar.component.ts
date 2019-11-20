@@ -57,7 +57,7 @@ export class SidebarComponent implements OnInit {
           {
             displayName: 'Site',
             iconName: 'settings_input_composite',
-            route: 'SiteSetup'
+            route: 'SiteSetup',
 
           },
           {
@@ -81,7 +81,7 @@ export class SidebarComponent implements OnInit {
           {
             displayName: 'Parameter',
             iconName: 'settings_input_component',
-            route: 'Paramsetup'
+            route: 'Paramsetup',
 
           }
 

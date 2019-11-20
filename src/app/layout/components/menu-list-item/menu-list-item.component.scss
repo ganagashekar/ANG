@@ -21,8 +21,15 @@
   padding: 8px 0;
   display: flex;
   width: auto;
+  background-color:#0c3c60;
+  color:#fff;
 
   .routeIcon {
     margin-right: 40px;
   }
+
+}
+.mat-list-item:hover{color:#0c3c60 !important;}
+.rotate{
+  background-color: #fff !important; color:#0c3c60 !important;
 }

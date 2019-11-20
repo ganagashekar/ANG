@@ -28,5 +28,17 @@ element.style {
   width: 500px;
   position: static;
 }
-.site-data{text-align: center;}
+.site-data{text-align: center;border-right:1px solid #e0e0e0;}
+span.add-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+span.add-title:hover {
+  color: #e0e011!important;
+}
+i.material-icons:hover{
+  color:#e0e011 !important;
+}
+
+
 

@@ -28,6 +28,11 @@ import { ConfgFilter } from 'src/app/Model/FilterModels/ConfgFilter';
         '/GetSites?SiteId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
       }
 
+      getAllBuses(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+        return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+          '/Getconfigs?BusId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+        }
+
     getAllconfgList(filter: ConfgFilter): Observable<any> {
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/ConfigAsync', filter);

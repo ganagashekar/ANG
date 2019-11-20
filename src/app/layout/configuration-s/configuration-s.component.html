@@ -1,3 +1,11 @@
+<mat-form-field>
+  <mat-label>Bus Id</mat-label>
+   <mat-select [(ngModel)]="confgFilter.BusId"  (ngModelChange)="BusChange()">
+
+      <mat-option [value]="buses.id" *ngFor="let buses of busesArray">{{buses.id}}
+      </mat-option>
+  </mat-select>
+</mat-form-field>
 
 <div class="add">
   <button mat-icon-button class="add-button" (click)="Newconfig()">
