@@ -16,7 +16,7 @@
 
 
     <span class="nav-spacer"></span>
-    <div  flFlex flexLayout="row" flexLayout.lt-md="column" >
+    <div  flFlex flexLayout="row" class="sitename" flexLayout.lt-md="column" >
       <a> <span>
             <mat-icon>location_city</mat-icon>
 
@@ -31,7 +31,7 @@
     <span class="nav-spacer"></span>
 
 
-    <span>&nbsp;Welcome, {{loggedusername}}&nbsp;</span>
+    <span class="welcomeloggeduser">&nbsp;Welcome, {{loggedusername}}&nbsp;</span>
 
     <button class="hidden-sm" mat-icon-button [matMenuTriggerFor]="language">
         <mat-icon>language</mat-icon>

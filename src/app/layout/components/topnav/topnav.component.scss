@@ -8,8 +8,23 @@
 }
 .nav-brand {
     width: 215px;
-    text-align: center;
+    text-align: left;
+    font-weight: bold;
+    font-size: 22px;
 }
+.sitename {
+float: left;
+  text-align: left;
+  width: 100%;
+  font-weight: bold;
+  font-size: 25px;
+  color: #ff0;
+}
+.welcomeloggeduser {
+  font-weight: bold;
+  font-size: 22px;
+}
+
 .topnav-icon {
     text-decoration: none;
     display: flex;

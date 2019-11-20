@@ -28,7 +28,7 @@ element.style {
   width: 500px;
   position: static;
 }
-.site-data{text-align: center;border-right:1px solid #e0e0e0;}
+.site-data{text-align: center;border-right:2px solid #1a237e ;border-bottom:2px solid #1a237e;}
 span.add-title {
   font-size: 20px;
   font-weight: bold;
@@ -39,6 +39,10 @@ span.add-title:hover {
 i.material-icons:hover{
   color:#e0e011 !important;
 }
+.mat-column-editAction{
+  border-bottom: 2px solid #1a237e;border-right:2px solid #1a237e;
+}
+.mat-column-deleteAction {border-bottom: 2px solid #1a237e;}
 
 
 

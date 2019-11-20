@@ -21,4 +21,20 @@ table {
 .mb-20 {
   margin-bottom: 20px;
 }
-.parameter-data{text-align: center;margin-left:1px solid #ff0000 !important;}
+.parameter-data{text-align: center;border-right:2px solid #1a237e ;border-bottom:2px solid #1a237e;}
+
+
+span.add-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+span.add-title:hover {
+  color: #e0e011!important;
+}
+i.material-icons:hover{
+  color:#e0e011 !important;
+}
+.mat-column-editAction{
+  border-bottom: 2px solid #1a237e;border-right:2px solid #1a237e;
+}
+.mat-column-deleteAction {border-bottom: 2px solid #1a237e;}
