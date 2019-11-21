@@ -97,19 +97,6 @@ export class SidebarComponent implements OnInit {
             route: 'Userinfosetup'
 
           },
-          {
-            displayName: 'Error-Code',
-            iconName: 'error',
-            route: 'Error'
-
-          },
-          {
-            displayName: 'Audit',
-            iconName: 'Audit',
-            route: 'audit'
-
-          },
-
         ]
       },
       {
@@ -122,6 +109,18 @@ export class SidebarComponent implements OnInit {
             route: 'ApplicationLogs'
 
           },
+          {
+            displayName: 'Audit',
+            iconName: 'Audit',
+            route: 'audit'
+
+          },
+          {
+            displayName: 'Error-Code',
+            iconName: 'error',
+            route: 'Error'
+
+          }
         ]
       }
       // {

@@ -36,15 +36,20 @@
         </form>
     </div>
 </div> -->
-
-<div align="center">
+<div style="height:100%;">
+<div class="login-pg" align="center">
   <p><br><br></p>
+  <div>
+    <!-- <h2 class="emsv-header">eEMSV</h2> -->
+    <img src="assets/images/ems.png" class="img-responsive login-logo">
+  </div>
+
+
   <form [formGroup]="loginForm" (keyup.enter)="validateUser()" class="login-form">
 
       <div class="mat-h1">
           Login
       </div>
-
       <mat-form-field class="login-field-full-width">
           <mat-label>User Name</mat-label>
           <input matInput placeholder="Enter User Name" formControlName="userNameFormControl">
@@ -80,8 +85,12 @@
       <button mat-raised-button color="primary" class="login-field-full-width" (click)="validateUser()"><b>Login</b></button>
       <p></p>
 
-      <span class="mat-h3">Create an account? </span><a routerLink="/register" class="register-link  mat-h3"
-          routerActiveLink="active">Sign up</a>
+      <span class="mat-h3">Create an account? </span>
+      <a routerLink="/register" class="register-link  mat-h3"
+          routerActiveLink="active">Sign up</a> <br>
+          <a routerLink="/forgotpassword" class="forgot-link  mat-h3"
+          routerActiveLink="active">Forgot Password</a>
       <mat-error class="mat-h3">{{errorMsg}}</mat-error>
   </form>
+</div>
 </div>

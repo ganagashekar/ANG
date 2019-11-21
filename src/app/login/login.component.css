@@ -6,13 +6,35 @@
   padding:20px;
   border-radius: 10px;
   background: #FFF;
+
+}
+.login-pg{
+
+  background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:100%;
+    background: linear-gradient(90deg, rgba(12,60,96,0.5), rgba(12, 60, 96, 0.5)), url('src/assets/images/loginpage.jpg') center top no-repeat;
 }
 
 .login-field-full-width {
   width: 100%;
 }
 
+.emsv-header {
+  font-size: 30px;
+  color: #fff;
+  font-size: -webkit-xxx-large;
+  letter-spacing: 10px;
+  font-weight: bold;
+}
+
 .register-link{
   text-decoration: none;
   color: rgba(0,120,212,1);
+}
+.login-logo {
+  width: 150px;
+  float: left;
+  margin-left: 50px;
 }

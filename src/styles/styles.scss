@@ -74,10 +74,15 @@ tr.mat-header-row {
   width: fit-content !important;
   }
   .mat-sort-header-container {
-    font-size: 18px !important;
+    font-size: 16px !important;
   }
   .mat-list-item-content{cursor: pointer;}
-
+  .mat-form-field-infix {
+    width: 170px !important;
+  }
+  .mat-option-text{text-align: center;color: #1a237e;}
+  .mat-option-text:hover{background-color: #1a237e;color:#fff;widows: 100%;}
+  .mat-option{padding: 0px !important;}
 // .ng-star-inserted:hover{background-color:#0c3c60;}
 // .mat-list-item-content:hover {
 //   color: #fff;

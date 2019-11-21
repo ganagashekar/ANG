@@ -25,6 +25,7 @@ import { ConfigurationSModule } from './configuration-s/configuration-s.module';
 import { AuditsModule } from './audits/audits.module';
 import { ApplicationlogsModule } from './applicationlogs/applicationlogs.module';
 import { ErrorcodesModule } from './errorcodes/errorcodes.module';
+import { ForgotpasswordModule } from './Forgotpassword/Forgotpassword.module';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 @NgModule({
     imports: [
@@ -46,6 +47,7 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
         ControllersSModule,
         FormsModule,
         ControllerbusModule,
+        ForgotpasswordModule,
 
     ],
     providers: [NavService],

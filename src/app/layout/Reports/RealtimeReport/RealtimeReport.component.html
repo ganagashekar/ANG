@@ -1,21 +1,11 @@
-<mat-toolbar   class="mb-5"  style="height: 50px; font-size: 16px; background: #fff; border: #0000; font-weight: bold;" >
-    <span>
 
-      <a  mat-button >
-          <mat-icon>assessment</mat-icon>Report</a></span>
-
-    <span > > </span>
-    <span><a  mat-button color="white">
-        <mat-icon>timeline</mat-icon>RealTime Report</a></span>
-
-  </mat-toolbar>
 <div >
 
 
   <mat-card >
 
     <div>
-      <mat-form-field>
+      <mat-form-field >
           <mat-label>Site</mat-label>
            <mat-select [(ngModel)]="reportRequestModel.SiteId"  (selectionChange)="onSiteChange($event.value)">
 
@@ -54,24 +44,45 @@
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
+      <mat-card-actions align="end" fxFlex >
+          <!-- <mat-form-field >
+            <input [disabled]="diableGridFilters" matInput (keyup)="applyFilter($event.target.value)" placeholder="Grid Search">
+          </mat-form-field> -->
+          <button mat-button color="primary" (click)="OnSearchClick()" class="commonbtn-realtime">
+              <mat-icon>filter_list</mat-icon>
+             Apply
+
+          </button>
+
+
+          <button  mat-button color="primary" [disabled]="diableGridFilters" (click)="OnExcelExportClick()" class="commonbtn-realtime file-copy">
+            <i class="material-icons">
+              file_copy
+              </i>
+            Excel  Export
+
+          </button>
+
+
+        </mat-card-actions>
 
     </div>
   </mat-card>
   </div>
-    <mat-card   style="height: 60px;padding: 1px;" >
+    <!-- <mat-card   style="height: 60px;padding: 1px;" >
 
 
           <mat-card-actions align="end" fxFlex style="height: 40px;" >
             <mat-form-field >
               <input [disabled]="diableGridFilters" matInput (keyup)="applyFilter($event.target.value)" placeholder="Grid Search">
             </mat-form-field>
-            <button mat-button color="primary" (click)="OnSearchClick()">
+            <button mat-button color="primary" (click)="OnSearchClick()" class="commonbtn-realtime">
                 <mat-icon>filter_list</mat-icon>
                Apply
 
             </button>
 
-            <button  mat-button color="primary" [disabled]="diableGridFilters" (click)="OnExcelExportClick()">
+            <button  mat-button color="primary" [disabled]="diableGridFilters" (click)="OnExcelExportClick()" class="commonbtn-realtime file-copy">
               <i class="material-icons">
                 file_copy
                 </i>
@@ -81,7 +92,7 @@
 
 
           </mat-card-actions>
-          </mat-card>
+          </mat-card> -->
 
   <div  flFlex flexLayout="row" flexLayout.lt-md="column" >
     <mat-paginator [pageSizeOptions]="[10,20,30,50,100]" showFirstLastButtons></mat-paginator>
