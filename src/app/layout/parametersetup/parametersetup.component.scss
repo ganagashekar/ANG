@@ -17,6 +17,7 @@ table {
   color:rgba(0,0,0,.54);
   align-items: center;
   font-weight: bold;
+  border-right: 2px solid #fff;
 }
 .mb-20 {
   margin-bottom: 20px;
@@ -27,6 +28,10 @@ table {
 span.add-title {
   font-size: 20px;
   font-weight: bold;
+
+}
+th.mat-header-cell.cdk-column-editAction.mat-column-editAction.ng-star-inserted {
+  border-right: 2px solid #fff;
 }
 span.add-title:hover {
   color: #e0e011!important;

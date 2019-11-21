@@ -17,13 +17,16 @@ table {
     color:rgba(0,0,0,.54);
     align-items: center;
     font-weight: bold;
+    border-right: 2px solid #fff;
   }
   .mb-20 {
     margin-bottom: 20px;
   }
   .controller-busvalues{text-align: center;border-right:2px solid #1a237e ;border-bottom:2px solid #1a237e;}
   .cntrbus-siteid{margin-left: 25px;}
-
+  th.mat-header-cell.cdk-column-editAction.mat-column-editAction.ng-star-inserted {
+    border-right: 2px solid #fff;
+  }
 
 span.add-title {
   font-size: 20px;
