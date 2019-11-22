@@ -1,10 +1,12 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import {formatDate } from '@angular/common';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
 import { AppComponent } from 'src/app/app.component';
 import { ReportsService } from 'src/app/shared/services/report.services';
 import { ActivatedRoute } from '@angular/router';
 import { saveAs } from 'file-saver';
 import * as Highcharts from 'highcharts/highstock';
+import * as moment from 'moment';
 // const IndicatorsCore = require('highcharts/indicators/indicators');
 // IndicatorsCore(Highcharts);
 // const IndicatorZigZag = require('highcharts/indicators/zigzag');
@@ -47,7 +49,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
     private snackBar: MatSnackBar) {
       this.reportRequestModel = new ReportRequestModel();
       this.parameterFilter =  new ParameterFilter();
-      this.reportRequestModel.SiteId = Number(localStorage.getItem('SiteId'))
+      this.reportRequestModel.SiteId = Number(localStorage.getItem('SiteId'));
       this.reportRequestModel.FromDate = (new Date());
       this.reportRequestModel.ToDate = (new Date());
       this.reportRequestModel.StackId  = 0;
@@ -85,7 +87,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
 
   }
   getAllStacks(): void {
-    this._reportservices.getSiteStacks( this.reportRequestModel.SiteId,this.reportRequestModel.StackId, true).subscribe(resp => {
+    this._reportservices.getSiteStacks( this.reportRequestModel.SiteId, this.reportRequestModel.StackId, true).subscribe(resp => {
       this.stacksArray = resp.model as ReferenceRecords[];
       this.reportRequestModel.StackId = Number(this.stacksArray[0].id);
     }, error => {
@@ -174,6 +176,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
       legend: {
         enabled: true
       },
+
       plotOptions: {
         series: {
           showInLegend: true
@@ -197,7 +200,9 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
          },
          showInNavigator: true,
            data: chartdata.map(function (point) {
-           return [ new Date(point.createdDate).getTime(), point[item]];
+
+
+           return [ new Date((point.createdDate)).getTime(), point[item]];
            })
         };
          _series.push(singleseries);
@@ -218,7 +223,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
                                   this.dataSource.data = resp.model;
                                   this.dataSource.sort = this.sort;
                                   this.dataSource.paginator = this.paginator;
-                                  if(this.displayedColumns.length == 1) {
+                                  if (this.displayedColumns.length === 1) {
                                     this.showSnackBar('No data available ', true);
                                     this.isLoading = false;
                                     return;
@@ -228,7 +233,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
                                   );
                                   this.initChart();
                                 } else {
-                                  this.showSnackBar('No data available ', true);}
+                                  this.showSnackBar('No data available ', true); }
       this.isLoading = false;
     }, error => {
       this.isLoading = false;

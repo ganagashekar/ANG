@@ -10,33 +10,36 @@
   .divTaskScheduler{
     padding: 5px;
   }
-  
+
   .full-width{
       width: 100%;
   }
-  
-  .half-width{
-    width: 48%;
-  
-  }
-  
+
+  .siteedit-field {
+    width: 32%;
+    margin-right: 15px;
+}
+.siteedit-fields {
+  width: 48% !important;
+  margin-right: 22px;
+}
   .radio-btn {
       color: #8c8c8c;
     }
-  
+
     .float-left{
       float:left;
     }
-  
+
     .float-right{
       float:right;
     }
-  
-  
-  
+
+
+
   .enabled{
     padding-right:340px;
-  
+
   }
    .mat-form-field--inline {
      display: flex;
@@ -46,11 +49,11 @@
   .padding-right-10px{
     padding-right: 10px;
   }
-  
+
   .checkbox-margin{
     margin: 10px 10px 0px 0px;
   }
-  
+
   .control-section {
     display: flex;
     align-content: flex-end;
@@ -60,29 +63,29 @@
     flex-wrap: wrap;
     flex-flow: row wrap;
   }
-  
+
   .control-margin{
     margin: 10px 10px 0px 0px;
   }
-  
+
   .control-error{
     text-align: left;
     padding-bottom: 10px;
   }
-  
+
   .cbx-label {
     color: #8c8c8c;
   }
-  
+
   .startTime{
     float: left;
     width: 100%;
   }
-  
+
   .padbottom10px{
     padding-bottom: 10px;
   }
-  
+
   .padbottom20px{
     padding-bottom: 20px;
   }
@@ -100,9 +103,8 @@
     color:darkblue;
     text-decoration: underline;
   }
-  
-  
-  
-  
-  
-  
+
+
+
+
+
