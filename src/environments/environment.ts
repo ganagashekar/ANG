@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:4438/api/',
+  // apiUrl: 'http://localhost:4438/api/',
+   apiUrl: 'http://localhost/EMSVAPI/api/',
   fromEmailId: 'ganga123081@gmail.com'
 };
 

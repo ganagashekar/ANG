@@ -14,7 +14,7 @@ import { ConfigurationSComponent } from './configuration-s/configuration-s.compo
 import { AuditsComponent } from './audits/audits.component';
 import { ErrorcodesComponent } from './errorcodes/errorcodes.component';
 import { ApplicationLogsComponent } from './applicationlogs/applicationLogs.component';
-import { ForgotpasswordComponent } from './Forgotpassword/Forgotpassword.component';
+
 
 const routes: Routes = [
     {
@@ -34,18 +34,18 @@ const routes: Routes = [
 
               path: 'AverageReport',
               component: AverageReportComponent
-            },
+          },
 
-            {
+          {
 
             path: 'RealtimeReport',
             component: RealtimeReportComponent
-            },
-            {
+        },
+        {
 
-              path: 'ExceedenceReport',
-              component: ExceedenceReportComponent
-            },
+          path: 'ExceedenceReport',
+          component: ExceedenceReportComponent
+      },
             {
               path: 'SiteSetup',
               component: SitesetupComponent
@@ -82,11 +82,7 @@ const routes: Routes = [
             {
               path: 'Error',
               component: ErrorcodesComponent
-          },
-          {
-            path: 'forgotpassword',
-            component: ForgotpasswordComponent
-        }
+          }
         ]
     }
 ];

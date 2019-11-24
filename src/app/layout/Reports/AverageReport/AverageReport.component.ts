@@ -12,7 +12,8 @@ import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/
 import { ParameterFilter } from 'src/app/Model/FilterModels/ParameterFilter';
 const HC_exporting = HC_exporting_;
 HC_exporting(Highcharts);
-
+import MapModule from 'highcharts/modules/map';
+MapModule(Highcharts);
 @Component({
   selector: 'app-AverageReport',
   templateUrl: './AverageReport.component.html',
@@ -20,8 +21,20 @@ HC_exporting(Highcharts);
 })
 
 export class AverageReportComponent implements OnInit , AfterViewInit {
+
+  SelectedView: string;
+  Viewtypes = [
+    {
+      key: 'Graph View',
+      checked: true
+    },
+    {
+      key: 'Table View',
+      checked: false
+    }];
   Highcharts = Highcharts;
    updateFlag = true;
+   IsGraphView = true;
    reportRequestModel: ReportRequestModel;
    stacksArray: ReferenceRecords[] = [];
    paramArray: ReferenceRecords[] = [];
@@ -43,6 +56,10 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   constructor(private _dialog: MatDialog,  private _route: ActivatedRoute,
     private _reportservices: ReportsService,
     private snackBar: MatSnackBar) {
+      this.SelectedView = 'Table';
+
+    // **As well as this**
+
       this.reportRequestModel = new ReportRequestModel();
       this.parameterFilter =  new ParameterFilter();
       this.reportRequestModel.SiteId = Number(localStorage.getItem('SiteId'));
@@ -56,6 +73,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
       this.reportRequestModel.SiteName =  localStorage.getItem('SiteName');
       this.reportRequestModel.ReportTitle = localStorage.getItem('VendorName');
       this.reportRequestModel.ReportType = 'Average Report ';
+
       this.reportRequestModel.RequestedUser =  localStorage.getItem('username');
         localStorage.setItem('currentUrl', '/AverageReport');
 
@@ -63,8 +81,6 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
 
   }
   ngOnInit() {
-
-
     this.getSites();
      this. getAllStacks();
      this.getAllParameterList(this.reportRequestModel.StackId);
@@ -72,15 +88,13 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
      this.gettimePeriod();
      this.reportRequestModel.TimePeriod = this.timePeriodArray[0].id;
 
-
-
-    this.getAverageReport();
   }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   ngAfterViewInit(): void {
+    this.getAverageReport();
 
   }
   getAllStacks(): void {
@@ -100,6 +114,15 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
       console.log('Error: ' + error);
     });
    }
+
+   radioViewChange(selectedView: any) {
+    if (selectedView.value === 'Graph View'){
+   this.IsGraphView = true;
+    } else {
+      this.IsGraphView = false;
+    }
+   }
+
   getSites(): void {
     this._reportservices.getAllSites( this.reportRequestModel.SiteId, false).subscribe(resp => {
       this.sitesArray = resp.model as ReferenceRecords[];
@@ -138,18 +161,57 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
 
    initChart() {
     this.chartOptions = {
-      rangeSelector: {
-        selected: 1
+
+
+    credits: {
+      enabled: false
+  },
+    rangeSelector: {
+      selected : 0,
+      inputEnabled: false,
+      buttonTheme: {
+        visibility: 'hidden'
+    },
+
+    labelStyle: {
+      visibility: 'hidden'
+  }
+    },
+    chart: {
+      zoomType: 'x'
+    },
+
+    mapNavigation: {
+      enabled: true,
+      enableButtons: false
+  },
+
+
+    yAxis: {
+
+      opposite: false,
+      lineColor: '#000000',
+      lineWidth: 1,
+      title: {
+          text: 'Count'
       },
+      plotLines: [
 
+    ]
+  },
+    xAxis: {
+      lineColor: '#000000',
+      title: {
+        text: 'DateTime'
+    },
 
-      chart: {
-        zoomType: 'x',
-        // events: {
-        //     addSeries: function () {
-        //         alert('A series was added');
-        //     }
-        // }
+      events: {
+        afterSetExtremes: (e) => {
+          // console.log(e);
+          // this.button = e.rangeSelectorButton.count;
+
+        }
+      }
     },
       tooltip: {
         shared: true,
@@ -163,7 +225,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
       },
       exporting: {
         chartOptions: {
-          // specific options for the exported image
+
           plotOptions: {
             series: {
               dataLabels: {
@@ -175,7 +237,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
         fallbackToExportServer: false
       },
       title: {
-        text: 'Live Chart'
+        text: 'Chart'
       },
       legend: {
         enabled: true
@@ -185,6 +247,8 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
           showInLegend: true
         }
       },
+
+
       series: this.chartdata,
 
     };

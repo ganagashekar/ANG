@@ -14,6 +14,10 @@ import { OnInit, ElementRef, ViewChild, AfterViewInit, Component } from '@angula
 import { DashboardQuickCounts } from 'src/app/Model/ServiceResposeModel/Dashboard/DashboardQuickCounts';
 import { DashboardService } from 'src/app/shared/services/Dashboard.Services';
 
+import MapModule from 'highcharts/modules/map';
+
+MapModule(Highcharts);
+
 export interface GroupBy {
   initial: string;
   isGroupBy: boolean;
@@ -71,8 +75,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.init();
     this.getDashboardQuickCounts();
     this.getDashboardQuickTableList();
-    // const source = interval(20000);
-    // this.subscription = source.subscribe(val => this.getDashboardQuickTableList());
+    const source = interval(20000);
+    this.subscription = source.subscribe(val => this.getDashboardQuickTableList());
   }
   addPoint() {
     const x = new Date().getTime();
@@ -151,35 +155,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   init() {
    this.chatsss = Highcharts.stockChart(this.container.nativeElement, {
       rangeSelector: {
-        selected: 6,
-        // buttons: [{
-        //   type: 'month',
-        //   count: 1,
-        //   text: '1m',
-        //   events: {
-        //     click: function (e) {
-        //       console.log('button clickd');
-        //     }
-        //   }
-        // }, {
-        //   type: 'month',
-        //   count: 3,
-        //   text: '3m'
-        // }, {
-        //   type: 'month',
-        //   count: 6,
-        //   text: '6m'
-        // }, {
-        //   type: 'ytd',
-        //   text: 'YTD'
-        // }, {
-        //   type: 'year',
-        //   count: 1,
-        //   text: '1y'
-        // }, {
-        //   type: 'all',
-        //   text: 'All1'
-        // }]
+        selected : 0,
+        inputEnabled: false,
+        buttonTheme: {
+          visibility: 'hidden'
+      },
+
+      labelStyle: {
+        visibility: 'hidden'
+    }
       },
       chart: {
         zoomType: 'x'
@@ -187,7 +171,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       credits: {
 
       },
-
+      mapNavigation: {
+        enabled: true,
+        enableButtons: false
+    },
       legend: {
         enabled: true
       },
@@ -202,33 +189,31 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         },
         events: {
           legendItemClick: function() {
-            // this.RemovePlotline();
             return true;
           }
         },
         }
       },
-
-
-    //   tooltip: {
-    //     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-    //     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-    //         '<td style="padding:0"><b>{point.y:.2f} TWh</b></td></tr>' +
-    //         '<tr><td>Indikator : </td>' +
-    //         '<td><b>x %</b></td></tr>',
-    //     footerFormat: '</table> ',
-    //     shared: true,
-    //     useHTML: true
-    // },
       tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.2f} TWh</b></td></tr>' +
+            '<tr><td>Indikator : </td>' +
+            '<td><b>x %</b></td></tr>',
+        footerFormat: '</table> ',
         shared: true,
-        crosshairs: true,
-    animation: true,
-    // formatter: function() {
-		// 	return this.x + '<br>'
-		// 	+ this.points[0].series.name + ': ' + this.points[0].y + '<br>'
-		// 	+ this.points[1].series.name + ': ' + this.points[1].y;
-		// },
+        useHTML: true
+    },
+  //     tooltip: {
+  //       shared: true,
+  //       crosshairs: true,
+  //   animation: true,
+  //   formatter: function() {
+	// 		return this.x + '<br>'
+	// 		+ this.points[0].series.name + ': ' + this.points[0].y + '<br>'
+	// 		+ this.points[1].series.name + ': ' + this.points[1].y;
+  //   }
+  // },
 
         // useHTML: true,
         // crosshairs: true,
@@ -238,37 +223,28 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         //   '<tr><td style="color: {series.color}">{series.name}: </td>' +
         //   '<td style="text-align: right"><b>{point.y}</b> {point.extraForTooltip}</td></tr>',
         // footerFormat: '</table>',
-        valueDecimals: 2
-      },
+      //   valueDecimals: 2
+      // },
       series: [],
 
       yAxis: {
+
+        opposite: false,
+        lineColor: '#000000',
+        lineWidth: 1,
         title: {
-            text: ''
+            text: 'Count'
         },
         plotLines: [
-        //   {
-        //     value: minRate,
-        //     color: 'green',
-        //     dashStyle: 'shortdash',
-        //     width: 2,
-        //     label: {
-        //         text: 'Last quarter minimum'
-        //     }
-        // },
-        // {
-        //     value: 0,
-        //     visible: false,
-        //     color: 'red',
-        //     dashStyle: 'shortdash',
-        //     width: 0,
-        //     label: {
-        //         text: 'Last quarter maximum'
-        //     }
-        // }
+
       ]
     },
       xAxis: {
+        lineColor: '#000000',
+        title: {
+          text: 'DateTime'
+      },
+
         events: {
           afterSetExtremes: (e) => {
             // console.log(e);
