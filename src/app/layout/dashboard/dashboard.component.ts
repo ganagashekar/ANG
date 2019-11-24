@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.init();
     this.getDashboardQuickCounts();
     this.getDashboardQuickTableList();
-    const source = interval(20000);
+    const source = interval(5000);
     this.subscription = source.subscribe(val => this.getDashboardQuickTableList());
   }
   addPoint() {
@@ -130,8 +130,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                            value: element.threShholdValue
                          },
                          {
-                           color: '#ff0000'
-                           // dashStyle: 'dot',
+                           color: '#ff0000',
+                            dashStyle: 'dot',
                          }
                        ]
                      });
