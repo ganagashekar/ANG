@@ -2,7 +2,7 @@
   <mat-label>Bus Id</mat-label>
    <mat-select [(ngModel)]="confgFilter.BusId"  (ngModelChange)="BusChange()">
 
-      <mat-option [value]="buses.id" *ngFor="let buses of busesArray">{{buses.id}}
+      <mat-option [value]="buses.id" *ngFor="let buses of busesArray">{{buses.name}}
       </mat-option>
   </mat-select>
 </mat-form-field>
