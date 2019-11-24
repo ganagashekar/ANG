@@ -14,5 +14,6 @@ export class ReportRequestModel {
   SiteName: string;
   SiteCode: string;
   RequestedUser: string;
+  ReportTitle: string;
 
 }
