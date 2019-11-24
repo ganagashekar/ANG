@@ -202,3 +202,4 @@ dist/assets/i18n/ur.json
 dist/assets/images/card-1.jpg
 dist/assets/images/card-2.jpg
 dist/assets/images/card-3.jpg
+src/environments/environment.ts

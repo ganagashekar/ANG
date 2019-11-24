@@ -27,9 +27,13 @@ import { ApplicationlogsModule } from './applicationlogs/applicationlogs.module'
 import { ErrorcodesModule } from './errorcodes/errorcodes.module';
 import { ForgotpasswordModule } from './Forgotpassword/Forgotpassword.module';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
     imports: [
         CommonModule,
+
         SitesetupModule,
         UserinfoModule,
         AuditsModule,
@@ -48,14 +52,14 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
         FormsModule,
         ControllerbusModule,
         ForgotpasswordModule,
-
+        NgbModule
     ],
     providers: [NavService],
 
     entryComponents: [
          ConfirmationDialogComponent],
 
-    declarations: [ ConfirmationDialogComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
+    declarations: [    ConfirmationDialogComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
         AverageReportComponent, MenuListItemComponent
       , RealtimeReportComponent , ExceedenceReportComponent]
 
