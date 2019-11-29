@@ -30,8 +30,8 @@ export class ControllersSComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.getAllControllerinfoList ();
     this.getSites();
+    this.getAllControllerinfoList ();
   }
 
   StackChange() {
@@ -56,6 +56,7 @@ export class ControllersSComponent implements OnInit {
     console.log('Error: ' + error);
   });
 }
+
  NewController(): void {
   const dialogRef = this._dialog.open(ControllerEditTemplateComponent, {
     width: '500px',

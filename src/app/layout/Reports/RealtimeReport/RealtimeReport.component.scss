@@ -23,7 +23,18 @@ table {
   margin: 0px;
 }
 
+.example-radio-group {
+  // display: flex;
+  flex-direction: row;
+  margin: 15px 0;
+}
 
+.example-radio-button{
+  padding: 5px;
+}
+.mat-radio-button {
+  padding: 5px;
+}
 
 .mat-table {
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
@@ -37,18 +48,17 @@ table {
   width:150px !important;
   white-space: nowrap;
   min-width: 80px !important;
-  border-bottom: 2px solid #1a237e;
-  border-right: 2px solid #1a237e;
-  display: inline-block;
-  text-align: center;
-  padding-top: 25px;
+  border-right: 1px solid #888;
+  text-align: center !important;
+    padding-top: 20px;
+    display: inline-block;
 }
 
 .mat-header-cell {
   width:150px !important;
   white-space: nowrap;
   min-width: 80px !important;
-
+  border-right: 1px solid #888;
 }
 
 tr.mat-header-row {
@@ -56,6 +66,7 @@ height: 40px !important;
 }
 tr.mat-footer-row,
 tr.mat-row {
+
 height: 40px !important;
 }
 .mb-20 {
@@ -63,19 +74,7 @@ height: 40px !important;
 }
 .mat-header-cell, .mat-sort-header {
 background-color:#1a237e;
-color:#fafafa;
-border-bottom: 2px solid #1a237e;
-border-right: 2px solid #000;
-}
-
-.mat-sort-header-container {
-  align-items: center;
-  margin: 0 auto !important;
-  display: inline-block !important;
-  margin-left: 10px;
-}
-.mat-sort-header-button {
-  margin-left: 6px !important;
+color:#fafafa
 }
 .mat-row:nth-child(even){
         background-color:white ;
@@ -140,39 +139,11 @@ mat-header-cell:nth-child(1) {
     flex: 0 0 12%;
 }
 
-mat-cell:nth-child(2),
-mat-header-cell:nth-child(2) {
-    flex: 0 0 100px;
-}
+// mat-cell:nth-child(2),
+// mat-header-cell:nth-child(2) {
+//     flex: 0 0 100px;
+// }
 
-.customWidthClass{
-  flex: 0 0 100px;
-}
-.commonbtn-realtime:hover{
-  color:#fff !important;
-  background-color: #1a237e !important;
-  border:2px solid #fff !important;
-  cursor: pointer;
-  overflow: hidden;
-}
-.mat-card-actions .mat-button, .mat-card-actions .mat-raised-button {
-  margin: 4px 0px !important;
-}
-.mat-card-actions {
-  margin-left: 16px;
-  margin-right: -1px;
-  padding: 8px 0;
-}
-.commonbtn-realtime{border: 2px solid #1a237e;color: #1a237e;}
-.file-copy:hover i{color:#fff;}
-.mat-card-actions-align-end {
-  display: inline-grid;
-}
-.mat-card-actions {
-   margin-bottom: 0px;
-}
-.file-copy{margin-top: 20px;}
-.mat-select-value {
-  font-size: 13px !important;
-}
-
+// .customWidthClass{
+//   flex: 0 0 100px;
+// }

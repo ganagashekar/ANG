@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   }
 
-    displayedColumns = ['stackName', 'paramName', 'paramUnits', 'paramValue', 'recordedDate', 'threShholdValue'];
+  displayedColumns = ['paramName', 'paramUnits', 'paramValue', 'threShholdValue', 'paramminvalue', 'parammaxvalue', 'recordedDate', ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -75,8 +75,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.init();
     this.getDashboardQuickCounts();
     this.getDashboardQuickTableList();
-    const source = interval(5000);
-    this.subscription = source.subscribe(val => this.getDashboardQuickTableList());
+    // const source = interval(5000);
+    // this.subscription = source.subscribe(val => this.getDashboardQuickTableList());
   }
   addPoint() {
     const x = new Date().getTime();

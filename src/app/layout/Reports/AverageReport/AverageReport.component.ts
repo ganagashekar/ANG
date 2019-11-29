@@ -98,7 +98,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
 
   }
   getAllStacks(): void {
-    this._reportservices.getSiteStacks( this.reportRequestModel.SiteId,this.reportRequestModel.StackId, true).subscribe(resp => {
+    this._reportservices.getSiteStacks( this.reportRequestModel.SiteId, this.reportRequestModel.StackId, true).subscribe(resp => {
       this.stacksArray = resp.model as ReferenceRecords[];
       this.reportRequestModel.StackId = Number(this.stacksArray[0].id);
     }, error => {
@@ -116,7 +116,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
    }
 
    radioViewChange(selectedView: any) {
-    if (selectedView.value === 'Graph View'){
+    if (selectedView.value === 'Graph View') {
    this.IsGraphView = true;
     } else {
       this.IsGraphView = false;

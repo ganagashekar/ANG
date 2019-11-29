@@ -1,0 +1,148 @@
+<div class="divTaskScheduler">
+  <div fxFlex>
+    <form [formGroup]="schedulerForm" class="scheduler-form">
+        <div class="close-btn">
+            <button mat-icon-button  (click)="onCloseClick()">
+                <i class="material-icons" title="Click here to delete Calibration popup">cancel</i>
+            </button>
+          </div>
+       <!-- <div class="close-btn"  (click)="onCloseClick()">
+         <mat-icon class="sidenav-icon">cancel</mat-icon>
+       </div> -->
+       <!-- <button mat-icon-button class="close-btn" (click)="onCloseClick()">
+          <i class="material-icons" title="Click here to delete  user info popup">cancel</i>
+      </button> -->
+      <div class="mat-h2 header">
+        CalibSetUp
+      </div>
+      <mat-form-field class="half-width float-left">
+        <mat-label>confg_id.</mat-label>
+        <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
+          Errordesc is
+          <strong>required</strong>
+      </mat-error> -->
+        <input matInput type="number" min="1" formControlName="confg_id">
+    </mat-form-field>
+        <mat-form-field class="half-width float-right">
+          <mat-label>Stack Name.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
+            Errordesc is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="stack_name">
+      </mat-form-field>
+      <mat-form-field class="half-width float-left">
+          <mat-label>Param Name.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="param_name">
+      </mat-form-field>
+
+      <mat-form-field class="half-width float-right">
+        <mat-label>setZeroCmd.</mat-label>
+        <input matInput type="string" min="1" formControlName="setZeroCmd">
+    </mat-form-field>
+
+      <mat-form-field class="half-width float-left">
+        <mat-label>setZeroResp.</mat-label>
+        <input matInput type="string" min="1" formControlName="setZeroResp">
+    </mat-form-field>
+
+    <mat-form-field class="half-width float-right">
+      <mat-label>zeroRelayOpenCmd.</mat-label>
+      <input matInput type="string" min="1" formControlName="zeroRelayOpenCmd">
+  </mat-form-field>
+
+  <mat-form-field class="half-width float-left">
+    <mat-label>zeroRelayOpenResp.</mat-label>
+    <input matInput type="string" min="1" formControlName="zeroRelayOpenResp">
+</mat-form-field>
+
+<mat-form-field class="half-width float-right">
+  <mat-label>zeroRelayCloseCmd.</mat-label>
+  <input matInput type="string" min="1" formControlName="zeroRelayCloseCmd">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>zeroRelayCloseResp.</mat-label>
+  <input matInput type="string" min="1" formControlName="zeroRelayCloseResp">
+</mat-form-field>
+
+<mat-form-field class="half-width float-right">
+  <mat-label>readPrevValueCmd.</mat-label>
+  <input matInput type="string" min="1" formControlName="readPrevValueCmd">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>readPrevValueRes.</mat-label>
+  <input matInput type="string" min="1" formControlName="readPrevValueRes">
+</mat-form-field>
+
+<mat-form-field class="half-width float-right">
+  <mat-label>realGasRelayOpenCmd.</mat-label>
+  <input matInput type="string" min="1" formControlName="realGasRelayOpenCmd">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>realGasRelayOpenResp.</mat-label>
+  <input matInput type="string" min="1" formControlName="realGasRelayOpenResp">
+</mat-form-field>
+
+<mat-form-field class="half-width float-right">
+  <mat-label>realGasRelayCloseCmd.</mat-label>
+  <input matInput type="string" min="1" formControlName="realGasRelayCloseCmd">
+</mat-form-field>
+
+<mat-form-field class="half-width float-l">
+  <mat-label>real_GasRelayCloseResp.</mat-label>
+  <input matInput type="string" min="1" formControlName="real_GasRelayCloseResp">
+</mat-form-field>
+
+
+<mat-form-field class="half-width float-right">
+  <mat-label>setNewValueCmd.</mat-label>
+  <input matInput type="string" min="1" formControlName="setNewValueCmd">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>setNewValueResp.</mat-label>
+  <input matInput type="string" min="1" formControlName="setNewValueResp">
+</mat-form-field>
+
+<mat-form-field class="half-width float-right">
+  <mat-label>setMakeSpanCmd.</mat-label>
+  <input matInput type="string" min="1" formControlName="setMakeSpanCmd">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>setMakeSpanResp.</mat-label>
+  <input matInput type="string" min="1" formControlName="setMakeSpanResp">
+</mat-form-field>
+
+    <!-- <mat-form-field class="half-width float-left">
+        <mat-label>.</mat-label>
+        <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+          Errorcode is
+          <strong>required</strong>
+      </mat-error> ->
+        <input matInput type="number" min="1" formControlName="isEnabled">
+    </mat-form-field> -->
+
+      <div layout="row" layout-align="center center" class="divBtnCon float-right">
+        <div fxFlex>
+        <button mat-raised-button color="primary" class="btn add-btn fr" (click)="onFormSubmit()"
+            [disabled]="!schedulerForm.valid ">
+            <mat-icon>save</mat-icon>
+            <b *ngIf="isAdd == true"> Add</b>
+            <b *ngIf="isAdd != true"> Update</b>
+        </button>
+        <button mat-raised-button class="btn cancel-btn fr" (click)="onCloseClick()">
+            <mat-icon>close</mat-icon> <b>Cancel</b>
+        </button>
+        </div>
+    </div>
+    </form>
+  </div>
+</div>

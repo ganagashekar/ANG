@@ -2,7 +2,7 @@
   <mat-label>Bus Id</mat-label>
    <mat-select [(ngModel)]="confgFilter.BusId"  (ngModelChange)="BusChange()">
 
-      <mat-option [value]="buses.id" *ngFor="let buses of busesArray">{{buses.name}}
+      <mat-option [value]="buses.id" *ngFor="let buses of busesArray">{{buses.id}}
       </mat-option>
   </mat-select>
 </mat-form-field>
@@ -11,7 +11,7 @@
   <button mat-icon-button class="add-button" (click)="Newconfig()">
       <i class="material-icons" title="Click here to add new logs info ">add_circle_outline</i>
   </button>
-  <span class="add-title">Add New Config </span>
+  <span class="add-title">Add Config </span>
   </div>
 
 <div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">

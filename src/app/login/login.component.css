@@ -4,15 +4,32 @@
   width: 50%;
   border: 1px solid lightgray;
   padding:20px;
-  border-radius: 10px;
-  background: #FFF;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  background: #3d3780;
+  float: right;
+  background-color: rgba(61, 55, 128, 0.7);
 
+}
+.mat-h1{color:#fff;}
+.mat-h3{color:#fff;}
+.login-img{text-align: left;}
+.login-nature{height:400px !important;width:400px; border-top-right-radius: 25px;border-bottom-right-radius: 25px;}
+.cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+  color: #fff;
+}
+.logmain-sec{width: 100%;border-radius: 10px;}
+mat-label{color:#fff !important;}
+.mat-raised-button {
+  background-color: #3ec4de !important;
+  border: 2px solid #3ec4de !important;
+  color: #fff !important;
 }
 .login-pg{
 
   background-attachment:fixed;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover !important;
     height:100%;
     background: linear-gradient(90deg, rgba(12,60,96,0.5), rgba(12, 60, 96, 0.5)), url('src/assets/images/loginpage.jpg') center top no-repeat;
 }

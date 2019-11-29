@@ -16,11 +16,11 @@
               Macid is
               <strong>required</strong>
           </mat-error> -->
-          <input matInput type="string" min="1" formControlName="macId">
-          <!-- <mat-select formControlName="macId" >
-             <mat-option [value]="mac.id" *ngFor="let mac of macsArray">{{mac.name}}
+          <!-- <input matInput type="string" min="1" formControlName="macId"> -->
+          <mat-select formControlName="macId" >
+             <mat-option [value]="site.macId" *ngFor="let site of macArray">{{site.macId}}
              </mat-option>
-         </mat-select> -->
+         </mat-select>
      </mat-form-field>
       <mat-form-field class="half-width float-right">
         <mat-label>Com_Port.</mat-label>

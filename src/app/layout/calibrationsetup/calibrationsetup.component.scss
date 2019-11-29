@@ -19,29 +19,27 @@ table {
   font-weight: bold;
   border-right: 2px solid #fff;
 }
-th.mat-header-cell.cdk-column-editAction.mat-column-editAction.ng-star-inserted {
-  border-right: 2px solid #fff;
-}
 .mb-20 {
   margin-bottom: 20px;
 }
-.controller-data{text-align: center;border-right:2px solid #1a237e ;border-bottom:2px solid #1a237e;}
-.cntrbus-siteid{margin-left: 25px;}
+.config-data{text-align: center !important;border-right:2px solid #1a237e ;border-bottom:2px solid #1a237e;}
+
+
 span.add-title {
-  font-size: 20px;
-  font-weight: bold;
+font-size: 20px;
+font-weight: bold;
+border-right: 2px solid #fff;
+}
+th.mat-header-cell.cdk-column-editAction.mat-column-editAction.ng-star-inserted {
+border-right: 2px solid #fff;
 }
 span.add-title:hover {
-  color: #e0e011!important;
+color: #e0e011!important;
 }
 i.material-icons:hover{
-  color:#e0e011 !important;
+color:#e0e011 !important;
 }
 .mat-column-editAction{
-  border-bottom: 2px solid #1a237e;border-right:2px solid #1a237e;
+border-bottom: 2px solid #1a237e;border-right:2px solid #1a237e;
 }
 .mat-column-deleteAction {border-bottom: 2px solid #1a237e;}
-.cntr-sitename{
-  padding-left: 30px;
-}
-

@@ -86,7 +86,7 @@ export class ExceedenceReportComponent implements OnInit , AfterViewInit {
 
   }
   getAllStacks(): void {
-    this._reportservices.getSiteStacks( this.reportRequestModel.SiteId ,this.reportRequestModel.StackId, true).subscribe(resp => {
+    this._reportservices.getSiteStacks( this.reportRequestModel.SiteId , this.reportRequestModel.StackId, true).subscribe(resp => {
       this.stacksArray = resp.model as ReferenceRecords[];
       this.reportRequestModel.StackId = Number(this.stacksArray[0].id);
     }, error => {
@@ -146,7 +146,7 @@ export class ExceedenceReportComponent implements OnInit , AfterViewInit {
 
 
                                 } else {
-                                  this.showSnackBar('No data available ', true);}
+                                  this.showSnackBar('No data available ', true); }
 
 
 
@@ -162,6 +162,18 @@ export class ExceedenceReportComponent implements OnInit , AfterViewInit {
   }
 
   OnExcelExportClick(): void {
+    this.isLoading = true;
+    this.reportRequestModel.IsExport = true;
+    this._reportservices.exportExceedingtimeReport(this.reportRequestModel).subscribe(resp => {
+      saveAs(resp, 'ExceedingReport.xlsx');
+     // this.saveAsBlob(resp);
+      this.isLoading = false;
+      this.reportRequestModel.IsExport = false;
+    }, error => {
+      this.isLoading = false;
+      this.reportRequestModel.IsExport = false;
+      console.log('Error: ' + error);
+    });
 
 
   }

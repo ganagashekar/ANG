@@ -18,6 +18,7 @@ import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/
 import { ParameterFilter } from 'src/app/Model/FilterModels/ParameterFilter';
 const HC_exporting = HC_exporting_;
 HC_exporting(Highcharts);
+
 @Component({
   selector: 'app-RealtimeReport',
   templateUrl: './RealtimeReport.component.html',
@@ -25,8 +26,19 @@ HC_exporting(Highcharts);
 })
 
 export class RealtimeReportComponent implements OnInit , AfterViewInit {
+  SelectedView: string;
+  Viewtypes = [
+    {
+      key: 'Graph View',
+      checked: true
+    },
+    {
+      key: 'Table View',
+      checked: false
+    }];
   Highcharts = Highcharts;
    updateFlag = true;
+   IsGraphView = true;
    reportRequestModel: ReportRequestModel;
    stacksArray: ReferenceRecords[] = [];
    paramArray: ReferenceRecords[] = [];
@@ -95,6 +107,14 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
     });
   }
 
+  radioViewChange(selectedView: any) {
+    if (selectedView.value === 'Graph View') {
+   this.IsGraphView = true;
+    } else {
+      this.IsGraphView = false;
+    }
+   }
+
   getSites(): void {
     this._reportservices.getAllSites(this.reportRequestModel.SiteId, false).subscribe(resp => {
       this.sitesArray = resp.model as ReferenceRecords[];
@@ -134,10 +154,21 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
 
    initChart() {
     this.chartOptions = {
+
+      credits: {
+        enabled: false
+    },
       rangeSelector: {
-        selected: 1
+        selected : 0,
+        inputEnabled: false,
+        buttonTheme: {
+          visibility: 'hidden'
       },
 
+      labelStyle: {
+        visibility: 'hidden'
+    }
+  },
 
       chart: {
         zoomType: 'x',
@@ -147,6 +178,37 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
         //     }
         // }
     },
+
+    mapNavigation: {
+      enabled: true,
+      enableButtons: false
+  },
+  yAxis: {
+
+    opposite: false,
+    lineColor: '#000000',
+    lineWidth: 1,
+    title: {
+        text: 'Count'
+    },
+    plotLines: [
+
+  ]
+},
+  xAxis: {
+    lineColor: '#000000',
+    title: {
+      text: 'DateTime'
+  },
+
+    events: {
+      afterSetExtremes: (e) => {
+        // console.log(e);
+        // this.button = e.rangeSelectorButton.count;
+
+      }
+    }
+  },
       tooltip: {
         shared: true,
         useHTML: true,
@@ -249,7 +311,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
     this.isLoading = true;
     this.reportRequestModel.IsExport = true;
     this._reportservices.exportRealtimeReport(this.reportRequestModel).subscribe(resp => {
-      saveAs(resp, 'AverageReport.xlsx');
+      saveAs(resp, 'RealtimeReport.xlsx');
      // this.saveAsBlob(resp);
       this.isLoading = false;
       this.reportRequestModel.IsExport = false;

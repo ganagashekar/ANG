@@ -123,6 +123,24 @@
           <input matInput type="string" min="1" formControlName="displayoutputtype">
           </mat-form-field>
 
+          <mat-form-field class="half-width float-left">
+            <mat-label>Bytes To Read.</mat-label>
+            <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+              Errorcode is
+              <strong>required</strong>
+          </mat-error> -->
+            <input matInput type="bigint" min="1" formControlName="bytestoread">
+            </mat-form-field>
+
+            <mat-form-field class="half-width float-right">
+              <mat-label>Input String To Read.</mat-label>
+              <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+                Errorcode is
+                <strong>required</strong>
+            </mat-error> -->
+              <input matInput type="string" min="1" formControlName="inputstringtoread">
+              </mat-form-field>
+
        <div layout="row" layout-align="center center" class="divBtnCon float-right">
         <div fxFlex>
         <button mat-raised-button color="primary" class="btn add-btn fr" (click)="onFormSubmit()"

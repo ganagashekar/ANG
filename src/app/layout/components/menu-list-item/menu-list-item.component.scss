@@ -9,11 +9,16 @@
 
   .mat-list-item.active {
     background-color: mat-color($mat-indigo, 50);
+    color:#000000 !important;
   }
+
+
+
   &:hover,
   &:focus {
     >.mat-list-item:not(.expanded) {
       background-color: mat-color($mat-indigo, 100) !important;
+
     }
   }
 }

@@ -14,5 +14,7 @@ export class ConfgModel {
     output_format: string;
     displayoutputtype: string;
     createts: DateTime;
+    bytestoread: bigint;
+    inputstringtoread: string;
 
 }

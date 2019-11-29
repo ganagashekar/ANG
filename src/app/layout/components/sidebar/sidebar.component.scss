@@ -7,6 +7,7 @@
     box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
     z-index: 999;
     overflow: auto;
+    background-color: rgba(12,60,96,0.8) !important;
 
     .mat-nav-list {
         width: 100%;
@@ -26,9 +27,11 @@
     .submenu {
         display: none;
         height: 0;
+        background-color: #000 !important;
     }
     & .expand {
         &.submenu {
+          background-color: #000 !important;
             display: block;
             list-style-type: none;
             height: auto;
@@ -37,6 +40,7 @@
                 a {
                     padding: 10px;
                     display: block;
+                    background-color: #000 !important;
                 }
             }
         }
@@ -47,6 +51,9 @@ a.mat-list-item:hover {
   color: #fff;
   border: 2px solid #0c3c60 !important;
 }
+//  app-menu-list-item.ng-tns-c10-16.ng-star-inserted {
+//    background-color: #000;
+//  }
 a.mat-list-item{cursor: pointer;}
 @media screen and (max-width: 992px) {
     #sidebar {

@@ -2,7 +2,7 @@
        <mat-form-field>
         <mat-label>SiteId</mat-label>
          <mat-select>
-            <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.id}}
+            <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.id}}  <label>-</label> <span class="cntr-sitename">{{site.name}}</span>
             </mat-option>
         </mat-select>
     </mat-form-field>

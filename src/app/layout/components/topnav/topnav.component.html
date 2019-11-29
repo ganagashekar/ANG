@@ -1,70 +1,72 @@
 <style>
-.fix-nav {
- color: #fff;
- background-color: #0c3c60;
-}
-</style>
+  .fix-nav {
+   color: #fff;
+   background-color: #0c3c60;
+  }
+  </style>
 
-<mat-toolbar  class="fix-nav">
-    <button type="button" mat-icon-button class="visible-md" (click)="toggleSidebar()">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-    </button>
-    <div class="nav-brand">
-        eEMS
-    </div>
-
-
-
-    <span class="nav-spacer"></span>
-    <div  flFlex flexLayout="row" class="sitename" flexLayout.lt-md="column" >
-      <a> <span>
-            <mat-icon>location_city</mat-icon>
-
-          </span>
-          {{SiteName}}
-        </a>
-          <a>
-      <span>
-          <mat-icon>room</mat-icon></span>{{SiteCity}}</a>
-     </div>
-
-    <span class="nav-spacer"></span>
+  <mat-toolbar  class="fix-nav">
+      <button type="button" mat-icon-button class="visible-md" (click)="toggleSidebar()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <div class="nav-brand">
+          <span class="dektoslogo-dashboard">Dektos Labs</span><label class="dashboard-logomerge"><span>e</span><label>EMS</label></label>
+          <small>electrical Environmental Monitoring System</small>
+      </div>
 
 
-    <span class="welcomeloggeduser">&nbsp;Welcome, {{loggedusername}}&nbsp;</span>
 
-    <button class="hidden-sm" mat-icon-button [matMenuTriggerFor]="language">
-        <mat-icon>language</mat-icon>
-    </button>
-    <mat-menu #language="matMenu">
-        <button mat-menu-item (click)="changeLang('en')">
-            <span>{{ 'English' | translate }}</span>
-        </button>
-        <button mat-menu-item (click)="changeLang('fr')">
-            <span>{{ 'French' | translate }}</span>
-        </button>
-        <button mat-menu-item (click)="changeLang('ur')">
-            <span>{{ 'Urdu' | translate }}s</span>
-        </button>
-    </mat-menu>
-    <button class="hidden-sm" mat-icon-button [matMenuTriggerFor]="profile">
-        <mat-icon>account_circle</mat-icon>
-    </button>
-    <mat-menu #profile="matMenu">
-        <button mat-menu-item>
-            <mat-icon>person</mat-icon>
-            <span>{{ 'Profile' | translate }}</span>
-        </button>
-        <button mat-menu-item>
-            <mat-icon>inbox</mat-icon>
-            <span>{{ 'Inbox' | translate }}</span>
-        </button>
-        <button mat-menu-item>
-            <mat-icon>settings</mat-icon>
-            <span>{{ 'Settings' | translate }}</span>
-        </button>
-    </mat-menu>
-    <button mat-icon-button (click)="onLoggedout()">
-        <mat-icon>exit_to_app</mat-icon>
-    </button>
-</mat-toolbar>
+
+      <span class="nav-spacer"></span>
+      <div  flFlex flexLayout="row" class="sitename" flexLayout.lt-md="column" >
+        <a> <span>
+              <mat-icon>location_city</mat-icon>
+
+            </span>
+            {{SiteName}}
+          </a>
+            <a>
+        <span>
+            <mat-icon>room</mat-icon></span>{{SiteCity}}</a>
+       </div>
+
+      <span class="nav-spacer"></span>
+
+
+      <span class="welcomeloggeduser">&nbsp;Welcome, {{loggedusername}}&nbsp;</span>
+
+      <button class="hidden-sm" mat-icon-button [matMenuTriggerFor]="language">
+          <mat-icon>language</mat-icon>
+      </button>
+      <mat-menu #language="matMenu">
+          <button mat-menu-item (click)="changeLang('en')">
+              <span>{{ 'English' | translate }}</span>
+          </button>
+          <button mat-menu-item (click)="changeLang('fr')">
+              <span>{{ 'French' | translate }}</span>
+          </button>
+          <button mat-menu-item (click)="changeLang('ur')">
+              <span>{{ 'Urdu' | translate }}s</span>
+          </button>
+      </mat-menu>
+      <button class="hidden-sm" mat-icon-button [matMenuTriggerFor]="profile">
+          <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #profile="matMenu">
+          <button mat-menu-item>
+              <mat-icon>person</mat-icon>
+              <span>{{ 'Profile' | translate }}</span>
+          </button>
+          <button mat-menu-item>
+              <mat-icon>inbox</mat-icon>
+              <span>{{ 'Inbox' | translate }}</span>
+          </button>
+          <button mat-menu-item>
+              <mat-icon>settings</mat-icon>
+              <span>{{ 'Settings' | translate }}</span>
+          </button>
+      </mat-menu>
+      <button mat-icon-button (click)="onLoggedout()">
+          <mat-icon>exit_to_app</mat-icon>
+      </button>
+  </mat-toolbar>

@@ -18,6 +18,7 @@ export class ControllerbusEditTemplateComponent implements OnInit {
   schedulerForm: FormGroup;
   sitebaudrateArray: ReferenceRecords[] = [];
   siteprotocalArray: ReferenceRecords[] = [];
+  macArray: any = [];
   // paramUnitsArray: ReferenceRecords[] = [];
   isAdd = true;
  SelectedbusId: bigint ;
@@ -48,6 +49,7 @@ export class ControllerbusEditTemplateComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.getmacs();
      this.getAllBaudrateList(0);
      this.getAllprotocalist(0);
     // this.getAllParameterUnitsList(0);
@@ -80,6 +82,14 @@ export class ControllerbusEditTemplateComponent implements OnInit {
 
 
       }
+  }
+
+  getmacs(): void {
+    this._ControllerBusService.getAllControllerbus('', false ).subscribe(resp => {
+      this.macArray = resp.model as ReferenceRecords[];
+    }, error => {
+      console.log('Error: ' + error);
+    });
   }
 
   getAllprotocalist(BusId: number): void {
