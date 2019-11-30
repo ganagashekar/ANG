@@ -1,17 +1,17 @@
 <mat-form-field class="cntrbus-siteid">
   <mat-label>SiteId</mat-label>
   <mat-select >
-     <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.id}}
+     <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.id}} <label>-</label> <span class="cntr-sitename">{{site.name}}</span>
      </mat-option>
  </mat-select>
 </mat-form-field>
+
 <mat-form-field>
   <mat-label>MacId</mat-label>
-  <mat-select >
-
-     <mat-option [value]="mac.id" *ngFor="let mac of macidsArray">{{mac.id}}
-     </mat-option>
- </mat-select>
+   <mat-select>
+      <mat-option [value]="site.macId" *ngFor="let site of macArray">{{site.macId}}
+      </mat-option>
+  </mat-select>
 </mat-form-field>
 
 <div class="add">

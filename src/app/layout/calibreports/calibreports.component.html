@@ -1,0 +1,50 @@
+<div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
+  <div fxFlex>
+    <table mat-table  [dataSource]="CalibListDataSource" class="mat-elevation-z8 mat-table" matSort matSortStart="desc">
+<!--- Note that these columns can be defined in any order.
+The actual rendered columns are set as a property on the row definition" -->
+
+
+    <!-- taskName Column -->
+    <ng-container matColumnDef="confgId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Config Id </th>
+        <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.confgId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="paramName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Param Name </th>
+      <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.paramName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="calibtype">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Calib Type  </th>
+    <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calibtype}} </td>
+</ng-container>
+
+<ng-container matColumnDef="calibduriation">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Calib Duriation  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calibduriation}} </td>
+</ng-container>
+
+
+
+<ng-container matColumnDef="create_ts">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> create_ts  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.create_ts}} </td>
+</ng-container>
+
+<ng-container matColumnDef="updtts">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated Time </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.updtts}} </td>
+</ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<!--<mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]" showFirstLastButtons>
+</mat-paginator>-->
+</div>
+</div>
+

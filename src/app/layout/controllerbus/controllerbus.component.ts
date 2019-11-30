@@ -21,7 +21,7 @@ export class ControllerBusComponent implements OnInit {
   ControllerBusFilter: ControllerBusFilter;
   ControllerBusListDataSource: MatTableDataSource<ControllerBusModel>;
   sitesArray: ReferenceRecords[] = [];
-  macidsArray: ReferenceRecords[] = [];
+  macArray: any = [];
   displayedColumns: string[] = [
     'editAction', 'macId', 'protocal', 'comPort', 'baudrate', 'timeOut', 'startIndex', 'updtts', 'deleteAction'
    ];
@@ -37,9 +37,9 @@ export class ControllerBusComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getAllControllerBusinfoList ();
     this.getSites();
-    // this.getMacids();
+    this.getmacs();
+    this.getAllControllerBusinfoList ();
   }
 
 
@@ -53,6 +53,7 @@ export class ControllerBusComponent implements OnInit {
      console.log('Error: ' + error);
    });
   }
+
   getSites(): void {
     this._controllerBusservices.getAllSites(0, false).subscribe(resp => {
       this.sitesArray = resp.model as ReferenceRecords[];
@@ -61,13 +62,13 @@ export class ControllerBusComponent implements OnInit {
     });
   }
 
-  // getMacids(): void {
-  //   this._controllerBusservices.getAllMacids(0, false).subscribe(resp => {
-  //     this.macidsArray = resp.model as ReferenceRecords[];
-  //   }, error => {
-  //     console.log('Error: ' + error);
-  //   });
-  // }
+ getmacs(): void {
+  this._controllerBusservices.getAllControllerbus('', false ).subscribe(resp => {
+    this.macArray = resp.model as ReferenceRecords[];
+  }, error => {
+    console.log('Error: ' + error);
+  });
+}
 
   NewControllerBus(): void {
     const dialogRef = this._dialog.open(ControllerbusEditTemplateComponent, {

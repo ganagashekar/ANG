@@ -65,6 +65,12 @@ import { ReportRequestModel } from '../../Model/Report/ReportRequestModel';
         { responseType: 'blob' as 'json' });
 
       }
+      exportExceedingtimeReport(filter: ReportRequestModel):  Observable<Blob> {
+        return this._httpClient.post<Blob>(this._baseURL + appConstants.APICONTROLLER_REPORTS +
+          '/ExportexceedingReport', filter,
+        { responseType: 'blob' as 'json' });
+
+      }
 
       getAllStacks(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
         return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
@@ -73,7 +79,7 @@ import { ReportRequestModel } from '../../Model/Report/ReportRequestModel';
 
         getSiteStacks(SiteId: Number , StackId: number  , All: boolean): Observable<any> {
           return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
-            '/GetStacksBySite?SiteId='+ SiteId +'&StackId=' + StackId + '&IncludeAll=' + All);
+            '/GetStacksBySite?SiteId=' + SiteId + '&StackId=' + StackId + '&IncludeAll=' + All);
           }
 
         GetParameterforStack(filter: ParameterFilter, All: boolean): Observable<any> {
@@ -90,5 +96,6 @@ import { ReportRequestModel } from '../../Model/Report/ReportRequestModel';
           return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
             '/GetSites?SiteId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
           }
+
 
   }

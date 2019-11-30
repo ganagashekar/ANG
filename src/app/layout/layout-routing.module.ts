@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CalibreportsComponent } from './calibreports/calibreports.component';
 import { LayoutComponent } from './layout.component';
 import { ParametersetupComponent } from './parametersetup/parametersetup.component';
 import { AverageReportComponent } from './Reports/AverageReport/AverageReport.component';
@@ -14,7 +15,7 @@ import { ConfigurationSComponent } from './configuration-s/configuration-s.compo
 import { AuditsComponent } from './audits/audits.component';
 import { ErrorcodesComponent } from './errorcodes/errorcodes.component';
 import { ApplicationLogsComponent } from './applicationlogs/applicationLogs.component';
-
+import { CalibrationsetupComponent } from './calibrationsetup/calibrationsetup.component';
 
 const routes: Routes = [
     {
@@ -40,12 +41,12 @@ const routes: Routes = [
 
             path: 'RealtimeReport',
             component: RealtimeReportComponent
-        },
-        {
+          },
+          {
 
           path: 'ExceedenceReport',
           component: ExceedenceReportComponent
-      },
+          },
             {
               path: 'SiteSetup',
               component: SitesetupComponent
@@ -82,7 +83,15 @@ const routes: Routes = [
             {
               path: 'Error',
               component: ErrorcodesComponent
-          }
+          },
+          {
+            path: 'Calibration',
+            component: CalibrationsetupComponent
+        },
+        {
+          path: 'Calibrationreport',
+          component: CalibreportsComponent
+      },
         ]
     }
 ];

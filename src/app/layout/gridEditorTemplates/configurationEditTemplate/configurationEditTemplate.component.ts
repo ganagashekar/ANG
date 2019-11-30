@@ -56,6 +56,8 @@ export class ConfigurationEditTemplateComponent implements OnInit {
       holdingreg: new FormControl('', [Validators.required]),
       firstreg: new FormControl('', [Validators.required]),
       displayoutputtype: new FormControl('', [Validators.required]),
+      bytestoread: new FormControl('', [Validators.required]),
+      inputstringtoread: new FormControl('', [Validators.required])
     });
 
     if (this.isAdd) { // scheduler add
@@ -77,6 +79,8 @@ export class ConfigurationEditTemplateComponent implements OnInit {
           holdingreg: this.editModel.holdingreg,
           firstreg: this.editModel.firstreg,
           displayoutputtype: this.editModel.displayoutputtype,
+          bytestoread: this.editModel.bytestoread,
+          inputstringtoread: this.editModel.inputstringtoread
         });
 
 
