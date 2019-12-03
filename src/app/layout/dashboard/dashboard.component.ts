@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   }
 
-  displayedColumns = ['paramName', 'paramUnits', 'paramValue', 'threShholdValue', 'paramminvalue', 'parammaxvalue', 'recordedDate', ];
+  displayedColumns = ['paramName', 'paramUnits', 'paramminvalue', 'parammaxvalue', 'threShholdValue', 'paramValue', 'recordedDate', ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace

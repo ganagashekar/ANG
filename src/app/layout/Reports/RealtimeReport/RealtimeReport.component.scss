@@ -78,10 +78,12 @@ color:#fafafa
 }
 .mat-row:nth-child(even){
         background-color:white ;
+        height: 40px;
         }
 
  .mat-row:nth-child(odd){
         background-color:#fafafa;
+        height: 40px;
         }
 
 
@@ -138,6 +140,7 @@ mat-cell:nth-child(1),
 mat-header-cell:nth-child(1) {
     flex: 0 0 12%;
 }
+.mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple{background-color: #ff4081}
 
 // mat-cell:nth-child(2),
 // mat-header-cell:nth-child(2) {

@@ -37,13 +37,17 @@ table {
   width:200px !important;
   white-space: nowrap;
   min-width: 80px !important;
+  border-right: 1px solid #888;
+  text-align: center !important;
+  padding-top: 20px;
+  display: inline-block;
 }
 
 .mat-header-cell {
   width:200px !important;
   white-space: nowrap;
   min-width: 80px !important;
-
+  border-right: 1px solid #888;
 }
 
 tr.mat-header-row {
@@ -63,10 +67,12 @@ color:#fafafa
 }
 .mat-row:nth-child(even){
         background-color:white ;
+        height: 40px;
         }
 
  .mat-row:nth-child(odd){
         background-color:#fafafa;
+        height: 40px;
         }
 
 
@@ -124,11 +130,11 @@ mat-header-cell:nth-child(1) {
     flex: 0 0 14%;
 }
 
-mat-cell:nth-child(2),
-mat-header-cell:nth-child(2) {
-    flex: 0 0 170px;
-}
+// mat-cell:nth-child(2),
+// mat-header-cell:nth-child(2) {
+//     flex: 0 0 170px;
+// }
 
-.customWidthClass{
-  flex: 0 0 180px;
-}
+// .customWidthClass{
+//   flex: 0 0 180px;
+// }

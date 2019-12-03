@@ -1,45 +1,45 @@
 table {
-    width: 100%;
+  width: 100%;
+}
+.mat-card {
+  text-align: center;
+  img {
+      border-radius: 5px;
+      margin-top: -25px;
   }
-  .mat-card {
-    text-align: center;
-    img {
-        border-radius: 5px;
-        margin-top: -25px;
-    }
-  }
-  .mat-table {
-    box-shadow: 0 3px 1px -2px rgba(53, 23, 23, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-        0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  }
+}
+.mat-table {
+  box-shadow: 0 3px 1px -2px rgba(53, 23, 23, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
 
-  .mat-header-cell {
-    color:rgba(0,0,0,.54);
-    align-items: center;
-    font-weight: bold;
-    border-right: 2px solid #fff;
-  }
-  .mb-20 {
-    margin-bottom: 20px;
-  }
-  .config-data{text-align: center !important;border-right:2px solid #1a237e ;border-bottom:2px solid #1a237e;}
+.mat-header-cell {
+  color:rgba(0,0,0,.54);
+  align-items: center;
+  font-weight: bold;
+  border-right: 1px solid #fff;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.config-data{text-align: center !important;border-right:1px solid #888 ;border-bottom:1px solid #888;}
 
 
 span.add-title {
-  font-size: 20px;
-  font-weight: bold;
-  border-right: 2px solid #fff;
+font-size: 20px;
+font-weight: bold;
+border-right: 2px solid #fff;
 }
 th.mat-header-cell.cdk-column-editAction.mat-column-editAction.ng-star-inserted {
-  border-right: 2px solid #fff;
+border-right: 2px solid #fff;
 }
 span.add-title:hover {
-  color: #e0e011!important;
+color: #e0e011!important;
 }
 i.material-icons:hover{
-  color:#e0e011 !important;
+color:#e0e011 !important;
 }
 .mat-column-editAction{
-  border-bottom: 2px solid #1a237e;border-right:2px solid #1a237e;
+border-bottom: 1px solid #888;border-right:1px solid #888;
 }
-.mat-column-deleteAction {border-bottom: 2px solid #1a237e;}
+.mat-column-deleteAction {border-bottom: 1px solid #888;}

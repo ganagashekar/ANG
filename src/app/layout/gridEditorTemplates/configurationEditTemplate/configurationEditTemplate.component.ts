@@ -16,6 +16,7 @@ export class ConfigurationEditTemplateComponent implements OnInit {
   ConfigEditorEmitter = new EventEmitter<any>();
   schedulerForm: FormGroup;
   sitesArray: ReferenceRecords[] = [];
+  // busArray: ReferenceRecords[] = [];
   // paramArray: ReferenceRecords[] = [];
   // paramUnitsArray: ReferenceRecords[] = [];
   isAdd = true;
@@ -94,6 +95,13 @@ export class ConfigurationEditTemplateComponent implements OnInit {
     });
   }
 
+  // getBus(): void {
+  //   this._confgsservices.getAllBuses(0, false).subscribe(resp => {
+  //     this.busArray = resp.model as ReferenceRecords[];
+  //   }, error => {
+  //     console.log('Error: ' + error);
+  //   });
+  // }
   showSnackBar(message: string, isError: boolean = false): void {
     if (isError) {
       this.snackBar.open(message, 'Ok');

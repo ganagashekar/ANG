@@ -29,14 +29,17 @@
              </mat-option>
          </mat-select>
      </mat-form-field>
-      <mat-form-field class="half-width float-left">
-        <mat-label>Bus Id.</mat-label>
-        <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
-          Errorcode is
+     <mat-form-field class="half-width float-left">
+      <mat-label>Bus Id.</mat-label>
+      <!-- <mat-error *ngIf="schedulerForm.controls.siteId.hasError('required')">
+          Siteid is
           <strong>required</strong>
       </mat-error> -->
-        <input matInput type="number" min="1" formControlName="busID">
-    </mat-form-field>
+       <input matInput type="bigint" min="1" formControlName="busID">
+
+
+
+ </mat-form-field>
     <!-- <mat-form-field class="half-width float-right">
         <mat-label>vendorID.</mat-label>
         <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
@@ -45,6 +48,7 @@
       </mat-error>
         <input matInput type="string" min="1" formControlName="vendorID">
     </mat-form-field> -->
+
     <mat-form-field class="half-width float-right">
         <mat-label>Stack name.</mat-label>
         <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
