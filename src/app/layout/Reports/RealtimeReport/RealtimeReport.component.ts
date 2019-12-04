@@ -171,6 +171,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
   },
 
       chart: {
+        height: 600,
         zoomType: 'x',
         // events: {
         //     addSeries: function () {
@@ -263,8 +264,9 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
          showInNavigator: true,
            data: chartdata.map(function (point) {
 
-
-           return [ new Date((point.createdDate)).getTime(), point[item]];
+            const dates = new Date(point.createdDate);
+            dates.setMinutes(dates.getMinutes() + 330);
+          return [ dates.getTime(), point[item]];
            })
         };
          _series.push(singleseries);
@@ -310,7 +312,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
   OnExcelExportClick(): void {
     this.isLoading = true;
     this.reportRequestModel.IsExport = true;
-    this._reportservices.exportRealtimeReport(this.reportRequestModel).subscribe(resp => {
+    this._reportservices.exportExceedingtimeReport(this.reportRequestModel).subscribe(resp => {
       saveAs(resp, 'RealtimeReport.xlsx');
      // this.saveAsBlob(resp);
       this.isLoading = false;

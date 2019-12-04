@@ -86,7 +86,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
      this.getAllParameterList(this.reportRequestModel.StackId);
 
      this.gettimePeriod();
-     this.reportRequestModel.TimePeriod = this.timePeriodArray[0].id;
+   //  this.reportRequestModel.TimePeriod = this.timePeriodArray[0].id;
 
   }
 
@@ -178,6 +178,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   }
     },
     chart: {
+      height: 600,
       zoomType: 'x'
     },
 
@@ -200,6 +201,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
     ]
   },
     xAxis: {
+      type: 'datetime',
       lineColor: '#000000',
       title: {
         text: 'DateTime'
@@ -219,7 +221,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
         headerFormat: '<small>{point.key}</small><table>',
         pointFormat:
           '<tr><td style="color: {series.color}">{series.name}: </td>' +
-          '<td style="text-align: right"><b>{point.y}</b> {point.extraForTooltip}</td></tr>',
+          '<td style="text-align: right"><b>{point.y}</b></td></tr>',
         footerFormat: '</table>',
         valueDecimals: 2
       },
@@ -267,7 +269,9 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
          },
          showInNavigator: true,
            data: chartdata.map(function (point) {
-           return [ new Date(point.createdDate).getTime(), point[item]];
+             const dates = new Date(point.createdDate);
+             dates.setMinutes(dates.getMinutes() + 330);
+           return [ dates.getTime(), point[item]];
            })
         };
          _series.push(singleseries);

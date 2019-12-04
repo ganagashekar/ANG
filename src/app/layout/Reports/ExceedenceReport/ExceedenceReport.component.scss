@@ -23,7 +23,18 @@ table {
   margin: 0px;
 }
 
+.example-radio-group {
+  // display: flex;
+  flex-direction: row;
+  margin: 15px 0;
+}
 
+.example-radio-button{
+  padding: 5px;
+}
+.mat-radio-button {
+  padding: 5px;
+}
 
 .mat-table {
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
@@ -34,16 +45,20 @@ table {
       // display: block !important;
 }
 .mat-cell {
-  width:200px !important;
+  width:150px !important;
   white-space: nowrap;
   min-width: 80px !important;
+  border-right: 1px solid #888;
+  text-align: center !important;
+  padding-top: 20px;
+  display: inline-block;
 }
 
 .mat-header-cell {
-  width:200px !important;
+  width:150px !important;
   white-space: nowrap;
   min-width: 80px !important;
-
+  border-right: 1px solid #888;
 }
 
 tr.mat-header-row {
@@ -121,14 +136,15 @@ color:#fafafa
 
 mat-cell:nth-child(1),
 mat-header-cell:nth-child(1) {
-    flex: 0 0 14%;
+    flex: 0 0 12%;
 }
 
-mat-cell:nth-child(2),
-mat-header-cell:nth-child(2) {
-    flex: 0 0 170px;
-}
+//mat-cell:nth-child(2),
 
-.customWidthClass{
-  flex: 0 0 180px;
-}
+// mat-header-cell:nth-child(2) {
+//     flex: 0 0 100px;
+// }
+
+// .customWidthClass{
+//   flex: 0 0 100px;
+// }

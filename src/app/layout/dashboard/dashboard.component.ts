@@ -166,6 +166,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
       },
       chart: {
+        height: 550,
         zoomType: 'x'
       },
       credits: {
