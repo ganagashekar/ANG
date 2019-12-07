@@ -10,19 +10,27 @@
         ControllerBus
       </div>
 
+      <!-- <mat-form-field class="half-width float-left">
+        <mat-label>Mac Id.</mat-label>
+        <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+          Errorcode is
+          <strong>required</strong>
+      </mat-error> -
+        <input matInput type="bigint" min="1" formControlName="macId">
+    </mat-form-field> -->
+
       <mat-form-field class="half-width float-left">
-          <mat-label>Mac Id.</mat-label>
-          <!-- <mat-error *ngIf="schedulerForm.controls.macId.hasError('required')">
-              Macid is
-              <strong>required</strong>
-          </mat-error> -->
-          <!-- <input matInput type="string" min="1" formControlName="macId"> -->
-          <!-- <mat-select formControlName="macId" >
-             <mat-option [value]="site.macId" *ngFor="let site of macArray">{{site.macId}}
-             </mat-option>
-         </mat-select>-->
-         <input matInput type="string" min="1" formControlName="macId">
-     </mat-form-field>
+        <mat-label>Mac Id.</mat-label>
+        <!-- <mat-error *ngIf="schedulerForm.controls.siteId.hasError('required')">
+            Siteid is
+            <strong>required</strong>
+        </mat-error>-->
+        <mat-select formControlName="macId" >
+           <mat-option [value]="site.macId" *ngFor="let site of macArray">{{site.macId}}
+           </mat-option>
+       </mat-select>
+   </mat-form-field>
+
       <mat-form-field class="half-width float-right">
         <mat-label>Com_Port.</mat-label>
         <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">

@@ -1,4 +1,4 @@
 export class ControllerFilter {
-  MacId: String;
+  macId: String;
   SiteId: number;
 }

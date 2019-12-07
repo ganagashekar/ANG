@@ -35,11 +35,15 @@
           Siteid is
           <strong>required</strong>
       </mat-error> -->
-       <input matInput type="bigint" min="1" formControlName="busID">
+      <mat-select formControlName="busID" >
 
-
-
+         <mat-option [value]="bus.id" *ngFor="let bus of busArray">{{bus.id}}
+         </mat-option>
+     </mat-select>
  </mat-form-field>
+
+
+
     <!-- <mat-form-field class="half-width float-right">
         <mat-label>vendorID.</mat-label>
         <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
