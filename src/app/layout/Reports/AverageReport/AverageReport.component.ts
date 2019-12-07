@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { saveAs } from 'file-saver';
 import * as Highcharts from 'highcharts/highstock';
 
-
+import * as _moment from 'moment';
 import * as HC_exporting_ from 'highcharts/modules/exporting';
 import { ReportRequestModel } from '../../../Model/Report/ReportRequestModel';
 import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
@@ -13,6 +13,8 @@ import { ParameterFilter } from 'src/app/Model/FilterModels/ParameterFilter';
 const HC_exporting = HC_exporting_;
 HC_exporting(Highcharts);
 import MapModule from 'highcharts/modules/map';
+import { appConstants } from 'src/app/shared/Common/app-constants';
+
 MapModule(Highcharts);
 @Component({
   selector: 'app-AverageReport',
@@ -21,7 +23,8 @@ MapModule(Highcharts);
 })
 
 export class AverageReportComponent implements OnInit , AfterViewInit {
-
+ FromDate = new Date();
+ ToDate = new Date();
   SelectedView: string;
   Viewtypes = [
     {
@@ -63,8 +66,10 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
       this.reportRequestModel = new ReportRequestModel();
       this.parameterFilter =  new ParameterFilter();
       this.reportRequestModel.SiteId = Number(localStorage.getItem('SiteId'));
-      this.reportRequestModel.FromDate = (new Date());
-      this.reportRequestModel.ToDate = (new Date());
+      this.reportRequestModel.FromDateVM = (new Date());
+      this.reportRequestModel.FromTimeVM = "12:00 AM";
+      this.reportRequestModel.ToTimeVM = "11:59 PM";
+      this.reportRequestModel.ToDateVM = (new Date());
       this.reportRequestModel.StackId  = 0;
       this.reportRequestModel.ParamId = 0;
       this.reportRequestModel.IsExport = false;
@@ -215,16 +220,38 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
         }
       }
     },
+      // tooltip: {
+      //   shared: true,
+      //   useHTML: true,
+      //   headerFormat: '<small>{point.key}</small><table>',
+      //   pointFormat:
+      //     '<tr><td style="color: {series.color}">{series.name}: </td>' +
+      //     '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+      //   footerFormat: '</table>',
+      //   valueDecimals: 2
+      // },
+
       tooltip: {
-        shared: true,
         useHTML: true,
-        headerFormat: '<small>{point.key}</small><table>',
-        pointFormat:
-          '<tr><td style="color: {series.color}">{series.name}: </td>' +
-          '<td style="text-align: right"><b>{point.y}</b></td></tr>',
-        footerFormat: '</table>',
-        valueDecimals: 2
-      },
+        shared: true,
+        crosshairs: true,
+    animation: true,
+    formatter: function() {
+      var outputString = '<table bgcolor="#fff" border= "1 dotted"  style="border-collapse:collapse;background-color:#fff; border: 1px solid #DAD9D9 ;">';
+      outputString +=" <tr><th style='background-color:#000;color: #DAD9D9'; colspan=5>" + new Date(this.x).toLocaleString() + "</th></tr>";
+      this.points.forEach(function(point) {
+        if (point.x === this.x) {
+          const seriesame = (point.series.name).toUpperCase()
+          let param = seriesame.split('-');
+          const StackName= param[0] == null ? "" : param[0];
+          const paramName= param.length > 1 ? param[1] :"";
+          const paramUnits= param.length > 2 ? param[2] :"";
+          outputString += "<tr><td><span style='color:" + point.color + "'>\u25CF</span></td><td> " + (StackName) + "</td><td>"+paramName+"</td><td>"+paramUnits+"</td><td> <b> " + point.y + "</b></td></tr>";
+        }
+      }, this);
+      return outputString+='</table>';
+    }
+  },
       exporting: {
         chartOptions: {
 
@@ -281,7 +308,9 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   }
   getAverageReport(): void {
     this.isLoading = true;
-    this.reportRequestModel.IsExport = false;
+    this.reportRequestModel.IsExport = false; 
+    this.reportRequestModel.FromDate = _moment(this.reportRequestModel.FromDateVM).format(appConstants.DATE_FORMAT);
+    this.reportRequestModel.ToDate = _moment(this.reportRequestModel.ToDateVM).format(appConstants.DATE_FORMAT);
     this._reportservices.getAverageReport(this.reportRequestModel).subscribe(resp => {
       this.isLoading = false;
       this.chartdata = [];

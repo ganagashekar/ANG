@@ -50,8 +50,8 @@ table {
   min-width: 80px !important;
   border-right: 1px solid #888;
   text-align: center !important;
-    padding-top: 20px;
-    display: inline-block;
+  padding-top: 20px;
+  display: inline-block;
 }
 
 .mat-header-cell {
@@ -139,7 +139,8 @@ mat-header-cell:nth-child(1) {
     flex: 0 0 12%;
 }
 
-// mat-cell:nth-child(2),
+//mat-cell:nth-child(2),
+
 // mat-header-cell:nth-child(2) {
 //     flex: 0 0 100px;
 // }

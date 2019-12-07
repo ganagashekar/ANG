@@ -5,12 +5,12 @@
   {{item.displayName}}
   <span fxFlex *ngIf="item.children && item.children.length">
     <span fxFlex></span>
-    <mat-icon [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
+    <mat-icon  [@indicatorRotate]="expanded ? 'expanded': 'collapsed'">
       expand_more
     </mat-icon>
   </span>
 </a>
-<div *ngIf="expanded">
+<div *ngIf="expanded" style="background-color: #000;">
   <app-menu-list-item *ngFor="let child of item.children" [item]="child" [depth]="depth+1">
   </app-menu-list-item>
 </div>

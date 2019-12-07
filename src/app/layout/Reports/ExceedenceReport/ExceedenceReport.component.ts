@@ -63,8 +63,8 @@ export class ExceedenceReportComponent implements OnInit , AfterViewInit {
       this.reportRequestModel = new ReportRequestModel();
       this.parameterFilter =  new ParameterFilter();
       this.reportRequestModel.SiteId = Number(localStorage.getItem('SiteId'));
-      this.reportRequestModel.FromDate = (new Date());
-      this.reportRequestModel.ToDate = (new Date());
+      this.reportRequestModel.FromDate = (new Date()).toISOString();
+      this.reportRequestModel.ToDate = (new Date()).toISOString();
       this.reportRequestModel.StackId  = 0;
       this.reportRequestModel.ParamId = 0;
       this.reportRequestModel.IsExport = false;
@@ -282,6 +282,8 @@ export class ExceedenceReportComponent implements OnInit , AfterViewInit {
   getAverageReport(): void {
     this.isLoading = true;
     this.reportRequestModel.IsExport = false;
+    this.reportRequestModel.FromDate = new Date(this.reportRequestModel.FromDate).toISOString();
+    this.reportRequestModel.ToDate = new Date(this.reportRequestModel.ToDate).toISOString();
     this._reportservices.getExceedenceReport(this.reportRequestModel).subscribe(resp => {
       this.isLoading = false;
       this.chartdata = [];

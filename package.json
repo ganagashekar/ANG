@@ -37,6 +37,7 @@
     "highcharts-angular": "^2.4.0",
     "luxon": "^1.19.3",
     "ngx-loading-bar": "0.0.9",
+    "ngx-material-timepicker": "^4.0.0",
     "rxjs": "6.5.3",
     "web-animations-js": "2.3.1",
     "zone.js": "0.9.1"

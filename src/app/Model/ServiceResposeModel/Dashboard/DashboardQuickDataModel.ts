@@ -9,4 +9,7 @@ export class DashboardQuickDataModel {
   configId: number;
   isGroupby: boolean;
   status: boolean;
+  chartSeriesName:string;
+  IsFirst = false;
+  paramId: number;
 }
