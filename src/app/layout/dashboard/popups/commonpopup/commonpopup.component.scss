@@ -1,0 +1,150 @@
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-5 {
+  margin-bottom: 5px;
+}
+
+table {
+  width: 100%;
+  // display: block !important;
+
+  max-width: 100%;
+  overflow: auto;
+  margin-bottom: 10px;
+  display: table;
+  border-collapse: collapse;
+  margin: 0px;
+}
+
+.example-radio-group {
+  // display: flex;
+  flex-direction: row;
+  margin: 15px 0;
+}
+
+.example-radio-button{
+  padding: 5px;
+}
+.mat-radio-button {
+  padding: 5px;
+}
+
+.mat-table {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 1px 5px 0 rgba(0, 0, 0, 0.12);
+      max-height: 500px;
+      overflow: auto;
+      width: 100%;
+      // display: block !important;
+}
+.mat-cell {
+  width:150px !important;
+  white-space: nowrap;
+  min-width: 80px !important;
+  border-right: 1px solid #888;
+  text-align: center !important;
+  padding-top: 20px;
+  display: inline-block;
+}
+
+.mat-header-cell {
+  width:150px !important;
+  white-space: nowrap;
+  min-width: 80px !important;
+  border-right: 1px solid #888;
+}
+
+tr.mat-header-row {
+height: 40px !important;
+}
+tr.mat-footer-row,
+tr.mat-row {
+
+height: 40px !important;
+}
+.mb-20 {
+  margin-bottom: 10px;
+}
+.mat-header-cell, .mat-sort-header {
+background-color:#1a237e;
+color:#fafafa
+}
+.mat-row:nth-child(even){
+        background-color:white ;
+        }
+
+ .mat-row:nth-child(odd){
+        background-color:#fafafa;
+        }
+
+
+        .row,
+.header-row {
+  display: table-row;
+  min-height: 36px !important;
+}
+
+.cell,
+.header-cell {
+  word-wrap: initial;
+  display: table-cell;
+      padding: 0px 5px;
+  line-break: unset;
+  width: fit-content;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.header-row,
+.header-cell {
+  margin: 0 auto;
+  min-height: 100px !important;
+  text-align: center;
+  vertical-align: middle;
+  align-self: center;
+}
+
+
+.mat-form-field {
+  margin-right: 12px;
+}
+.mat-h-30{
+  height: 5px;
+}
+
+.fontsize-20-icon {
+  font-size: 23px;
+  margin: -10px;
+}
+
+.mat-footer-row,
+.mat-header-row,
+.mat-row {
+    display: inline-flex;
+    min-width: 100%;
+
+}
+
+mat-cell:nth-child(1),
+mat-header-cell:nth-child(1) {
+    flex: 0 0 12%;
+}
+
+//mat-cell:nth-child(2),
+
+// mat-header-cell:nth-child(2) {
+//     flex: 0 0 100px;
+// }
+
+// .customWidthClass{
+//   flex: 0 0 100px;
+// }

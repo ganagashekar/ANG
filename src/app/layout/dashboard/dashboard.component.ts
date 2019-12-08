@@ -10,11 +10,14 @@ HC_exporting(Highcharts);
 import { first } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { interval, Subscription } from 'rxjs';
-import { OnInit, ElementRef, ViewChild, AfterViewInit, Component } from '@angular/core';
+import { OnInit, ElementRef, ViewChild, AfterViewInit, Component, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { DashboardQuickCounts } from 'src/app/Model/ServiceResposeModel/Dashboard/DashboardQuickCounts';
 import { DashboardService } from 'src/app/shared/services/Dashboard.Services';
 
 import MapModule from 'highcharts/modules/map';
+import { ConfigurationSComponent } from '../configuration-s/configuration-s.component';
+import { CommonpopupComponent } from './popups/commonpopup/commonpopup.component';
+import { DataSource } from '@angular/cdk/table';
 
 MapModule(Highcharts);
 
@@ -46,7 +49,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
 
 
-
+  @ViewChild('container2', {  static: false , read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   @ViewChild('container', { read: ElementRef , static: true }) container: ElementRef;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -56,13 +59,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private _dialog: MatDialog,
     private _route: ActivatedRoute,
     private _dashboardService: DashboardService,
+    private componentFactoryResolver: ComponentFactoryResolver,
     private snackBar: MatSnackBar) {
 
       localStorage.setItem('currentUrl', '/dashboard');
 
   }
 
-  displayedColumns = ['paramName', 'paramUnits', 'paramValue', 'threShholdValue', 'paramminvalue', 'parammaxvalue', 'recordedDate', ];
+  displayedColumns = ['paramName', 'paramUnits', 'paramValue', 'threShholdValue','limit', 'recordedDate' ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -78,18 +82,51 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     const source = interval(30000);
     this.subscription = source.subscribe(val => this.getDashboardQuickTableList());
   }
+
+  onStationClick(type: number): void {
+let data: any;
+let Heading = "";
+switch (type) {
+  case 1: {
+    data = this.dashboardQuickCounts.stations;
+    Heading = 'Monitoring Stations';
+     break;
+  }
+  case 2: {
+    data = this.dashboardQuickCounts.paramters;
+    Heading = 'Parameters';
+    break;
+  }
+  case 3: {
+    data = this.dashboardQuickCounts.exceedence;
+    Heading = 'Exceedence';
+    break;
+  }
+  default: {
+    data = this.dashboardQuickCounts.alarms;
+    Heading = 'Alarms';
+    break;
+  }
+}
+    const dialogRef = this._dialog.open(CommonpopupComponent, {
+      width: '500px',
+      data: { action: Heading, data}
+    });
+   }
   addPoint() {
     const x = new Date().getTime();
     const shift = this.chatsss.series[0].data.length > 100000000;
     if (this.chatsss) {
-      
+
       this.chatsss.series.forEach(element => {
         if (this.DashboardQuickDataResposne != null) {
 
           const result = this.DashboardQuickDataResposne.filter(x => x.paramName != null)
           .filter(model => model.chartSeriesName.toUpperCase() === element.name.toUpperCase() )[0];
               if (result != null && result.paramValue !== undefined) {
-                element.addPoint([x, result.paramValue]);
+                const dates = new Date(result.recordedDate);
+                dates.setMinutes(dates.getMinutes() + 330);
+                element.addPoint([dates, result.paramValue]);
               }
         }
       });

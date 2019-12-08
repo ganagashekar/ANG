@@ -2,16 +2,17 @@
 
 <div class="mb-20 mt-20" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="10px">
   <div fxFlex>
-      <app-stat [bgClass]="'success'" [icon]="'dashboard'" [count]="stackCount" [label]="'Monitoring Stations'"></app-stat>
+     
+     <a style="text-decoration: none" href="javascript:void(0)" (click)="onStationClick(1)"><app-stat  [bgClass]="'success'" [icon]="'dashboard'" [count]="stackCount" [label]="'Monitoring Stations'"></app-stat></a>
   </div>
   <div fxFlex>
-      <app-stat [bgClass]="'info'" [icon]="'settings_input_antenna'" [count]="paramCount" [label]="'Parameters Monitored'"></app-stat>
+      <a style="text-decoration: none" href="javascript:void(0)" (click)="onStationClick(2)"><app-stat [bgClass]="'info'" [icon]="'settings_input_antenna'" [count]="paramCount" [label]="'Parameters Monitored'"></app-stat></a>
   </div>
   <div fxFlex>
-      <app-stat [bgClass]="'danger'" [icon]="'view_list'" [count]="exceedenceCount" [label]="'Exceeding Parameters'"></app-stat>
+      <a style="text-decoration: none" href="javascript:void(0)" (click)="onStationClick(3)"><app-stat [bgClass]="'danger'" [icon]="'view_list'" [count]="exceedenceCount" [label]="'Exceeding Parameters'"></app-stat></a>
   </div>
   <div fxFlex>
-      <app-stat [bgClass]="'warn'" [icon]="'notification_important'" [count]="alertCount" [label]="'Alerts'"></app-stat>
+      <a style="text-decoration: none" href="javascript:void(0)" (click)="onStationClick(4)"><app-stat [bgClass]="'warn'" [icon]="'notification_important'" [count]="alertCount" [label]="'Alerts'"></app-stat></a>
   </div>
 </div>
 
@@ -30,7 +31,7 @@
                     </button> -->
                     Parameter Name </th>
 
-              <td mat-cell *matCellDef="let element">
+              <td [ngStyle]="{'background-color': element.color_code}" mat-cell *matCellDef="let element">
                   <button matTooltip="Show Graph for" mat-icon-button>
                       <mat-icon (click)="SelectedrowDrawCharts(element)">insert_chart_outlined</mat-icon>
                       <!-- <i class="fa fa-chart-line"  (click)="SelectedrowDrawCharts(element)"></i>
@@ -42,35 +43,35 @@
           </ng-container>
           <ng-container matColumnDef="paramUnits" class="dashboard-tableheadings">
             <th mat-header-cell *matHeaderCellDef> Units of Messure </th>
-            <td mat-cell *matCellDef="let element"> {{element.paramUnits}} </td>
+            <td [ngStyle]="{'background-color': element.color_code}" mat-cell *matCellDef="let element"> {{element.paramUnits}} </td>
         </ng-container>
           <ng-container matColumnDef="paramValue" class="dashboard-tableheadings">
               <th mat-header-cell *matHeaderCellDef> Value </th>
-              <td mat-cell *matCellDef="let element"> {{element.paramValue}} </td>
+              <td  [ngStyle]="{'background-color': element.color_code}" mat-cell *matCellDef="let element"> {{element.paramValue}} </td>
           </ng-container>
           <ng-container matColumnDef="recordedDate" class="dashboard-tableheadings">
               <th mat-header-cell *matHeaderCellDef> Created Date </th>
-              <td mat-cell *matCellDef="let element"> {{element.recordedDate}} </td>
+              <td [ngStyle]="{'background-color': element.color_code}" mat-cell *matCellDef="let element"> {{element.recordedDate}} </td>
           </ng-container>
           <ng-container matColumnDef="threShholdValue" class="dashboard-tableheadings">
             <th mat-header-cell *matHeaderCellDef> ThreshHold Value </th>
-            <td mat-cell *matCellDef="let element"> {{element.threShholdValue}} </td>
+            <td  [ngStyle]="{'background-color':element.color_code}" mat-cell *matCellDef="let element"> {{element.threShholdValue}} </td>
         </ng-container>
-        <ng-container matColumnDef="paramminvalue" class="dashboard-tableheadings">
-          <th mat-header-cell *matHeaderCellDef> Param Min Value </th>
-          <td mat-cell *matCellDef="let element"> {{element.paramminvalue}} </td>
+        <ng-container matColumnDef="limit" class="dashboard-tableheadings">
+          <th mat-header-cell *matHeaderCellDef> Limit </th>
+          <td [ngStyle]="{'background-color': element.color_code}" mat-cell *matCellDef="let element"> {{element.limit}} </td>
       </ng-container>
-      <ng-container matColumnDef="parammaxvalue" class="dashboard-tableheadings">
+      <!-- <ng-container matColumnDef="parammaxvalue" class="dashboard-tableheadings">
         <th mat-header-cell *matHeaderCellDef> Param Max Value </th>
-        <td mat-cell *matCellDef="let element"> {{element.parammaxvalue}} </td>
-    </ng-container>
+        <td [ngStyle]="{'background-color': element.color_code}" mat-cell *matCellDef="let element"> {{element.parammaxvalue}} </td>
+    </ng-container> -->
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
 
           <!-- Group header -->
 <ng-container matColumnDef="groupHeader">
-  <td colspan="999" mat-cell *matCellDef="let groupBy" class="dashboard-analyzer">
+  <td [ngStyle]="{'background-color': groupBy.color_code}"  colspan="999" mat-cell *matCellDef="let groupBy" class="dashboard-analyzer">
 
     <strong>  {{groupBy.stackName}}
 
@@ -87,7 +88,7 @@
 
   </div>
 </div>
-
+<div #container2></div>
 
 <!-- <button mat-stroked-button (click)="init()">Init</button>
 <button mat-stroked-button (click)="addSerie()">Add Serie</button>

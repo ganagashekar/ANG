@@ -29,6 +29,7 @@ import { CalibrationsetupModule } from 'src/app/layout/calibrationsetup/calibrat
 import { CalibreportsModule } from 'src/app/layout/calibreports/calibreports.module';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { CommonpopupComponent } from './dashboard/popups/commonpopup/commonpopup.component';
 
 
 
@@ -61,9 +62,9 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
     providers: [NavService],
 
     entryComponents: [
-         ConfirmationDialogComponent],
+         ConfirmationDialogComponent,CommonpopupComponent],
 
-    declarations: [    ConfirmationDialogComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
+    declarations: [  CommonpopupComponent,  ConfirmationDialogComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
         AverageReportComponent, MenuListItemComponent
       , RealtimeReportComponent , ExceedenceReportComponent]
 

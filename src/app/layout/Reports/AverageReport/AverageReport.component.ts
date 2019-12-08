@@ -29,15 +29,15 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   Viewtypes = [
     {
       key: 'Graph View',
-      checked: true
+      checked: false
     },
     {
       key: 'Table View',
-      checked: false
+      checked: true
     }];
   Highcharts = Highcharts;
    updateFlag = true;
-   IsGraphView = true;
+   IsGraphView = false;
    reportRequestModel: ReportRequestModel;
    stacksArray: ReferenceRecords[] = [];
    paramArray: ReferenceRecords[] = [];
@@ -59,7 +59,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   constructor(private _dialog: MatDialog,  private _route: ActivatedRoute,
     private _reportservices: ReportsService,
     private snackBar: MatSnackBar) {
-      this.SelectedView = 'Table';
+      this.SelectedView = 'Table View';
 
     // **As well as this**
 

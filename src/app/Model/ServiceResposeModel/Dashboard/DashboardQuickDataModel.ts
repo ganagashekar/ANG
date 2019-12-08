@@ -10,6 +10,8 @@ export class DashboardQuickDataModel {
   isGroupby: boolean;
   status: boolean;
   chartSeriesName:string;
+  color_code:string;
+  limit: string;
   IsFirst = false;
   paramId: number;
 }

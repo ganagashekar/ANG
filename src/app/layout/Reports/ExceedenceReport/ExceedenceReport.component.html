@@ -3,7 +3,7 @@
 <div >
 
 
-  <mat-card >
+  <mat-card style="padding: 6px;" class="mb-5" >
 
     <div>
 
@@ -38,18 +38,46 @@
       </mat-form-field>
 
       <mat-form-field style="width: 100px;">
-        <input matInput [matDatepicker]="picker1" placeholder="From Date" [(ngModel)]="reportRequestModel.FromDate">
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
-
-
-      <mat-form-field style="width: 100px;">
-        <input matInput [matDatepicker]="picker2" placeholder="To Date"
-        [(ngModel)]="reportRequestModel.ToDate">
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-      </mat-form-field>
+          <input matInput [matDatepicker]="picker1" placeholder="From Date" [(ngModel)]="reportRequestModel.FromDateVM" >
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+       
+      
+    
+       
+          <mat-form-field style="width: 60px;">
+            <input
+              matInput
+              [ngxTimepicker]="timePick"
+              placeholder="Start Time"
+              [(ngModel)]="reportRequestModel.FromTimeVM"
+            />
+           
+            <ngx-material-timepicker
+            
+              #timePick
+            ></ngx-material-timepicker>
+          </mat-form-field>
+          <mat-form-field style="width: 100px;">
+              <input matInput [matDatepicker]="picker2" placeholder="To Date" [(ngModel)]="reportRequestModel.ToDateVM" >
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+    
+          <mat-form-field style="width: 60px;">
+              <input
+                matInput
+                [ngxTimepicker]="timePick2"
+                placeholder="End Time"
+                [(ngModel)]="reportRequestModel.ToTimeVM"
+              />
+             
+              <ngx-material-timepicker
+              
+                #timePick2
+              ></ngx-material-timepicker>
+            </mat-form-field>
 
 
 
