@@ -42,20 +42,21 @@
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
-       
-      
-    
-       
+
+
+
+
           <mat-form-field style="width: 60px;">
             <input
               matInput
               [ngxTimepicker]="timePick"
               placeholder="Start Time"
+              [format]="24"
               [(ngModel)]="reportRequestModel.FromTimeVM"
             />
-           
+
             <ngx-material-timepicker
-            
+
               #timePick
             ></ngx-material-timepicker>
           </mat-form-field>
@@ -64,17 +65,18 @@
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
-    
+
           <mat-form-field style="width: 60px;">
               <input
                 matInput
                 [ngxTimepicker]="timePick2"
                 placeholder="End Time"
+                [format]="24"
                 [(ngModel)]="reportRequestModel.ToTimeVM"
               />
-             
+
               <ngx-material-timepicker
-              
+
                 #timePick2
               ></ngx-material-timepicker>
             </mat-form-field>

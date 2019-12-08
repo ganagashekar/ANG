@@ -32,27 +32,28 @@
               </mat-option>
           </mat-select>
       </mat-form-field>
-     
+
 
     <mat-form-field style="width: 100px;">
       <input matInput [matDatepicker]="picker1" placeholder="From Date" [(ngModel)]="reportRequestModel.FromDateVM" >
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
-   
-  
 
-   
+
+
+
       <mat-form-field style="width: 60px;">
         <input
           matInput
           [ngxTimepicker]="timePick"
           placeholder="Start Time"
+          [format]="24"
           [(ngModel)]="reportRequestModel.FromTimeVM"
         />
-       
+
         <ngx-material-timepicker
-        
+
           #timePick
         ></ngx-material-timepicker>
       </mat-form-field>
@@ -67,17 +68,18 @@
             matInput
             [ngxTimepicker]="timePick2"
             placeholder="End Time"
+            [format]="24"
             [(ngModel)]="reportRequestModel.ToTimeVM"
           />
-         
+
           <ngx-material-timepicker
-          
+
             #timePick2
           ></ngx-material-timepicker>
         </mat-form-field>
-     
-      
-      
+
+
+
       <button mat-button color="primary" (click)="OnSearchClick()"
     matTooltip="Search">
       <mat-icon>search</mat-icon>

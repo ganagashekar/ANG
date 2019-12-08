@@ -40,7 +40,7 @@ import { SiteSetupFilter } from 'src/app/Model/FilterModels/SiteSetupFilter';
 
     DeleteSite(siteId: string): Observable<boolean> {
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
-        '/DeleteSite?=' + siteId);
+        '/DeleteSite?=SiteId' + siteId);
     }
 
   }

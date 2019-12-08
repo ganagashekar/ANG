@@ -79,8 +79,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.init();
     this.getDashboardQuickCounts();
     this.getDashboardQuickTableList();
-    const source = interval(30000);
-    this.subscription = source.subscribe(val => this.getDashboardQuickTableList());
+    // const source = interval(30000);
+    // this.subscription = source.subscribe(val => this.getDashboardQuickTableList());
   }
 
   onStationClick(type: number): void {
@@ -125,7 +125,7 @@ switch (type) {
           .filter(model => model.chartSeriesName.toUpperCase() === element.name.toUpperCase() )[0];
               if (result != null && result.paramValue !== undefined) {
                 const dates = new Date(result.recordedDate);
-                dates.setMinutes(dates.getMinutes() + 330);
+                dates.setMinutes(dates.getMinutes() );
                 element.addPoint([dates, result.paramValue]);
               }
         }
@@ -198,7 +198,7 @@ switch (type) {
     }
       },
       chart: {
-        height: 550,
+        height: 600,
         zoomType: 'x'
       },
       credits: {
@@ -235,9 +235,9 @@ switch (type) {
                 element.hide();
               }
               }
-            
+
         });
-            // if (!confirm('The series is currently '+ 
+            // if (!confirm('The series is currently '+
             //              visibility +'. Do you want to change that?')) {
             //     return false;
             // }
@@ -245,7 +245,7 @@ switch (type) {
             //.filter(model => model.id == row.paramName + '-' + row.stackName + ' Threshhold')[0];
             const check = this.yAxis.plotLinesAndBands.filter(model => model.id.toUpperCase() == this.name.toUpperCase())[0];
             if(check != null) {
-  
+
               if (check.hidden) {
                 check.hidden = false;
                 check.svgElem.show();
@@ -269,12 +269,18 @@ switch (type) {
 
       tooltip: {
         useHTML: true,
+        followTouchMove: true,
         shared: true,
-        crosshairs: true,
+         split: false,
+        outside: true,
+        percentageDecimals: 2,
+        crosshairs: false,
     animation: true,
     formatter: function() {
-      var outputString = '<table bgcolor="#fff" border= "1 dotted"  style="border-collapse:collapse;background-color:#fff; border: 1px solid #DAD9D9 ;">';
-      outputString +=" <tr><th style='background-color:#000;color: #DAD9D9'; colspan=5>" + new Date(this.x).toLocaleString() + "</th></tr>";
+      const dates = new Date(this.x);
+      dates.setMinutes(dates.getMinutes() + 330);
+let outputString = '<table bgcolor="#fff" border= "1 dotted"  style="border-collapse:collapse;background-color:#fff; border: 1px solid #DAD9D9 ;">';
+outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspan=5>' + new Date(dates).toLocaleString() + '</th></tr>';
       this.points.forEach(function(point) {
         if (point.x === this.x) {
           const seriesame = (point.series.name).toUpperCase()
@@ -309,7 +315,9 @@ switch (type) {
         title: {
           text: 'DateTime'
       },
-
+      dateTimeLabelFormats: {
+        day: '%e of %b'
+    },
         events: {
           afterSetExtremes: (e) => {
             // console.log(e);
@@ -402,9 +410,13 @@ switch (type) {
             name: element,
             data: chartdata.map(function (point) {
              const dates = new Date(point.createdDate);
-             dates.setMinutes(dates.getMinutes() + 330);
+             dates.setMinutes(dates.getMinutes() );
            return [ dates.getTime(), point[element]];
            }),
+
+           tooltip: {
+            valueDecimals: 2
+        },
             marker: {
              enabled: true,
              radius: 3
@@ -429,7 +441,7 @@ switch (type) {
 
       }
     });
-  
+
   }
   SelectedrowDrawCharts(row: DashboardQuickDataModel) {
     this.showAllSeries();
@@ -504,7 +516,7 @@ switch (type) {
 
   hideAllSeries(): void  {
 
-    
+
     this.chatsss.series.forEach(element => {
           element.hide();
     });

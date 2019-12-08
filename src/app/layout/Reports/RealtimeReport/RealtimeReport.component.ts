@@ -65,12 +65,12 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
       this.parameterFilter =  new ParameterFilter();
       this.reportRequestModel.SiteId = Number(localStorage.getItem('SiteId'));
       this.reportRequestModel.FromDateVM = (new Date());
-      this.reportRequestModel.FromTimeVM = "12:00 AM";
-      this.reportRequestModel.ToTimeVM = "11:59 PM";
+      this.reportRequestModel.FromTimeVM = '00:00';
+      this.reportRequestModel.ToTimeVM = '23:59';
       this.reportRequestModel.ToDateVM = (new Date());
       this.reportRequestModel.StackId  = 0;
       this.reportRequestModel.ParamId = 0;
-     
+
       this.reportRequestModel.IsExport = false;
       this.reportRequestModel.SiteCode = localStorage.getItem('SiteName');
       this.reportRequestModel.TimePeriod = (0);
@@ -176,7 +176,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
   },
 
       chart: {
-        height: 600,
+        height: 800,
         zoomType: 'x',
         // events: {
         //     addSeries: function () {
@@ -206,7 +206,9 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
     title: {
       text: 'DateTime'
   },
-
+  dateTimeLabelFormats: {
+    day: '%e of %b'
+},
     events: {
       afterSetExtremes: (e) => {
         // console.log(e);
@@ -217,23 +219,29 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
   },
   tooltip: {
     useHTML: true,
+    followTouchMove: true,
     shared: true,
-    crosshairs: true,
+      split: false,
+    outside: true,
+    percentageDecimals: 2,
+    crosshairs: false,
 animation: true,
 formatter: function() {
-  var outputString = '<table bgcolor="#fff" border= "1 dotted"  style="border-collapse:collapse;background-color:#fff; border: 1px solid #DAD9D9 ;">';
-  outputString +=" <tr><th style='background-color:#000;color: #DAD9D9'; colspan=5>" + new Date(this.x).toLocaleString() + "</th></tr>";
+  const dates = new Date(this.x);
+         dates.setMinutes(dates.getMinutes());
+  let outputString = '<table bgcolor="#fff" border= "1 dotted"  style="border-collapse:collapse;background-color:#fff; border: 1px solid #DAD9D9 ;">';
+  outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspan=5>' + new Date(dates).toLocaleString() + '</th></tr>';
   this.points.forEach(function(point) {
     if (point.x === this.x) {
-      const seriesame = (point.series.name).toUpperCase()
-      let param = seriesame.split('-');
-      const StackName= param[0] == null ? "" : param[0];
-      const paramName= param.length > 1 ? param[1] :"";
-      const paramUnits= param.length > 2 ? param[2] :"";
-      outputString += "<tr><td><span style='color:" + point.color + "'>\u25CF</span></td><td> " + (StackName) + "</td><td>"+paramName+"</td><td>"+paramUnits+"</td><td> <b> " + point.y + "</b></td></tr>";
+      const seriesame = (point.series.name).toUpperCase();
+      const param = seriesame.split('-');
+      const StackName = param[0] == null ? '' : param[0];
+      const paramName = param.length > 1 ? param[1] :'';
+      const paramUnits = param.length > 2 ? param[2] :'';
+      outputString += '<tr><td><span style=\'color:' + point.color + '\'>\u25CF</span></td><td> ' + (StackName) + '</td><td>'+paramName+'</td><td>' + paramUnits + '</td><td> <b> ' + point.y + '</b></td></tr>';
     }
   }, this);
-  return outputString+='</table>';
+  return outputString += '</table>';
 }
 },
       exporting: {
@@ -293,8 +301,12 @@ formatter: function() {
   getRealtimeReport(): void {
     this.isLoading = true;
     this.reportRequestModel.IsExport = false;
-    this.reportRequestModel.FromDate = _moment(this.reportRequestModel.FromDateVM).format(appConstants.DATE_FORMAT);
-    this.reportRequestModel.ToDate = _moment(this.reportRequestModel.ToDateVM).format(appConstants.DATE_FORMAT);
+
+    const Fromdates = _moment(this.reportRequestModel.FromDateVM).format("MM/DD/YYYY");
+    const Todates = _moment(this.reportRequestModel.ToDateVM).format("MM/DD/YYYY");
+
+    this.reportRequestModel.FromDate = _moment( Fromdates + ' ' + this.reportRequestModel.FromTimeVM).format(appConstants.DATE_Time_FORMAT);
+    this.reportRequestModel.ToDate = _moment(Todates + ' '+ this.reportRequestModel.ToTimeVM).format(appConstants.DATE_Time_FORMAT);
     this._reportservices.getRealtimeReport(this.reportRequestModel).subscribe(resp => {
       this.chartdata = [];
       this.chartOptions = {};
@@ -330,7 +342,7 @@ formatter: function() {
   OnExcelExportClick(): void {
     this.isLoading = true;
     this.reportRequestModel.IsExport = true;
-    this._reportservices.exportExceedingtimeReport(this.reportRequestModel).subscribe(resp => {
+    this._reportservices.exportRealtimeReport(this.reportRequestModel).subscribe(resp => {
       saveAs(resp, 'RealtimeReport.xlsx');
      // this.saveAsBlob(resp);
       this.isLoading = false;

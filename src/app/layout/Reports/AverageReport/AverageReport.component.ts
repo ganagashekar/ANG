@@ -67,8 +67,8 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
       this.parameterFilter =  new ParameterFilter();
       this.reportRequestModel.SiteId = Number(localStorage.getItem('SiteId'));
       this.reportRequestModel.FromDateVM = (new Date());
-      this.reportRequestModel.FromTimeVM = "12:00 AM";
-      this.reportRequestModel.ToTimeVM = "11:59 PM";
+      this.reportRequestModel.FromTimeVM = '00:00';
+      this.reportRequestModel.ToTimeVM = '23:59';
       this.reportRequestModel.ToDateVM = (new Date());
       this.reportRequestModel.StackId  = 0;
       this.reportRequestModel.ParamId = 0;
@@ -183,7 +183,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   }
     },
     chart: {
-      height: 600,
+      height: 700,
       zoomType: 'x'
     },
 
@@ -201,16 +201,22 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
       title: {
           text: 'Count'
       },
+
       plotLines: [
 
     ]
   },
     xAxis: {
-      type: 'datetime',
+      type:'datetime',
+      dateTimeLabelFormats: {
+        day: '%e of %b'
+    },
       lineColor: '#000000',
       title: {
         text: 'DateTime'
     },
+
+
 
       events: {
         afterSetExtremes: (e) => {
@@ -220,36 +226,33 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
         }
       }
     },
-      // tooltip: {
-      //   shared: true,
-      //   useHTML: true,
-      //   headerFormat: '<small>{point.key}</small><table>',
-      //   pointFormat:
-      //     '<tr><td style="color: {series.color}">{series.name}: </td>' +
-      //     '<td style="text-align: right"><b>{point.y}</b></td></tr>',
-      //   footerFormat: '</table>',
-      //   valueDecimals: 2
-      // },
+
 
       tooltip: {
         useHTML: true,
+        followTouchMove: true,
         shared: true,
-        crosshairs: true,
+        split: false,
+        outside: true,
+        percentageDecimals: 2,
+        crosshairs: false,
     animation: true,
     formatter: function() {
-      var outputString = '<table bgcolor="#fff" border= "1 dotted"  style="border-collapse:collapse;background-color:#fff; border: 1px solid #DAD9D9 ;">';
-      outputString +=" <tr><th style='background-color:#000;color: #DAD9D9'; colspan=5>" + new Date(this.x).toLocaleString() + "</th></tr>";
+      const dates = new Date(this.x);
+             dates.setMinutes(dates.getMinutes());
+      let outputString = '<table bgcolor="#fff" border= "1 dotted"  style="border-collapse:collapse;background-color:#fff; border: 1px solid #DAD9D9 ;">';
+      outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspan=5>' + new Date(dates).toLocaleString() + '</th></tr>';
       this.points.forEach(function(point) {
         if (point.x === this.x) {
-          const seriesame = (point.series.name).toUpperCase()
-          let param = seriesame.split('-');
-          const StackName= param[0] == null ? "" : param[0];
-          const paramName= param.length > 1 ? param[1] :"";
-          const paramUnits= param.length > 2 ? param[2] :"";
-          outputString += "<tr><td><span style='color:" + point.color + "'>\u25CF</span></td><td> " + (StackName) + "</td><td>"+paramName+"</td><td>"+paramUnits+"</td><td> <b> " + point.y + "</b></td></tr>";
+          const seriesame = (point.series.name).toUpperCase();
+          const param = seriesame.split('-');
+          const StackName = param[0] == null ? '' : param[0];
+          const paramName = param.length > 1 ? param[1] :'';
+          const paramUnits = param.length > 2 ? param[2] :'';
+          outputString += '<tr><td><span style=\'color:' + point.color + '\'>\u25CF</span></td><td> ' + (StackName) + '</td><td>'+paramName+'</td><td>' + paramUnits + '</td><td> <b> ' + point.y + '</b></td></tr>';
         }
       }, this);
-      return outputString+='</table>';
+      return outputString += '</table>';
     }
   },
       exporting: {
@@ -285,7 +288,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
    }
    bindChartSeries(chartdata: any): any {
     const _series = [];
-    const x = new Date().getTime();
+
     this.displayedColumns.forEach(item => {
        if (item !== 'createdDate' && item !== 'id' ) {
       const singleseries =  {
@@ -297,7 +300,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
          showInNavigator: true,
            data: chartdata.map(function (point) {
              const dates = new Date(point.createdDate);
-             dates.setMinutes(dates.getMinutes() + 330);
+             dates.setMinutes(dates.getMinutes() );
            return [ dates.getTime(), point[item]];
            })
         };
@@ -308,9 +311,13 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   }
   getAverageReport(): void {
     this.isLoading = true;
-    this.reportRequestModel.IsExport = false; 
-    this.reportRequestModel.FromDate = _moment(this.reportRequestModel.FromDateVM).format(appConstants.DATE_FORMAT);
-    this.reportRequestModel.ToDate = _moment(this.reportRequestModel.ToDateVM).format(appConstants.DATE_FORMAT);
+    this.reportRequestModel.IsExport = false;
+
+    const Fromdates = _moment(this.reportRequestModel.FromDateVM).format("MM/DD/YYYY");
+    const Todates = _moment(this.reportRequestModel.ToDateVM).format("MM/DD/YYYY");
+
+    this.reportRequestModel.FromDate = _moment( Fromdates + ' ' + this.reportRequestModel.FromTimeVM).format(appConstants.DATE_Time_FORMAT);
+    this.reportRequestModel.ToDate = _moment(Todates + ' '+ this.reportRequestModel.ToTimeVM).format(appConstants.DATE_Time_FORMAT);
     this._reportservices.getAverageReport(this.reportRequestModel).subscribe(resp => {
       this.isLoading = false;
       this.chartdata = [];
