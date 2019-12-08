@@ -39,7 +39,7 @@ export class ControllersSComponent implements OnInit {
   }
 
   getAllControllerinfoList(): void {
-    this.ControllerFilter.MacId = this._appcomponent.MacId;
+    this.ControllerFilter.macId = this._appcomponent.MacId;
     this.ControllerFilter.SiteId = this._appcomponent.SiteId;
     this._controllerservices.getAllControllerinfoList(this.ControllerFilter).subscribe(resp => {
      this.ControllerListDataSource.data = resp.model as ControllerModel[];

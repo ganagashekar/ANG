@@ -41,9 +41,9 @@ import { ControllerFilter } from 'src/app/Model/FilterModels/ControllerFilter';
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/SaveController', ControllerDetails);
     }
-    Deletecontroller(macId: string): Observable<boolean> {
+    Deletecontroller(MacId: string): Observable<boolean> {
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
-        '/DeleteController?=' + macId);
+        '/DeleteController?=' + MacId);
     }
 
   }

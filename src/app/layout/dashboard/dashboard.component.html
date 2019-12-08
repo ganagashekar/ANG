@@ -2,7 +2,7 @@
 
 <div class="mb-20 mt-20" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="10px">
   <div fxFlex>
-     
+
      <a style="text-decoration: none" href="javascript:void(0)" (click)="onStationClick(1)"><app-stat  [bgClass]="'success'" [icon]="'dashboard'" [count]="stackCount" [label]="'Monitoring Stations'"></app-stat></a>
   </div>
   <div fxFlex>
@@ -24,6 +24,7 @@
               <th mat-header-cell *matHeaderCellDef><button matTooltip="Show All" mat-icon-button>
 
                   <mat-icon   (click)="showAllSeries()">insert_chart_outlined</mat-icon>
+
                 </button>
                   <!-- <button matTooltip="Show All" mat-icon-button>
 
@@ -74,11 +75,11 @@
   <td [ngStyle]="{'background-color': groupBy.color_code}"  colspan="999" mat-cell *matCellDef="let groupBy" class="dashboard-analyzer">
 
     <strong>  {{groupBy.stackName}}
-
-
   </strong>
   <button mat-icon-button>
- <mat-icon (click)="SelectedGroupDrawCharts(groupBy)">insert_chart_outlined</mat-icon></button></td>
+
+ <i class="fas fa-chart-line"  (click)="SelectedGroupDrawCharts(groupBy)"></i>
+</button></td>
 </ng-container>
 
 <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup"> </tr>

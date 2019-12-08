@@ -34,8 +34,9 @@ import { ControllerBusFilter } from 'src/app/Model/FilterModels/ControllerBusFil
     }
 
     getAllControllerbus(macId: string  , All: boolean): Observable<any> {
+
       return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
-        '/CtrMacID?macId=' + macId + '&IncludeAll=' + All);
+        '/GetCtrMacID?macId=' + macId + '&IncludeAll=' + All);
       }
 
     getReferencerecords(referenceRecordsTypeId: number  , All: boolean): Observable<any> {

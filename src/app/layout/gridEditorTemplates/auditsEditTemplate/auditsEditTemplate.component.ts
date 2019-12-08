@@ -19,7 +19,7 @@ export class AuditsEditTemplateComponent implements OnInit {
   // paramUnitsArray: ReferenceRecords[] = [];
   isAdd = true;
   SelectedauditID: bigint;
-  SelectedsiteID: string;
+  SelectedsiteID: bigint;
   SelectedconfgID: bigint;
   editModel: AuditModel;
   auditFilter: AuditFilter;
