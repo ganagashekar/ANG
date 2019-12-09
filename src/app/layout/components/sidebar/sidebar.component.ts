@@ -9,41 +9,46 @@ import { NavItem } from 'src/app/shared/Common/NavItem';
 export class SidebarComponent implements OnInit {
     public showMenu: string;
 
+      roleName = localStorage.getItem('RoleName');
+     IsAdmin = (this.roleName === 'Admin' ? true : false);
 
-    navItems: NavItem[] =  [
+     navItems: NavItem[] =  [
       {
         displayName: 'Dashboard',
         iconName: 'home',
         route: 'dashboard',
+        visible: true ,
 
       },
       {
         displayName: 'Reports',
         iconName: 'assessment',
+        visible: true ,
         children: [
           {
             displayName: 'Average',
             iconName: 'timeline',
-            route: 'AverageReport'
-
+            route: 'AverageReport',
+            visible: true ,
           },
           {
             displayName: 'RealTime',
             iconName: 'library_books',
-            route: 'RealtimeReport'
-
+            route: 'RealtimeReport',
+            visible: true ,
           },
           {
             displayName: 'Exceedence',
             iconName: 'multiline_chart',
-            route: 'ExceedenceReport'
-
+            route: 'ExceedenceReport',
+            visible: true ,
           },
           {
             displayName: 'Delayed',
             iconName: 'query_builder',
 
-            route: 'AverageReport'
+            route: 'AverageReport',
+            visible: true ,
 
           }
 
@@ -53,47 +58,55 @@ export class SidebarComponent implements OnInit {
       {
         displayName: 'Setups',
         iconName: 'settings_applications',
+        visible: this.IsAdmin ,
         children: [
           {
             displayName: 'Site',
             iconName: 'settings_input_composite',
             route: 'SiteSetup',
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Controller',
             iconName: 'settings_input_composite',
-            route: 'Controllersetup'
+            route: 'Controllersetup',
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Controller-Bus',
             iconName: 'settings_input_composite',
-            route: 'ControllerBusSetup'
+            route: 'ControllerBusSetup',
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Config',
             iconName: 'settings_system_daydream',
-            route: 'Confg'
+            route: 'Confg',
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Parameter',
             iconName: 'settings_input_component',
             route: 'Paramsetup',
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'CalibrationSetup',
             iconName: 'settings_input_component',
             route: 'Calibration',
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Calibration Report',
             iconName: 'settings_input_component',
             route: 'Calibrationreport',
+            visible: (this.roleName === 'Admin' ? true : false) ,
 
           }
 
@@ -102,11 +115,13 @@ export class SidebarComponent implements OnInit {
       {
         displayName: 'UserSetup',
         iconName: 'settings_applications',
+       visible: this.IsAdmin ,
         children: [
           {
             displayName: 'Users',
             iconName: 'people',
-            route: 'Userinfosetup'
+            route: 'Userinfosetup',
+           visible: this.IsAdmin ,
 
           },
         ]
@@ -114,23 +129,27 @@ export class SidebarComponent implements OnInit {
       {
         displayName: 'Logs',
         iconName: 'settings_applications',
+       visible: this.IsAdmin ,
         children: [
           {
             displayName: 'ApplicationLogs',
             iconName: 'Logs',
-            route: 'ApplicationLogs'
+            route: 'ApplicationLogs',
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Audit',
             iconName: 'Audit',
-            route: 'audit'
+            route: 'audit',
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Error-Code',
             iconName: 'error',
-            route: 'Error'
+            route: 'Error',
+           visible: this.IsAdmin ,
 
           }
         ]

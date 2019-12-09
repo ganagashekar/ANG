@@ -17,6 +17,8 @@ export interface Model {
   creatts: string;
   updtts: string;
   siteId: number;
+  roleId: number;
+  roleName: string;
 }
 export interface Site {
   siteId: number;

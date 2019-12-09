@@ -48,8 +48,8 @@ export class ApplicationLogsComponent implements OnInit , AfterViewInit  {
   }
 
   getAllApplicationLogsinfoList(): void {
-    this.ApplicationLogsFilter.LogID = this._appcomponent.logID;
-    this.ApplicationLogsFilter.ConfgID = this._appcomponent.confgID;
+    this.ApplicationLogsFilter.LogId = this._appcomponent.logID;
+    this.ApplicationLogsFilter.ConfgId = this._appcomponent.confgID;
     this._ApplicationLogsservices.getAllApplicationLogsinfoList(this.ApplicationLogsFilter).subscribe(resp => {
      this.ApplicationLogsListDataSource.data = resp.model as ApplicationLogsModel[];
    }, error => {

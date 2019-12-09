@@ -7,10 +7,7 @@
   outline: none;
   width: 100%;
 
-  .mat-list-item.active {
-    background-color: mat-color($mat-indigo, 50);
-    color:#000000 !important;
-  }
+
 
 
 
@@ -18,17 +15,24 @@
   &:focus {
     >.mat-list-item:not(.expanded) {
       background-color: mat-color($mat-indigo, 100) !important;
-
+      border-radius: 10px;
     }
   }
 }
 
+.mat-list-item.active {
+  background-color:deepskyblue;
+  border-radius: 5px;
+  height: 34px
+
+}
 .mat-list-item {
   padding: 8px 0;
   display: flex;
   width: auto;
+  // height: 34px;
 
   .routeIcon {
-    margin-right: 40px;
+    margin-right: 20px;
   }
 }

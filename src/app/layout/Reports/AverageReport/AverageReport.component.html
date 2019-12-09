@@ -3,9 +3,10 @@
 <div >
 
 
-<mat-card >
+<mat-card style="padding: 6px;" class="mb-10" >
 
   <div>
+
 
     <mat-form-field>
         <mat-label>Stack Name</mat-label>
@@ -28,7 +29,7 @@
     </mat-form-field>
 
     <mat-form-field style="width: 100px;">
-        <mat-label>Time Range</mat-label>
+        <mat-label>AVG Time</mat-label>
          <mat-select [(ngModel)]="reportRequestModel.TimePeriod" >
 
             <mat-option [value]="timePeriod.id" *ngFor="let timePeriod of timePeriodArray">{{timePeriod.name}}
@@ -38,23 +39,50 @@
     </mat-form-field>
 
     <mat-form-field style="width: 100px;">
-      <input matInput [matDatepicker]="picker1" placeholder="From Date" [(ngModel)]="reportRequestModel.FromDate">
+      <input matInput [matDatepicker]="picker1" placeholder="From Date" [(ngModel)]="reportRequestModel.FromDateVM" >
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
 
 
-    <mat-form-field style="width: 100px;">
-      <input matInput [matDatepicker]="picker2" placeholder="To Date"
-      [(ngModel)]="reportRequestModel.ToDate">
-      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2></mat-datepicker>
-    </mat-form-field>
 
 
+      <mat-form-field style="width: 60px;">
+        <input
+          matInput
+          [ngxTimepicker]="timePick"
+          placeholder="Start Time"
+          [format]="24"
+          [(ngModel)]="reportRequestModel.FromTimeVM"
+        />
 
+        <ngx-material-timepicker
 
-    <button mat-button color="primary" (click)="OnSearchClick()"
+          #timePick
+        ></ngx-material-timepicker>
+      </mat-form-field>
+      <mat-form-field style="width: 100px;">
+          <input matInput [matDatepicker]="picker2" placeholder="To Date" [(ngModel)]="reportRequestModel.ToDateVM" >
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+      <mat-form-field style="width: 60px;">
+          <input
+            matInput
+            [ngxTimepicker]="timePick2"
+            placeholder="End Time"
+            [format]="24"
+            [(ngModel)]="reportRequestModel.ToTimeVM"
+          />
+
+          <ngx-material-timepicker
+
+            #timePick2
+          ></ngx-material-timepicker>
+        </mat-form-field>
+
+        <button mat-button color="primary" (click)="OnSearchClick()"
     matTooltip="Search">
       <mat-icon>search</mat-icon>
     </button>
@@ -66,6 +94,16 @@
       file_copy
       </i>
   </button>
+
+    <!-- <br>
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle value="bold">1Day</mat-button-toggle>
+        <mat-button-toggle value="italic">3Day</mat-button-toggle>
+        <mat-button-toggle value="underline">7Day</mat-button-toggle>
+      </mat-button-toggle-group> -->
+
+
+
   <mat-radio-group class="example-radio-group" [(ngModel)]="SelectedView" >
     <mat-radio-button class="exmple-radio-button" *ngFor="let view of Viewtypes"
     (change)="radioViewChange($event)"
@@ -107,29 +145,29 @@
                 </mat-card>
 
   </div>
-  <mat-accordion   >
+  <mat-accordion [hidden]="!IsGraphView" >
 
 
-    <mat-card >
-        <div [hidden]="!IsGraphView" >
-          <mat-card    *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
-            <mat-progress-spinner [diameter]="30"
-              color="primary"
-              mode="indeterminate">
-            </mat-progress-spinner>
-          </mat-card>
 
-        <highcharts-chart  style="width: 99.8%; display: block"
-         [Highcharts]="Highcharts"
-         [oneToOne] ="'true'"
-        [constructorType]="'stockChart'"
-        [options]="chartOptions">
-             </highcharts-chart>
-            </div>
+      <div >
+          <mat-card  *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+              <mat-progress-spinner [diameter]="30"
+                color="primary"
+                mode="indeterminate">
+              </mat-progress-spinner>
             </mat-card>
 
+      <highcharts-chart *ngIf="!isLoading" style="width: 99.8%; display: block"
+       [Highcharts]="Highcharts"
+       [oneToOne] ="'true'"
+      [constructorType]="'stockChart'"
+      [options]="chartOptions">
+           </highcharts-chart>
 
-      </mat-accordion>
+
+         </div>
+
+    </mat-accordion>
 
 
 

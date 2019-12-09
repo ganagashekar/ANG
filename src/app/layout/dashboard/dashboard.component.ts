@@ -10,11 +10,14 @@ HC_exporting(Highcharts);
 import { first } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { interval, Subscription } from 'rxjs';
-import { OnInit, ElementRef, ViewChild, AfterViewInit, Component } from '@angular/core';
+import { OnInit, ElementRef, ViewChild, AfterViewInit, Component, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { DashboardQuickCounts } from 'src/app/Model/ServiceResposeModel/Dashboard/DashboardQuickCounts';
 import { DashboardService } from 'src/app/shared/services/Dashboard.Services';
 
 import MapModule from 'highcharts/modules/map';
+import { ConfigurationSComponent } from '../configuration-s/configuration-s.component';
+import { CommonpopupComponent } from './popups/commonpopup/commonpopup.component';
+import { DataSource } from '@angular/cdk/table';
 
 MapModule(Highcharts);
 
@@ -30,7 +33,7 @@ const ELEMENT_DATA: (DashboardQuickDataModel | GroupBy)[] = [];
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-
+  IsFirst = true;
   dashboardQuickCounts: DashboardQuickCounts;
   stackCount: number;
   paramCount: number;
@@ -46,7 +49,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
 
 
-
+  @ViewChild('container2', {  static: false , read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
 
   @ViewChild('container', { read: ElementRef , static: true }) container: ElementRef;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -56,13 +59,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private _dialog: MatDialog,
     private _route: ActivatedRoute,
     private _dashboardService: DashboardService,
+    private componentFactoryResolver: ComponentFactoryResolver,
     private snackBar: MatSnackBar) {
 
       localStorage.setItem('currentUrl', '/dashboard');
 
   }
 
-  displayedColumns = ['paramName', 'paramUnits', 'paramminvalue', 'parammaxvalue', 'threShholdValue', 'paramValue', 'recordedDate', ];
+  displayedColumns = ['paramName', 'paramUnits', 'paramValue', 'threShholdValue','limit', 'recordedDate' ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -75,27 +79,54 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.init();
     this.getDashboardQuickCounts();
     this.getDashboardQuickTableList();
-    // const source = interval(5000);
+    // const source = interval(30000);
     // this.subscription = source.subscribe(val => this.getDashboardQuickTableList());
   }
+
+  onStationClick(type: number): void {
+let data: any;
+let Heading = "";
+switch (type) {
+  case 1: {
+    data = this.dashboardQuickCounts.stations;
+    Heading = 'Monitoring Stations';
+     break;
+  }
+  case 2: {
+    data = this.dashboardQuickCounts.paramters;
+    Heading = 'Parameters';
+    break;
+  }
+  case 3: {
+    data = this.dashboardQuickCounts.exceedence;
+    Heading = 'Exceedence';
+    break;
+  }
+  default: {
+    data = this.dashboardQuickCounts.alarms;
+    Heading = 'Alarms';
+    break;
+  }
+}
+    const dialogRef = this._dialog.open(CommonpopupComponent, {
+      width: '500px',
+      data: { action: Heading, data}
+    });
+   }
   addPoint() {
     const x = new Date().getTime();
     const shift = this.chatsss.series[0].data.length > 100000000;
     if (this.chatsss) {
-      if (true) {
-        //  region
-        // this.chart.addPoint(Math.floor(Math.random() * 10));
-        //  this.chart.ref.series[0].addPoint(20)
-        //  endregion
-        // element.addPoint(Math.random() * 10);
-      }
+
       this.chatsss.series.forEach(element => {
         if (this.DashboardQuickDataResposne != null) {
 
           const result = this.DashboardQuickDataResposne.filter(x => x.paramName != null)
-          .filter(model => model.paramName  + '-' + model.stackName === element.name )[0];
+          .filter(model => model.chartSeriesName.toUpperCase() === element.name.toUpperCase() )[0];
               if (result != null && result.paramValue !== undefined) {
-                element.addPoint([x, result.paramValue]);
+                const dates = new Date(result.recordedDate);
+                dates.setMinutes(dates.getMinutes() );
+                element.addPoint([dates, result.paramValue]);
               }
         }
       });
@@ -109,13 +140,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                this.DashboardQuickDataResposne.forEach(element => {
                  if (element.paramName != null) {
                    const seriesfilter = this.chatsss.series
-                   .filter(model => model.name === element.paramName + '-' + element.stackName)[0];
+                   .filter(model => model.name.toUpperCase() === element.chartSeriesName.toUpperCase())[0];
                    if (seriesfilter == null) {
 
                      this.chatsss.addSeries({
                        type: 'line',
                       id: element.configId,
-                       name: element.paramName + '-' + element.stackName,
+                       name: element.chartSeriesName,
                        data: [
                          [x, element.paramValue]
                        ],
@@ -123,8 +154,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                         enabled: true,
                         radius: 3
                     },
-                       showInNavigator: true,
-                       softThreshold: true,
+
                        zones: [
                          {
                            value: element.threShholdValue
@@ -135,9 +165,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
                          }
                        ]
                      });
-                    // this.AddPlotline(element);
+                     this.AddPlotline(element);
 
                    } else {
+                    seriesfilter.id = element.configId;
+                    this.AddPlotline(element);
                     // this.chatsss.series[0].addPoint([x, 10]);
                    }
 
@@ -166,6 +198,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
       },
       chart: {
+        height: 600,
         zoomType: 'x'
       },
       credits: {
@@ -188,47 +221,85 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             radius: 3
         },
         events: {
-          legendItemClick: function() {
+          legendItemClick: function(event) {
+            var visibility = this.visible ? 'visible' : 'hidden';
             return true;
+            this.chart.series.forEach(element => {
+
+              if(element.name.toUpperCase() == this.name.toUpperCase()){
+                if (!this.visible) {
+                  element = false;
+                  element.show();
+              } else {
+                element.hidden = true;
+                element.hide();
+              }
+              }
+
+        });
+            // if (!confirm('The series is currently '+
+            //              visibility +'. Do you want to change that?')) {
+            //     return false;
+            // }
+            const seriesplotfilter = this.yAxis.plotLinesAndBands;
+            //.filter(model => model.id == row.paramName + '-' + row.stackName + ' Threshhold')[0];
+            const check = this.yAxis.plotLinesAndBands.filter(model => model.id.toUpperCase() == this.name.toUpperCase())[0];
+            if(check != null) {
+
+              if (check.hidden) {
+                check.hidden = false;
+                check.svgElem.show();
+            } else {
+              check.hidden = true;
+              check.svgElem.hide();
+            }
+
+             // check.svgElem[ el.visible ? 'show' : 'hide' ]();
+            // check[ el.visible ? 'show' : 'hide' ]();
+            // el.visible = !el.visible;
+            //  check.svgElem.visibility = this.visible;
+            // check.axis.visibility = this.visible;
+            // check.svgElem.visibility = this.visible;
+          }
+          return true;
           }
         },
         }
       },
-      tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.2f} TWh</b></td></tr>' +
-            '<tr><td>Indikator : </td>' +
-            '<td><b>x %</b></td></tr>',
-        footerFormat: '</table> ',
-        shared: true,
-        useHTML: true
-    },
-  //     tooltip: {
-  //       shared: true,
-  //       crosshairs: true,
-  //   animation: true,
-  //   formatter: function() {
-	// 		return this.x + '<br>'
-	// 		+ this.points[0].series.name + ': ' + this.points[0].y + '<br>'
-	// 		+ this.points[1].series.name + ': ' + this.points[1].y;
-  //   }
-  // },
 
-        // useHTML: true,
-        // crosshairs: true,
-        // enabled: true,
-        // headerFormat: '<small>{point.key}</small><table>',
-        // pointFormat:
-        //   '<tr><td style="color: {series.color}">{series.name}: </td>' +
-        //   '<td style="text-align: right"><b>{point.y}</b> {point.extraForTooltip}</td></tr>',
-        // footerFormat: '</table>',
-      //   valueDecimals: 2
-      // },
+      tooltip: {
+        useHTML: true,
+        followTouchMove: true,
+        shared: true,
+         split: false,
+        outside: true,
+        percentageDecimals: 2,
+        crosshairs: false,
+    animation: true,
+    formatter: function() {
+      const dates = new Date(this.x);
+      dates.setMinutes(dates.getMinutes());
+let outputString = '<table bgcolor="#fff" border= "1 dotted"  style="border-collapse:collapse;background-color:#fff; border: 1px solid #DAD9D9 ;">';
+outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspan=5>' + new Date(dates).toLocaleString() + '</th></tr>';
+      this.points.forEach(function(point) {
+        if (point.x === this.x) {
+          const seriesame = (point.series.name).toUpperCase()
+          let param = seriesame.split('-');
+          const StackName= param[0] == null ? "" : param[0];
+          const paramName= param.length > 1 ? param[1] :"";
+          const paramUnits= param.length > 2 ? param[2] :"";
+          outputString += "<tr><td><span style='color:" + point.color + "'>\u25CF</span></td><td> " + (StackName) + "</td><td>"+paramName+"</td><td>"+paramUnits+"</td><td> <b> " + point.y + "</b></td></tr>";
+        }
+      }, this);
+      return outputString+='</table>';
+    }
+  },
+
+
       series: [],
 
       yAxis: {
-
+        min: 0,
         opposite: false,
         lineColor: '#000000',
         lineWidth: 1,
@@ -240,11 +311,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       ]
     },
       xAxis: {
+        type:'datetime',
         lineColor: '#000000',
         title: {
           text: 'DateTime'
       },
-
+      dateTimeLabelFormats: {
+        day: '%e of %b'
+    },
         events: {
           afterSetExtremes: (e) => {
             // console.log(e);
@@ -261,7 +335,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
 
-
+   toggleBands(chart) {
+    chart.xAxis[0].plotLinesAndBands.forEach(el => {
+      if (el.svgElem !== undefined) {
+                el.svgElem[ el.visible ? 'show' : 'hide' ]();
+                el.visible = !el.visible;
+            }
+    } );
+}
   isGroup(index, item): boolean {
     return item.isGroupby;
   }
@@ -285,51 +366,150 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }
     );
   }
-  getDashboardQuickTableList(): void {
+
+  getDashboardChartData(stackId: number , paramId :number): void {
     this.DashboardQuickDataResposne = null;
     this.dashboardTableRequest = new DashboardTableRequestModel();
     this.dashboardTableRequest.siteId = this.siteId;
+    this.dashboardTableRequest.StackId = stackId;
+    this.dashboardTableRequest.ParamId = paramId;
     this.dashboardTableRequest.fromDate = new Date();
-    this._dashboardService.getDashboardQuickTableData(this.dashboardTableRequest).subscribe(
+    this.dashboardTableRequest.isFirst = this.IsFirst;
+    this._dashboardService.getDashboarChart(this.dashboardTableRequest).subscribe(
       resp => {
         if (resp.model.length === 0) {
-          this.showSnackBar('No data available ', true);
+         // this.showSnackBar('No data available ', true);
           return;
         }
-        this.DashboardQuickDataResposne = resp.model as DashboardQuickDataModel[];
-        this.dataSource.data = resp.model as DashboardQuickDataModel[];
+        this.init();
+          this.bindChartSeries(resp.dataTable);
 
-        this.addSerie();
-        this.addPoint();
       },
       error => {
         console.log('Error: ' + error);
       }
     );
   }
-
-  SelectedrowDrawCharts(row: DashboardQuickDataModel) {
-    this.showAllSeries();
-    this.chatsss.series.forEach(element => {
-      if (row != null) {
-        if  (row.paramName + '-' + row.stackName !== element.options.name) {
-          element.hide();
+  getDashboardQuickTableList(): void {
+    this.DashboardQuickDataResposne = null;
+    this.dashboardTableRequest = new DashboardTableRequestModel();
+    this.dashboardTableRequest.siteId = this.siteId;
+    this.dashboardTableRequest.fromDate = new Date();
+    this.dashboardTableRequest.isFirst =this.IsFirst;
+    this._dashboardService.getDashboardQuickTableData(this.dashboardTableRequest).subscribe(
+      resp => {
+        if (resp.model.length === 0) {
+         // this.showSnackBar('No data available ', true);
+          return;
         }
-    }
+        this.DashboardQuickDataResposne = resp.model as DashboardQuickDataModel[];
+        this.dataSource.data = resp.model as DashboardQuickDataModel[];
+
+          if(this.IsFirst) {
+          this.bindChartSeries(resp.dataTable);
+          this.IsFirst = false;
+          } else {
+         //  this.addSerie() ;
+          this.addPoint();
+        }
+
+      },
+      error => {
+        console.log('Error: ' + error);
+      }
+    );
+  }
+  bindChartSeries(chartdata: any): any {
+
+    const listofseries =  chartdata.length > 0 ? Object.keys( chartdata[0]) : [];
+    //   listofseries.forEach(item => {
+      listofseries.forEach(element => {
+        if (element !== 'createdDate' && element !== 'id' ) {
+        const seriesfilter = this.chatsss.series
+        .filter(model => model.name === element)[0];
+        if (seriesfilter == null) {
+          const param = element.split('-');
+          const StackName = param[0] == null ? '' : param[0];
+
+          this.chatsss.addSeries({
+            type: 'line',
+            stackname: StackName,
+            name: element,
+            data: chartdata.map(function (point) {
+             const dates = new Date(point.createdDate);
+             dates.setMinutes(dates.getMinutes() );
+           return [ dates.getTime(), point[element]];
+           }),
+
+           tooltip: {
+            valueDecimals: 2
+        },
+            marker: {
+             enabled: true,
+             radius: 3
+         },
+            showInNavigator: true,
+            softThreshold: true,
+            zones: [
+              {
+                // value: element.threShholdValue
+              },
+              {
+                color: '#ff0000',
+                 dashStyle: 'dot',
+              }
+            ]
+          });
+         // this.AddPlotline(element);
+
+        } else {
+         // this.chatsss.series[0].addPoint([x, 10]);
+        }
+
+      }
     });
-   // this.RemovePlotline(row);
+
+  }
+  SelectedrowDrawCharts(row: DashboardQuickDataModel) {
+    this.getDashboardChartData(row.configId,row.paramId);
+    // this.chatsss.series.forEach(element => {
+    //     if  (row.chartSeriesName.toUpperCase() == element.options.name.toUpperCase()) {
+    //         element.show();
+    //       element.hidden = false;
+    //     } else {
+    //       element.hide();
+    //       element.hidden = true;
+    //     }
+    // });
+    // const seriesplotfilter =  this.chatsss.yAxis.plotLinesAndBands;
+    // //.filter(model => model.id == row.paramName + '-' + row.stackName + ' Threshhold')[0];
+    // const check =  this.chatsss.plotLinesAndBands.filter(model => model.id.toUpperCase() == element.options.name.toUpperCase())[0];
+    // if(check != null) {
+
+    //   if (check.hidden) {
+    //     check.hidden = false;
+    //     check.svgElem.show();
+    // } else {
+    //   check.hidden = true;
+    //   check.svgElem.hide();
+    // }
     this.AddPlotline(row);
+
   }
 
   AddPlotline(row: DashboardQuickDataModel): void {
-    const plotOption = {
 
+    const seriesplotfilter = this.chatsss.yAxis[0];
+    const check = seriesplotfilter.plotLinesAndBands.filter(model => model.id == row.chartSeriesName)[0]
+    if(check == null) {
+    const plotOption = {
       color: '#FF0000',
       dashStyle: 'ShortDash',
       width: 2,
       zIndex: 9999,
-      visible: 'hide',
-      id:  row.paramName + '-' + row.stackName + ' Threshhold',
+      // visible: 'hide',
+      // hidden : false,
+      id:  row.chartSeriesName,
       value: row.threShholdValue,
       // zIndex: 0,
       label : {
@@ -337,7 +517,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }
   };
   // this.chatsss.yAxis[0].removePlotLine(row.paramName + '-' + row.stackName + ' Threshhold');
-    this.chatsss.yAxis[0].addPlotLine(plotOption) ;
+    this.chatsss.yAxis[0].addPlotLine(plotOption);
+  }
+
   }
 
   RemovePlotline(): void {
@@ -352,24 +534,33 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   SelectedGroupDrawCharts(row: DashboardQuickDataModel) {
-    this.showAllSeries();
-    this.chatsss.series.forEach(element => {
-      if (element.id !== row.paramName + '-' + row.stackName + ' Threshhold') {
+    this.getDashboardChartData(row.configId,0);
+    // this.chatsss.series.forEach(element => {
+    //   if(element.options.stackname.toUpperCase() == row.stackName.toString().toUpperCase()){
+    //     if (!element.visible) {
+    //       element.hidden = false;
+    //       element.show();
+    //   } else {
+    //     element.hidden = true;
+    //     element.hide();
+    //   }
+    //   } else {
+    //     element.hidden = true;
+    //     element.hide();
+    //   }
+  //});
+}
 
-      if (row != null) {
-        if  (row.configId.toString() !== element.options.id.toString()) {
-          element.zindex = 999;
-        }
-      }
-    }
+  showAllSeries(): void  {
+    this.chatsss.series.forEach(element => {
+      element.hidden = false;
+          element.show();
     });
   }
 
-  showAllSeries(): void  {
-
-    this.RemovePlotline();
+  hideAllSeries(): void  {
     this.chatsss.series.forEach(element => {
-          element.show();
+          element.hide();
     });
   }
 

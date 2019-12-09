@@ -27,10 +27,13 @@ import { ErrorcodesModule } from './errorcodes/errorcodes.module';
 import { ForgotpasswordModule } from 'src/app/forgotpassword/forgotpassword.module';
 import { CalibrationsetupModule } from 'src/app/layout/calibrationsetup/calibrationsetup.module';
 import { CalibreportsModule } from 'src/app/layout/calibreports/calibreports.module';
-
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { CommonpopupComponent } from './dashboard/popups/commonpopup/commonpopup.component';
+
+
+
+
 @NgModule({
     imports: [
         CommonModule,
@@ -53,17 +56,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         FormsModule,
         ControllerbusModule,
         ForgotpasswordModule,
-        CalibrationsetupModule,
-        CalibreportsModule,
-
-        NgbModule
+        CalibrationsetupModule, CalibreportsModule,
+        NgxMaterialTimepickerModule
     ],
     providers: [NavService],
 
     entryComponents: [
-         ConfirmationDialogComponent],
+         ConfirmationDialogComponent,CommonpopupComponent],
 
-    declarations: [    ConfirmationDialogComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
+    declarations: [  CommonpopupComponent,  ConfirmationDialogComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
         AverageReportComponent, MenuListItemComponent
       , RealtimeReportComponent , ExceedenceReportComponent]
 

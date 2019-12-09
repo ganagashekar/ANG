@@ -25,7 +25,7 @@ export function highchartsModules() {
     return [stock, more];
   }
 // import { LoaderComponent } from './shared/loader/loader.component';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MAT_DATE_LOCALE } from '@angular/material';
 import { LoadingBarHttpClientModule } from './packages/http-client';
 import { LoadingBarRouterModule } from './packages/router';
 // AoT requires an exported function for factories
@@ -65,9 +65,7 @@ export const createTranslateLoader = (http: HttpClient) => {
             }
         })
     ],
-    providers: [
-
-    ],
+    providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -35,6 +35,7 @@ import { ReportRequestModel } from '../../Model/Report/ReportRequestModel';
       }
 
       getAverageReport(filter: ReportRequestModel): Observable<any> {
+
         return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_REPORTS +
           '/FetchAverageReports', filter);
       }

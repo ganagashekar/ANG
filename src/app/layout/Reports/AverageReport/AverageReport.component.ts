@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { saveAs } from 'file-saver';
 import * as Highcharts from 'highcharts/highstock';
 
-
+import * as _moment from 'moment';
 import * as HC_exporting_ from 'highcharts/modules/exporting';
 import { ReportRequestModel } from '../../../Model/Report/ReportRequestModel';
 import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
@@ -13,6 +13,8 @@ import { ParameterFilter } from 'src/app/Model/FilterModels/ParameterFilter';
 const HC_exporting = HC_exporting_;
 HC_exporting(Highcharts);
 import MapModule from 'highcharts/modules/map';
+import { appConstants } from 'src/app/shared/Common/app-constants';
+
 MapModule(Highcharts);
 @Component({
   selector: 'app-AverageReport',
@@ -21,20 +23,21 @@ MapModule(Highcharts);
 })
 
 export class AverageReportComponent implements OnInit , AfterViewInit {
-
+ FromDate = new Date();
+ ToDate = new Date();
   SelectedView: string;
   Viewtypes = [
     {
       key: 'Graph View',
-      checked: true
+      checked: false
     },
     {
       key: 'Table View',
-      checked: false
+      checked: true
     }];
   Highcharts = Highcharts;
    updateFlag = true;
-   IsGraphView = true;
+   IsGraphView = false;
    reportRequestModel: ReportRequestModel;
    stacksArray: ReferenceRecords[] = [];
    paramArray: ReferenceRecords[] = [];
@@ -56,15 +59,17 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   constructor(private _dialog: MatDialog,  private _route: ActivatedRoute,
     private _reportservices: ReportsService,
     private snackBar: MatSnackBar) {
-      this.SelectedView = 'Table';
+      this.SelectedView = 'Table View';
 
     // **As well as this**
 
       this.reportRequestModel = new ReportRequestModel();
       this.parameterFilter =  new ParameterFilter();
       this.reportRequestModel.SiteId = Number(localStorage.getItem('SiteId'));
-      this.reportRequestModel.FromDate = (new Date());
-      this.reportRequestModel.ToDate = (new Date());
+      this.reportRequestModel.FromDateVM = (new Date());
+      this.reportRequestModel.FromTimeVM = '00:00';
+      this.reportRequestModel.ToTimeVM = '23:59';
+      this.reportRequestModel.ToDateVM = (new Date());
       this.reportRequestModel.StackId  = 0;
       this.reportRequestModel.ParamId = 0;
       this.reportRequestModel.IsExport = false;
@@ -86,7 +91,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
      this.getAllParameterList(this.reportRequestModel.StackId);
 
      this.gettimePeriod();
-     this.reportRequestModel.TimePeriod = this.timePeriodArray[0].id;
+   //  this.reportRequestModel.TimePeriod = this.timePeriodArray[0].id;
 
   }
 
@@ -178,6 +183,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   }
     },
     chart: {
+      height: 700,
       zoomType: 'x'
     },
 
@@ -188,22 +194,29 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
 
 
     yAxis: {
-
+      min: 0,
       opposite: false,
       lineColor: '#000000',
       lineWidth: 1,
       title: {
           text: 'Count'
       },
+
       plotLines: [
 
     ]
   },
     xAxis: {
+      type:'datetime',
+      dateTimeLabelFormats: {
+        day: '%e of %b'
+    },
       lineColor: '#000000',
       title: {
         text: 'DateTime'
     },
+
+
 
       events: {
         afterSetExtremes: (e) => {
@@ -213,16 +226,35 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
         }
       }
     },
+
+
       tooltip: {
-        shared: true,
         useHTML: true,
-        headerFormat: '<small>{point.key}</small><table>',
-        pointFormat:
-          '<tr><td style="color: {series.color}">{series.name}: </td>' +
-          '<td style="text-align: right"><b>{point.y}</b> {point.extraForTooltip}</td></tr>',
-        footerFormat: '</table>',
-        valueDecimals: 2
-      },
+        followTouchMove: true,
+        shared: true,
+        split: false,
+        outside: true,
+        percentageDecimals: 2,
+        crosshairs: false,
+    animation: true,
+    formatter: function() {
+      const dates = new Date(this.x);
+             dates.setMinutes(dates.getMinutes());
+      let outputString = '<table bgcolor="#fff" border= "1 dotted"  style="border-collapse:collapse;background-color:#fff; border: 1px solid #DAD9D9 ;">';
+      outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspan=5>' + new Date(dates).toLocaleString() + '</th></tr>';
+      this.points.forEach(function(point) {
+        if (point.x === this.x) {
+          const seriesame = (point.series.name).toUpperCase();
+          const param = seriesame.split('-');
+          const StackName = param[0] == null ? '' : param[0];
+          const paramName = param.length > 1 ? param[1] :'';
+          const paramUnits = param.length > 2 ? param[2] :'';
+          outputString += '<tr><td><span style=\'color:' + point.color + '\'>\u25CF</span></td><td> ' + (StackName) + '</td><td>'+paramName+'</td><td>' + paramUnits + '</td><td> <b> ' + point.y + '</b></td></tr>';
+        }
+      }, this);
+      return outputString += '</table>';
+    }
+  },
       exporting: {
         chartOptions: {
 
@@ -256,7 +288,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
    }
    bindChartSeries(chartdata: any): any {
     const _series = [];
-    const x = new Date().getTime();
+
     this.displayedColumns.forEach(item => {
        if (item !== 'createdDate' && item !== 'id' ) {
       const singleseries =  {
@@ -267,7 +299,9 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
          },
          showInNavigator: true,
            data: chartdata.map(function (point) {
-           return [ new Date(point.createdDate).getTime(), point[item]];
+             const dates = new Date(point.createdDate);
+             dates.setMinutes(dates.getMinutes() );
+           return [ dates.getTime(), point[item]];
            })
         };
          _series.push(singleseries);
@@ -278,6 +312,12 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   getAverageReport(): void {
     this.isLoading = true;
     this.reportRequestModel.IsExport = false;
+
+    const Fromdates = _moment(this.reportRequestModel.FromDateVM).format("MM/DD/YYYY");
+    const Todates = _moment(this.reportRequestModel.ToDateVM).format("MM/DD/YYYY");
+
+    this.reportRequestModel.FromDate = _moment( Fromdates + ' ' + this.reportRequestModel.FromTimeVM).format(appConstants.DATE_Time_FORMAT);
+    this.reportRequestModel.ToDate = _moment(Todates + ' '+ this.reportRequestModel.ToTimeVM).format(appConstants.DATE_Time_FORMAT);
     this._reportservices.getAverageReport(this.reportRequestModel).subscribe(resp => {
       this.isLoading = false;
       this.chartdata = [];

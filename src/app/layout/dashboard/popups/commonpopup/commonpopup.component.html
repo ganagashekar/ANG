@@ -1,0 +1,24 @@
+<div fxFlex style="padding: 10px;">
+    
+        <div class="close-btn">
+            <button mat-icon-button  (click)="onCloseClick()">
+                <i class="material-icons" title="Click here to delete controllerbus popup">cancel</i>
+            </button>
+          </div>
+      <div class="mat-h2 header">
+        {{Heading}}
+      </div>
+<mat-table table1 *ngIf="!isLoading" [dataSource]="dataSource" matSort matSortStart="desc" class="mat-elevation-z8 mat-table data">
+    <ng-container [matColumnDef]="columnName" *ngFor="let columnName of displayedColumns">
+      <mat-header-cell [ngClass]="'customWidthClass'"  mat-sort-header *matHeaderCellDef> {{columnName  | titlecase}} </mat-header-cell>
+      <mat-cell [ngClass]="'customWidthClass'"  *matCellDef="let element"> {{element[columnName]}} </mat-cell>
+
+
+
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true" ></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+  </div>

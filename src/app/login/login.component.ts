@@ -62,7 +62,8 @@ export class LoginComponent implements OnInit {
 
         localStorage.setItem('isLoggedin', 'true');
         localStorage.setItem('SiteName', data.model.site.siteName);
-        localStorage.setItem('VendorName','VASTHI');
+        localStorage.setItem('RoleName', data.model.roleName);
+        localStorage.setItem('VendorName', 'VASTHI');
         localStorage.setItem('SiteCity', data.model.site.site_city);
         localStorage.setItem('SiteId', (data.model.site.siteId).toString());
         localStorage.setItem('currentUrl', '/login');
