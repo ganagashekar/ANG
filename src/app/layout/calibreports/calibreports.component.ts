@@ -5,7 +5,7 @@ import { CalibReportService } from 'src/app/shared/services/CalibReport.service'
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
 import { CalibReportFilter } from 'src/app/Model/FilterModels/CalibReportFilter';
-
+import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 @Component({
   selector: 'app-calibreports',
   templateUrl: './calibreports.component.html',
@@ -15,7 +15,7 @@ export class CalibreportsComponent implements OnInit {
   CalibReportFilter: CalibReportFilter;
   CalibListDataSource: MatTableDataSource<CalibReportModel>;
   displayedColumns: string[] = [
-     'confgId', 'paramName', 'calibtype', 'calibduriation', 'create_ts', 'updtts',
+     'confgId', 'paramName', 'calibtype', 'calibduriation', 'create_ts', 'updtts', 'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _calibrationservices: CalibReportService,
@@ -38,6 +38,29 @@ export class CalibreportsComponent implements OnInit {
        console.log('Error: ' + error);
      });
    }
+
+
+Deletecalibreport(calibsetupid: number): void {
+  const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
+    width: '420px',
+    data: { Title: 'Confirm', Message: 'Are you sure want to delete this Calibration ?' }
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this._calibrationservices.Deletecalibreport(calibsetupid).subscribe((response: any) => {
+        if (response.model) {
+           this. getAllCalibList();
+           this.showSnackBar('Scheduled Calibration Deleted Successfully.');
+        } else {
+        this.showSnackBar('Error occurred while deleting the Calibration.', true);
+        }
+        this.showSnackBar(response.message);
+      }, error => {
+        console.log('Error: ' + error);
+      });
+    }
+  });
+}
 
    showSnackBar(message: string, isError: boolean = false): void {
     if (isError) {

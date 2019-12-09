@@ -85,7 +85,7 @@ export class SidebarComponent implements OnInit {
 
           },
           {
-            displayName: 'Calibration',
+            displayName: 'CalibrationSetup',
             iconName: 'settings_input_component',
             route: 'Calibration',
 

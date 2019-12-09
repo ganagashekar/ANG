@@ -43,7 +43,7 @@ import { ControllerFilter } from 'src/app/Model/FilterModels/ControllerFilter';
     }
     Deletecontroller(MacId: string): Observable<boolean> {
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
-        '/DeleteController?=' + MacId);
+        '/DeleteController?MacId=' + MacId);
     }
 
   }

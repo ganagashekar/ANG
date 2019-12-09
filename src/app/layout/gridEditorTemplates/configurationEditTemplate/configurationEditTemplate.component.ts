@@ -35,7 +35,7 @@ export class ConfigurationEditTemplateComponent implements OnInit {
       if (data !== undefined && data.action === 'edit') {
         this.isAdd = false;
         this.editModel = (data.Scheduler as  ConfgModel);
-       this.SelectedconfgId = this.editModel.confgID;
+       this.SelectedconfgId = this.editModel.confgId;
        // this.SelecteduserName = this.editModel.userName;
        this.SelectedsiteId = this.editModel.siteID;
        this.SelectedbusId = this.editModel.busID;

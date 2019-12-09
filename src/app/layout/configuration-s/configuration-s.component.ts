@@ -21,7 +21,7 @@ export class ConfigurationSComponent implements OnInit {
   busesArray: ReferenceRecords[] = [];
   confgListDataSource: MatTableDataSource<ConfgModel>;
   displayedColumns: string[] = [
-    'editAction', 'siteID', 'busID',
+    'editAction',
     'stack_name', 'stack_typ', 'stack_status',
      'input_format', 'output_format', 'createts', 'updatets', 'deleteAction'
    ];
@@ -89,14 +89,14 @@ export class ConfigurationSComponent implements OnInit {
      }
     });
   }
-  Deleteconfig(confgID: number): void {
+  Deleteconfig(confgId: number): void {
     const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
       width: '420px',
       data: { Title: 'Confirm', Message: 'Are you sure want to delete this Config ?' }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this._confgsservices.Deleteconfig(confgID).subscribe((response: any) => {
+        this._confgsservices.Deleteconfig(confgId).subscribe((response: any) => {
           if (response.model) {
              this. getAllconfgList();
              this.showSnackBar('Scheduler Config Deleted Successfully.');

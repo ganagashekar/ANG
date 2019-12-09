@@ -42,9 +42,9 @@ import { ConfgFilter } from 'src/app/Model/FilterModels/ConfgFilter';
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/saveConfig', configDetails);
     }
-    Deleteconfig(confgID: number): Observable<boolean> {
+    Deleteconfig(confgId: number): Observable<boolean> {
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
-        '/DeleteConfig?=' + confgID);
+        '/DeleteConfig?confgId=' + confgId);
     }
 
   }

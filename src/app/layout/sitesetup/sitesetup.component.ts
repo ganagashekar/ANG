@@ -78,7 +78,7 @@ export class SitesetupComponent implements OnInit {
     });
   }
 
-  DeleteSite(siteId: string): void {
+  DeleteSite(siteId: bigint): void {
     const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
       width: '420px',
       data: { Title: 'Confirm', Message: 'Are you sure want to delete this Site ?' }

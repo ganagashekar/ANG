@@ -34,13 +34,12 @@ export class ControllersSComponent implements OnInit {
     this.getAllControllerinfoList ();
   }
 
-  StackChange() {
+  SiteChange() {
     this.getAllControllerinfoList();
   }
 
   getAllControllerinfoList(): void {
-    this.ControllerFilter.macId = this._appcomponent.MacId;
-    this.ControllerFilter.SiteId = this._appcomponent.SiteId;
+
     this._controllerservices.getAllControllerinfoList(this.ControllerFilter).subscribe(resp => {
      this.ControllerListDataSource.data = resp.model as ControllerModel[];
    }, error => {

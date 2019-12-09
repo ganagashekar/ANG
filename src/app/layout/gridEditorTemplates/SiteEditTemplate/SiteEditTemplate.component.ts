@@ -46,7 +46,7 @@ export class SiteEditTemplateComponent implements OnInit {
     this.getAllsitecityList(0);
     this.getAllsiteindustryist(0);
     this.schedulerForm = this.formBuilder.group({
-      siteId: new FormControl('', [Validators.required]),
+     // siteId: new FormControl('', [Validators.required]),
       siteName: new FormControl('', [Validators.required]),
       site_cpcb_cd: new FormControl('', [Validators.required]),
       site_in_ganga_basin: new FormControl('', [Validators.required]),
@@ -77,7 +77,7 @@ export class SiteEditTemplateComponent implements OnInit {
 
 
       this.schedulerForm.patchValue({
-        siteId: this.editModel.siteId,
+// siteId: this.editModel.siteId,
         siteName: this.editModel.siteName,
         site_cpcb_cd: this.editModel.site_cpcb_cd,
         site_in_ganga_basin: this.editModel.site_in_ganga_basin,

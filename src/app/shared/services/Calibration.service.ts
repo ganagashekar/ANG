@@ -25,11 +25,11 @@ import { CalibrationFilter } from 'src/app/Model/FilterModels/CalibrationFilter'
 
     getAllCalibrationList(filter: CalibrationFilter): Observable<any> {
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
-        '/GetcalibrationAsync', filter);
+        '/GetcalibrationsetupAsync', filter);
     }
     saveCalibration(CalibrationDetails: any):  Observable<any> {
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
-        '/SaveCalibration', CalibrationDetails);
+        '/Savecalibrationsetup', CalibrationDetails);
     }
     Deletecalibration(calib_cmd_id: number): Observable<boolean> {
       alert('hello' + calib_cmd_id);
