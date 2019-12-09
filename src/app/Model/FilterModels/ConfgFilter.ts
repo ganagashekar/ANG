@@ -3,4 +3,5 @@ export class ConfgFilter {
   ConfgId: number;
   BusId: number;
   VendorId: string;
+  stack_typ: string;
 }

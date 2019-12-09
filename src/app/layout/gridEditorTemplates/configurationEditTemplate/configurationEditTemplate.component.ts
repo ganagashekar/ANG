@@ -17,6 +17,7 @@ export class ConfigurationEditTemplateComponent implements OnInit {
   schedulerForm: FormGroup;
   sitesArray: ReferenceRecords[] = [];
    busArray: ReferenceRecords[] = [];
+   stack_typArray: ReferenceRecords[] = [];
   // paramArray: ReferenceRecords[] = [];
   // paramUnitsArray: ReferenceRecords[] = [];
   isAdd = true;
@@ -46,6 +47,8 @@ export class ConfigurationEditTemplateComponent implements OnInit {
   ngOnInit() {
   this.getSites();
   this.getBus();
+  this. getAllstacktype(0);
+
     this.schedulerForm = this.formBuilder.group({
       siteID: new FormControl('', [Validators.required]),
      busID: new FormControl('', [Validators.required]),
@@ -102,6 +105,23 @@ export class ConfigurationEditTemplateComponent implements OnInit {
     }, error => {
       console.log('Error: ' + error);
     });
+  }
+  // getstack(): void {
+  //   this._confgsservices.getAllstack('', false).subscribe(resp => {
+  //     this.stack_typArray = resp.model as ReferenceRecords[];
+  //   }, error => {
+  //     console.log('Error: ' + error);
+  //   });
+  // }
+  getAllstacktype(ConfgId: number): void {
+
+    this.confgFilter.ConfgId = 1;
+    this.confgFilter.ConfgId = ConfgId;
+    this._confgsservices.getReferencerecords(1, false).subscribe(resp => {
+      this.stack_typArray = resp.model as ReferenceRecords[];
+   }, error => {
+     console.log('Error: ' + error);
+   });
   }
   showSnackBar(message: string, isError: boolean = false): void {
     if (isError) {

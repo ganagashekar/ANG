@@ -47,7 +47,7 @@ export class ControllerBusComponent implements OnInit {
     this.getAllControllerBusinfoList();
   }
 
-  macChange() {
+  macsChange() {
     this.getAllControllerBusinfoList();
   }
   getAllControllerBusinfoList(): void {

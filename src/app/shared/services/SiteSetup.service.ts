@@ -39,7 +39,7 @@ import { SiteSetupFilter } from 'src/app/Model/FilterModels/SiteSetupFilter';
     }
 
     DeleteSite(siteId: bigint): Observable<boolean> {
-      alert('hai');
+
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/DeleteSite?siteId=' + siteId);
     }

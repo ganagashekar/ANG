@@ -11,11 +11,12 @@
  </mat-select> -->
 </mat-form-field>
 
+
 <mat-form-field>
   <mat-label>MacId</mat-label>
-  <mat-select [(ngModel)]="ControllerBusFilter.MacId"  (ngModelChange)="macChange()">
+  <mat-select [(ngModel)]="ControllerBusFilter.MacId"  (ngModelChange)="macsChange()">
 
-    <mat-option [value]="site.macid" *ngFor="let site of macArray">{{site.macid}}
+    <mat-option [value]="mac.macId" *ngFor="let mac of macArray">{{mac.macId}}
     </mat-option>
 </mat-select>
    <!-- <mat-select>

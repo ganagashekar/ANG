@@ -46,5 +46,13 @@ import { ConfgFilter } from 'src/app/Model/FilterModels/ConfgFilter';
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/DeleteConfig?confgId=' + confgId);
     }
+    // getAllstack(stack_typ: string  , All: boolean): Observable<any> {
+    //   return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+    //     '/Getstacktype?stack_typ=' + stack_typ + '&IncludeAll=' + All);
+    //   }
+    getReferencerecords(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+      return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+        '/GetReferenceRecords?ReferenceTypeId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+      }
 
   }

@@ -18,14 +18,14 @@
         <input matInput type="number" min="1" formControlName="confgID">
     </mat-form-field> -->
       <mat-form-field class="half-width float-right">
-          <mat-label>Site Id.</mat-label>
+          <mat-label>Site Name.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.siteId.hasError('required')">
               Siteid is
               <strong>required</strong>
           </mat-error> -->
           <mat-select formControlName="siteID" >
 
-             <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.id}}
+             <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.name}}
              </mat-option>
          </mat-select>
      </mat-form-field>
@@ -62,13 +62,17 @@
         <input matInput type="string" min="1" formControlName="stack_name">
     </mat-form-field>
     <mat-form-field class="half-width float-left">
-        <mat-label>Stack typ.</mat-label>
-        <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
-          Errorcode is
+      <mat-label>stack type.</mat-label>
+      <!-- <mat-error *ngIf="schedulerForm.controls.siteId.hasError('required')">
+          Siteid is
           <strong>required</strong>
       </mat-error> -->
-        <input matInput type="string" min="1" formControlName="stack_typ">
-    </mat-form-field>
+      <mat-select formControlName="stack_typ" >
+
+         <mat-option [value]="stack.id" *ngFor="let stack of stack_typArray">{{stack.name}}
+         </mat-option>
+     </mat-select>
+ </mat-form-field>
     <mat-form-field class="half-width float-right">
         <mat-label>Stack Status.</mat-label>
         <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
