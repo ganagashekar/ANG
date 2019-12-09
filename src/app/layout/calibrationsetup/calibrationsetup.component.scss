@@ -22,16 +22,15 @@ table {
 .mb-20 {
   margin-bottom: 20px;
 }
-.config-data{text-align: center !important;border-right:1px solid #888 ;border-bottom:1px solid #888;}
-
+.controller-busvalues{text-align: center;border-right:1px solid #888 ;border-bottom:1px solid #888;}
+.cntrbus-siteid{margin-left: 25px;}
+th.mat-header-cell.cdk-column-editAction.mat-column-editAction.ng-star-inserted {
+  border-right: 1px solid #fff;
+}
 
 span.add-title {
 font-size: 20px;
 font-weight: bold;
-border-right: 1px solid #fff;
-}
-th.mat-header-cell.cdk-column-editAction.mat-column-editAction.ng-star-inserted {
-border-right: 1px solid #fff;
 }
 span.add-title:hover {
 color: #e0e011!important;
@@ -42,4 +41,8 @@ color:#e0e011 !important;
 .mat-column-editAction{
 border-bottom: 1px solid #888;border-right:1px solid #888;
 }
-.mat-column-deleteAction {border-bottom: 1px solid #888;}
+.mat-column-deleteAction {border-bottom:1px solid #888;}
+.cntr-sitename{
+padding-left: 30px;
+}
+

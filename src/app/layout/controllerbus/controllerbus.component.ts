@@ -43,10 +43,15 @@ export class ControllerBusComponent implements OnInit {
   }
 
 
+  SiteChange() {
+    this.getAllControllerBusinfoList();
+  }
 
+  macChange() {
+    this.getAllControllerBusinfoList();
+  }
   getAllControllerBusinfoList(): void {
-    this.ControllerBusFilter.MacId = this._appcomponent.MacId;
-    this.ControllerBusFilter.BusId = this._appcomponent.BusId;
+
     this._controllerBusservices.getAllControllerBusinfoList(this.ControllerBusFilter).subscribe(resp => {
      this.ControllerBusListDataSource.data = resp.model as ControllerBusModel[];
    }, error => {

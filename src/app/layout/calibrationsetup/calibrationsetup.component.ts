@@ -41,7 +41,6 @@ export class CalibrationsetupComponent implements OnInit {
    }, error => {
      console.log('Error: ' + error);
    });
-
  }
  NewCalibration(): void {
   const dialogRef = this._dialog.open(CalibEditTemplateComponent, {

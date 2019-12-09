@@ -49,7 +49,7 @@ import { ControllerBusFilter } from 'src/app/Model/FilterModels/ControllerBusFil
     }
     deletecontrollerbus(busId: bigint): Observable<boolean> {
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
-        '/DeleteControllerBus?=' + busId);
+        '/DeleteControllerBus?BusId=' + busId);
     }
 
   }

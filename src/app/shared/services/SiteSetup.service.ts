@@ -38,9 +38,10 @@ import { SiteSetupFilter } from 'src/app/Model/FilterModels/SiteSetupFilter';
         '/saveSite', SiteDetails);
     }
 
-    DeleteSite(siteId: string): Observable<boolean> {
+    DeleteSite(siteId: bigint): Observable<boolean> {
+     
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
-        '/DeleteSite?=SiteId' + siteId);
+        '/DeleteSite?siteId=' + siteId);
     }
 
   }

@@ -25,6 +25,9 @@ userName: string;
     return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
       '/GetCalibReportAsync', filter);
   }
+  Deletecalibreport(calibsetupid: number): Observable<boolean> {
+    return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
+      '/DeleteCalibreport?calibsetupid=' + calibsetupid);
 
-
+}
 }
