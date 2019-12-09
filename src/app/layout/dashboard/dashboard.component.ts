@@ -202,8 +202,8 @@ switch (type) {
         zoomType: 'x'
       },
       credits: {
-
-      },
+        enabled: false
+    },
       mapNavigation: {
         enabled: true,
         enableButtons: false
@@ -237,12 +237,9 @@ switch (type) {
               }
 
         });
-            // if (!confirm('The series is currently '+
-            //              visibility +'. Do you want to change that?')) {
-            //     return false;
-            // }
+
             const seriesplotfilter = this.yAxis.plotLinesAndBands;
-            //.filter(model => model.id == row.paramName + '-' + row.stackName + ' Threshhold')[0];
+            
             const check = this.yAxis.plotLinesAndBands.filter(model => model.id.toUpperCase() == this.name.toUpperCase())[0];
             if(check != null) {
 
@@ -253,13 +250,6 @@ switch (type) {
               check.hidden = true;
               check.svgElem.hide();
             }
-
-             // check.svgElem[ el.visible ? 'show' : 'hide' ]();
-            // check[ el.visible ? 'show' : 'hide' ]();
-            // el.visible = !el.visible;
-            //  check.svgElem.visibility = this.visible;
-            // check.axis.visibility = this.visible;
-            // check.svgElem.visibility = this.visible;
           }
           return true;
           }
@@ -321,9 +311,6 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
     },
         events: {
           afterSetExtremes: (e) => {
-            // console.log(e);
-            // this.button = e.rangeSelectorButton.count;
-
           }
         }
       },
@@ -367,7 +354,7 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
     );
   }
 
-  getDashboardChartData(stackId: number , paramId :number): void {
+  getDashboardChartData(stackId: number , paramId :number,row: any): void {
     this.DashboardQuickDataResposne = null;
     this.dashboardTableRequest = new DashboardTableRequestModel();
     this.dashboardTableRequest.siteId = this.siteId;
@@ -377,12 +364,16 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
     this.dashboardTableRequest.isFirst = this.IsFirst;
     this._dashboardService.getDashboarChart(this.dashboardTableRequest).subscribe(
       resp => {
-        if (resp.model.length === 0) {
-         // this.showSnackBar('No data available ', true);
+        if (resp.dataTable.length === 0) {
+         
           return;
         }
         this.init();
           this.bindChartSeries(resp.dataTable);
+          if(paramId !== 0)
+          {
+            this.AddPlotline(row);
+          }
 
       },
       error => {
@@ -441,9 +432,7 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
            return [ dates.getTime(), point[element]];
            }),
 
-           tooltip: {
-            valueDecimals: 2
-        },
+           
             marker: {
              enabled: true,
              radius: 3
@@ -471,36 +460,15 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
 
   }
   SelectedrowDrawCharts(row: DashboardQuickDataModel) {
-    this.getDashboardChartData(row.configId,row.paramId);
-    // this.chatsss.series.forEach(element => {
-    //     if  (row.chartSeriesName.toUpperCase() == element.options.name.toUpperCase()) {
-    //         element.show();
-    //       element.hidden = false;
-    //     } else {
-    //       element.hide();
-    //       element.hidden = true;
-    //     }
-    // });
-    // const seriesplotfilter =  this.chatsss.yAxis.plotLinesAndBands;
-    // //.filter(model => model.id == row.paramName + '-' + row.stackName + ' Threshhold')[0];
-    // const check =  this.chatsss.plotLinesAndBands.filter(model => model.id.toUpperCase() == element.options.name.toUpperCase())[0];
-    // if(check != null) {
+    this.getDashboardChartData(row.configId, row.paramId, row);
 
-    //   if (check.hidden) {
-    //     check.hidden = false;
-    //     check.svgElem.show();
-    // } else {
-    //   check.hidden = true;
-    //   check.svgElem.hide();
-    // }
-    this.AddPlotline(row);
 
   }
 
   AddPlotline(row: DashboardQuickDataModel): void {
 
     const seriesplotfilter = this.chatsss.yAxis[0];
-    const check = seriesplotfilter.plotLinesAndBands.filter(model => model.id == row.chartSeriesName)[0]
+    const check = seriesplotfilter.plotLinesAndBands.filter(model => model.id === row.chartSeriesName)[0]
     if(check == null) {
     const plotOption = {
       color: '#FF0000',
@@ -513,7 +481,7 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
       value: row.threShholdValue,
       // zIndex: 0,
       label : {
-          text : row.paramName + '-' + row.stackName + ' Threshhold'
+          text : 'Prescribed value  for ' + row.paramName + '-' + row.stackName + ' ( ' + row.paramUnits + ')'
       }
   };
   // this.chatsss.yAxis[0].removePlotLine(row.paramName + '-' + row.stackName + ' Threshhold');
@@ -534,28 +502,12 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
   }
 
   SelectedGroupDrawCharts(row: DashboardQuickDataModel) {
-    this.getDashboardChartData(row.configId,0);
-    // this.chatsss.series.forEach(element => {
-    //   if(element.options.stackname.toUpperCase() == row.stackName.toString().toUpperCase()){
-    //     if (!element.visible) {
-    //       element.hidden = false;
-    //       element.show();
-    //   } else {
-    //     element.hidden = true;
-    //     element.hide();
-    //   }
-    //   } else {
-    //     element.hidden = true;
-    //     element.hide();
-    //   }
-  //});
+    this.getDashboardChartData(row.configId, 0, row);
+  
 }
 
   showAllSeries(): void  {
-    this.chatsss.series.forEach(element => {
-      element.hidden = false;
-          element.show();
-    });
+    this.getDashboardChartData(0, 0, null)
   }
 
   hideAllSeries(): void  {

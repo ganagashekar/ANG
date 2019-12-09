@@ -28,13 +28,13 @@ userName: string;
     return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Dashboard +
       '/GetDashboardQuickCounts', filter);
   }
-  getDashboardQuickTableData(dashboardTableRequest: DashboardTableRequestModel) {
+  getDashboardQuickTableData(dashboardTableRequest: DashboardTableRequestModel): Observable<any>  {
     return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Dashboard +
       '/GetDashboardQuickData', dashboardTableRequest);
   }
-  getDashboarChart(dashboardTableRequest: DashboardTableRequestModel) {
+  getDashboarChart(dashboardTableRequest: DashboardTableRequestModel): Observable<any>  {
     return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Dashboard +
-      '/getDashboarChart', dashboardTableRequest);
+      '/GetDashboardQuickDataChartAsync', dashboardTableRequest);
   }
   
 }
