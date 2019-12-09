@@ -4,4 +4,6 @@ toDate: Date;
 dataId: number;
 siteId: number;
 isFirst = false;
+StackId: number;
+ParamId: number;
 }

@@ -1,4 +1,4 @@
 export class ApplicationLogsFilter {
-  LogID: number;
-  ConfgID: number;
+  LogId: number;
+  ConfgId: number;
 }

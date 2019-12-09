@@ -8,8 +8,9 @@ import { NavItem } from 'src/app/shared/Common/NavItem';
 })
 export class SidebarComponent implements OnInit {
     public showMenu: string;
-     IsAdmin = false;
+
       roleName = localStorage.getItem('RoleName');
+     IsAdmin = (this.roleName === 'Admin' ? true : false);
 
      navItems: NavItem[] =  [
       {
@@ -57,48 +58,48 @@ export class SidebarComponent implements OnInit {
       {
         displayName: 'Setups',
         iconName: 'settings_applications',
-        visible: (this.roleName === 'Admin' ? true : false) ,
+        visible: this.IsAdmin ,
         children: [
           {
             displayName: 'Site',
             iconName: 'settings_input_composite',
             route: 'SiteSetup',
-            visible: (this.roleName === 'Admin'? true : false) ,
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Controller',
             iconName: 'settings_input_composite',
             route: 'Controllersetup',
-            visible: (this.roleName === 'Admin'? true : false) ,
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Controller-Bus',
             iconName: 'settings_input_composite',
             route: 'ControllerBusSetup',
-            visible: (this.roleName === 'Admin'? true : false) ,
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Config',
             iconName: 'settings_system_daydream',
             route: 'Confg',
-            visible: (this.roleName === 'Admin'? true : false) ,
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Parameter',
             iconName: 'settings_input_component',
             route: 'Paramsetup',
-            visible: (this.roleName === 'Admin'? true : false) ,
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Calibration',
             iconName: 'settings_input_component',
             route: 'Calibration',
-            visible: (this.roleName === 'Admin'? true : false) ,
+           visible: this.IsAdmin ,
 
           },
           {
@@ -114,13 +115,13 @@ export class SidebarComponent implements OnInit {
       {
         displayName: 'UserSetup',
         iconName: 'settings_applications',
-        visible: (this.roleName === 'Admin'? true : false) ,
+       visible: this.IsAdmin ,
         children: [
           {
             displayName: 'Users',
             iconName: 'people',
             route: 'Userinfosetup',
-            visible: (this.roleName === 'Admin'? true : false) ,
+           visible: this.IsAdmin ,
 
           },
         ]
@@ -128,27 +129,27 @@ export class SidebarComponent implements OnInit {
       {
         displayName: 'Logs',
         iconName: 'settings_applications',
-        visible: (this.roleName === 'Admin'? true : false) ,
+       visible: this.IsAdmin ,
         children: [
           {
             displayName: 'ApplicationLogs',
             iconName: 'Logs',
             route: 'ApplicationLogs',
-            visible: (this.roleName === 'Admin'? true : false) ,
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Audit',
             iconName: 'Audit',
             route: 'audit',
-            visible: (this.roleName === 'Admin'? true : false) ,
+           visible: this.IsAdmin ,
 
           },
           {
             displayName: 'Error-Code',
             iconName: 'error',
             route: 'Error',
-            visible: (this.roleName === 'Admin'? true : false) ,
+           visible: this.IsAdmin ,
 
           }
         ]

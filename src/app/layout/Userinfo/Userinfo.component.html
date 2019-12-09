@@ -40,15 +40,10 @@
         <td mat-cell *matCellDef="let userScheduler" class="user-data"> {{userScheduler.isEnabled}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="vendorSiteId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> VendorSiteId </th>
-      <td mat-cell *matCellDef="let userScheduler" class="user-data"> {{userScheduler.vendorSiteId}} </td>
-  </ng-container>
-
-        <!-- <ng-container matColumnDef="vendorSiteId">
+        <ng-container matColumnDef="vendorSiteId">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> VendorSite Id </th>
           <td mat-cell *matCellDef="let userScheduler" class="user-data"> {{userScheduler.vendorSiteId}} </td>
-      </ng-container> -->
+      </ng-container>
 
       <ng-container matColumnDef="creatts">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Created date  </th>

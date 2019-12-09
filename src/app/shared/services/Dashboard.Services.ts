@@ -32,4 +32,9 @@ userName: string;
     return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Dashboard +
       '/GetDashboardQuickData', dashboardTableRequest);
   }
+  getDashboarChart(dashboardTableRequest: DashboardTableRequestModel) {
+    return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Dashboard +
+      '/getDashboarChart', dashboardTableRequest);
+  }
+  
 }

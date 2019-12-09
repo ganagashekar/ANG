@@ -190,7 +190,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
       enableButtons: false
   },
   yAxis: {
-
+    min: 0,
     opposite: false,
     lineColor: '#000000',
     lineWidth: 1,
@@ -289,7 +289,7 @@ formatter: function() {
            data: chartdata.map(function (point) {
 
             const dates = new Date(point.createdDate);
-            dates.setMinutes(dates.getMinutes() + 330);
+            dates.setMinutes(dates.getMinutes() );
           return [ dates.getTime(), point[item]];
            })
         };

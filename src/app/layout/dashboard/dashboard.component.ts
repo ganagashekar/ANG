@@ -278,7 +278,7 @@ switch (type) {
     animation: true,
     formatter: function() {
       const dates = new Date(this.x);
-      dates.setMinutes(dates.getMinutes() + 330);
+      dates.setMinutes(dates.getMinutes());
 let outputString = '<table bgcolor="#fff" border= "1 dotted"  style="border-collapse:collapse;background-color:#fff; border: 1px solid #DAD9D9 ;">';
 outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspan=5>' + new Date(dates).toLocaleString() + '</th></tr>';
       this.points.forEach(function(point) {
@@ -299,7 +299,7 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
       series: [],
 
       yAxis: {
-
+        min: 0,
         opposite: false,
         lineColor: '#000000',
         lineWidth: 1,
@@ -311,6 +311,7 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
       ]
     },
       xAxis: {
+        type:'datetime',
         lineColor: '#000000',
         title: {
           text: 'DateTime'
@@ -365,6 +366,30 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
       }
     );
   }
+
+  getDashboardChartData(stackId: number , paramId :number): void {
+    this.DashboardQuickDataResposne = null;
+    this.dashboardTableRequest = new DashboardTableRequestModel();
+    this.dashboardTableRequest.siteId = this.siteId;
+    this.dashboardTableRequest.StackId = stackId;
+    this.dashboardTableRequest.ParamId = paramId;
+    this.dashboardTableRequest.fromDate = new Date();
+    this.dashboardTableRequest.isFirst = this.IsFirst;
+    this._dashboardService.getDashboarChart(this.dashboardTableRequest).subscribe(
+      resp => {
+        if (resp.model.length === 0) {
+         // this.showSnackBar('No data available ', true);
+          return;
+        }
+        this.init();
+          this.bindChartSeries(resp.dataTable);
+
+      },
+      error => {
+        console.log('Error: ' + error);
+      }
+    );
+  }
   getDashboardQuickTableList(): void {
     this.DashboardQuickDataResposne = null;
     this.dashboardTableRequest = new DashboardTableRequestModel();
@@ -380,12 +405,11 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
         this.DashboardQuickDataResposne = resp.model as DashboardQuickDataModel[];
         this.dataSource.data = resp.model as DashboardQuickDataModel[];
 
-          if(this.IsFirst)
-          {
+          if(this.IsFirst) {
           this.bindChartSeries(resp.dataTable);
           this.IsFirst = false;
           } else {
-           this.addSerie() ;
+         //  this.addSerie() ;
           this.addPoint();
         }
 
@@ -404,9 +428,12 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
         const seriesfilter = this.chatsss.series
         .filter(model => model.name === element)[0];
         if (seriesfilter == null) {
+          const param = element.split('-');
+          const StackName = param[0] == null ? '' : param[0];
 
           this.chatsss.addSeries({
             type: 'line',
+            stackname: StackName,
             name: element,
             data: chartdata.map(function (point) {
              const dates = new Date(point.createdDate);
@@ -444,16 +471,30 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
 
   }
   SelectedrowDrawCharts(row: DashboardQuickDataModel) {
-    this.showAllSeries();
-    this.chatsss.series.forEach(element => {
-      if (row != null) {
-        if  (row.paramName + '-' + row.stackName !== element.options.name) {
-          element.hide();
-        }
-    }
-    });
-   // this.RemovePlotline(row);
+    this.getDashboardChartData(row.configId,row.paramId);
+    // this.chatsss.series.forEach(element => {
+    //     if  (row.chartSeriesName.toUpperCase() == element.options.name.toUpperCase()) {
+    //         element.show();
+    //       element.hidden = false;
+    //     } else {
+    //       element.hide();
+    //       element.hidden = true;
+    //     }
+    // });
+    // const seriesplotfilter =  this.chatsss.yAxis.plotLinesAndBands;
+    // //.filter(model => model.id == row.paramName + '-' + row.stackName + ' Threshhold')[0];
+    // const check =  this.chatsss.plotLinesAndBands.filter(model => model.id.toUpperCase() == element.options.name.toUpperCase())[0];
+    // if(check != null) {
+
+    //   if (check.hidden) {
+    //     check.hidden = false;
+    //     check.svgElem.show();
+    // } else {
+    //   check.hidden = true;
+    //   check.svgElem.hide();
+    // }
     this.AddPlotline(row);
+
   }
 
   AddPlotline(row: DashboardQuickDataModel): void {
@@ -466,8 +507,8 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
       dashStyle: 'ShortDash',
       width: 2,
       zIndex: 9999,
-      visible: 'hide',
-      hidden : true,
+      // visible: 'hide',
+      // hidden : false,
       id:  row.chartSeriesName,
       value: row.threShholdValue,
       // zIndex: 0,
@@ -493,30 +534,31 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
   }
 
   SelectedGroupDrawCharts(row: DashboardQuickDataModel) {
-    this.showAllSeries();
-    this.chatsss.series.forEach(element => {
-      if (element.id !== row.paramName + '-' + row.stackName + ' Threshhold') {
-
-      if (row != null) {
-        if  (row.configId.toString() !== element.options.id.toString()) {
-          element.zindex = 999;
-        }
-      }
-    }
-    });
-  }
+    this.getDashboardChartData(row.configId,0);
+    // this.chatsss.series.forEach(element => {
+    //   if(element.options.stackname.toUpperCase() == row.stackName.toString().toUpperCase()){
+    //     if (!element.visible) {
+    //       element.hidden = false;
+    //       element.show();
+    //   } else {
+    //     element.hidden = true;
+    //     element.hide();
+    //   }
+    //   } else {
+    //     element.hidden = true;
+    //     element.hide();
+    //   }
+  //});
+}
 
   showAllSeries(): void  {
-
-    this.RemovePlotline();
     this.chatsss.series.forEach(element => {
+      element.hidden = false;
           element.show();
     });
   }
 
   hideAllSeries(): void  {
-
-
     this.chatsss.series.forEach(element => {
           element.hide();
     });

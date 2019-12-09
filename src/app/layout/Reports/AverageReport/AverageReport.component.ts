@@ -194,7 +194,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
 
 
     yAxis: {
-
+      min: 0,
       opposite: false,
       lineColor: '#000000',
       lineWidth: 1,
