@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 export class ConfgModel {
     confgId: bigint;
     siteID: string;
-    busID: bigint;
+    busId: bigint;
     stack_name: string;
     stack_typ: string;
     slaveid: bigint;

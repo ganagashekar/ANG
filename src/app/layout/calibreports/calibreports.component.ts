@@ -6,6 +6,7 @@ import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
 import { CalibReportFilter } from 'src/app/Model/FilterModels/CalibReportFilter';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
+import { CalibreportEditTemplateComponent } from '../gridEditorTemplates/calibreportEditTemplate/calibreportEditTemplate.component';
 @Component({
   selector: 'app-calibreports',
   templateUrl: './calibreports.component.html',
@@ -15,7 +16,7 @@ export class CalibreportsComponent implements OnInit {
   CalibReportFilter: CalibReportFilter;
   CalibListDataSource: MatTableDataSource<CalibReportModel>;
   displayedColumns: string[] = [
-     'confgId', 'paramName', 'calibtype', 'calibduriation', 'create_ts', 'updtts', 'deleteAction'
+     'editAction', 'siteId', 'siteName', 'paramName', 'calibtype', 'calib_zero_duriation', 'create_ts', 'updtts', 'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _calibrationservices: CalibReportService,
@@ -39,6 +40,36 @@ export class CalibreportsComponent implements OnInit {
      });
    }
 
+
+   Newcalibreport(): void {
+    const dialogRef = this._dialog.open( CalibreportEditTemplateComponent, {
+      width: '500px',
+      data: { action: 'add',  CalibReportModel }
+    });
+    dialogRef.componentInstance. calibreportEditorEmitter.subscribe((response: any) => {
+       if (response.model > 0) {
+         this.getAllCalibList();
+        this.showSnackBar('Calibreport added Successfully.');
+          } else {
+      this.showSnackBar(response.message, true);
+       }
+    });
+   }
+
+   editcalibreport(Scheduler: CalibReportModel): void {
+    const dialogRef = this._dialog.open(CalibreportEditTemplateComponent, {
+      width: '500px',
+      data: { action: 'edit', Scheduler }
+    });
+    dialogRef.componentInstance.calibreportEditorEmitter.subscribe((response: any) => {
+    if (response.model > 0) {
+       this. getAllCalibList();
+      this.showSnackBar('Calibreport Updated Successfully.');
+     } else {
+   this.showSnackBar('Error occurred while updating the Calibreport.', true);
+     }
+    });
+  }
 
 Deletecalibreport(calibsetupid: number): void {
   const dialogRef = this._dialog.open(ConfirmationDialogComponent, {

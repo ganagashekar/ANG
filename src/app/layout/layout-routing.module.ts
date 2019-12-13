@@ -16,6 +16,7 @@ import { AuditsComponent } from './audits/audits.component';
 import { ErrorcodesComponent } from './errorcodes/errorcodes.component';
 import { ApplicationLogsComponent } from './applicationlogs/applicationLogs.component';
 import { CalibrationsetupComponent } from './calibrationsetup/calibrationsetup.component';
+import { CalibrationlogsComponent } from './calibrationlogs/calibrationlogs.component';
 
 const routes: Routes = [
     {
@@ -89,9 +90,13 @@ const routes: Routes = [
             component: CalibrationsetupComponent
         },
         {
-          path: 'Calibrationreport',
+          path: 'Calib',
           component: CalibreportsComponent
       },
+      {
+        path: 'Calibrationreport',
+        component: CalibrationlogsComponent
+    },
         ]
     }
 ];

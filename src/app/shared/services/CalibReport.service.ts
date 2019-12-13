@@ -25,9 +25,28 @@ userName: string;
     return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
       '/GetCalibReportAsync', filter);
   }
+
   Deletecalibreport(calibsetupid: number): Observable<boolean> {
     return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
       '/DeleteCalibreport?calibsetupid=' + calibsetupid);
 
 }
+saveCalibration(CalibrationDetails: any):  Observable<any> {
+  return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
+    '/Savecalibreport', CalibrationDetails);
+  }
+  getReferencerecords(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+    return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+      '/GetReferenceRecords?ReferenceTypeId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+    }
+    getAllSites(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+      return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+        '/GetSites?SiteId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+      }
+
+      getAllParam(paramname: string , All: boolean): Observable<any> {
+        return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+          '/Getparamcalib?paramname=' + paramname + '&IncludeAll=' + All);
+        }
+
 }

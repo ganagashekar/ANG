@@ -22,7 +22,7 @@ export class ConfigurationSComponent implements OnInit {
   confgListDataSource: MatTableDataSource<ConfgModel>;
   displayedColumns: string[] = [
     'editAction',
-    'stack_name', 'stack_typ', 'stack_status',
+     'stack_name', 'stack_typ', 'stack_status',
      'input_format', 'output_format', 'createts', 'updatets', 'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,

@@ -1,0 +1,271 @@
+<div class="divTaskScheduler">
+  <div fxFlex>
+    <form [formGroup]="schedulerForm" class="scheduler-form">
+        <div class="close-btn">
+            <button mat-icon-button  (click)="onCloseClick()">
+                <i class="material-icons" title="Click here to delete Calibration popup">cancel</i>
+            </button>
+          </div>
+       <!-- <div class="close-btn"  (click)="onCloseClick()">
+         <mat-icon class="sidenav-icon">cancel</mat-icon>
+       </div> -->
+       <!-- <button mat-icon-button class="close-btn" (click)="onCloseClick()">
+          <i class="material-icons" title="Click here to delete  user info popup">cancel</i>
+      </button> -->
+      <div class="mat-h2 header">
+        CalibSetUp
+      </div>
+      <mat-form-field class="half-width float-left">
+        <mat-label>Site Name.</mat-label>
+        <!-- <mat-error *ngIf="schedulerForm.controls.siteId.hasError('required')">
+            Siteid is
+            <strong>required</strong>
+        </mat-error> -->
+        <mat-select formControlName="siteName" >
+
+           <mat-option [value]="site.name" *ngFor="let site of sitesArray">{{site.name}}
+           </mat-option>
+       </mat-select>
+   </mat-form-field>
+        <!-- <mat-form-field class="half-width float-right">
+          <mat-label>Stack Name.</mat-label>
+          <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
+            Errordesc is
+            <strong>required</strong>
+        </mat-error>
+          <input matInput type="string" min="1" formControlName="stack_name">
+      </mat-form-field> -->
+      <mat-form-field class="half-width float-left">
+          <mat-label>Param Name.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+        <mat-select formControlName="paramname" >
+          <mat-option [value]="param.name" *ngFor="let param of paramArray">{{param.name}}
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+
+      <mat-form-field class="half-width float-left">
+        <mat-label>Calib Name.</mat-label>
+        <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+          Errorcode is
+          <strong>required</strong>
+      </mat-error> -->
+        <input matInput type="string" min="1" formControlName="clib_name">
+    </mat-form-field>
+
+    <mat-form-field class="half-width float-left">
+      <mat-label>CalibrationType.</mat-label>
+       <!-- <mat-error *ngIf="schedulerForm.controls.protocal.hasError('required')">
+        Protocal is
+        <strong>required</strong>
+    </mat-error> -->
+      <!-- <input matInput type="string" min="1" formControlName="protocal"> -->
+      <mat-select formControlName="calibtype">
+          <mat-option [value]="calib.name" *ngFor="let calib of calibtypeArray">{{calib.name}}
+            </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+
+<mat-form-field class="half-width float-left" >
+  <input matInput [matDatepicker]="picker1" placeholder="Start Date" formControlName="calib_start_date">
+  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <input matInput [matDatepicker]="picker2" placeholder="End Date" formControlName="calib_end_date" >
+  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+  <mat-datepicker #picker2></mat-datepicker>
+</mat-form-field>
+
+
+<mat-form-field class="half-width float-left">
+  <mat-label>Gas_Name.</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+  <input matInput type="string" min="1" formControlName="calib_zero_gas_name">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>Unit.</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+  <input matInput type="string" min="1" formControlName="calib_zero_gas_unit">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>Type.</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+  <input matInput type="string" min="1" formControlName="calib_zero_gas_type">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>Set Value</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+  <input matInput type="bigint" min="1" formControlName="ca_set_new_zero_value">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>Duration</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+  <input matInput type="bigint" min="1" formControlName="calib_zero_duriation">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>Delay</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+  <input matInput type="bigint" min="1" formControlName="calib_zero_delay">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>SpanGasName</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+  <input matInput type="string" min="1" formControlName="calib_span_gas_name">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>Unit</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+  <input matInput type="string" min="1" formControlName="calib_span_gas_unit">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>Type</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+  <input matInput type="string" min="1" formControlName="calib_span_gas_type">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>Set Value</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+  <input matInput type="bigint" min="1" formControlName="ca_set_new_span_value">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>Duriation</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+  <input matInput type="bigint" min="1" formControlName="calib_span_duriation">
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>Delay</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+  <input matInput type="bigint" min="1" formControlName="calib_span_delay">
+</mat-form-field>
+
+<!-- <mat-form-field class="half-width float-left" >
+  <input matInput [matDatepicker]="picker1" placeholder="Start Date" formControlName="calib_start_date">
+  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <input matInput [matDatepicker]="picker2" placeholder="End Date" formControlName="calib_end_date" >
+  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+  <mat-datepicker #picker2></mat-datepicker>
+</mat-form-field> -->
+
+
+<!-- <mat-form-field style="width: 60px;">
+  <input
+    matInput
+    [ngxTimepicker]="timePick"
+    placeholder="Start Time"
+    [format]="24"
+    [(ngModel)]="reportRequestModel.FromTimeVM"
+  />
+
+  <ngx-material-timepicker
+
+    #timePick
+  ></ngx-material-timepicker>
+</mat-form-field> -->
+
+<!-- <mat-form-field class="half-width float-left">
+  <mat-label>EndDate.</mat-label>
+  <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error>
+  <input matInput type="datetime" min="1" formControlName="calib_start_date">
+</mat-form-field> -->
+
+
+<!--
+<mat-form-field class="half-width float-left">
+  <mat-label>EndTime.</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> ->
+  <input matInput type="datetime" min="1" formControlName="calib_start_date">
+</mat-form-field> -->
+
+<!-- <mat-form-field class="half-width float-left">
+  <mat-label>CalibType.</mat-label>
+   <!-- <mat-error *ngIf="schedulerForm.controls.protocal.hasError('required')">
+    Protocal is
+    <strong>required</strong>
+</mat-error> ->
+  <!-- <input matInput type="string" min="1" formControlName="protocal"> ->
+  <mat-select formControlName="calibtype">
+      <mat-option [value]="calib.name" *ngFor="let calib of calibtypeArray">{{calib.name}}
+        </mat-option>
+  </mat-select>
+</mat-form-field> -->
+
+      <div layout="row" layout-align="center center" class="divBtnCon float-right">
+        <div fxFlex>
+        <button mat-raised-button color="primary" class="btn add-btn fr" (click)="onFormSubmit()"
+            [disabled]="!schedulerForm.valid ">
+            <mat-icon>save</mat-icon>
+            <b *ngIf="isAdd == true"> Add</b>
+            <b *ngIf="isAdd != true"> Update</b>
+        </button>
+        <button mat-raised-button class="btn cancel-btn fr" (click)="onCloseClick()">
+            <mat-icon>close</mat-icon> <b>Cancel</b>
+        </button>
+        </div>
+    </div>
+    </form>
+  </div>
+</div>

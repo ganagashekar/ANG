@@ -103,6 +103,13 @@ export class SidebarComponent implements OnInit {
 
           },
           {
+            displayName: 'Calibration',
+            iconName: 'settings_input_component',
+            route: 'Calib',
+            visible: (this.roleName === 'Admin' ? true : false) ,
+
+          },
+          {
             displayName: 'Calibration Report',
             iconName: 'settings_input_component',
             route: 'Calibrationreport',

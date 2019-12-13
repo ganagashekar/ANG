@@ -39,7 +39,7 @@ export class ConfigurationEditTemplateComponent implements OnInit {
        this.SelectedconfgId = this.editModel.confgId;
        // this.SelecteduserName = this.editModel.userName;
        this.SelectedsiteId = this.editModel.siteID;
-       this.SelectedbusId = this.editModel.busID;
+       this.SelectedbusId = this.editModel.busId;
        // this.SelectedvendorisEnabled = this.editModel.isEnabled;
       }
     }
@@ -74,7 +74,7 @@ export class ConfigurationEditTemplateComponent implements OnInit {
 
         this.schedulerForm.patchValue({
           siteID: this.editModel.siteID,
-          busID: this.editModel.busID,
+          busID: this.editModel.busId,
           stack_name: this.editModel.stack_name,
           stack_typ: this.editModel.stack_typ,
           stack_status: this.editModel.stack_status,
