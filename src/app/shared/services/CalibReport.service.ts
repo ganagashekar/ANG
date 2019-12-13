@@ -44,9 +44,9 @@ saveCalibration(CalibrationDetails: any):  Observable<any> {
         '/GetSites?SiteId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
       }
 
-      getAllParam(paramname: string , All: boolean): Observable<any> {
+      getAllParam(referenceRecordsTypeId: number , All: boolean): Observable<any> {
         return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
-          '/Getparamcalib?paramname=' + paramname + '&IncludeAll=' + All);
+          '/Getparamcalib?paramId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
         }
 
 }

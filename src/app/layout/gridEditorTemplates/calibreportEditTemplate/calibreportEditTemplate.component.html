@@ -36,13 +36,13 @@
           <input matInput type="string" min="1" formControlName="stack_name">
       </mat-form-field> -->
       <mat-form-field class="half-width float-left">
-          <mat-label>Param Name.</mat-label>
+          <mat-label>Param Id.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
             Errorcode is
             <strong>required</strong>
         </mat-error> -->
         <mat-select formControlName="paramname" >
-          <mat-option [value]="param.name" *ngFor="let param of paramArray">{{param.name}}
+          <mat-option [value]="param.id" *ngFor="let param of paramArray">{{param.name}}
           </mat-option>
       </mat-select>
   </mat-form-field>

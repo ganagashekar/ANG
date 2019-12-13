@@ -17,7 +17,8 @@ export class CalibrationlogsComponent implements OnInit {
   CalibrationlogFilter: CalibrationlogFilter;
   CalibListDataSource: MatTableDataSource<CalibrationlogModel>;
   displayedColumns: string[] = [
-    'siteId', 'siteName', 'paramName', 'calibtype'
+    'siteId', 'siteName', 'paramName', 'calibtype', 'calib_zero_gas_unit', 'ca_set_new_zero_value', 'calib_zero_delay',
+    'calib_zero_duriation', 'calib_start_date', 'calib_end_date', 'iconAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _calibrationlogsServices: CalibrationlogsService,

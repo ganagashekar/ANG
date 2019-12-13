@@ -22,6 +22,7 @@ export class CalibReportModel {
   ca_set_new_span_value: bigint;
   create_ts: DateTime;
   updtts: DateTime;
+  paramId: bigint;
 
   siteId: bigint;
   siteName: string;

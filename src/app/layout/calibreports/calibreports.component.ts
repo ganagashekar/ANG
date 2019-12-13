@@ -16,7 +16,8 @@ export class CalibreportsComponent implements OnInit {
   CalibReportFilter: CalibReportFilter;
   CalibListDataSource: MatTableDataSource<CalibReportModel>;
   displayedColumns: string[] = [
-     'editAction', 'siteId', 'siteName', 'paramName', 'calibtype', 'calib_zero_duriation', 'create_ts', 'updtts', 'deleteAction'
+     'editAction', 'siteId', 'siteName', 'paramName', 'calibtype', 'calib_zero_duriation', 'calib_start_date', 'calib_end_date',
+      'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _calibrationservices: CalibReportService,

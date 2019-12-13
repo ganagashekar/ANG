@@ -56,14 +56,14 @@ The actual rendered columns are set as a property on the row definition" -->
 
 
 
-<ng-container matColumnDef="create_ts">
-  <th mat-header-cell *matHeaderCellDef mat-sort-header> create_ts  </th>
-  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.create_ts}} </td>
+<ng-container matColumnDef="calib_start_date">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_start_date}} </td>
 </ng-container>
 
-<ng-container matColumnDef="updtts">
-  <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated Time </th>
-  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.updtts}} </td>
+<ng-container matColumnDef="calib_end_date">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata. calib_end_date}} </td>
 </ng-container>
 
 
