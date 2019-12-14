@@ -17,7 +17,7 @@
     "@angular/common": "8.2.11",
     "@angular/compiler": "8.2.11",
     "@angular/core": "8.2.11",
-    "@angular/flex-layout": "7.0.0-beta.19",
+    "@angular/flex-layout": "^7.0.0-beta.19",
     "@angular/forms": "8.2.11",
     "@angular/http": "7.1.0",
     "@angular/material": "7.1.0",
