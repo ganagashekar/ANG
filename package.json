@@ -13,7 +13,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "8.2.11",
-    "@angular/cdk": "7.1.0",
+    "@angular/cdk": "^7.1.0",
     "@angular/common": "8.2.11",
     "@angular/compiler": "8.2.11",
     "@angular/core": "8.2.11",
@@ -38,6 +38,7 @@
     "luxon": "^1.19.3",
     "ngx-loading-bar": "0.0.9",
     "ngx-material-timepicker": "^4.0.0",
+    "ngx-scrollbar": "^7.1.0",
     "rxjs": "6.5.3",
     "web-animations-js": "2.3.1",
     "zone.js": "0.9.1"

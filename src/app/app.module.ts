@@ -28,6 +28,7 @@ export function highchartsModules() {
 import { MatDialogRef, MAT_DIALOG_DATA, MAT_DATE_LOCALE } from '@angular/material';
 import { LoadingBarHttpClientModule } from './packages/http-client';
 import { LoadingBarRouterModule } from './packages/router';
+import { NgScrollbarModule, NG_SCROLLBAR_OPTIONS } from 'ngx-scrollbar';
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
     /* for development
@@ -55,6 +56,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         LayoutModule,
         OverlayModule,
         MaterialModule,
+        NgScrollbarModule,
         HttpClientModule,
         FormsModule,
         TranslateModule.forRoot({

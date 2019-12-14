@@ -21,9 +21,28 @@
 }
 
 .mat-list-item.active {
-  background-color:deepskyblue;
+  // background-color:deepskyblue;
+  background-color: #1976d2;
   border-radius: 5px;
-  height: 34px
+  // height: 34px
+
+  height: 35px;
+    padding-left: 24px;
+    padding-right: 16px;
+    position: relative;
+    cursor: pointer;
+    outline: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    text-decoration: none;
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    margin-right: 8px;
+    -webkit-transition: background-color .4s cubic-bezier(.25,.8,.25,1);
+    transition: background-color .4s cubic-bezier()
 
 }
 .mat-list-item {

@@ -32,7 +32,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CommonpopupComponent } from './dashboard/popups/commonpopup/commonpopup.component';
 
-
+import { NgScrollbarModule, NG_SCROLLBAR_OPTIONS } from 'ngx-scrollbar';
 
 
 @NgModule({
@@ -59,7 +59,8 @@ import { CommonpopupComponent } from './dashboard/popups/commonpopup/commonpopup
         ForgotpasswordModule,
         CalibrationsetupModule, CalibreportsModule,
         CalibrationlogsModule,
-        NgxMaterialTimepickerModule
+        NgxMaterialTimepickerModule,
+        NgScrollbarModule
     ],
     providers: [NavService],
 
