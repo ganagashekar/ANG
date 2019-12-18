@@ -40,3 +40,31 @@ body {
   .mb-5 {
     margin-bottom: 5px;
   }
+  .highcharts-title tspan {
+    font-weight: bold;
+    color:#ff4081;
+    font-size:25px;
+}
+g.highcharts-axis-labels.highcharts-yaxis-labels {
+    font-weight: bold;
+    color:#ff4081;
+}
+g.highcharts-axis-labels.highcharts-xaxis-labels {
+    font-weight: bold;
+    color:#ff4081;
+}
+
+element.style {
+}
+.mat-button:hover {
+    color: #1a237e !important;
+    background-color: transparent !important;
+    cursor: pointer;
+    border: 2px solid #6f6296;
+}
+.mat-button.mat-primary, .mat-icon-button.mat-primary, .mat-stroked-button.mat-primary {
+    color: #3f51b5;
+}
+.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
+    min-width: auto !important;
+}

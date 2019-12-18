@@ -28,4 +28,5 @@ import { CalibrationlogFilter } from 'src/app/Model/FilterModels/CalibrationlogF
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/GetCalibReportAsync', filter);
     }
+
   }

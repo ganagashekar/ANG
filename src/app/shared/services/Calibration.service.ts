@@ -36,5 +36,13 @@ import { CalibrationFilter } from 'src/app/Model/FilterModels/CalibrationFilter'
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/DeleteCalibration?=' + calib_cmd_id);
     }
+    getAllParam(referenceRecordsTypeId: number , All: boolean): Observable<any> {
+      return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+        '/Getparamcalib?paramId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+      }
+      getAllstacks(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+        return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+          '/Getconfigs?busID=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+        }
 
   }

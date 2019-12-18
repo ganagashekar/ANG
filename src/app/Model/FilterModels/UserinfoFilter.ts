@@ -4,4 +4,5 @@ export class UserinfoFilter {
   SiteId: number;
   UserPass: string;
   IsEnabled: number;
+  roleId: number;
 }

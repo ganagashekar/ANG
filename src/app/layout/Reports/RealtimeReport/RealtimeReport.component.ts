@@ -195,7 +195,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
     lineColor: '#000000',
     lineWidth: 1,
     title: {
-        text: 'Count'
+        text: ''
     },
     plotLines: [
 
@@ -204,7 +204,7 @@ export class RealtimeReportComponent implements OnInit , AfterViewInit {
   xAxis: {
     lineColor: '#000000',
     title: {
-      text: 'DateTime'
+      text: ''
   },
   dateTimeLabelFormats: {
     day: '%e of %b'
@@ -238,7 +238,7 @@ formatter: function() {
       const StackName = param[0] == null ? '' : param[0];
       const paramName = param.length > 1 ? param[1] :'';
       const paramUnits = param.length > 2 ? param[2] :'';
-      outputString += '<tr><td><span style=\'color:' + point.color + '\'>\u25CF</span></td><td> ' + (StackName) + '</td><td>'+paramName+'</td><td>' + paramUnits + '</td><td> <b> ' + point.y + '</b></td></tr>';
+      outputString += '<tr><td><span style=\'color:' + point.color + '\'>\u25CF</span></td><td> ' + (StackName) + '</td><td>' + paramName + '</td><td>' + paramUnits + '</td><td> <b> ' + point.y + '</b></td></tr>';
     }
   }, this);
   return outputString += '</table>';
@@ -302,11 +302,11 @@ formatter: function() {
     this.isLoading = true;
     this.reportRequestModel.IsExport = false;
 
-    const Fromdates = _moment(this.reportRequestModel.FromDateVM).format("MM/DD/YYYY");
-    const Todates = _moment(this.reportRequestModel.ToDateVM).format("MM/DD/YYYY");
+    const Fromdates = _moment(this.reportRequestModel.FromDateVM).format('MM/DD/YYYY');
+    const Todates = _moment(this.reportRequestModel.ToDateVM).format('MM/DD/YYYY');
 
     this.reportRequestModel.FromDate = _moment( Fromdates + ' ' + this.reportRequestModel.FromTimeVM).format(appConstants.DATE_Time_FORMAT);
-    this.reportRequestModel.ToDate = _moment(Todates + ' '+ this.reportRequestModel.ToTimeVM).format(appConstants.DATE_Time_FORMAT);
+    this.reportRequestModel.ToDate = _moment(Todates + ' ' + this.reportRequestModel.ToTimeVM).format(appConstants.DATE_Time_FORMAT);
     this._reportservices.getRealtimeReport(this.reportRequestModel).subscribe(resp => {
       this.chartdata = [];
       this.chartOptions = {};

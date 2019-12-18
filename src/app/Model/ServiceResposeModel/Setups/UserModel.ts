@@ -9,6 +9,8 @@ export class UserModel {
     creatts: DateTime;
     updtts: DateTime;
     validityts: DateTime;
+    roleName: string;
+    roleId: bigint;
      // length: number;
      // creatts: DateTime;
      // updtts: DateTime;

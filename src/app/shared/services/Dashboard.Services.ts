@@ -36,5 +36,10 @@ userName: string;
     return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Dashboard +
       '/GetDashboardQuickDataChartAsync', dashboardTableRequest);
   }
-  
+
+  getCalibrationreport(dashboardTableRequest: DashboardTableRequestModel): Observable<any>  {
+    return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Dashboard +
+      '/GetCalibrationreport', dashboardTableRequest);
+    }
+
 }

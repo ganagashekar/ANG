@@ -18,4 +18,30 @@ export class CalibrationlogModel {
     calib_span_delay: bigint;
     calib_span_duriation: bigint;
     calib_zero_delay: bigint;
-}
+
+
+
+
+      StackId: number;
+     // SiteId: number;
+      ParamId: number;
+      FromDate: string;
+      ToDate: string;
+
+      FromDateVM: Date;
+      ToDateVM: Date;
+
+      FromTimeVM: string;
+      ToTimeVM: string;
+
+      TimePeriod: number;
+      IsExport: boolean;
+      StartIndex: number;
+      EndIndex: number;
+      ReportType: string;
+     // SiteName: string;
+      SiteCode: string;
+      RequestedUser: string;
+      ReportTitle: string;
+
+    }

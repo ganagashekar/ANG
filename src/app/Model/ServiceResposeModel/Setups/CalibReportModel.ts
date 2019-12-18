@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 export class CalibReportModel {
   calibsetupid: bigint;
   confgId: bigint;
+  paramId: bigint;
   paramname: string;
   clib_name: string;
   calibtype: string;
@@ -22,8 +23,8 @@ export class CalibReportModel {
   ca_set_new_span_value: bigint;
   create_ts: DateTime;
   updtts: DateTime;
-  paramId: bigint;
-
+  stack_name: string;
   siteId: bigint;
   siteName: string;
+  busID: bigint;
 }

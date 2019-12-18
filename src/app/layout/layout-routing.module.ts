@@ -17,7 +17,7 @@ import { ErrorcodesComponent } from './errorcodes/errorcodes.component';
 import { ApplicationLogsComponent } from './applicationlogs/applicationLogs.component';
 import { CalibrationsetupComponent } from './calibrationsetup/calibrationsetup.component';
 import { CalibrationlogsComponent } from './calibrationlogs/calibrationlogs.component';
-
+import { CameraComponent } from './camera/camera.component';
 const routes: Routes = [
     {
         path: '',
@@ -97,6 +97,10 @@ const routes: Routes = [
         path: 'Calibrationreport',
         component: CalibrationlogsComponent
     },
+    {
+      path: 'Camera',
+      component: CameraComponent
+  },
         ]
     }
 ];

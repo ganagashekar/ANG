@@ -41,6 +41,26 @@
         <!-- <mat-slide-toggle>Slide me!</mat-slide-toggle> -->
     </mat-form-field>
 
+    <mat-form-field class="half-width float-right">
+      <mat-label>vendor SiteId.</mat-label>
+      <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+        Errorcode is
+        <strong>required</strong>
+    </mat-error> -->
+      <input matInput type="number" min="1" formControlName="vendorSiteId">
+      <!-- <mat-slide-toggle>Slide me!</mat-slide-toggle> -->
+  </mat-form-field>
+
+    <mat-form-field class="half-width float-left">
+
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="roleId">
+        <mat-option [value]="roleId.id" *ngFor="let roleId of userroleArray">{{roleId.name}}
+          </mat-option>
+    </mat-select>
+</mat-form-field>
+
+
       <div layout="row" layout-align="center center" class="divBtnCon float-right">
         <div fxFlex>
         <button mat-raised-button color="primary" class="btn add-btn fr" (click)="onFormSubmit()"

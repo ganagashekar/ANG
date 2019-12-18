@@ -38,7 +38,7 @@ export class ConfigurationSComponent implements OnInit {
     }
 
   ngOnInit() {
-    this. getAllBuses();
+    this. getAllBusss();
     this.getAllconfgList();
     this.confgFilter.BusId = 0;
   }
@@ -52,8 +52,8 @@ export class ConfigurationSComponent implements OnInit {
    });
   }
 
-  getAllBuses(): void {
-    this._confgsservices.getAllBuses(0, true).subscribe(resp => {
+  getAllBusss(): void {
+    this._confgsservices.getAllBusss(0, true).subscribe(resp => {
       this.busesArray = resp.model as ReferenceRecords[];
     }, error => {
       console.log('Error: ' + error);

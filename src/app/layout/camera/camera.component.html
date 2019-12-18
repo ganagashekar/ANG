@@ -1,0 +1,120 @@
+<!--
+<div id=""><div>
+  <div class="main-container container-fluid">
+    <div class="main-content" id="main-content" style="margin-left: 0px;">
+      <div class="page-content" style="padding: 0px;">
+        <div class="">
+          <div class="">
+  <div class="" id="camArea" style="width: 48%; padding: 10px; float: left; height: 480px;">
+        <div id="videoDiv">
+
+             <iframe src="http://g2.ipcamlive.com/player/player.php?alias=5df312e656e65" width="800px" height="480px"
+frameborder="0" allowfullscreen></iframe>
+        </div>
+
+</div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div></div> -->
+<div class="add">
+  <button mat-icon-button class="add-button" (click)="Newcamera()">
+      <i class="material-icons" title="Click here to add  camera ">add_circle_outline</i>
+  </button>
+  <span class="add-title">Add Camera </span>
+  </div>
+
+<div class="mb-20" flFlex flexLayout="row" flexLayout.lt-md="column">
+  <div fxFlex>
+    <table mat-table  [dataSource]="CameraListDataSource" class="mat-elevation-z8 mat-table" matSort matSortStart="desc">
+<!--- Note that these columns can be defined in any order.
+The actual rendered columns are set as a property on the row definition" -->
+
+<ng-container matColumnDef="editAction">
+  <th mat-header-cell *matHeaderCellDef></th>
+  <td mat-cell *matCellDef="let camera">
+      <button mat-icon-button (click)="editcamera(camera)">
+          <i class="material-icons" title="Edit">create</i>
+      </button>
+  </td>
+</ng-container>
+
+
+<ng-container matColumnDef="cameraAction">
+  <th mat-header-cell *matHeaderCellDef></th>
+  <td mat-cell *matCellDef="let camera">
+      <button mat-icon-button  (click)="livecamera(camera.rtpsUrl)">
+        <i class="fa fa-camera" matTooltip="Show camera"></i>
+      </button>
+
+  </td>
+</ng-container>
+
+<!-- delete icon -->
+<ng-container matColumnDef="deleteAction">
+  <th mat-header-cell *matHeaderCellDef></th>
+  <td mat-cell *matCellDef="let camera">
+      <button mat-icon-button (click)="Deletecamera(camera.camId)" class="padding-left-20px">
+          <i class="material-icons" title="click here to delete camera">close</i>
+      </button>
+  </td>
+  </ng-container>
+    <!-- taskName Column -->
+
+    <!-- <ng-container matColumnDef="camId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Config Id </th>
+        <td mat-cell *matCellDef="let camera" class="camera-values"> {{camera.camId}} </td>
+    </ng-container> -->
+
+    <ng-container matColumnDef="confgId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> confg Id </th>
+      <td mat-cell *matCellDef="let camera" class="camera-values"> {{camera.confgId}} </td>
+  </ng-container>
+
+    <ng-container matColumnDef="siteName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> site Name </th>
+      <td mat-cell *matCellDef="let camera" class="camera-values"> {{camera.siteName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="paramName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Param_name  </th>
+    <td mat-cell *matCellDef="let camera" class="camera-values"> {{camera.paramName}} </td>
+</ng-container>
+
+
+<ng-container matColumnDef="rtpsUrl">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> rtpsUrl  </th>
+  <td mat-cell *matCellDef="let camera" class="camera-values"> {{camera.rtpsUrl}} </td>
+</ng-container>
+
+
+<ng-container matColumnDef="creat_usr">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> CreateUsr  </th>
+  <td mat-cell *matCellDef="let camera" class="camera-values"> {{camera.creat_usr}} </td>
+</ng-container>
+
+<ng-container matColumnDef="creat_ts">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Time  </th>
+  <td mat-cell *matCellDef="let camera" class="camera-values"> {{camera.creat_ts}} </td>
+</ng-container>
+
+<ng-container matColumnDef="updt_ts">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Updated Time </th>
+  <td mat-cell *matCellDef="let camera" class="camera-values"> {{camera.updt_ts}} </td>
+</ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<!--<mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]" showFirstLastButtons>
+</mat-paginator>-->
+</div>
+</div>
+

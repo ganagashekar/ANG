@@ -160,6 +160,20 @@ export class SidebarComponent implements OnInit {
 
           }
         ]
+      },
+      {
+        displayName: 'Live Status',
+        iconName: 'settings_applications',
+        visible: this.IsAdmin ,
+        children: [
+          {
+            displayName: 'Camera Status',
+            iconName: 'camera_enhance',
+            route: 'Camera',
+           visible: this.IsAdmin ,
+
+          },
+        ]
       }
       // {
       //   displayName: 'Maleficent',

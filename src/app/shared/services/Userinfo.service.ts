@@ -48,5 +48,15 @@ import { UserinfoFilter } from 'src/app/Model/FilterModels/UserinfoFilter';
     //   return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
     //     '/DeleteErrorCode?=' + errorcode);
     // }
+    // getReferencerecords(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+    //   return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+    //     '/GetUsrRole?RoleId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+    //   }
+    getuserRole(roleId: number  , All: boolean): Observable<any> {
+
+        return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+          '/GetUsrRole?RoleId=' + roleId + '&IncludeAll=' + All);
+        }
+     // ValidateUser
 
   }

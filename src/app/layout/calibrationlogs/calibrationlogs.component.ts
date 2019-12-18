@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CalibrationlogModel } from 'src/app/Model/ServiceResposeModel/Setups/CalibLogsModel';
 import { MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
-import { CalibrationlogsService } from 'src/app/shared/services/Calibrationlogs.service';
+import { CalibrationlogsService } from 'src/app/shared/services/calibrationlogs.service';
 import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute } from '@angular/router';
 import { CalibrationlogFilter } from 'src/app/Model/FilterModels/calibrationlogFilter';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
+import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { CalibLogsEditTemplateComponent } from '../gridEditorTemplates/calibLogsEditTemplate/calibLogsEditTemplate.component';
+
 
 
 @Component({
@@ -17,7 +20,7 @@ export class CalibrationlogsComponent implements OnInit {
   CalibrationlogFilter: CalibrationlogFilter;
   CalibListDataSource: MatTableDataSource<CalibrationlogModel>;
   displayedColumns: string[] = [
-    'siteId', 'siteName', 'paramName', 'calibtype', 'calib_zero_gas_unit', 'ca_set_new_zero_value', 'calib_zero_delay',
+    'siteId', 'siteName', 'paramname', 'calibtype', 'calib_zero_gas_unit', 'ca_set_new_zero_value', 'calib_zero_delay',
     'calib_zero_duriation', 'calib_start_date', 'calib_end_date', 'iconAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
@@ -40,6 +43,13 @@ export class CalibrationlogsComponent implements OnInit {
      });
     }
 
+    newCalibLogs(): void {
+      const dialogRef = this._dialog.open( CalibLogsEditTemplateComponent, {
+        width: '500px',
+        data: { action: 'add',  CalibrationlogModel }
+      });
+
+     }
    showSnackBar(message: string, isError: boolean = false): void {
     if (isError) {
       this.snackBar.open(message, 'Ok');

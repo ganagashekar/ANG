@@ -15,6 +15,8 @@ import { CalibrationFilter } from 'src/app/Model/FilterModels/CalibrationFilter'
 export class CalibEditTemplateComponent implements OnInit {
   @Output()
   CalibEditorEmitter = new EventEmitter<any>();
+  paramArray: ReferenceRecords[] = [];
+  stackArray: ReferenceRecords[] = [];
   schedulerForm: FormGroup;
   // paramUnitsArray: ReferenceRecords[] = [];
   isAdd = true;
@@ -41,10 +43,12 @@ export class CalibEditTemplateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getParam();
+    this.getstack();
   // this.getAllParameterList(0);
     // this.getAllParameterUnitsList(0);
     this.schedulerForm = this.formBuilder.group({
-      confg_id: new FormControl('', [Validators.required]),
+     // confg_id: new FormControl('', [Validators.required]),
       stack_name: new FormControl('', [Validators.required]),
       param_name: new FormControl('', [Validators.required]),
       setZeroCmd: new FormControl('', [Validators.required]),
@@ -74,7 +78,7 @@ export class CalibEditTemplateComponent implements OnInit {
 
 
         this.schedulerForm.patchValue({
-          confg_id: this.editModel.confg_id,
+         // confg_id: this.editModel.confg_id,
           stack_name: this.editModel.stack_name,
           param_name: this.editModel.param_name,
           setZeroCmd: this.editModel.setZeroCmd,
@@ -99,6 +103,22 @@ export class CalibEditTemplateComponent implements OnInit {
 
       }
   }
+  getParam(): void {
+    this._calibrationservices.getAllParam(0, false).subscribe(resp => {
+    this.paramArray = resp.model as ReferenceRecords[];
+    }, error => {
+     console.log('Error: ' + error);
+    });
+  }
+
+  getstack(): void {
+    this._calibrationservices.getAllstacks(0, false).subscribe(resp => {
+    this.stackArray = resp.model as ReferenceRecords[];
+    }, error => {
+     console.log('Error: ' + error);
+    });
+  }
+
 
 
 

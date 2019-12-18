@@ -197,7 +197,7 @@ export class ExceedenceReportComponent implements OnInit , AfterViewInit {
       lineColor: '#000000',
       lineWidth: 1,
       title: {
-          text: 'Count'
+          text: ''
       },
       plotLines: [
 
@@ -207,7 +207,7 @@ export class ExceedenceReportComponent implements OnInit , AfterViewInit {
       type: 'datetime',
       lineColor: '#000000',
       title: {
-        text: 'DateTime'
+        text: ''
     },
 
     dateTimeLabelFormats: {
@@ -241,9 +241,9 @@ export class ExceedenceReportComponent implements OnInit , AfterViewInit {
         const seriesame = (point.series.name).toUpperCase();
         const param = seriesame.split('-');
         const StackName = param[0] == null ? '' : param[0];
-        const paramName = param.length > 1 ? param[1] :'';
-        const paramUnits = param.length > 2 ? param[2] :'';
-        outputString += '<tr><td><span style=\'color:' + point.color + '\'>\u25CF</span></td><td> ' + (StackName) + '</td><td>'+paramName+'</td><td>' + paramUnits + '</td><td> <b> ' + point.y + '</b></td></tr>';
+        const paramName = param.length > 1 ? param[1] : '';
+        const paramUnits = param.length > 2 ? param[2] : '';
+        outputString += '<tr><td><span style=\'color:' + point.color + '\'>\u25CF</span></td><td> ' + (StackName) + '</td><td>' + paramName + '</td><td>' + paramUnits + '</td><td> <b> ' + point.y + '</b></td></tr>';
       }
     }, this);
     return outputString += '</table>';
@@ -263,7 +263,7 @@ export class ExceedenceReportComponent implements OnInit , AfterViewInit {
         fallbackToExportServer: false
       },
       title: {
-        text: 'Chart'
+        text: 'Exceedence Chart'
       },
       legend: {
         enabled: true
@@ -306,11 +306,11 @@ export class ExceedenceReportComponent implements OnInit , AfterViewInit {
   getAverageReport(): void {
     this.isLoading = true;
     this.reportRequestModel.IsExport = false;
-    const Fromdates = _moment(this.reportRequestModel.FromDateVM).format("MM/DD/YYYY");
-    const Todates = _moment(this.reportRequestModel.ToDateVM).format("MM/DD/YYYY");
+    const Fromdates = _moment(this.reportRequestModel.FromDateVM).format('MM/DD/YYYY');
+    const Todates = _moment(this.reportRequestModel.ToDateVM).format('MM/DD/YYYY');
 
     this.reportRequestModel.FromDate = _moment( Fromdates + ' ' + this.reportRequestModel.FromTimeVM).format(appConstants.DATE_Time_FORMAT);
-    this.reportRequestModel.ToDate = _moment(Todates + ' '+ this.reportRequestModel.ToTimeVM).format(appConstants.DATE_Time_FORMAT);
+    this.reportRequestModel.ToDate = _moment(Todates + ' ' + this.reportRequestModel.ToTimeVM).format(appConstants.DATE_Time_FORMAT);
 
     this._reportservices.getExceedenceReport(this.reportRequestModel).subscribe(resp => {
       this.isLoading = false;

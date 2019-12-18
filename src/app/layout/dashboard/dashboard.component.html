@@ -21,26 +21,29 @@
       <table mat-table [dataSource]="dataSource"  matSort matSortStart="desc">
 
           <ng-container matColumnDef="paramName" class="dashboard-tableheadings">
-              <th mat-header-cell *matHeaderCellDef><button matTooltip="Show All" mat-icon-button>
+              <th mat-header-cell *matHeaderCellDef>
 
-                  <mat-icon   (click)="showAllSeries()">insert_chart_outlined</mat-icon>
-
-                </button>
                   <!-- <button matTooltip="Show All" mat-icon-button>
 
                       <mat-icon>insert_chart_outlined</mat-icon>
                     </button> -->
-                    Parameter Name </th>
+                    Parameter Name
+                    <button matTooltip="Show All" mat-icon-button>
+
+                        <i class="fa fa-chart-line"   (click)="showAllSeries()" style="color:#fff;"></i>
+
+                      </button></th>
 
               <td [ngStyle]="{'background-color': element.color_code}" mat-cell *matCellDef="let element">
+                  {{element.paramName}}
                   <button matTooltip="Show Graph for" mat-icon-button>
-                      <mat-icon (click)="SelectedrowDrawCharts(element)">insert_chart_outlined</mat-icon>
-                      <!-- <i class="fa fa-chart-line"  (click)="SelectedrowDrawCharts(element)"></i>
-                      <i class="fa fa-chart-line-down"></i> -->
+                      <!-- <mat-icon (click)="SelectedrowDrawCharts(element)">insert_chart_outlined</mat-icon> -->
+                       <i class="fa fa-chart-line" (click)="SelectedrowDrawCharts(element)"></i>
 
-                    
+
+
                     </button>
-                {{element.paramName}} </td>
+                </td>
           </ng-container>
           <ng-container matColumnDef="paramUnits" class="dashboard-tableheadings">
             <th mat-header-cell *matHeaderCellDef> Units of Messure </th>
@@ -76,10 +79,16 @@
 
     <strong>  {{groupBy.stackName}}
   </strong>
-  <button mat-icon-button>
+<button mat-icon-button>
+      <i class="fa fa-chart-line"  (click)="SelectedGroupDrawCharts(groupBy)"></i>
+</button>
+<a href="javascript:void()"><i class="fa fa-camera" matTooltip="Show camera " (click)="opencamera()" routerLinkActive="active" style="margin-left:30px;color:#1a237e;"></i></a>
+<a href="javascript:void()"><i class="fa fa-file-excel"  matTooltip="Export to excel " style="margin-left:20px;color:green;"></i></a>
+<a href="javascript:void()"><i class="fa fa-file-pdf" matTooltip="Export to pdf " style="margin-left:20px;color:#1a237e;"></i></a>
+<span style="float:right;padding: 10px 0px 0px 0px;font-weight: bold;">Historical data:<a href="javascript:void();"><i class="fa fa-arrow-right"  href="javascript:void(0)" (click)="historicaldata(groupBy.stackName)" matTooltip="" style="margin-left:20px;color:#1a237e;"></i></a>
+  <!-- <a href="javascript:void();"><i class="fa fa-file-pdf" matTooltip="Export to pdf " style="margin-left:20px;color:#1a237e;"></i></a> --></span>
+</td>
 
- <i class="fas fa-chart-line"  (click)="SelectedGroupDrawCharts(groupBy)"></i>
-</button></td>
 </ng-container>
 
 <tr mat-row *matRowDef="let row; columns: ['groupHeader']; when: isGroup"> </tr>

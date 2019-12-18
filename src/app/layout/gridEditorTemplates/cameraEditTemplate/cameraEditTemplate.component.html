@@ -1,0 +1,172 @@
+<div class="divTaskScheduler">
+  <div fxFlex>
+    <form [formGroup]="schedulerForm" class="scheduler-form">
+        <div class="close-btn">
+            <button mat-icon-button  (click)="onCloseClick()">
+                <i class="material-icons" title="Click here to close Camera popup">cancel</i>
+            </button>
+          </div>
+      <div class="mat-h2 header">
+        Camera
+      </div>
+      <!-- <mat-form-field class="half-width float-left">
+        <mat-label>ConfigID.</mat-label>
+        <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+          Errorcode is
+          <strong>required</strong>
+      </mat-error>
+        <input matInput type="number" min="1" formControlName="confgID">
+    </mat-form-field> -->
+
+
+
+
+
+    <!-- <mat-form-field class="half-width float-right">
+        <mat-label>vendorID.</mat-label>
+        <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+          Errorcode is
+          <strong>required</strong>
+      </mat-error>
+        <input matInput type="string" min="1" formControlName="vendorID">
+    </mat-form-field> -->
+
+    <mat-form-field class="half-width float-left">
+      <mat-label>Site Name.</mat-label>
+      <!-- <mat-error *ngIf="schedulerForm.controls.siteId.hasError('required')">
+          Siteid is
+          <strong>required</strong>
+      </mat-error> -->
+      <mat-select formControlName="siteName" >
+
+         <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.name}}
+         </mat-option>
+     </mat-select>
+ </mat-form-field>
+
+
+    <mat-form-field class="half-width float-right">
+      <mat-label>Stack Name.</mat-label>
+
+      <mat-select formControlName="stackName" >
+        <mat-option [value]="stack.name" *ngFor="let stack of stackArray">{{stack.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field class="half-width float-left">
+  <mat-label>Param Name.</mat-label>
+  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+    Errorcode is
+    <strong>required</strong>
+</mat-error> -->
+<mat-select formControlName="paramName" >
+  <mat-option [value]="param.name" *ngFor="let param of paramArray">{{param.name}}
+  </mat-option>
+</mat-select>
+</mat-form-field>
+    <mat-form-field class="half-width float-right">
+      <mat-label>rtpsUrl.</mat-label>
+      <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+        Errorcode is
+        <strong>required</strong>
+    </mat-error> -->
+      <input matInput type="string" min="1" formControlName="rtpsUrl">
+      </mat-form-field>
+    <mat-form-field class="half-width float-left">
+      <mat-label>Ip Address.</mat-label>
+      <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+        Errorcode is
+        <strong>required</strong>
+    </mat-error> -->
+      <input matInput type="string" min="1" formControlName="ipAddress">
+      </mat-form-field>
+      <mat-form-field class="half-width float-right">
+        <mat-label>Cam Make.</mat-label>
+        <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+          Errorcode is
+          <strong>required</strong>
+      </mat-error> -->
+        <input matInput type="string" min="1" formControlName="camMake">
+        </mat-form-field>
+        <mat-form-field class="half-width float-left">
+          <mat-label>Cam_Model_No.</mat-label>
+          <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+            Errorcode is
+            <strong>required</strong>
+        </mat-error> -->
+          <input matInput type="string" min="1" formControlName="cam_model_no">
+          </mat-form-field>
+
+          <mat-form-field class="half-width float-right">
+            <mat-label>Ptz.</mat-label>
+             <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+              Errorcode is
+              <strong>required</strong>
+          </mat-error> -->
+            <input matInput type="string" min="1" formControlName="ptz">
+            </mat-form-field>
+
+            <mat-form-field class="half-width float-left">
+              <mat-label>connectivity_typ.</mat-label>
+              <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+                Errorcode is
+                <strong>required</strong>
+            </mat-error> -->
+              <input matInput type="string" min="1" formControlName="connectivity_typ">
+              </mat-form-field>
+
+              <mat-form-field class="half-width float-right">
+                <mat-label>band_width.</mat-label>
+                <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+                  Errorcode is
+                  <strong>required</strong>
+              </mat-error> -->
+                <input matInput type="string" min="1" formControlName="band_width">
+                </mat-form-field>
+
+                <mat-form-field class="half-width float-left">
+                  <mat-label>night_vision.</mat-label>
+                  <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+                    Errorcode is
+                    <strong>required</strong>
+                </mat-error> -->
+                  <input matInput type="string" min="1" formControlName="night_vision">
+                  </mat-form-field>
+
+                  <mat-form-field class="half-width float-right">
+                    <mat-label>zoom.</mat-label>
+                    <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+                      Errorcode is
+                      <strong>required</strong>
+                  </mat-error> -->
+                    <input matInput type="string" min="1" formControlName="zoom">
+                    </mat-form-field>
+
+                    <mat-form-field class="half-width float-left">
+                      <mat-label>creat_usr.</mat-label>
+                      <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
+                        Errorcode is
+                        <strong>required</strong>
+                    </mat-error> -->
+                      <input matInput type="string" min="1" formControlName="creat_usr">
+                      </mat-form-field>
+
+       <div layout="row" layout-align="center center" class="divBtnCon float-right">
+        <div fxFlex>
+        <button mat-raised-button color="primary" class="btn add-btn fr" (click)="onFormSubmit()"
+        [disabled]="!schedulerForm.valid">
+            <mat-icon>save</mat-icon>
+            <b *ngIf="isAdd == true"> Add</b>
+            <b *ngIf="isAdd != true"> Update</b>
+        </button>
+        <button mat-raised-button class="btn cancel-btn fr" (click)="onCloseClick()">
+            <mat-icon>close</mat-icon> <b>Cancel</b>
+        </button>
+
+
+        </div>
+    </div>
+    </form>
+  </div>
+</div>

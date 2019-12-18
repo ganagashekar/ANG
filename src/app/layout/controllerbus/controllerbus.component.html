@@ -2,7 +2,7 @@
   <mat-label>SiteId</mat-label>
   <mat-select [(ngModel)]="ControllerBusFilter.SiteId"  (ngModelChange)="SiteChange()">
 
-    <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.name}}
+    <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.id}}--{{site.name}}
     </mat-option>
 </mat-select>
   <!-- <mat-select >

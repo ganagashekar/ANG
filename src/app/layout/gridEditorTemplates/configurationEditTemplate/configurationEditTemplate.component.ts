@@ -16,6 +16,7 @@ export class ConfigurationEditTemplateComponent implements OnInit {
   ConfigEditorEmitter = new EventEmitter<any>();
   schedulerForm: FormGroup;
   sitesArray: ReferenceRecords[] = [];
+  configdisplayoutputArray: ReferenceRecords[] = [];
    busArray: ReferenceRecords[] = [];
    stack_typArray: ReferenceRecords[] = [];
   // paramArray: ReferenceRecords[] = [];
@@ -48,7 +49,7 @@ export class ConfigurationEditTemplateComponent implements OnInit {
   this.getSites();
   this.getBus();
   this. getAllstacktype(0);
-
+this.getalldisplayoutput();
     this.schedulerForm = this.formBuilder.group({
       siteID: new FormControl('', [Validators.required]),
      busID: new FormControl('', [Validators.required]),
@@ -91,6 +92,15 @@ export class ConfigurationEditTemplateComponent implements OnInit {
 
       }
   }
+
+  getalldisplayoutput(): void {
+    this._confgsservices.getAlldisplayoutputs(6, false).subscribe(resp => {
+      this.configdisplayoutputArray = resp.model as ReferenceRecords[];
+    }, error => {
+      console.log('Error: ' + error);
+    });
+  }
+
   getSites(): void {
     this._confgsservices.getAllSites(0, false).subscribe(resp => {
       this.sitesArray = resp.model as ReferenceRecords[];
@@ -100,7 +110,7 @@ export class ConfigurationEditTemplateComponent implements OnInit {
   }
 
   getBus(): void {
-    this._confgsservices.getAllBuses(0, false).subscribe(resp => {
+    this._confgsservices.getAllBus(0, false).subscribe(resp => {
       this.busArray = resp.model as ReferenceRecords[];
     }, error => {
       console.log('Error: ' + error);

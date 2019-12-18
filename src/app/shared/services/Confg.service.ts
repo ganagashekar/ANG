@@ -28,10 +28,15 @@ import { ConfgFilter } from 'src/app/Model/FilterModels/ConfgFilter';
         '/GetSites?SiteId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
       }
 
-      getAllBuses(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+    getAllBusss(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
         return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
-          '/Getconfigs?BusId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+          '/Getconfigs?busID=' + referenceRecordsTypeId + '&IncludeAll=' + All);
         }
+
+        getAlldisplayoutputs(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+            return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+              '/GetReferenceRecords?ReferenceTypeId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+            }
 
     getAllconfgList(filter: ConfgFilter): Observable<any> {
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
@@ -54,5 +59,9 @@ import { ConfgFilter } from 'src/app/Model/FilterModels/ConfgFilter';
       return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
         '/GetReferenceRecords?ReferenceTypeId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
       }
+      getAllBus(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+        return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+          '/Getconfigbybusid?BusId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+        }
 
   }

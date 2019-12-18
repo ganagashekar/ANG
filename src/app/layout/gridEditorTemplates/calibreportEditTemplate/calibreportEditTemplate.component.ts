@@ -18,6 +18,7 @@ export class CalibreportEditTemplateComponent implements OnInit {
   calibtypeArray: ReferenceRecords[] = [];
   sitesArray: ReferenceRecords[] = [];
   paramArray: ReferenceRecords[] = [];
+  stackArray: ReferenceRecords[] = [];
   // paramUnitsArray: ReferenceRecords[] = [];
   isAdd = true;
  Selectedconfg_id: bigint ;
@@ -52,13 +53,15 @@ export class CalibreportEditTemplateComponent implements OnInit {
   ngOnInit() {
     this.getSites();
     this.getParam();
+    this.getstack();
 
     this.getAllcalibtype(0);
 
     this.schedulerForm = this.formBuilder.group({
-      confgId: new FormControl('', [Validators.required]),
+     // confgId: new FormControl('', [Validators.required]),
       // stack_name: new FormControl('', [Validators.required]),
-       paramId: new FormControl('', [Validators.required]),
+      paramname: new FormControl('', [Validators.required]),
+      stack_name: new FormControl('', [Validators.required]),
       clib_name: new FormControl('', [Validators.required]),
       calibtype: new FormControl('', [Validators.required]),
       calib_start_date: new FormControl('', [Validators.required]),
@@ -76,7 +79,7 @@ export class CalibreportEditTemplateComponent implements OnInit {
       calib_span_delay: new FormControl('', [Validators.required]),
       calib_span_duriation: new FormControl('', [Validators.required]),
       ca_set_new_span_value: new FormControl('', [Validators.required]),
-      siteName: new FormControl('', [Validators.required]),
+      siteId: new FormControl('', [Validators.required]),
 
     });
 
@@ -88,9 +91,10 @@ export class CalibreportEditTemplateComponent implements OnInit {
 
 
         this.schedulerForm.patchValue({
-          confgId: this.editModel.confgId,
-          // stack_name: this.editModel.stack_name,
-          paramId: this.editModel.paramId,
+         // confgId: this.editModel.confgId,
+
+          paramname: this.editModel.paramname,
+          stack_name: this.editModel.stack_name,
           clib_name: this.editModel.clib_name,
           calibtype: this.editModel.calibtype,
          calib_start_date: this.editModel.calib_start_date,
@@ -108,7 +112,7 @@ export class CalibreportEditTemplateComponent implements OnInit {
           calib_span_delay: this.editModel.calib_span_delay,
           calib_span_duriation: this.editModel.calib_span_duriation,
           ca_set_new_span_value: this.editModel.ca_set_new_span_value,
-          siteName: this.editModel.siteName,
+           siteId: this.editModel.siteId,
         });
   }
 
@@ -128,6 +132,15 @@ export class CalibreportEditTemplateComponent implements OnInit {
      console.log('Error: ' + error);
     });
   }
+
+  getstack(): void {
+    this._calibReportServices.getAllstacks(0, false).subscribe(resp => {
+    this.stackArray = resp.model as ReferenceRecords[];
+    }, error => {
+     console.log('Error: ' + error);
+    });
+  }
+
 
 getAllcalibtype(confgId:  number): void {
 

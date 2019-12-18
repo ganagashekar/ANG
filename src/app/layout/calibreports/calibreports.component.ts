@@ -16,8 +16,12 @@ export class CalibreportsComponent implements OnInit {
   CalibReportFilter: CalibReportFilter;
   CalibListDataSource: MatTableDataSource<CalibReportModel>;
   displayedColumns: string[] = [
-     'editAction', 'siteId', 'siteName', 'paramName', 'calibtype', 'calib_zero_duriation', 'calib_start_date', 'calib_end_date',
-      'deleteAction'
+     'editAction', 'siteId', 'siteName', 'stack_name', 'paramname', 'calibtype', 'calib_zero_gas_name',
+      'calib_zero_gas_unit',
+     'ca_set_new_zero_value', 'calib_zero_duriation', 'calib_zero_delay',
+     'calib_span_gas_name', 'calib_span_gas_unit',  'ca_set_new_span_value',
+     'calib_span_duriation', 'calib_span_delay',  'calib_start_date',
+       'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,
     private _calibrationservices: CalibReportService,

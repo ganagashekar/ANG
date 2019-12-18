@@ -30,18 +30,23 @@ The actual rendered columns are set as a property on the row definition" -->
 
     <!-- taskName Column -->
     <ng-container matColumnDef="siteId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> site Id </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Id </th>
       <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.siteId}} </td>
   </ng-container>
 
     <ng-container matColumnDef="siteName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> site Name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Site Name </th>
         <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.siteName}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="paramName">
+    <ng-container matColumnDef="stack_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Stack Name </th>
+      <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.stack_name}} </td>
+  </ng-container>
+
+    <ng-container matColumnDef="paramname">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Param Name </th>
-      <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.paramName}} </td>
+      <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.paramname}} </td>
   </ng-container>
 
   <ng-container matColumnDef="calibtype">
@@ -49,22 +54,76 @@ The actual rendered columns are set as a property on the row definition" -->
     <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calibtype}} </td>
 </ng-container>
 
+<ng-container matColumnDef="calib_zero_gas_name">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Gas_Name </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_zero_gas_name}} </td>
+</ng-container>
+
+<ng-container matColumnDef="calib_zero_gas_unit">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Unit  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_zero_gas_unit}} </td>
+</ng-container>
+<!-- <ng-container matColumnDef="calib_zero_gas_type">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Calib Type  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_zero_gas_type}} </td>
+</ng-container> -->
+
+<ng-container matColumnDef="ca_set_new_zero_value">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Calib Set Value  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.ca_set_new_zero_value}} </td>
+</ng-container>
+
 <ng-container matColumnDef="calib_zero_duriation">
   <th mat-header-cell *matHeaderCellDef mat-sort-header> Calib Duriation  </th>
   <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_zero_duriation}} </td>
 </ng-container>
 
+<ng-container matColumnDef="calib_zero_delay">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Calib Delay  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_zero_delay}} </td>
+</ng-container>
 
+<ng-container matColumnDef="calib_span_gas_name">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> SpanGasName </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_span_gas_name}} </td>
+</ng-container>
+
+<ng-container matColumnDef="calib_span_gas_unit">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Span Unit  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_span_gas_unit}} </td>
+</ng-container>
+
+<!-- <ng-container matColumnDef="calib_span_gas_type">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> SpanType  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_span_gas_type}} </td>
+</ng-container> -->
+
+<ng-container matColumnDef="ca_set_new_span_value">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> Set Value  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.ca_set_new_span_value}} </td>
+</ng-container>
+<ng-container matColumnDef="calib_span_duriation">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> SpanDuriation  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_span_gas_type}} </td>
+</ng-container>
+<ng-container matColumnDef="calib_span_delay">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> SpaDelay  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_span_delay}} </td>
+</ng-container>
+<!-- <ng-container matColumnDef="calib_span_gas_type">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header> SpanType  </th>
+  <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_span_gas_type}} </td>
+</ng-container> -->
 
 <ng-container matColumnDef="calib_start_date">
   <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date  </th>
   <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata.calib_start_date}} </td>
 </ng-container>
 
-<ng-container matColumnDef="calib_end_date">
+<!-- <ng-container matColumnDef="calib_end_date">
   <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
   <td mat-cell *matCellDef="let calibdata" class="controller-busvalues"> {{calibdata. calib_end_date}} </td>
-</ng-container>
+</ng-container> -->
 
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

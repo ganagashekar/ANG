@@ -16,6 +16,7 @@ export class UserinfoEditTemplateComponent implements OnInit {
   @Output()
   UserinfoEditorEmitter = new EventEmitter<any>();
   schedulerForm: FormGroup;
+  userroleArray: ReferenceRecords[] = [];
   // paramUnitsArray: ReferenceRecords[] = [];
   isAdd = true;
  SelecteduserId: bigint ;
@@ -41,11 +42,14 @@ export class UserinfoEditTemplateComponent implements OnInit {
   }
   ngOnInit() {
     // this.getAllParameterList(0);
+    this.getuserRole();
     // this.getAllParameterUnitsList(0);
     this.schedulerForm = this.formBuilder.group({
       userName: new FormControl('', [Validators.required]),
       userPass: new FormControl('', [Validators.required]),
       isEnabled: new FormControl('', [Validators.required]),
+      roleId: new FormControl('', [Validators.required]),
+      vendorSiteId:  new FormControl('', [Validators.required]),
     });
 
     if (this.isAdd) { // scheduler add
@@ -59,12 +63,26 @@ export class UserinfoEditTemplateComponent implements OnInit {
           userName: this.editModel.userName,
           userPass: this.editModel.userPass,
           isEnabled: this.editModel.isEnabled,
+          vendorSiteId: this.editModel.isEnabled,
+          roleId: this.editModel.roleId,
 
         });
 
 
       }
   }
+  getuserRole(): void {
+   // this.UserinfoFilter.roleId = 1;
+  // this.siteSetupFilter.StackId = siteId;
+
+  this._Userinfoservices.getuserRole(0, false).subscribe(resp => {
+    this.userroleArray = resp.model as ReferenceRecords[];
+ }, error => {
+   console.log('Error: ' + error);
+ });
+  }
+
+
 
 
 

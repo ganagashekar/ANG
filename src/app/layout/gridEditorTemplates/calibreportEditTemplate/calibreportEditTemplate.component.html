@@ -15,39 +15,50 @@
       <div class="mat-h2 header">
         CalibSetUp
       </div>
-      <mat-form-field class="half-width float-left">
+      <mat-form-field class="half-width ">
         <mat-label>Site Name.</mat-label>
         <!-- <mat-error *ngIf="schedulerForm.controls.siteId.hasError('required')">
             Siteid is
             <strong>required</strong>
         </mat-error> -->
-        <mat-select formControlName="siteName" >
+        <mat-select formControlName="siteId" >
 
-           <mat-option [value]="site.name" *ngFor="let site of sitesArray">{{site.name}}
+           <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.name}}
            </mat-option>
        </mat-select>
    </mat-form-field>
-        <!-- <mat-form-field class="half-width float-right">
-          <mat-label>Stack Name.</mat-label>
-          <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
-            Errordesc is
-            <strong>required</strong>
-        </mat-error>
-          <input matInput type="string" min="1" formControlName="stack_name">
-      </mat-form-field> -->
-      <mat-form-field class="half-width float-left">
-          <mat-label>Param Id.</mat-label>
+
+   <mat-form-field class="half-width">
+    <mat-label>Stack Name.</mat-label>
+    <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
+      Errordesc is
+      <strong>required</strong>
+  </mat-error> ->
+    <!-- <input matInput type="string" min="1" formControlName="stack_name"> -->
+    <mat-select formControlName="stack_name" >
+      <mat-option [value]="stack.name" *ngFor="let stack of stackArray">{{stack.name}}
+      </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+      <mat-form-field class="half-width">
+          <mat-label>Param Name.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
             Errorcode is
             <strong>required</strong>
         </mat-error> -->
         <mat-select formControlName="paramname" >
-          <mat-option [value]="param.id" *ngFor="let param of paramArray">{{param.name}}
+          <mat-option [value]="param.name" *ngFor="let param of paramArray">{{param.name}}
           </mat-option>
       </mat-select>
   </mat-form-field>
 
-      <mat-form-field class="half-width float-left">
+
+
+
+
+      <mat-form-field class="half-width">
         <mat-label>Calib Name.</mat-label>
         <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
           Errorcode is
@@ -56,7 +67,7 @@
         <input matInput type="string" min="1" formControlName="clib_name">
     </mat-form-field>
 
-    <mat-form-field class="half-width float-left">
+    <mat-form-field class="half-width">
       <mat-label>CalibrationType.</mat-label>
        <!-- <mat-error *ngIf="schedulerForm.controls.protocal.hasError('required')">
         Protocal is
@@ -71,20 +82,20 @@
 
 
 
-<mat-form-field class="half-width float-left" >
+<mat-form-field class="half-width" >
   <input matInput [matDatepicker]="picker1" placeholder="Start Date" formControlName="calib_start_date">
   <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
   <mat-datepicker #picker1></mat-datepicker>
 </mat-form-field>
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <input matInput [matDatepicker]="picker2" placeholder="End Date" formControlName="calib_end_date" >
   <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
   <mat-datepicker #picker2></mat-datepicker>
 </mat-form-field>
 
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <mat-label>Gas_Name.</mat-label>
   <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
     Errorcode is
@@ -93,7 +104,7 @@
   <input matInput type="string" min="1" formControlName="calib_zero_gas_name">
 </mat-form-field>
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <mat-label>Unit.</mat-label>
   <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
     Errorcode is
@@ -102,7 +113,7 @@
   <input matInput type="string" min="1" formControlName="calib_zero_gas_unit">
 </mat-form-field>
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <mat-label>Type.</mat-label>
   <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
     Errorcode is
@@ -111,7 +122,7 @@
   <input matInput type="string" min="1" formControlName="calib_zero_gas_type">
 </mat-form-field>
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <mat-label>Set Value</mat-label>
   <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
     Errorcode is
@@ -120,7 +131,7 @@
   <input matInput type="bigint" min="1" formControlName="ca_set_new_zero_value">
 </mat-form-field>
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <mat-label>Duration</mat-label>
   <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
     Errorcode is
@@ -129,7 +140,7 @@
   <input matInput type="bigint" min="1" formControlName="calib_zero_duriation">
 </mat-form-field>
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <mat-label>Delay</mat-label>
   <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
     Errorcode is
@@ -138,7 +149,7 @@
   <input matInput type="bigint" min="1" formControlName="calib_zero_delay">
 </mat-form-field>
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <mat-label>SpanGasName</mat-label>
   <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
     Errorcode is
@@ -147,7 +158,7 @@
   <input matInput type="string" min="1" formControlName="calib_span_gas_name">
 </mat-form-field>
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <mat-label>Unit</mat-label>
   <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
     Errorcode is
@@ -156,7 +167,7 @@
   <input matInput type="string" min="1" formControlName="calib_span_gas_unit">
 </mat-form-field>
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <mat-label>Type</mat-label>
   <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
     Errorcode is
@@ -165,7 +176,7 @@
   <input matInput type="string" min="1" formControlName="calib_span_gas_type">
 </mat-form-field>
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <mat-label>Set Value</mat-label>
   <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
     Errorcode is
@@ -174,7 +185,7 @@
   <input matInput type="bigint" min="1" formControlName="ca_set_new_span_value">
 </mat-form-field>
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <mat-label>Duriation</mat-label>
   <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
     Errorcode is
@@ -183,7 +194,7 @@
   <input matInput type="bigint" min="1" formControlName="calib_span_duriation">
 </mat-form-field>
 
-<mat-form-field class="half-width float-left">
+<mat-form-field class="half-width">
   <mat-label>Delay</mat-label>
   <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
     Errorcode is

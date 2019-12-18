@@ -132,7 +132,11 @@
             Errorcode is
             <strong>required</strong>
         </mat-error> -->
-          <input matInput type="string" min="1" formControlName="displayoutputtype">
+          <!-- <input matInput type="string" min="1" formControlName="displayoutputtype"> -->
+          <mat-select formControlName="displayoutputtype" >
+            <mat-option [value]="config.name" *ngFor="let config of configdisplayoutputArray">{{config.name}}
+              </mat-option>
+        </mat-select>
           </mat-form-field>
 
           <mat-form-field class="half-width float-left">

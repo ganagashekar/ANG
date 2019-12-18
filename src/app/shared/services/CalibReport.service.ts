@@ -33,7 +33,7 @@ userName: string;
 }
 saveCalibration(CalibrationDetails: any):  Observable<any> {
   return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
-    '/Savecalibreport', CalibrationDetails);
+    '/Savecalibreport?', CalibrationDetails);
   }
   getReferencerecords(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
     return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
@@ -48,5 +48,9 @@ saveCalibration(CalibrationDetails: any):  Observable<any> {
         return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
           '/Getparamcalib?paramId=' + referenceRecordsTypeId + '&IncludeAll=' + All);
         }
+        getAllstacks(referenceRecordsTypeId: number  , All: boolean): Observable<any> {
+          return this._httpClient.get<any>(this._baseURL + appConstants.APICONTROLLER_REFERENCE +
+            '/Getconfigs?busID=' + referenceRecordsTypeId + '&IncludeAll=' + All);
+          }
 
 }

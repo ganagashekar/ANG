@@ -15,109 +15,113 @@
       <div class="mat-h2 header">
         CalibSetUp
       </div>
-      <mat-form-field class="half-width float-left">
+      <!-- <mat-form-field class="half-width float-left">
         <mat-label>confg_id.</mat-label>
         <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
           Errordesc is
           <strong>required</strong>
-      </mat-error> -->
+      </mat-error> ->
         <input matInput type="number" min="1" formControlName="confg_id">
-    </mat-form-field>
-        <mat-form-field class="half-width float-right">
-          <mat-label>Stack Name.</mat-label>
-          <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
-            Errordesc is
-            <strong>required</strong>
-        </mat-error> -->
-          <input matInput type="string" min="1" formControlName="stack_name">
-      </mat-form-field>
-      <mat-form-field class="half-width float-left">
+    </mat-form-field> -->
+    <mat-form-field class="half-width float-left">
+      <mat-label>Stack Name.</mat-label>
+
+      <mat-select formControlName="stack_name" >
+        <mat-option [value]="stack.name" *ngFor="let stack of stackArray">{{stack.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+      <mat-form-field class="half-width float-right">
           <mat-label>Param Name.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
             Errorcode is
             <strong>required</strong>
         </mat-error> -->
-          <input matInput type="string" min="1" formControlName="param_name">
-      </mat-form-field>
+        <mat-select formControlName="param_name" >
+          <mat-option [value]="param.name" *ngFor="let param of paramArray">{{param.name}}
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
 
       <mat-form-field class="half-width float-right">
-        <mat-label>setZeroCmd.</mat-label>
+        <mat-label>SetZeroCmd.</mat-label>
         <input matInput type="string" min="1" formControlName="setZeroCmd">
     </mat-form-field>
 
       <mat-form-field class="half-width float-left">
-        <mat-label>setZeroResp.</mat-label>
+        <mat-label>SetZeroResp.</mat-label>
         <input matInput type="string" min="1" formControlName="setZeroResp">
     </mat-form-field>
 
     <mat-form-field class="half-width float-right">
-      <mat-label>zeroRelayOpenCmd.</mat-label>
+      <mat-label>ZeroRelayOpenCmd.</mat-label>
       <input matInput type="string" min="1" formControlName="zeroRelayOpenCmd">
   </mat-form-field>
 
   <mat-form-field class="half-width float-left">
-    <mat-label>zeroRelayOpenResp.</mat-label>
+    <mat-label>ZeroRelayOpenResp.</mat-label>
     <input matInput type="string" min="1" formControlName="zeroRelayOpenResp">
 </mat-form-field>
 
 <mat-form-field class="half-width float-right">
-  <mat-label>zeroRelayCloseCmd.</mat-label>
+  <mat-label>ZeroRelayCloseCmd.</mat-label>
   <input matInput type="string" min="1" formControlName="zeroRelayCloseCmd">
 </mat-form-field>
 
 <mat-form-field class="half-width float-left">
-  <mat-label>zeroRelayCloseResp.</mat-label>
+  <mat-label>ZeroRelayCloseResp.</mat-label>
   <input matInput type="string" min="1" formControlName="zeroRelayCloseResp">
 </mat-form-field>
 
 <mat-form-field class="half-width float-right">
-  <mat-label>readPrevValueCmd.</mat-label>
+  <mat-label>ReadPrevValueCmd.</mat-label>
   <input matInput type="string" min="1" formControlName="readPrevValueCmd">
 </mat-form-field>
 
 <mat-form-field class="half-width float-left">
-  <mat-label>readPrevValueRes.</mat-label>
+  <mat-label>ReadPrevValueRes.</mat-label>
   <input matInput type="string" min="1" formControlName="readPrevValueRes">
 </mat-form-field>
 
 <mat-form-field class="half-width float-right">
-  <mat-label>realGasRelayOpenCmd.</mat-label>
+  <mat-label>RealGasRelayOpenCmd.</mat-label>
   <input matInput type="string" min="1" formControlName="realGasRelayOpenCmd">
 </mat-form-field>
 
 <mat-form-field class="half-width float-left">
-  <mat-label>realGasRelayOpenResp.</mat-label>
+  <mat-label>RealGasRelayOpenResp.</mat-label>
   <input matInput type="string" min="1" formControlName="realGasRelayOpenResp">
 </mat-form-field>
 
 <mat-form-field class="half-width float-right">
-  <mat-label>realGasRelayCloseCmd.</mat-label>
+  <mat-label>RealGasRelayCloseCmd.</mat-label>
   <input matInput type="string" min="1" formControlName="realGasRelayCloseCmd">
 </mat-form-field>
 
 <mat-form-field class="half-width float-l">
-  <mat-label>real_GasRelayCloseResp.</mat-label>
+  <mat-label>Real_GasRelayCloseResp.</mat-label>
   <input matInput type="string" min="1" formControlName="real_GasRelayCloseResp">
 </mat-form-field>
 
 
 <mat-form-field class="half-width float-right">
-  <mat-label>setNewValueCmd.</mat-label>
+  <mat-label>SetNewValueCmd.</mat-label>
   <input matInput type="string" min="1" formControlName="setNewValueCmd">
 </mat-form-field>
 
 <mat-form-field class="half-width float-left">
-  <mat-label>setNewValueResp.</mat-label>
+  <mat-label>SetNewValueResp.</mat-label>
   <input matInput type="string" min="1" formControlName="setNewValueResp">
 </mat-form-field>
 
 <mat-form-field class="half-width float-right">
-  <mat-label>setMakeSpanCmd.</mat-label>
+  <mat-label>SetMakeSpanCmd.</mat-label>
   <input matInput type="string" min="1" formControlName="setMakeSpanCmd">
 </mat-form-field>
 
 <mat-form-field class="half-width float-left">
-  <mat-label>setMakeSpanResp.</mat-label>
+  <mat-label>SetMakeSpanResp.</mat-label>
   <input matInput type="string" min="1" formControlName="setMakeSpanResp">
 </mat-form-field>
 

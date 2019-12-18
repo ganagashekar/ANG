@@ -31,7 +31,10 @@ import { CalibrationlogsModule } from 'src/app/layout/calibrationlogs/calibratio
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CommonpopupComponent } from './dashboard/popups/commonpopup/commonpopup.component';
-
+import { CameraModule } from 'src/app/layout/camera/camera.module';
+import * as Highcharts from 'highcharts/highstock';
+import * as _moment from 'moment';
+import * as HC_exporting_ from 'highcharts/modules/exporting';
 
 
 
@@ -59,7 +62,9 @@ import { CommonpopupComponent } from './dashboard/popups/commonpopup/commonpopup
         ForgotpasswordModule,
         CalibrationsetupModule, CalibreportsModule,
         CalibrationlogsModule,
-        NgxMaterialTimepickerModule
+        NgxMaterialTimepickerModule,
+        CameraModule,
+        HighchartsChartModule
     ],
     providers: [NavService],
 
