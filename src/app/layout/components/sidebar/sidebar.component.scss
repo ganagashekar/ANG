@@ -7,7 +7,8 @@
     box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
     z-index: 999;
     overflow: auto;
-    background-color: rgba(12,60,96,0.8) !important;
+    // background-color: rgba(12,60,96,0.8) !important;
+    background-color: #283144 !important;
 
     .mat-nav-list {
         width: 100%;
@@ -19,7 +20,7 @@
         }
     }
 }
-.mat-list-base{padding-top: 0px !important;}
+// .mat-list-base{padding-top: 0px !important;}
 .nested-menu {
     .nested {
         list-style-type: none;
