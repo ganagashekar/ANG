@@ -35,7 +35,7 @@ import { CameraModule } from 'src/app/layout/camera/camera.module';
 import * as Highcharts from 'highcharts/highstock';
 import * as _moment from 'moment';
 import * as HC_exporting_ from 'highcharts/modules/exporting';
-
+import { SafePipe } from '../shared/pipes/safe.pipe';
 
 
 @NgModule({
@@ -64,7 +64,7 @@ import * as HC_exporting_ from 'highcharts/modules/exporting';
         CalibrationlogsModule,
         NgxMaterialTimepickerModule,
         CameraModule,
-        HighchartsChartModule
+        HighchartsChartModule,
     ],
     providers: [NavService],
 

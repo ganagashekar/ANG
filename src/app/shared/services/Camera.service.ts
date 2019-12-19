@@ -24,6 +24,7 @@ import { CameraFilter } from 'src/app/Model/FilterModels/CameraFilter';
     }
 
     getAllCameraList(filter: CameraFilter): Observable<any> {
+
       return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Admin +
         '/GetcameraAsync', filter);
     }

@@ -19,7 +19,7 @@ export class CameraComponent implements OnInit {
   cameraFilter: CameraFilter;
   CameraListDataSource: MatTableDataSource<CameraModel>;
   displayedColumns: string[] = [
-     'editAction', 'cameraAction', 'siteName', 'paramName', 'rtpsUrl', 'creat_usr', 'creat_ts', 'updt_ts', 'deleteAction'
+     'editAction', 'cameraAction', 'confgId', 'siteId',  'paramName', 'rtpsUrl', 'creat_usr', 'creat_ts', 'updt_ts', 'deleteAction'
    ];
   constructor(private _dialog: MatDialog, private _appcomponent: AppComponent, private _route: ActivatedRoute,  private router: Router,
     private _cameraservices: CameraService,
@@ -56,11 +56,10 @@ export class CameraComponent implements OnInit {
   });
  }
 
- livecamera(rtpsUrl: string): void {
-
+ livecamera(model: CameraModel): void {
   const dialogRef = this._dialog.open( LiveCameraTemplateComponent, {
     width: '500px',
-    data: { action: 'add',  rtpsUrl }
+    data: { action: 'add',  model }
   });
 
  }

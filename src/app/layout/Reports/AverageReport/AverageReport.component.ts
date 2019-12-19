@@ -26,6 +26,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
  FromDate = new Date();
  ToDate = new Date();
   SelectedView: string;
+  selectedStackId = 0;
   Viewtypes = [
     {
       key: 'Graph View',
@@ -60,7 +61,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
     private _reportservices: ReportsService,
     private snackBar: MatSnackBar) {
       this.SelectedView = 'Table View';
-
+      this.selectedStackId = this._route.snapshot.queryParams.stackId !== undefined ? this._route.snapshot.queryParams.stackId : 0;
     // **As well as this**
 
       this.reportRequestModel = new ReportRequestModel();
@@ -105,7 +106,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
   getAllStacks(): void {
     this._reportservices.getSiteStacks( this.reportRequestModel.SiteId, this.reportRequestModel.StackId, true).subscribe(resp => {
       this.stacksArray = resp.model as ReferenceRecords[];
-      this.reportRequestModel.StackId = Number(this.stacksArray[0].id);
+      this.reportRequestModel.StackId = Number(this.selectedStackId);
     }, error => {
       console.log('Error: ' + error);
     });
@@ -207,7 +208,7 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
     ]
   },
     xAxis: {
-      type:'datetime',
+      type: 'datetime',
       dateTimeLabelFormats: {
         day: '%e of %b'
     },
@@ -247,8 +248,8 @@ export class AverageReportComponent implements OnInit , AfterViewInit {
           const seriesame = (point.series.name).toUpperCase();
           const param = seriesame.split('-');
           const StackName = param[0] == null ? '' : param[0];
-          const paramName = param.length > 1 ? param[1] :'';
-          const paramUnits = param.length > 2 ? param[2] :'';
+          const paramName = param.length > 1 ? param[1] : '';
+          const paramUnits = param.length > 2 ? param[2] : '';
           outputString += '<tr><td><span style=\'color:' + point.color + '\'>\u25CF</span></td><td> ' + (StackName) + '</td><td>' + paramName + '</td><td>' + paramUnits + '</td><td> <b> ' + point.y + '</b></td></tr>';
         }
       }, this);

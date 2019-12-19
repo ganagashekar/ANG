@@ -36,7 +36,7 @@
   </mat-error> ->
     <!-- <input matInput type="string" min="1" formControlName="stack_name"> -->
     <mat-select formControlName="stack_name" >
-      <mat-option [value]="stack.name" *ngFor="let stack of stackArray">{{stack.name}}
+      <mat-option [value]="stack.id" *ngFor="let stack of stackArray">{{stack.name}}
       </mat-option>
   </mat-select>
 </mat-form-field>
@@ -49,7 +49,7 @@
             <strong>required</strong>
         </mat-error> -->
         <mat-select formControlName="paramname" >
-          <mat-option [value]="param.name" *ngFor="let param of paramArray">{{param.name}}
+          <mat-option [value]="param.id" *ngFor="let param of paramArray">{{param.name}}
           </mat-option>
       </mat-select>
   </mat-form-field>

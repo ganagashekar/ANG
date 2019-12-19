@@ -294,7 +294,7 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
         lineColor: '#000000',
         lineWidth: 1,
         title: {
-            text: 'Count'
+            text: ''
         },
         plotLines: [
 
@@ -304,7 +304,7 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
         type: 'datetime',
         lineColor: '#000000',
         title: {
-          text: 'DateTime'
+          text: ''
       },
       dateTimeLabelFormats: {
         day: '%e of %b'
@@ -520,8 +520,8 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
   }
 
 
-  historicaldata(): void {
-    this.router.navigateByUrl('/AverageReport');
+  historicaldata(data: any): void {
+    this.router.navigateByUrl('/AverageReport?stackId=' + data.configId);
   }
 
 
