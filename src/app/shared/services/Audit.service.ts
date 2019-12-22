@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { appConstants } from '../Common/app-constants';
-import { AuditFilter } from 'src/app/Model/FilterModels/AuditFilter';
+import { AuditFilter } from '../../Model/FilterModels/AuditFilter';
 
 
 

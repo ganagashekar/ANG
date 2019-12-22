@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { CameraService } from 'src/app/shared/services/Camera.service';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
-import { CameraModel } from 'src/app/Model/ServiceResposeModel/Setups/CameraModel';
-import { CameraFilter } from 'src/app/Model/FilterModels/CameraFilter';
+import { CameraService } from '../../../shared/services/Camera.service';
+import { ReferenceRecords } from '../../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { CameraModel } from '../../../Model/ServiceResposeModel/Setups/CameraModel';
+import { CameraFilter } from '../../../Model/FilterModels/CameraFilter';
 
 
 @Component({

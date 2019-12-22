@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule , FormArray, ValidatorFn } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { SitesetupService } from 'src/app/shared/services/Sitesetup.service';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
-import { SiteSetupModel } from 'src/app/Model/ServiceResposeModel/Setups/SiteSetupModel';
-import { SiteSetupFilter } from 'src/app/Model/FilterModels/SiteSetupFilter';
+import { SitesetupService } from '../../../shared/services/Sitesetup.service';
+import { ReferenceRecords } from '../../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { SiteSetupModel } from '../../../Model/ServiceResposeModel/Setups/SiteSetupModel';
+import { SiteSetupFilter } from '../../../Model/FilterModels/SiteSetupFilter';
 
 @Component({
   selector: 'app-siteedittemplate',

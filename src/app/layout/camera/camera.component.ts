@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CameraModel } from 'src/app/Model/ServiceResposeModel/Setups/CameraModel';
+import { CameraModel } from '../../Model/ServiceResposeModel/Setups/CameraModel';
 import { MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
-import { CameraService } from 'src/app/shared/services/Camera.service';
-import { AppComponent } from 'src/app/app.component';
+import { CameraService } from '../../shared/services/Camera.service';
+import { AppComponent } from '../../app.component';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { CameraFilter } from 'src/app/Model/FilterModels/CameraFilter';
+import { CameraFilter } from '../../Model/FilterModels/CameraFilter';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { CameraEditTemplateComponent } from '../gridEditorTemplates/cameraEditTemplate/cameraEditTemplate.component';
 import { LiveCameraTemplateComponent } from '../gridEditorTemplates/LiveCameraTemplate/LiveCameraTemplate.component';
@@ -58,7 +58,7 @@ export class CameraComponent implements OnInit {
 
  livecamera(model: CameraModel): void {
   const dialogRef = this._dialog.open( LiveCameraTemplateComponent, {
-    width: '500px',
+    width: '800px',
     data: { action: 'add',  model }
   });
 

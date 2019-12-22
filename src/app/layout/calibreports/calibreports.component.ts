@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CalibReportModel } from 'src/app/Model/ServiceResposeModel/Setups/CalibReportModel';
+import { CalibReportModel } from '../../Model/ServiceResposeModel/Setups/CalibReportModel';
 import { MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
-import { CalibReportService } from 'src/app/shared/services/CalibReport.service';
-import { AppComponent } from 'src/app/app.component';
+import { CalibReportService } from '../../shared/services/CalibReport.service';
+import { AppComponent } from '../../app.component';
 import { ActivatedRoute } from '@angular/router';
-import { CalibReportFilter } from 'src/app/Model/FilterModels/CalibReportFilter';
+import { CalibReportFilter } from '../../Model/FilterModels/CalibReportFilter';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { CalibreportEditTemplateComponent } from '../gridEditorTemplates/calibreportEditTemplate/calibreportEditTemplate.component';
 @Component({
@@ -16,7 +16,7 @@ export class CalibreportsComponent implements OnInit {
   CalibReportFilter: CalibReportFilter;
   CalibListDataSource: MatTableDataSource<CalibReportModel>;
   displayedColumns: string[] = [
-     'editAction', 'siteId', 'siteName', 'stack_name', 'paramname', 'calibtype', 'calib_zero_gas_name',
+     'editAction', 'siteName', 'stack_name', 'paramname', 'calibtype', 'calib_zero_gas_name',
       'calib_zero_gas_unit',
      'ca_set_new_zero_value', 'calib_zero_duriation', 'calib_zero_delay',
      'calib_span_gas_name', 'calib_span_gas_unit',  'ca_set_new_span_value',

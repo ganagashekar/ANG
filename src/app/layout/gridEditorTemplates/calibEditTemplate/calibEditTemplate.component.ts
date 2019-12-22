@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { CalibrationService } from 'src/app/shared/services/Calibration.service';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
-import { CalibrationModel } from 'src/app/Model/ServiceResposeModel/Setups/CalibrationSetupModel';
-import { CalibrationFilter } from 'src/app/Model/FilterModels/CalibrationFilter';
+import { CalibrationService } from '../../../shared/services/Calibration.service';
+import { ReferenceRecords } from '../../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { CalibrationModel } from '../../../Model/ServiceResposeModel/Setups/CalibrationSetupModel';
+import { CalibrationFilter } from '../../../Model/FilterModels/CalibrationFilter';
 
 
 @Component({

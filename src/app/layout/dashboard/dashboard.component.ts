@@ -1,18 +1,20 @@
+import { DashboardTableRequestModel } from './../../Model/FilterModels/DashboardTableRequestModel';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { DashboardQuickDataModel } from 'src/app/Model/ServiceResposeModel/Dashboard/DashboardQuickDataModel';
-import { DashboardTableRequestModel } from 'src/app/Model/FilterModels/DashboardTableRequestModel';
+import { ReportRequestModel } from './../../Model/Report/ReportRequestModel';
+import { DashboardQuickDataModel } from './../..//Model/ServiceResposeModel/Dashboard/DashboardQuickDataModel';
 import * as Highcharts from 'highcharts/highstock';
 import { Router } from '@angular/router';
 import * as HC_exporting_ from 'highcharts/modules/exporting';
 const HC_exporting = HC_exporting_;
 HC_exporting(Highcharts);
+import { saveAs } from 'file-saver';
 import { first } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { interval, Subscription } from 'rxjs';
 import { OnInit, ElementRef, ViewChild, AfterViewInit, Component, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { DashboardQuickCounts } from 'src/app/Model/ServiceResposeModel/Dashboard/DashboardQuickCounts';
-import { DashboardService } from 'src/app/shared/services/Dashboard.Services';
+import { DashboardQuickCounts } from './../../Model/ServiceResposeModel/Dashboard/DashboardQuickCounts';
+import { DashboardService } from './../../shared/services/Dashboard.Services';
 
 import MapModule from 'highcharts/modules/map';
 import { ConfigurationSComponent } from '../configuration-s/configuration-s.component';
@@ -39,11 +41,16 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   paramCount: number;
   exceedenceCount: number;
   alertCount: number;
+  // ravi code for dashboard excel
+  StackId: number;
+  isLoading: boolean;
+  reportRequestModel: ReportRequestModel;
   dashboardTableRequest: DashboardTableRequestModel;
   siteId: number;
   Highcharts = Highcharts;
    chatsss: any;
   updateFlag = true;
+ // isLoading = false;
   subscription: Subscription;
   DashboardQuickDataResposne: DashboardQuickDataModel[] = [];
 
@@ -60,13 +67,28 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private _route: ActivatedRoute,
     private _dashboardService: DashboardService,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private snackBar: MatSnackBar, private router: Router) {
-
+    private snackBar: MatSnackBar,
+     private router: Router) {
       localStorage.setItem('currentUrl', '/dashboard');
-
+      // ravi code for dashboard excel
+      this.reportRequestModel = new ReportRequestModel();
+      this.reportRequestModel.FromDateVM = (new Date());
+      this.reportRequestModel.FromTimeVM = '00:00';
+      this.reportRequestModel.ToTimeVM = '23:59';
+      this.reportRequestModel.ToDateVM = (new Date());
+      this.reportRequestModel.StackId  = 0;
+      this.reportRequestModel.ParamId = 0;
+      this.reportRequestModel.IsExport = false;
+      this.reportRequestModel.SiteCode = localStorage.getItem('SiteName');
+      this.reportRequestModel.TimePeriod = (0);
+      this.reportRequestModel.SiteName =  localStorage.getItem('SiteName');
+      this.reportRequestModel.ReportTitle = localStorage.getItem('VendorName');
+      this.reportRequestModel.ReportType = ' Live Report ';
+      this.reportRequestModel.RequestedUser =  localStorage.getItem('username');
+      this.dataSource =  new MatTableDataSource();
   }
 
-  displayedColumns = ['paramName', 'paramUnits', 'paramValue', 'threShholdValue', 'limit', 'recordedDate' ];
+  displayedColumns = ['paramName', 'paramUnits', 'limit', 'threShholdValue', 'paramValue', 'recordedDate' ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -85,7 +107,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   onStationClick(type: number): void {
 let data: any;
-let Heading = '';
+let Heading = "";
 switch (type) {
   case 1: {
     data = this.dashboardQuickCounts.stations;
@@ -222,11 +244,11 @@ switch (type) {
         },
         events: {
           legendItemClick: function(event) {
-            const visibility = this.visible ? 'visible' : 'hidden';
+            var visibility = this.visible ? 'visible' : 'hidden';
             return true;
             this.chart.series.forEach(element => {
 
-              if (element.name.toUpperCase() === this.name.toUpperCase()) {
+              if(element.name.toUpperCase() == this.name.toUpperCase()){
                 if (!this.visible) {
                   element = false;
                   element.show();
@@ -240,8 +262,8 @@ switch (type) {
 
             const seriesplotfilter = this.yAxis.plotLinesAndBands;
 
-            const check = this.yAxis.plotLinesAndBands.filter(model => model.id.toUpperCase() === this.name.toUpperCase())[0];
-            if (check != null) {
+            const check = this.yAxis.plotLinesAndBands.filter(model => model.id.toUpperCase() == this.name.toUpperCase())[0];
+            if(check != null) {
 
               if (check.hidden) {
                 check.hidden = false;
@@ -273,15 +295,15 @@ let outputString = '<table bgcolor="#fff" border= "1 dotted"  style="border-coll
 outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspan=5>' + new Date(dates).toLocaleString() + '</th></tr>';
       this.points.forEach(function(point) {
         if (point.x === this.x) {
-          const seriesame = (point.series.name).toUpperCase();
-          const param = seriesame.split('-');
-          const StackName = param[0] == null ? '' : param[0];
-          const paramName = param.length > 1 ? param[1] : '';
-          const paramUnits = param.length > 2 ? param[2] : '';
-          outputString += '<tr><td><span style=\'color:' + point.color + '\'>\u25CF</span></td><td> ' + (StackName) + '</td><td>' + paramName + '</td><td>' + paramUnits + '</td><td> <b> ' + point.y + '</b></td></tr>';
+          const seriesame = (point.series.name).toUpperCase()
+          let param = seriesame.split('-');
+          const StackName= param[0] == null ? "" : param[0];
+          const paramName= param.length > 1 ? param[1] :"";
+          const paramUnits= param.length > 2 ? param[2] :"";
+          outputString += "<tr><td><span style='color:" + point.color + "'>\u25CF</span></td><td> " + (StackName) + "</td><td>"+paramName+"</td><td>"+paramUnits+"</td><td> <b> " + point.y + "</b></td></tr>";
         }
       }, this);
-      return outputString += '</table>';
+      return outputString+='</table>';
     }
   },
 
@@ -301,7 +323,7 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
       ]
     },
       xAxis: {
-        type: 'datetime',
+        type:'datetime',
         lineColor: '#000000',
         title: {
           text: ''
@@ -354,7 +376,7 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
     );
   }
 
-  getDashboardChartData(stackId: number , paramId: number, row: any): void {
+  getDashboardChartData(stackId: number , paramId :number,row: any): void {
     this.DashboardQuickDataResposne = null;
     this.dashboardTableRequest = new DashboardTableRequestModel();
     this.dashboardTableRequest.siteId = this.siteId;
@@ -370,7 +392,8 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
         }
         this.init();
           this.bindChartSeries(resp.dataTable);
-          if (paramId !== 0) {
+          if(paramId !== 0)
+          {
             this.AddPlotline(row);
           }
 
@@ -385,7 +408,7 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
     this.dashboardTableRequest = new DashboardTableRequestModel();
     this.dashboardTableRequest.siteId = this.siteId;
     this.dashboardTableRequest.fromDate = new Date();
-    this.dashboardTableRequest.isFirst = this.IsFirst;
+    this.dashboardTableRequest.isFirst =this.IsFirst;
     this._dashboardService.getDashboardQuickTableData(this.dashboardTableRequest).subscribe(
       resp => {
         if (resp.model.length === 0) {
@@ -395,7 +418,7 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
         this.DashboardQuickDataResposne = resp.model as DashboardQuickDataModel[];
         this.dataSource.data = resp.model as DashboardQuickDataModel[];
 
-          if (this.IsFirst) {
+          if(this.IsFirst) {
           this.bindChartSeries(resp.dataTable);
           this.IsFirst = false;
           } else {
@@ -467,8 +490,8 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
   AddPlotline(row: DashboardQuickDataModel): void {
 
     const seriesplotfilter = this.chatsss.yAxis[0];
-    const check = seriesplotfilter.plotLinesAndBands.filter(model => model.id === row.chartSeriesName)[0];
-    if (check == null) {
+    const check = seriesplotfilter.plotLinesAndBands.filter(model => model.id === row.chartSeriesName)[0]
+    if(check == null) {
     const plotOption = {
       color: '#FF0000',
       dashStyle: 'ShortDash',
@@ -506,7 +529,7 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
 }
 
   showAllSeries(): void  {
-    this.getDashboardChartData(0, 0, null);
+    this.getDashboardChartData(0, 0, null)
   }
 
   hideAllSeries(): void  {
@@ -519,9 +542,27 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
     this.router.navigateByUrl('/Camera');
   }
 
+   // ravi code for dashboard excel
+   exporttoexcelClick(row: DashboardQuickDataModel): void {
+    this.isLoading = true;
+    this.dashboardTableRequest = new DashboardTableRequestModel();
+    this.reportRequestModel.IsExport = true;
+    this.reportRequestModel.StackId = row.configId;
+    this._dashboardService.exportDashboardRealtimeReport(this.reportRequestModel).subscribe(resp => {
+      saveAs(resp, 'LiveReport.xlsx');
+     // this.saveAsBlob(resp);
+      this.isLoading = false;
+      this.reportRequestModel.IsExport = false;
+    }, error => {
+      this.isLoading = false;
+      this.reportRequestModel.IsExport = false;
+      console.log('Error: ' + error);
+    });
+
+  }
 
   historicaldata(data: any): void {
-    this.router.navigateByUrl('/AverageReport?stackId=' + data.configId);
+    this.router.navigateByUrl('/HistoricalReport?stackId=' + data.configId);
   }
 
 

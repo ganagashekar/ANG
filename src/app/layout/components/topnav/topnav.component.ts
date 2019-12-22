@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
-import { SetupsService } from 'src/app/shared/services/Setups.service';
-import { AppComponent } from 'src/app/app.component';
+import { ReferenceRecords } from '../../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { SetupsService } from '../../../shared/services/Setups.service';
+import { AppComponent } from '../../../app.component';
 import { Loginresponse } from '../../../Model/Account/UserModel';
 
 @Component({
@@ -32,7 +32,7 @@ export class TopnavComponent implements OnInit {
 
     ngOnInit() {
         this.pushRightClass = 'push-right';
-        this.loggedusername = localStorage.getItem('userName');
+        this.loggedusername = localStorage.getItem('RoleName');
         this.SiteId = Number(localStorage.getItem('SiteId'));
         this.SiteName = localStorage.getItem('SiteName');
         this.SiteCity = localStorage.getItem('SiteCity');

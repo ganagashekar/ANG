@@ -1,12 +1,12 @@
 import { Component, OnInit, AfterViewInit, ViewChild  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
-import { AuditFilter } from 'src/app/Model/FilterModels/AuditFilter';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { AuditFilter } from './../../Model/FilterModels/AuditFilter';
+import { ReferenceRecords } from './../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
-import { AuditModel } from 'src/app/Model/ServiceResposeModel/CommonModel/AuditModel';
-import { AppComponent } from 'src/app/app.component';
+import { AuditModel } from './../../Model/ServiceResposeModel/CommonModel/AuditModel';
+import { AppComponent } from './../../app.component';
 import { ActivatedRoute } from '@angular/router';
-import { AuditService } from 'src/app/shared/services/Audit.service';
+import { AuditService } from './../..//shared/services/Audit.service';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 
 

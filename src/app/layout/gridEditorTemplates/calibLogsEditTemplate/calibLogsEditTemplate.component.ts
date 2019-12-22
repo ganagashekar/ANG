@@ -1,23 +1,26 @@
+
+
+
 import { Component, OnInit, Output, Inject, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
-import { CalibrationlogsService } from 'src/app/shared/services/calibrationlogs.service';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
-import { CalibrationlogModel } from 'src/app/Model/ServiceResposeModel/Setups/CalibLogsModel';
-import { CalibrationlogFilter } from 'src/app/Model/FilterModels/calibrationlogFilter';
+import { CalibrationlogsService } from '../../../shared/services/calibrationlogs.service';
+import { ReferenceRecords } from '../../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { CalibrationlogModel } from '../../../Model/ServiceResposeModel/Setups/CalibLogsModel';
+import { CalibrationlogFilter } from '../../../Model/FilterModels/calibrationlogFilter';
 import * as Highcharts from 'highcharts/highstock';
 import * as _moment from 'moment';
 import * as HC_exporting_ from 'highcharts/modules/exporting';
 import { HighchartsChartModule } from 'highcharts-angular';
-import { appConstants } from 'src/app/shared/Common/app-constants';
-import { AppComponent } from 'src/app/app.component';
+import { appConstants } from '../../../shared/Common/app-constants';
+import { AppComponent } from '../../../app.component';
 import { ActivatedRoute } from '@angular/router';
 import { saveAs } from 'file-saver';
-import { DashboardTableRequestModel } from 'src/app/Model/FilterModels/DashboardTableRequestModel';
-import { DashboardQuickDataModel } from 'src/app/Model/ServiceResposeModel/Dashboard/DashboardQuickDataModel';
-import { DashboardService } from 'src/app/shared/services/Dashboard.Services';
+import { DashboardTableRequestModel } from '../../../Model/FilterModels/DashboardTableRequestModel';
+import { DashboardQuickDataModel } from '../../../Model/ServiceResposeModel/Dashboard/DashboardQuickDataModel';
+import { DashboardService } from '../../../shared/services/Dashboard.Services';
 const HC_exporting = HC_exporting_;
-
+import { ReportRequestModel } from '../../../Model/Report/ReportRequestModel';
 
 
 @Component({
@@ -40,6 +43,7 @@ export class CalibLogsEditTemplateComponent implements OnInit {
    chartOptions: any;
    SiteId: number ;
    dashboardTableRequest: DashboardTableRequestModel;
+   reportRequestModel: ReportRequestModel;
    chartdata: any = [];
    isLoading = false;
    diableGridFilters = true;
@@ -60,7 +64,6 @@ export class CalibLogsEditTemplateComponent implements OnInit {
   editModel: CalibrationlogModel;
   CalibrationlogFilter: CalibrationlogFilter;
 
-
   @ViewChild('container', { read: ElementRef , static: true }) container: ElementRef;
   constructor(public dialogRef: MatDialogRef<CalibLogsEditTemplateComponent>,
     private _dashboardService: DashboardService,
@@ -74,7 +77,19 @@ export class CalibLogsEditTemplateComponent implements OnInit {
         this.editModel = (data.Scheduler as CalibrationlogModel );
        this.Selectedconfg_id = this.editModel.confgId;
       }
-      this.getCalibrationreport(881, 39, null);
+      this.getCalibrationreport(881, 31, null);
+    //  this.reportRequestModel = new ReportRequestModel();
+    // //  this.reportRequestModel.ParamId = 0;
+    // //  this.reportRequestModel.StackId  = 0;
+
+    //  this.reportRequestModel.IsExport = false;
+    //  this.reportRequestModel.SiteCode = localStorage.getItem('SiteName');
+    //  this.reportRequestModel.TimePeriod = (0);
+    //  this.reportRequestModel.SiteName =  localStorage.getItem('SiteName');
+    //  this.reportRequestModel.ReportTitle = localStorage.getItem('VendorName');
+    //  this.reportRequestModel.ReportType = 'Real time Report ';
+    //  this.reportRequestModel.RequestedUser =  localStorage.getItem('username');
+    //  this.dataSource =  new MatTableDataSource();
     }
       ngOnInit() {
         this.dashboardTableRequest = new DashboardTableRequestModel();
@@ -273,7 +288,7 @@ export class CalibLogsEditTemplateComponent implements OnInit {
 
 
 
-      getCalibrationreport(stackId: number , paramId: number, row: any): void {
+      getCalibrationreport(stackId: number, paramId: number, row: any): void {
         this.DashboardQuickDataResposne = null;
         this.dashboardTableRequest = new DashboardTableRequestModel();
         this.dashboardTableRequest.siteId = this.SiteId;

@@ -1,12 +1,12 @@
 import { Component, OnInit , AfterViewInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
-import { ErrorCodeFilter } from 'src/app/Model/FilterModels/ErrorCodeFilter';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { ErrorCodeFilter } from '../../Model/FilterModels/ErrorCodeFilter';
+import { ReferenceRecords } from '../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
-import { ErrorCodeModel } from 'src/app/Model/ServiceResposeModel/Setups/ErrorCodeModel';
-import { AppComponent } from 'src/app/app.component';
+import { ErrorCodeModel } from './../../Model/ServiceResposeModel/Setups/ErrorCodeModel';
+import { AppComponent } from '../../../app/app.component';
 import { ActivatedRoute } from '@angular/router';
-import { ErrorCodeService } from 'src/app/shared/services/ErrorCode.services';
+import { ErrorCodeService } from '../../shared/services/ErrorCode.services';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({

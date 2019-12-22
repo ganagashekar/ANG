@@ -3,8 +3,8 @@ import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import { NavItem } from 'src/app/shared/Common/NavItem';
-import { NavService } from 'src/app/shared/services/nav.service';
+import { NavItem } from '../../../shared/Common/NavItem';
+import { NavService } from '../../../shared/services/nav.service';
 
 @Component({
   selector: 'app-menu-list-item',

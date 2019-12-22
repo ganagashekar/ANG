@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import {formatDate } from '@angular/common';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
-import { AppComponent } from 'src/app/app.component';
-import { ReportsService } from 'src/app/shared/services/report.services';
+import { AppComponent } from '../../../app.component';
+import { ReportsService } from '../../../shared/services/report.services';
 import { ActivatedRoute } from '@angular/router';
 import { saveAs } from 'file-saver';
 import * as Highcharts from 'highcharts/highstock';
@@ -14,9 +14,9 @@ import * as _moment from 'moment';
 
 import * as HC_exporting_ from 'highcharts/modules/exporting';
 import { ReportRequestModel } from '../../../Model/Report/ReportRequestModel';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
-import { ParameterFilter } from 'src/app/Model/FilterModels/ParameterFilter';
-import { appConstants } from 'src/app/shared/Common/app-constants';
+import { ReferenceRecords } from '../../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { ParameterFilter } from '../../../Model/FilterModels/ParameterFilter';
+import { appConstants } from '../../../shared/Common/app-constants';
 const HC_exporting = HC_exporting_;
 HC_exporting(Highcharts);
 

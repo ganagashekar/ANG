@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { appConstants } from '../Common/app-constants';
-import { SiteSetupFilter } from 'src/app/Model/FilterModels/SiteSetupFilter';
+import { SiteSetupFilter } from '../../Model/FilterModels/SiteSetupFilter';
 
 
 

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
-import { UserinfoFilter } from 'src/app/Model/FilterModels/UserinfoFilter';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { UserinfoFilter } from '../../Model/FilterModels/UserinfoFilter';
+import { ReferenceRecords } from '../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
-import { UserModel } from 'src/app/Model/ServiceResposeModel/Setups/UserModel';
-import { AppComponent } from 'src/app/app.component';
+import { UserModel } from '../../Model/ServiceResposeModel/Setups/UserModel';
+import { AppComponent } from '../../app.component';
 import { ActivatedRoute } from '@angular/router';
-import { UserinfoService } from 'src/app/shared/services/Userinfo.service';
+import { UserinfoService } from '../../shared/services/Userinfo.service';
 
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { UserinfoEditTemplateComponent } from '../gridEditorTemplates/userinfoEditTemplate/userinfoEditTemplate.component';

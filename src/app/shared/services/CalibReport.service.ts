@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { appConstants } from '../Common/app-constants';
-import { CalibReportFilter } from 'src/app/Model/FilterModels/CalibReportFilter';
+import { CalibReportFilter } from '../../Model/FilterModels/CalibReportFilter';
 
 @Injectable({
   providedIn: 'root'

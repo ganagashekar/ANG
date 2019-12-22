@@ -83,7 +83,7 @@
       <i class="fa fa-chart-line"  (click)="SelectedGroupDrawCharts(groupBy)"></i>
 </button>
 <a href="javascript:void()"><i class="fa fa-camera" matTooltip="Show camera " (click)="opencamera()" routerLinkActive="active" style="margin-left:30px;color:#1a237e;"></i></a>
-<a href="javascript:void()"><i class="fa fa-file-excel"  matTooltip="Export to excel " style="margin-left:20px;color:green;"></i></a>
+<a href="javascript:void()"><i class="fa fa-file-excel"  matTooltip="Export to excel " (click)="exporttoexcelClick(groupBy)" style="margin-left:20px;color:green;"></i></a>
 <a href="javascript:void()"><i class="fa fa-file-pdf" matTooltip="Export to pdf " style="margin-left:20px;color:#1a237e;"></i></a>
 <span style="float:right;padding: 10px 0px 0px 0px;font-weight: bold;">Historical data:<a href="javascript:void();"><i class="fa fa-arrow-right"  href="javascript:void(0)" (click)="historicaldata(groupBy)" matTooltip="" style="margin-left:20px;color:#1a237e;"></i></a>
   <!-- <a href="javascript:void();"><i class="fa fa-file-pdf" matTooltip="Export to pdf " style="margin-left:20px;color:#1a237e;"></i></a> --></span>

@@ -1,10 +1,10 @@
 import { Component, OnInit, EventEmitter, Inject, Output } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ControllerBusModel } from 'src/app/Model/ServiceResposeModel/Setups/ControllerBusModel';
+import { ControllerBusModel } from '../../../Model/ServiceResposeModel/Setups/ControllerBusModel';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { ControllerBusFilter } from 'src/app/Model/FilterModels/ControllerBusFilter';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
-import { ControllerBusService } from 'src/app/shared/services/controllerbus.services';
+import { ControllerBusFilter } from '../../../Model/FilterModels/ControllerBusFilter';
+import { ReferenceRecords } from '../../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { ControllerBusService } from '../../../shared/services/controllerbus.services';
 
 @Component({
   selector: 'app-controllerbusedittemplate',

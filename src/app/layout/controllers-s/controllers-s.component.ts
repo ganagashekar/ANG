@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { ReferenceRecords } from '../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { ControllerEditTemplateComponent } from '../gridEditorTemplates/controllerEditTemplate/controllerEditTemplate.component';
-import { ControllerModel } from 'src/app/Model/ServiceResposeModel/Setups/ControllerModel';
-import { ControllerFilter } from 'src/app/Model/FilterModels/ControllerFilter';
+import { ControllerModel } from '../../Model/ServiceResposeModel/Setups/ControllerModel';
+import { ControllerFilter } from '../../Model/FilterModels/ControllerFilter';
 import { MatTableDataSource, MatSnackBar, MatDialog } from '@angular/material';
-import { ControllerService } from 'src/app/shared/services/controller.service';
-import { AppComponent } from 'src/app/app.component';
+import { ControllerService } from '../../shared/services/controller.service';
+import { AppComponent } from '../../../app/app.component';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 

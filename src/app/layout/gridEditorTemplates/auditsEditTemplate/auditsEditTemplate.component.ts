@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { AuditService } from 'src/app/shared/services/Audit.service';
-import { AuditModel } from 'src/app/Model/ServiceResposeModel/CommonModel/AuditModel';
-import { AuditFilter } from 'src/app/Model/FilterModels/AuditFilter';
+import { AuditService } from '../../../shared/services/Audit.service';
+import { AuditModel } from '../../../Model/ServiceResposeModel/CommonModel/AuditModel';
+import { AuditFilter } from '../../../Model/FilterModels/AuditFilter';
 
 @Component({
   selector: 'app-auditsEditTemplate',

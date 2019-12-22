@@ -13,7 +13,7 @@ import { ChartModule } from 'angular-highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { MenuListItemComponent } from './components/menu-list-item/menu-list-item.component';
 import { NavService } from '../shared/services/nav.service';
-import { ConfirmationDialogComponent } from 'src/app/layout/components/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { RealtimeReportComponent } from './Reports/RealtimeReport/RealtimeReport.component';
 import { ExceedenceReportComponent } from './Reports/ExceedenceReport/ExceedenceReport.component';
 import { SitesetupModule } from './sitesetup/sitesetup.module';
@@ -24,14 +24,14 @@ import { ConfigurationSModule } from './configuration-s/configuration-s.module';
 import { AuditsModule } from './audits/audits.module';
 import { ApplicationlogsModule } from './applicationlogs/applicationlogs.module';
 import { ErrorcodesModule } from './errorcodes/errorcodes.module';
-import { ForgotpasswordModule } from 'src/app/forgotpassword/forgotpassword.module';
-import { CalibrationsetupModule } from 'src/app/layout/calibrationsetup/calibrationsetup.module';
-import { CalibreportsModule } from 'src/app/layout/calibreports/calibreports.module';
-import { CalibrationlogsModule } from 'src/app/layout/calibrationlogs/calibrationlogs.module';
+import { ForgotpasswordModule } from '../forgotpassword/forgotpassword.module';
+import { CalibrationsetupModule } from './calibrationsetup/calibrationsetup.module';
+import { CalibreportsModule } from './calibreports/calibreports.module';
+import { CalibrationlogsModule } from './calibrationlogs/calibrationlogs.module';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CommonpopupComponent } from './dashboard/popups/commonpopup/commonpopup.component';
-import { CameraModule } from 'src/app/layout/camera/camera.module';
+import { CameraModule } from './camera/camera.module';
 import * as Highcharts from 'highcharts/highstock';
 import * as _moment from 'moment';
 import * as HC_exporting_ from 'highcharts/modules/exporting';
@@ -73,7 +73,7 @@ import { SafePipe } from '../shared/pipes/safe.pipe';
 
     declarations: [  CommonpopupComponent,  ConfirmationDialogComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
         AverageReportComponent, MenuListItemComponent
-      , RealtimeReportComponent , ExceedenceReportComponent]
+      , RealtimeReportComponent , ExceedenceReportComponent,]
 
 
 })

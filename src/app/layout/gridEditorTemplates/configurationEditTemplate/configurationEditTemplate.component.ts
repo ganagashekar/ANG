@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject, EventEmitter, Output } from '@angular/core';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { ReferenceRecords } from '../../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { ConfgFilter } from 'src/app/Model/FilterModels/ConfgFilter';
+import { ConfgFilter } from '../../../Model/FilterModels/ConfgFilter';
 import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ConfgService } from 'src/app/shared/services/Confg.service';
-import { ConfgModel } from 'src/app/Model/ServiceResposeModel/CommonModel/confgModel';
+import { ConfgService } from '../../../shared/services/Confg.service';
+import { ConfgModel } from '../../../Model/ServiceResposeModel/CommonModel/confgModel';
 
 @Component({
   selector: 'app-configurationEditTemplate',

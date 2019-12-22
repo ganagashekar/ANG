@@ -2,10 +2,10 @@
 import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { UserinfoService } from 'src/app/shared/services/Userinfo.service';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
-import { UserModel } from 'src/app/Model/ServiceResposeModel/Setups/userModel';
-import { UserinfoFilter } from 'src/app/Model/FilterModels/UserinfoFilter';
+import { UserinfoService } from '../../../shared/services/Userinfo.service';
+import { ReferenceRecords } from '../../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { UserModel } from '../../../Model/ServiceResposeModel/Setups/userModel';
+import { UserinfoFilter } from '../../../Model/FilterModels/UserinfoFilter';
 
 @Component({
   selector: 'app-userinfoedittemplate',

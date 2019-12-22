@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn, ReactiveFormsModule } from '@angular/forms';
-import { ControllerBusFilter } from 'src/app/Model/FilterModels/ControllerBusFilter';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { ControllerBusFilter } from '../../Model/FilterModels/ControllerBusFilter';
+import { ReferenceRecords } from '../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
-import { ControllerBusModel } from 'src/app/Model/ServiceResposeModel/Setups/ControllerBusModel';
-import { AppComponent } from 'src/app/app.component';
+import { ControllerBusModel } from '../../Model/ServiceResposeModel/Setups/ControllerBusModel';
+import { AppComponent } from '../../../app/app.component';
 import { ActivatedRoute } from '@angular/router';
-import { ControllerBusService } from 'src/app/shared/services/controllerbus.services';
+import { ControllerBusService } from '../../shared/services/controllerbus.services';
 
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { ControllerbusEditTemplateComponent } from '../gridEditorTemplates/controllerbusEditTemplate/controllerbusEditTemplate.component';

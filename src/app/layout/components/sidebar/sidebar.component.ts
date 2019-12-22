@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavItem } from 'src/app/shared/Common/NavItem';
+import { NavItem } from '../../../shared/Common/NavItem';
 
 @Component({
     selector: 'app-sidebar',

@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment } from './../../../environments/environment';
 import { appConstants } from '../Common/app-constants';
-import { ParameterFilter } from 'src/app/Model/FilterModels/ParameterFilter';
-import { DashboardTableRequestModel } from 'src/app/Model/FilterModels/DashboardTableRequestModel';
-
+import { ParameterFilter } from './../../Model/FilterModels/ParameterFilter';
+import { DashboardTableRequestModel } from './../../Model/FilterModels/DashboardTableRequestModel';
+import { ReportRequestModel } from './../../Model/Report/ReportRequestModel';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +40,13 @@ userName: string;
   getCalibrationreport(dashboardTableRequest: DashboardTableRequestModel): Observable<any>  {
     return this._httpClient.post<any>(this._baseURL + appConstants.APICONTROLLER_Dashboard +
       '/GetCalibrationreport', dashboardTableRequest);
+    }
+
+    exportDashboardRealtimeReport(filter: ReportRequestModel):  Observable<Blob> {
+      return this._httpClient.post<Blob>(this._baseURL + appConstants.APICONTROLLER_REPORTS +
+        '/ExportLiveReport?' , filter,
+      { responseType: 'blob' as 'json' });
+
     }
 
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { ErrorCodeSetupService } from 'src/app/shared/services/ErrorCodeSetup.service';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
-import { ErrorCodeSetupModel } from 'src/app/Model/ServiceResposeModel/Setups/ErrorCodeSetupModel';
-import { ErrorCodeSetupFilter } from 'src/app/Model/FilterModels/ErrorCodeSetupFilter';
+import { ErrorCodeSetupService } from '../../../shared/services/ErrorCodeSetup.service';
+import { ReferenceRecords } from '../../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { ErrorCodeSetupModel } from '../../../Model/ServiceResposeModel/Setups/ErrorCodeSetupModel';
+import { ErrorCodeSetupFilter } from '../../../Model/FilterModels/ErrorCodeSetupFilter';
 
 @Component({
   selector: 'app-errorcodesEditTemplate',

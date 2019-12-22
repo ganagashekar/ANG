@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CalibrationlogModel } from 'src/app/Model/ServiceResposeModel/Setups/CalibLogsModel';
+import { CalibrationlogModel } from './../..//Model/ServiceResposeModel/Setups/CalibLogsModel';
 import { MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
-import { CalibrationlogsService } from 'src/app/shared/services/calibrationlogs.service';
-import { AppComponent } from 'src/app/app.component';
+import { CalibrationlogsService } from './../../shared/services/calibrationlogs.service';
+import { AppComponent } from './../../app.component';
 import { ActivatedRoute } from '@angular/router';
-import { CalibrationlogFilter } from 'src/app/Model/FilterModels/calibrationlogFilter';
+import { CalibrationlogFilter } from './../../Model/FilterModels/calibrationlogFilter';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { ReferenceRecords } from './../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 import { CalibLogsEditTemplateComponent } from '../gridEditorTemplates/calibLogsEditTemplate/calibLogsEditTemplate.component';
 
 
@@ -44,6 +44,7 @@ export class CalibrationlogsComponent implements OnInit {
     }
 
     newCalibLogs(): void {
+      //this.SelectedrowDrawCharts();
       const dialogRef = this._dialog.open( CalibLogsEditTemplateComponent, {
         width: '500px',
         data: { action: 'add',  CalibrationlogModel }

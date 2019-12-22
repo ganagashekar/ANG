@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CalibrationModel } from 'src/app/Model/ServiceResposeModel/Setups/CalibrationSetupModel';
+import { CalibrationModel } from '../../Model/ServiceResposeModel/Setups/CalibrationSetupModel';
 import { DataSource } from '@angular/cdk/table';
 import { MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
-import { CalibrationService } from 'src/app/shared/services/Calibration.service';
-import { AppComponent } from 'src/app/app.component';
+import { CalibrationService } from '../../shared/services/Calibration.service';
+import { AppComponent } from '../../app.component';
 import { ActivatedRoute } from '@angular/router';
-import { CalibrationFilter } from 'src/app/Model/FilterModels/CalibrationFilter';
+import { CalibrationFilter } from '../../Model/FilterModels/CalibrationFilter';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { CalibEditTemplateComponent } from '../gridEditorTemplates/calibEditTemplate/calibEditTemplate.component';
 

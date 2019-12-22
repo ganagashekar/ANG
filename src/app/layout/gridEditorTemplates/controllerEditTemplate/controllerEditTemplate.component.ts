@@ -1,9 +1,9 @@
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { ControllerService } from 'src/app/shared/services/controller.service';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
-import { ControllerModel } from 'src/app/Model/ServiceResposeModel/Setups/ControllerModel';
-import { ControllerFilter } from 'src/app/Model/FilterModels/ControllerFilter';
+import { ControllerService } from '../../../shared/services/controller.service';
+import { ReferenceRecords } from '../../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { ControllerModel } from '../../../Model/ServiceResposeModel/Setups/ControllerModel';
+import { ControllerFilter } from '../../../Model/FilterModels/ControllerFilter';
 import { OnInit, Inject, Output, EventEmitter, Component } from '@angular/core';
 
 @Component({

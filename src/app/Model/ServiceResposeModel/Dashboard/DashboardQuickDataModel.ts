@@ -6,6 +6,7 @@ export class DashboardQuickDataModel {
   paramValue: number;
   threShholdValue: number;
   data_id: number;
+  stack_id: number;
   configId: number;
   isGroupby: boolean;
   status: boolean;

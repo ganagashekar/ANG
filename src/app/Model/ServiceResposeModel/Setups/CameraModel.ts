@@ -3,8 +3,10 @@ import { DateTime } from 'luxon';
 export class CameraModel {
   camId: bigint;
   confgId: bigint;
+  paramId: number;
   siteName: string;
   siteId: bigint;
+  stackId: number;
   stackName: string;
   paramName: string;
   rtpsUrl: string;

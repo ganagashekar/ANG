@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { SetupsService } from 'src/app/shared/services/Setups.service';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
-import { ParamModel } from 'src/app/Model/ServiceResposeModel/Setups/ParamModel';
-import { ParameterFilter } from 'src/app/Model/FilterModels/ParameterFilter';
+import { SetupsService } from '../../../shared/services/Setups.service';
+import { ReferenceRecords } from '../../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { ParamModel } from '../../../Model/ServiceResposeModel/Setups/ParamModel';
+import { ParameterFilter } from '../../../Model/FilterModels/ParameterFilter';
 @Component({
   selector: 'app-paramtereditemplate',
   templateUrl: './paramterEditTemplate.component.html',

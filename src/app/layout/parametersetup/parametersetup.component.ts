@@ -1,13 +1,13 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray, ValidatorFn } from '@angular/forms';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
-import { ParameterFilter } from 'src/app/Model/FilterModels/ParameterFilter';
-import { ReferenceRecords } from 'src/app/Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
+import { ParameterFilter } from './../../Model/FilterModels/ParameterFilter';
+import { ReferenceRecords } from './../../Model/ServiceResposeModel/CommonModel/ReferenceRecordsModel';
 
-import { ParamModel } from 'src/app/Model/ServiceResposeModel/Setups/ParamModel';
-import { AppComponent } from 'src/app/app.component';
+import { ParamModel } from '../../Model/ServiceResposeModel/Setups/ParamModel';
+import { AppComponent } from '../../app.component';
 import { ActivatedRoute } from '@angular/router';
-import { SetupsService } from 'src/app/shared/services/Setups.service';
+import { SetupsService } from '../../shared/services/Setups.service';
 import { ParamterEditTemplateComponent } from '../gridEditorTemplates/paramterEditTemplate/ParamterEditTemplateComponent';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 

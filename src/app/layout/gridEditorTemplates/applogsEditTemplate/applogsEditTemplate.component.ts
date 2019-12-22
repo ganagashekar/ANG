@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Inject, EventEmitter } from '@angular/core';
-import { ApplicationLogsModel } from 'src/app/Model/ServiceResposeModel/CommonModel/ApplicationLogsModel';
-import { ApplicationLogsFilter } from 'src/app/Model/FilterModels/ApplicationLogsFilter';
-import { ApplicationLogsService } from 'src/app/shared/services/ApplicationLogs.service';
+import { ApplicationLogsModel } from '../../../Model/ServiceResposeModel/CommonModel/ApplicationLogsModel';
+import { ApplicationLogsFilter } from '../../../Model/FilterModels/ApplicationLogsFilter';
+import { ApplicationLogsService } from '../../../shared/services/ApplicationLogs.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
