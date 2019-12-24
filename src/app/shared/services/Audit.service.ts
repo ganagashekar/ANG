@@ -38,7 +38,7 @@ import { AuditFilter } from '../../Model/FilterModels/AuditFilter';
 
     deleteaudit(auditID: bigint): Observable<boolean> {
       return this._httpClient.delete<boolean>(this._baseURL + appConstants.APICONTROLLER_Admin +
-        '/Deleteaudit?=' + auditID);
+        '/Deleteaudit?AuditId=' + auditID);
     }
 
   }

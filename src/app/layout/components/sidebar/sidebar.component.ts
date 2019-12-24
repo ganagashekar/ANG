@@ -136,20 +136,20 @@ export class SidebarComponent implements OnInit {
       {
         displayName: 'Logs',
         iconName: 'settings_applications',
-       visible: this.IsAdmin ,
+        visible: true,
         children: [
           {
             displayName: 'ApplicationLogs',
             iconName: 'Logs',
             route: 'ApplicationLogs',
-           visible: this.IsAdmin ,
+            visible: true ,
 
           },
           {
             displayName: 'Audit',
             iconName: 'Audit',
             route: 'audit',
-           visible: this.IsAdmin ,
+            visible: true ,
 
           },
           {
@@ -164,13 +164,13 @@ export class SidebarComponent implements OnInit {
       {
         displayName: 'Live Status',
         iconName: 'settings_applications',
-        visible: this.IsAdmin ,
+        visible: true,
         children: [
           {
             displayName: 'Camera Status',
             iconName: 'camera_enhance',
             route: 'Camera',
-           visible: this.IsAdmin ,
+            visible: true ,
 
           },
         ]
