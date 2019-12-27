@@ -55,3 +55,14 @@ mat-label{color:#fff !important;}
   float: left;
   margin-left: 50px;
 }
+
+@media only screen and (max-width: 768px) {
+  .login-nature {
+    display:none;
+  }
+  .logmain-sec{
+    display:  block!important;
+  }
+  .login-form{width: 100%;border-radius: 20px;margin-top: 25px;}
+
+}

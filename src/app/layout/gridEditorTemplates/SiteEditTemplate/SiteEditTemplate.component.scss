@@ -103,9 +103,25 @@
     color:darkblue;
     text-decoration: underline;
   }
+.scheduler-form{
+  overflow: scroll;
+  height: 580px;
+}
 
-
-
-
+  @media screen and (max-width: 990px) {
+  .divTaskScheduler {
+    padding: 5px;
+    overflow: scroll;
+    height: 500px;
+}
+.siteedit-field {
+  width: 100%;
+  margin-right: 0px;
+}
+.siteedit-fields {
+  width: 100% !important;
+  margin-right: 0px;
+}
+  }
 
 

@@ -97,3 +97,15 @@
   text-decoration: underline;
 }
 
+@media screen and (max-width: 990px) {
+
+  .half-width{
+    width: 100% !important;
+
+  }
+  .divTaskScheduler {
+    padding: 5px;
+    overflow: scroll;
+    height: 500px;
+}
+  }

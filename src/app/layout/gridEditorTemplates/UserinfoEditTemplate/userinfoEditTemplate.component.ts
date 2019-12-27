@@ -48,7 +48,7 @@ export class UserinfoEditTemplateComponent implements OnInit {
       userName: new FormControl('', [Validators.required]),
       userPass: new FormControl('', [Validators.required]),
       isEnabled: new FormControl('', [Validators.required]),
-      roleName: new FormControl('', [Validators.required]),
+      //roleName: new FormControl('', [Validators.required]),
       roleId: new FormControl('', [Validators.required]),
       vendorSiteId:  new FormControl('', [Validators.required]),
     });
@@ -65,7 +65,7 @@ export class UserinfoEditTemplateComponent implements OnInit {
           userPass: this.editModel.userPass,
           isEnabled: this.editModel.isEnabled,
           vendorSiteId: this.editModel.isEnabled,
-          roleName: this.editModel.roleName,
+         // roleName: this.editModel.roleName,
           roleId: this.editModel.roleId,
 
         });

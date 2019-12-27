@@ -61,6 +61,9 @@ font-size: 22px;
   .nav-brand {
       width: 100%;
   }
+  .sitename {
+    display: none;
+}
 }
 @media screen and (max-width: 768px) {
   .hidden-sm {

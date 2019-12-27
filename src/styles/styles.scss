@@ -106,3 +106,10 @@ tr.mat-header-row {
   margin-top: -11px;
   padding-right: 7px;
 }
+
+@media screen and (max-width: 768px) {
+.mat-snack-bar-container {
+  left: 25%;
+  width: 300px !important;
+}
+}

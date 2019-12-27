@@ -22,7 +22,7 @@ table {
 .mb-20 {
   margin-bottom: 20px;
 }
-.controller-busvalues{text-align: center;border-right:1px solid #888 ;border-bottom:1px solid #888;}
+.audit-data{text-align: center;border-right:1px solid #888 ;border-bottom:1px solid #888;}
 .cntrbus-siteid{margin-left: 25px;}
 th.mat-header-cell.cdk-column-editAction.mat-column-editAction.ng-star-inserted {
   border-right: 1px solid #fff;
@@ -44,5 +44,9 @@ border-bottom: 1px solid #888;border-right:1px solid #888;
 .mat-column-deleteAction {border-bottom:1px solid #888;}
 .cntr-sitename{
 padding-left: 30px;
+}
+.calib-icons{
+  margin: 8px 6px 0px 6px;
+          font-size: 20px;
 }
 
