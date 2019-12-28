@@ -44,10 +44,9 @@ export class SidebarComponent implements OnInit {
             visible: true ,
           },
           {
-            displayName: 'Delayed',
+            displayName: 'Historical',
             iconName: 'query_builder',
-
-            route: 'AverageReport',
+            route: 'HistoricalReport',
             visible: true ,
 
           }

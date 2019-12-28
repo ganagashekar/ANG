@@ -8,6 +8,7 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
 import { SitesetupComponent} from './sitesetup/sitesetup.component';
 import { RealtimeReportComponent } from './Reports/RealtimeReport/RealtimeReport.component';
 import { ExceedenceReportComponent } from './Reports/ExceedenceReport/ExceedenceReport.component';
+import { HistoricalReportComponent } from './Reports/HistoricalReport/HistoricalReport.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ControllerBusComponent } from './controllerbus/controllerbus.component';
 import { ControllersSComponent } from './controllers-s/controllers-s.component';
@@ -48,6 +49,11 @@ const routes: Routes = [
           path: 'ExceedenceReport',
           component: ExceedenceReportComponent
           },
+          {
+
+            path: 'HistoricalReport',
+            component: HistoricalReportComponent
+            },
             {
               path: 'SiteSetup',
               component: SitesetupComponent

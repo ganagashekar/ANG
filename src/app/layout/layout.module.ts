@@ -16,6 +16,7 @@ import { NavService } from '../shared/services/nav.service';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { RealtimeReportComponent } from './Reports/RealtimeReport/RealtimeReport.component';
 import { ExceedenceReportComponent } from './Reports/ExceedenceReport/ExceedenceReport.component';
+import { HistoricalReportComponent } from './Reports/HistoricalReport/HistoricalReport.component';
 import { SitesetupModule } from './sitesetup/sitesetup.module';
 import { UserinfoModule } from './userinfo/userinfo.module';
 import { ControllerbusModule } from './controllerbus/controllerbus.module';
@@ -73,7 +74,7 @@ import { SafePipe } from '../shared/pipes/safe.pipe';
 
     declarations: [  CommonpopupComponent,  ConfirmationDialogComponent,  LayoutComponent, TopnavComponent, SidebarComponent,
         AverageReportComponent, MenuListItemComponent
-      , RealtimeReportComponent , ExceedenceReportComponent,]
+      , RealtimeReportComponent , ExceedenceReportComponent, HistoricalReportComponent]
 
 
 })
