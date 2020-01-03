@@ -19,9 +19,10 @@
     width: 32%;
     margin-right: 15px;
 }
-.siteedit-fields {
-  width: 48% !important;
-  margin-right: 22px;
+
+.siteedits-field {
+  width: 230px;
+  margin-right: 20px;
 }
   .radio-btn {
       color: #8c8c8c;
@@ -115,6 +116,10 @@
     height: 500px;
 }
 .siteedit-field {
+  width: 100%;
+  margin-right: 0px;
+}
+.siteedits-field {
   width: 100%;
   margin-right: 0px;
 }
