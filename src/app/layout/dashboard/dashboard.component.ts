@@ -1,8 +1,8 @@
 import { DashboardTableRequestModel } from './../../Model/FilterModels/DashboardTableRequestModel';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { ReportRequestModel } from './../../Model/Report/ReportRequestModel';
-import { DashboardQuickDataModel } from './../..//Model/ServiceResposeModel/Dashboard/DashboardQuickDataModel';
+import { ReportRequestModel } from '../../Model/Report/ReportRequestModel';
+import { DashboardQuickDataModel } from '../../Model/ServiceResposeModel/Dashboard/DashboardQuickDataModel';
 import * as Highcharts from 'highcharts/highstock';
 import { Router } from '@angular/router';
 import * as HC_exporting_ from 'highcharts/modules/exporting';
@@ -13,8 +13,8 @@ import { first } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { interval, Subscription } from 'rxjs';
 import { OnInit, ElementRef, ViewChild, AfterViewInit, Component, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { DashboardQuickCounts } from './../../Model/ServiceResposeModel/Dashboard/DashboardQuickCounts';
-import { DashboardService } from './../../shared/services/Dashboard.Services';
+import { DashboardQuickCounts } from '../../Model/ServiceResposeModel/Dashboard/DashboardQuickCounts';
+import { DashboardService } from '../../shared/services/Dashboard.Services';
 
 import MapModule from 'highcharts/modules/map';
 import { ConfigurationSComponent } from '../configuration-s/configuration-s.component';
@@ -297,13 +297,13 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
         if (point.x === this.x) {
           const seriesame = (point.series.name).toUpperCase()
           let param = seriesame.split('-');
-          const StackName= param[0] == null ? "" : param[0];
-          const paramName= param.length > 1 ? param[1] :"";
-          const paramUnits= param.length > 2 ? param[2] :"";
+          const StackName= param[0] == null ? '' : param[0];
+          const paramName= param.length > 1 ? param[1] :'';
+          const paramUnits= param.length > 2 ? param[2] :'';
           outputString += "<tr><td><span style='color:" + point.color + "'>\u25CF</span></td><td> " + (StackName) + "</td><td>"+paramName+"</td><td>"+paramUnits+"</td><td> <b> " + point.y + "</b></td></tr>";
         }
       }, this);
-      return outputString+='</table>';
+      return outputString +='</table>';
     }
   },
 
@@ -576,3 +576,12 @@ outputString += ' <tr><th style=\'background-color:#000;color: #DAD9D9\'; colspa
     }
   }
 }
+
+
+
+
+
+
+
+
+

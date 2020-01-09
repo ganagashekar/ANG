@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { CameraFilter } from '../../Model/FilterModels/CameraFilter';
 import { ConfirmationDialogComponent } from '../components/confirmation-dialog/confirmation-dialog.component';
 import { CameraEditTemplateComponent } from '../gridEditorTemplates/cameraEditTemplate/cameraEditTemplate.component';
-import { LiveCameraTemplateComponent } from '../gridEditorTemplates/LiveCameraTemplate/LiveCameraTemplate.component';
+import { LiveCameraTemplateComponent } from '../gridEditorTemplates/livecameraTemplate/livecameraTemplate.component';
 
 @Component({
   selector: 'app-camera',

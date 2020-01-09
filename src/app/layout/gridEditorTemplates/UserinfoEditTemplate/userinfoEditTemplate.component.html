@@ -51,15 +51,28 @@
       <!-- <mat-slide-toggle>Slide me!</mat-slide-toggle> -->
   </mat-form-field>
 
-    <mat-form-field class="half-width float-left">
+   <mat-form-field class="half-width float-left">
 
-      <mat-label>Role</mat-label>
-       <input matInput type="number" min="1" formControlName="roleId">
-      <!-- <mat-select formControlName="roleId">
+       <mat-label>Role</mat-label>
+       <!-- <input matInput type="string" min="1" formControlName="roleName">  -->
+       <mat-select formControlName="roleId">
         <mat-option [value]="role.id" *ngFor="let role of userroleArray">{{role.name}}
           </mat-option>
-    </mat-select> -->
+    </mat-select>
 </mat-form-field>
+
+
+<!-- <mat-form-field class="half-width float-left">
+  <mat-label>Role</mat-label>
+  <mat-error *ngIf="schedulerForm.controls.rolename.hasError('required')">
+      Role Name is
+      <strong>required</strong>
+  </mat-error>
+  <mat-select formControlName="roleId" (selectionChange)="RoleChange($event.value)" >
+      <mat-option [value]="role.id" *ngFor="let role of userroleArray">{{role.name}}
+        </mat-option>
+  </mat-select>
+</mat-form-field> -->
 
 
       <div layout="row" layout-align="center center" class="divBtnCon float-right">

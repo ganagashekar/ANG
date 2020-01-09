@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuditsComponent } from './audits.component';
 import { AuditsEditTemplateComponent } from '../gridEditorTemplates/auditsEditTemplate/auditsEditTemplate.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MaterialModule } from 'src/app/material/material.module';
+import { MaterialModule } from '../../material/material.module';
 
 @NgModule({
   imports: [

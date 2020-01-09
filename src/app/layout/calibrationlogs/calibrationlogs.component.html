@@ -16,7 +16,7 @@ The actual rendered columns are set as a property on the row definition" -->
   <th mat-header-cell *matHeaderCellDef></th>
   <td mat-cell *matCellDef="let calibdata">
       <button mat-icon-button  class="padding-left-20px">
-        <a href="#"><i class="fa fa-file-excel calib-icons"></i></a>
+        <a href="#"><i class="fa fa-chart-line calib-icons" (click)="newCalibLogs()"></i></a>
         <a href="#"><i class="fa fa-file-pdf calib-icons"></i></a>
           <a href="#"><i class="fa fa-print calib-icons"></i></a>
       </button>
