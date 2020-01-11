@@ -15,6 +15,7 @@ export class SiteEditTemplateComponent implements OnInit {
   @Output()
   siteEditorEmitter = new EventEmitter<any>();
   schedulerForm: FormGroup;
+  site_in_ganga_basin = false;
   // stacksArray: ReferenceRecords[] = [];
   // paramArray: ReferenceRecords[] = [];
   siteStatesArray: ReferenceRecords[] = [];
@@ -103,9 +104,15 @@ export class SiteEditTemplateComponent implements OnInit {
       });
 
 
+
     }
 
 }
+slideToggle(event): void {
+  console.log(event);
+
+}
+
 getAllsiteindustryist(siteId: number): void {
 
    this.siteSetupFilter.SiteId = 1;

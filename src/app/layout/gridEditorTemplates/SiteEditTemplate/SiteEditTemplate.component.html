@@ -42,14 +42,20 @@
       </mat-error> -->
         <input matInput type="string" min="1" formControlName="site_cpcb_cd">
     </mat-form-field>
+
     <mat-form-field class="half-width  siteedits-field">
+
       <mat-label>Site in Ganga Basin.</mat-label>
-      <!-- <mat-error *ngIf="schedulerForm.controls.errorcode.hasError('required')">
-        Errorcode is
-        <strong>required</strong>
-    </mat-error> -->
+     <!-- <div>
+    <mat-slide-toggle
+    lableposition="before" (chnage)="slideToggle($event)">Site in Ganga Basin</mat-slide-toggle>
+  </div> -->
+
       <input matInput type="string" min="1" formControlName="site_in_ganga_basin">
-  </mat-form-field>
+    </mat-form-field>
+
+
+  <!-- </mat-form-field> -->
     <mat-form-field class="half-width  siteedits-field">
         <mat-label>Industry Type.</mat-label>
         <!-- <mat-error *ngIf="schedulerForm.controls.site_industry.hasError('required')">
