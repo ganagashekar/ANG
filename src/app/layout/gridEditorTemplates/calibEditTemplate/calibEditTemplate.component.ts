@@ -67,7 +67,7 @@ export class CalibEditTemplateComponent implements OnInit {
       setNewValueResp: new FormControl('', [Validators.required]),
       setMakeSpanCmd: new FormControl('', [Validators.required]),
       setMakeSpanResp: new FormControl('', [Validators.required]),
-
+      confg_id: new FormControl('', [Validators.required]),
     });
 
     if (this.isAdd) { // scheduler add
@@ -97,7 +97,7 @@ export class CalibEditTemplateComponent implements OnInit {
           setNewValueResp: this.editModel.setNewValueResp,
           setMakeSpanCmd: this.editModel.setMakeSpanCmd,
           setMakeSpanResp: this.editModel.setMakeSpanResp,
-
+          confg_id: this.editModel.confg_id,
         });
 
 

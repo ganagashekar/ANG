@@ -58,7 +58,7 @@ export class CalibreportEditTemplateComponent implements OnInit {
     this.getAllcalibtype(0);
 
     this.schedulerForm = this.formBuilder.group({
-     // confgId: new FormControl('', [Validators.required]),
+      confgId: new FormControl('', [Validators.required]),
 
       paramname: new FormControl('', [Validators.required]),
 
@@ -79,8 +79,8 @@ export class CalibreportEditTemplateComponent implements OnInit {
       calib_span_delay: new FormControl('', [Validators.required]),
       calib_span_duriation: new FormControl('', [Validators.required]),
       ca_set_new_span_value: new FormControl('', [Validators.required]),
-     siteId: new FormControl('', [Validators.required]),
-     stack_name: new FormControl('', [Validators.required]),
+    // siteId: new FormControl('', [Validators.required]),
+    // stack_name: new FormControl('', [Validators.required]),
 
     });
 
@@ -92,7 +92,7 @@ export class CalibreportEditTemplateComponent implements OnInit {
 
 
         this.schedulerForm.patchValue({
-         // confgId: this.editModel.confgId,
+          confgId: this.editModel.confgId,
           paramname: this.editModel.paramname,
           clib_name: this.editModel.clib_name,
           calibtype: this.editModel.calibtype,
@@ -111,8 +111,8 @@ export class CalibreportEditTemplateComponent implements OnInit {
           calib_span_delay: this.editModel.calib_span_delay,
           calib_span_duriation: this.editModel.calib_span_duriation,
           ca_set_new_span_value: this.editModel.ca_set_new_span_value,
-         siteId: this.editModel.siteId,
-           stack_name: this.editModel.stack_name,
+       //  siteId: this.editModel.siteId,
+          // stack_name: this.editModel.stack_name,
         });
   }
 

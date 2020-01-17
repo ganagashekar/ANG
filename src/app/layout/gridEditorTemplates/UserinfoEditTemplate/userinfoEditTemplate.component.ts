@@ -45,11 +45,12 @@ export class UserinfoEditTemplateComponent implements OnInit {
     this.getuserRole();
     // this.getAllParameterUnitsList(0);
     this.schedulerForm = this.formBuilder.group({
+      userId: new FormControl('', [Validators.required]),
       userName: new FormControl('', [Validators.required]),
       userPass: new FormControl('', [Validators.required]),
       isEnabled: new FormControl('', [Validators.required]),
      // roleName: new FormControl('', [Validators.required]),
-      roleId: new FormControl('', [Validators.required]),
+     // roleId: new FormControl('', [Validators.required]),
       vendorSiteId:  new FormControl('', [Validators.required]),
     });
 
@@ -61,12 +62,13 @@ export class UserinfoEditTemplateComponent implements OnInit {
 
 
         this.schedulerForm.patchValue({
+          userId: this.editModel.userId,
           userName: this.editModel.userName,
           userPass: this.editModel.userPass,
           isEnabled: this.editModel.isEnabled,
-          vendorSiteId: this.editModel.isEnabled,
+          vendorSiteId: this.editModel.vendorSiteId,
          // roleName: this.editModel.roleName,
-          roleId: this.editModel.roleId,
+          //roleId: this.editModel.roleId,
 
         });
 

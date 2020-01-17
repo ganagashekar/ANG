@@ -15,31 +15,39 @@
       <div class="mat-h2 header">
         CalibSetUp
       </div>
-        <mat-form-field class="half-width ">
+        <!-- <mat-form-field class="half-width ">
         <mat-label>Site Name.</mat-label>
         <!-- <mat-error *ngIf="schedulerForm.controls.siteId.hasError('required')">
             Siteid is
             <strong>required</strong>
-        </mat-error> -->
+        </mat-error> ->
         <mat-select formControlName="siteId" >
 
            <mat-option [value]="site.id" *ngFor="let site of sitesArray">{{site.name}}
            </mat-option>
        </mat-select>
-   </mat-form-field>
-
-   <mat-form-field class="half-width">
-    <mat-label>Stack Name.</mat-label>
+   </mat-form-field> -->
+   <mat-form-field class="half-width float-left">
+    <mat-label>confgId.</mat-label>
     <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
       Errordesc is
       <strong>required</strong>
   </mat-error> -->
-    <!-- <input matInput type="string" min="1" formControlName="stack_name"> -->
+    <input matInput type="number" min="1" formControlName="confgId">
+</mat-form-field>
+
+   <!-- <mat-form-field class="half-width">
+    <mat-label>Stack Name.</mat-label>
+    <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
+      Errordesc is
+      <strong>required</strong>
+  </mat-error> ->
+    <!-- <input matInput type="string" min="1" formControlName="stack_name"> ->
     <mat-select formControlName="stack_name" >
       <mat-option [value]="stack.id" *ngFor="let stack of stackArray">{{stack.name}}
       </mat-option>
   </mat-select>
-</mat-form-field>
+</mat-form-field> -->
 
 
       <mat-form-field class="half-width">

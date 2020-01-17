@@ -15,6 +15,14 @@
       <div class="mat-h2 header">
         Userinfo
       </div>
+      <!-- <mat-form-field class="half-width float-left">
+        <mat-label>User Id.</mat-label>
+        <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
+          Errordesc is
+          <strong>required</strong>
+      </mat-error> ->
+        <input matInput type="number" min="1" formControlName="userId">
+    </mat-form-field> -->
         <mat-form-field class="half-width float-left">
           <mat-label>User Name.</mat-label>
           <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
@@ -51,11 +59,11 @@
       <!-- <mat-slide-toggle>Slide me!</mat-slide-toggle> -->
   </mat-form-field>
 
-   <mat-form-field class="half-width float-left">
+    <mat-form-field class="half-width float-left">
 
        <mat-label>Role</mat-label>
-       <!-- <input matInput type="string" min="1" formControlName="roleName">  -->
-       <mat-select formControlName="roleId">
+       <!-- <input matInput type="string" min="1" formControlName="roleName"> -->
+        <mat-select formControlName="roleId">
         <mat-option [value]="role.id" *ngFor="let role of userroleArray">{{role.name}}
           </mat-option>
     </mat-select>

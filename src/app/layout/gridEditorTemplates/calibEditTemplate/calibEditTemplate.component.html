@@ -15,15 +15,15 @@
       <div class="mat-h2 header">
         CalibSetUp
       </div>
-      <!-- <mat-form-field class="half-width float-left">
+      <mat-form-field class="half-width float-left">
         <mat-label>confg_id.</mat-label>
         <!-- <mat-error *ngIf="schedulerForm.controls.errordesc.hasError('required')">
           Errordesc is
           <strong>required</strong>
-      </mat-error> ->
+      </mat-error> -->
         <input matInput type="number" min="1" formControlName="confg_id">
-    </mat-form-field> -->
-    <mat-form-field class="half-width float-left">
+    </mat-form-field>
+    <mat-form-field class="half-width float-right">
       <mat-label>Stack Name.</mat-label>
 
       <mat-select formControlName="stack_name" >
@@ -44,7 +44,7 @@
       </mat-select>
   </mat-form-field>
 
-      <mat-form-field class="half-width float-right">
+      <mat-form-field class="half-width float-left">
         <mat-label>SetZeroCmd.</mat-label>
         <input matInput type="string" min="1" formControlName="setZeroCmd">
     </mat-form-field>
