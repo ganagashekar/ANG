@@ -269,7 +269,7 @@ public class {testClassName}
         return null;
     }
 
-    public static void Main(string[] args)
+   public static void Main(string[] args)
     {
         string code = @"
 public class Calculator
@@ -284,3 +284,62 @@ public class Calculator
     [InlineData(5, 5, 10)]
     public int AddTheory(int a, int b, int expected)
     {
+        return a + b;
+    }
+
+    public string Greet(string name)
+    {
+        return ""Hello, "" + name;
+    }
+
+    public int[] GetEvens(int limit)
+    {
+         return Enumerable.Range(1, limit).Where(x => x % 2 == 0).ToArray();
+    }
+
+    [Theory]
+    [InlineData(5)]
+    public int[] GetEvensTheory(int limit)
+    {
+         return Enumerable.Range(1, limit).Where(x => x % 2 == 0).ToArray();
+    }
+
+
+    public void DoSomething()
+    {
+        // ...
+    }
+}
+";
+
+        string className = "Calculator";
+        string methodName = "AddTheory";
+
+        string unitTest = GenerateUnitTest(code, className, methodName);
+        Console.WriteLine(unitTest);
+
+        methodName = "Add";
+        unitTest = GenerateUnitTest(code, className, methodName);
+        Console.WriteLine(unitTest);
+
+
+        methodName = "Greet";
+        unitTest = GenerateUnitTest(code, className, methodName);
+        Console.WriteLine(unitTest);
+
+         methodName = "GetEvens";
+        unitTest = GenerateUnitTest(code, className, methodName);
+        Console.WriteLine(unitTest);
+
+        methodName = "GetEvensTheory";
+        unitTest = GenerateUnitTest(code, className, methodName);
+        Console.WriteLine(unitTest);
+
+
+         methodName = "DoSomething";
+        unitTest = GenerateUnitTest(code, className, methodName);
+        Console.WriteLine(unitTest);
+
+
+    }
+}
