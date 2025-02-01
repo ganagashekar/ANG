@@ -343,3 +343,67 @@ public class Calculator
 
     }
 }
+
+
+public static void Main(string[] args)
+    {
+        // ... (Code example remains the same)
+
+        string className = "Calculator";
+        string methodName = "AddTheory";
+
+        string unitTest = GenerateUnitTest(code, className, methodName);
+        Console.WriteLine(unitTest);  // Still print to console
+
+        // Save to file
+        string filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{className}Tests.cs"); // Or any path you prefer
+        File.WriteAllText(filePath, unitTest);
+        Console.WriteLine($"Unit tests saved to: {filePath}");
+
+        // ... (Generate and save other test methods)
+
+        methodName = "Add";
+        unitTest = GenerateUnitTest(code, className, methodName);
+        Console.WriteLine(unitTest);
+
+        filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{className}Tests.cs");
+        File.AppendAllText(filePath, unitTest); // Append to the same file
+        Console.WriteLine($"Unit tests saved to: {filePath}");
+
+        // ... (repeat for other methods)
+
+        methodName = "Greet";
+        unitTest = GenerateUnitTest(code, className, methodName);
+        Console.WriteLine(unitTest);
+
+        filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{className}Tests.cs");
+        File.AppendAllText(filePath, unitTest);
+        Console.WriteLine($"Unit tests saved to: {filePath}");
+
+
+        methodName = "GetEvens";
+        unitTest = GenerateUnitTest(code, className, methodName);
+        Console.WriteLine(unitTest);
+
+        filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{className}Tests.cs");
+        File.AppendAllText(filePath, unitTest);
+        Console.WriteLine($"Unit tests saved to: {filePath}");
+
+        methodName = "GetEvensTheory";
+        unitTest = GenerateUnitTest(code, className, methodName);
+        Console.WriteLine(unitTest);
+
+        filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{className}Tests.cs");
+        File.AppendAllText(filePath, unitTest);
+        Console.WriteLine($"Unit tests saved to: {filePath}");
+
+        methodName = "DoSomething";
+        unitTest = GenerateUnitTest(code, className, methodName);
+        Console.WriteLine(unitTest);
+
+        filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{className}Tests.cs");
+        File.AppendAllText(filePath, unitTest);
+        Console.WriteLine($"Unit tests saved to: {filePath}");
+
+    }
+}
