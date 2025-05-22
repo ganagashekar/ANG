@@ -1,286 +1,103 @@
-using System;
-using System.Linq;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
-using System.Web; // For HttpUtility.HtmlEncode (part of .NET Framework)
-using System.Web.Http;
-using System.Web.Http.Controllers;
-using System.Web.Http.ModelBinding;
-using System.Web.Http.ModelBinding.Binders;
-using System.Net.Http.Formatting; // For JsonMediaTypeFormatter
+using System.Collections; // Required for IEnumerable
 
-namespace XssSanitization
+public class XssEncodingActionFilter : IAsyncActionFilter
 {
-    /// <summary>
-    /// Attribute to mark string properties that should have XSS (Cross-Site Scripting)
-    /// strings removed or sanitized when processed.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
-    public class SanitizeXssAttribute : Attribute
+    private readonly IHtmlEncodingService _htmlEncodingService;
+
+    public XssEncodingActionFilter(IHtmlEncodingService htmlEncodingService)
     {
-        // This attribute primarily acts as a marker.
-        // The sanitization logic is applied by a separate processor (e.g., a Custom Model Binder).
+        _htmlEncodingService = htmlEncodingService;
+    }
+
+    public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+    {
+        // This method executes BEFORE the action method.
+        // Model binding has already occurred, so context.ActionArguments contains the bound models.
+
+        foreach (var arg in context.ActionArguments.Values)
+        {
+            if (arg == null) continue;
+
+            // Recursively process the argument to find and encode string properties
+            EncodeStringProperties(arg);
+        }
+
+        // Continue to the action method
+        await next();
     }
 
     /// <summary>
-    /// Provides utility methods for XSS sanitization.
+    /// Recursively HTML-encodes all public string properties of an object.
+    /// Handles nested objects and collections.
     /// </summary>
-    public static class XssSanitizer
+    /// <param name="obj">The object whose string properties should be encoded.</param>
+    /// <param name="visited">A set to track visited objects to prevent infinite loops with circular references.</param>
+    private void EncodeStringProperties(object obj, HashSet<object> visited = null)
     {
-        /// <summary>
-        /// A basic XSS sanitization function using HttpUtility.HtmlEncode.
-        /// In a real-world application, consider using a robust library like
-        /// OWASP ESAPI or a dedicated HTML sanitization library (e.g., AntiXSS Library)
-        /// for more comprehensive protection, especially if you need to allow a safe subset of HTML.
-        /// HttpUtility.HtmlEncode escapes HTML characters, effectively preventing most XSS attacks
-        /// by rendering scripts as text.
-        /// </summary>
-        /// <param name="input">The string to sanitize.</param>
-        /// <returns>The sanitized string.</returns>
-        private static string SanitizeString(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-            {
-                return input;
-            }
+        if (obj == null) return;
 
-            // HttpUtility.HtmlEncode is commonly used in .NET Framework applications.
-            return HttpUtility.HtmlEncode(input);
+        // Initialize visited set for the top-level call
+        visited ??= new HashSet<object>();
+
+        // Check for circular references to prevent infinite loops
+        if (visited.Contains(obj)) return;
+        visited.Add(obj);
+
+        var type = obj.GetType();
+
+        // Handle collections (Lists, Arrays, etc.) but exclude strings themselves
+        if (obj is IEnumerable enumerable && !(obj is string))
+        {
+            foreach (var item in enumerable)
+            {
+                // Only recurse for complex types within collections
+                if (item != null && item.GetType().IsClass && item.GetType() != typeof(string))
+                {
+                    EncodeStringProperties(item, visited);
+                }
+                // String items in collections (e.g., List<string>) will be caught by the property iteration if they are properties of an enclosing object.
+                // If the collection itself is directly bound (e.g., [FromBody] List<string>), you would need to handle that specifically
+                // which is less common for complex sanitization scenarios typically targeting complex models.
+            }
         }
 
-        /// <summary>
-        /// Iterates through properties of an object marked with <see cref="SanitizeXssAttribute"/>
-        /// and applies XSS sanitization to their string values.
-        /// </summary>
-        /// <param name="obj">The object instance whose properties need sanitization.</param>
-        public static void SanitizeProperties(object obj)
+        // Iterate through public instance properties of the current object
+        foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
         {
-            if (obj == null)
+            if (prop.CanRead && prop.CanWrite) // Ensure property can be read and written to
             {
-                return;
-            }
-
-            // Get all public instance properties of the object's type
-            PropertyInfo[] properties = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
-            foreach (PropertyInfo property in properties)
-            {
-                // Check if the property is a string, can be read/written, and has the SanitizeXssAttribute
-                if (property.PropertyType == typeof(string) &&
-                    property.CanRead && property.CanWrite &&
-                    property.IsDefined(typeof(SanitizeXssAttribute), true))
+                if (prop.PropertyType == typeof(string))
                 {
-                    // Get the current value of the property
-                    string originalValue = property.GetValue(obj) as string;
-
-                    if (originalValue != null)
+                    // It's a string property, get its value and encode it
+                    try
                     {
-                        // Sanitize the value
-                        string sanitizedValue = SanitizeString(originalValue);
-
-                        // Set the sanitized value back to the property
-                        property.SetValue(obj, sanitizedValue);
+                        var value = (string)prop.GetValue(obj);
+                        if (!string.IsNullOrEmpty(value))
+                        {
+                            var encodedValue = _htmlEncodingService.EncodeHtml(value);
+                            prop.SetValue(obj, encodedValue);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log errors without stopping execution, e.g., if a property cannot be accessed
+                        Console.WriteLine($"Error encoding property '{prop.Name}' of type '{type.Name}': {ex.Message}");
                     }
                 }
-            }
-        }
-    }
-
-    /// <summary>
-    /// A custom model binder for ASP.NET Web API that sanitizes properties
-    /// marked with <see cref="SanitizeXssAttribute"/> after the default model binding has occurred.
-    /// </summary>
-    public class SanitizingModelBinder : IModelBinder
-    {
-        private readonly IModelBinder _fallbackBinder;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SanitizingModelBinder"/> class.
-        /// </summary>
-        /// <param name="fallbackBinder">The default model binder to use for initial binding.</param>
-        public SanitizingModelBinder(IModelBinder fallbackBinder)
-        {
-            _fallbackBinder = fallbackBinder ?? throw new ArgumentNullException(nameof(fallbackBinder));
-        }
-
-        /// <summary>
-        /// Attempts to bind a model for the current request.
-        /// </summary>
-        /// <param name="actionContext">The context for the action.</param>
-        /// <param name="bindingContext">The model binding context.</param>
-        /// <returns>True if the model was successfully bound; otherwise, false.</returns>
-        public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
-        {
-            if (actionContext == null)
-            {
-                throw new ArgumentNullException(nameof(actionContext));
-            }
-            if (bindingContext == null)
-            {
-                throw new ArgumentNullException(nameof(bindingContext));
-            }
-
-            // First, let the default model binder do its job.
-            // This will populate the model instance from the request body.
-            bool isBound = _fallbackBinder.BindModel(actionContext, bindingContext);
-
-            // If the model was successfully bound and is not null, proceed with sanitization.
-            if (isBound && bindingContext.Model != null)
-            {
-                try
+                else if (prop.PropertyType.IsClass && prop.PropertyType != typeof(string))
                 {
-                    // Apply XSS sanitization to properties of the bound model.
-                    XssSanitizer.SanitizeProperties(bindingContext.Model);
+                    // It's a complex object (not a string), recurse into it
+                    var nestedObj = prop.GetValue(obj);
+                    if (nestedObj != null)
+                    {
+                        EncodeStringProperties(nestedObj, visited);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    // Log the exception if sanitization fails.
-                    Console.WriteLine($"Error during XSS sanitization for model {bindingContext.Model.GetType().Name}: {ex.Message}");
-                    // In Web API, you might add a model state error or re-throw if critical.
-                    // bindingContext.ModelState.AddModelError(bindingContext.ModelName, "Error during sanitization.");
-                }
+                // Primitive types (int, bool, etc.) don't need XSS encoding.
             }
-
-            return isBound;
         }
     }
-
-    /// <summary>
-    /// A model binder provider for ASP.NET Web API that supplies the <see cref="SanitizingModelBinder"/>
-    /// for types that contain properties marked with <see cref="SanitizeXssAttribute"/>.
-    /// </summary>
-    public class SanitizingModelBinderProvider : ModelBinderProvider
-    {
-        /// <summary>
-        /// Gets a model binder for the given model type.
-        /// </summary>
-        /// <param name="configuration">The HTTP configuration.</param>
-        /// <param name="modelType">The type of the model to bind.</param>
-        /// <returns>An <see cref="IModelBinder"/> instance or null if no binder can be provided.</returns>
-        public override IModelBinder GetBinder(HttpConfiguration configuration, Type modelType)
-        {
-            if (configuration == null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
-            if (modelType == null)
-            {
-                throw new ArgumentNullException(nameof(modelType));
-            }
-
-            // Check if the model type has any properties marked with SanitizeXssAttribute.
-            // We only want to apply our custom binder if there's something to sanitize.
-            bool hasSanitizeXssProperties = modelType
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Any(p => p.PropertyType == typeof(string) && p.IsDefined(typeof(SanitizeXssAttribute), true));
-
-            if (!hasSanitizeXssProperties)
-            {
-                return null; // No properties to sanitize, let other providers handle it.
-            }
-
-            // Get the default JsonMediaTypeFormatter's model binder.
-            // This is typically what handles [FromBody] for JSON.
-            // You might need to adjust this if you're using other formatters (e.g., Xml).
-            var jsonFormatter = configuration.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();
-
-            if (jsonFormatter == null)
-            {
-                return null; // No JSON formatter found, so we can't proceed.
-            }
-
-            // Get the default binder for the current model type from the JSON formatter.
-            // This is equivalent to the fallback binder in ASP.NET Core.
-            IModelBinder fallbackBinder = new FormatterModelBinder(jsonFormatter, false); // 'false' for optional param
-
-            if (fallbackBinder == null)
-            {
-                return null; // No default binder found, so we can't proceed.
-            }
-
-            // Return our custom binder, wrapping the fallback binder.
-            return new SanitizingModelBinder(fallbackBinder);
-        }
-    }
-
-    // --- Example Usage in an ASP.NET Web API Application ---
-
-    // This would typically be in a separate file (e.g., UserInputModel.cs)
-    public class UserInputModel
-    {
-        [SanitizeXss]
-        public string Comment { get; set; }
-
-        [SanitizeXss]
-        public string UserName { get; set; }
-
-        public string Email { get; set; } // This property will not be sanitized
-
-        [SanitizeXss]
-        public string Bio { get; set; }
-    }
-
-    // This would typically be in a separate file (e.g., DataController.cs)
-    // and part of an ASP.NET Web API project.
-    public class DataController : ApiController
-    {
-        [HttpPost]
-        [Route("api/data/submit")] // Example route
-        public IHttpActionResult SubmitData([FromBody] UserInputModel model)
-        {
-            // At this point, the SanitizingModelBinder has already run,
-            // and properties marked with [SanitizeXss] in 'model' should be sanitized.
-
-            Console.WriteLine($"Received Sanitized Comment: {model.Comment}");
-            Console.WriteLine($"Received Sanitized UserName: {model.UserName}");
-            Console.WriteLine($"Received Email (not sanitized): {model.Email}");
-            Console.WriteLine($"Received Sanitized Bio: {model.Bio}");
-
-            // You can return the sanitized model or process it further
-            return Ok(new { message = "Data received and sanitized.", sanitizedModel = model });
-        }
-    }
-
-    // --- Global.asax.cs or App_Start/WebApiConfig.cs ---
-    // This is where you would register the model binder provider.
-    // In a typical ASP.NET Web API project, this code goes into App_Start/WebApiConfig.cs
-    // within the Register method, or directly into Global.asax.cs Application_Start.
-
-    /*
-    // Example of WebApiConfig.cs
-    public static class WebApiConfig
-    {
-        public static void Register(HttpConfiguration config)
-        {
-            // Web API routes
-            config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-
-            // Register the custom model binder provider
-            // Insert it at the beginning of the collection to ensure it's checked first.
-            config.Services.Insert(typeof(ModelBinderProvider), 0, new SanitizingModelBinderProvider());
-
-            // Optional: Remove default body model binder if you want to ensure only your custom binder handles it
-            // config.Services.RemoveAll(typeof(ModelBinderProvider),
-            //     p => p is BodyModelBinderProvider);
-        }
-    }
-
-    // Example of Global.asax.cs Application_Start
-    public class WebApiApplication : System.Web.HttpApplication
-    {
-        protected void Application_Start()
-        {
-            AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-        }
-    }
-    */
 }
