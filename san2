@@ -1,0 +1,116 @@
+using System;
+using System.Linq;
+using System.Net.Http;
+using System.Reflection;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.ModelBinding;
+using System.Web.Http.ModelBinding.Binders;
+using System.Web.Http.ModelBinding.Map;
+
+namespace WebApiSanitizeXSS
+{
+    // 1. Property-level attribute
+    [AttributeUsage(AttributeTargets.Property)]
+    public class SanitizeXSSAttribute : Attribute
+    {
+    }
+
+    // 2. Generic model binder that sanitizes [SanitizeXSS] string properties
+    public class SanitizeModelBinder<T> : IModelBinder where T : class, new()
+    {
+        public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+        {
+            var model = new T();
+            var request = actionContext.Request;
+
+            var formDataTask = request.Content.ReadAsFormDataAsync();
+            Task.WaitAll(formDataTask);
+            var form = formDataTask.Result;
+
+            foreach (var prop in typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (!prop.CanWrite || prop.PropertyType != typeof(string))
+                    continue;
+
+                var value = form[prop.Name];
+                if (value == null) continue;
+
+                bool sanitize = prop.GetCustomAttribute<SanitizeXSSAttribute>() != null;
+
+                string sanitizedValue = sanitize
+                    ? HttpUtility.HtmlEncode(value.Trim())
+                    : value.Trim();
+
+                prop.SetValue(model, sanitizedValue);
+            }
+
+            bindingContext.Model = model;
+            return true;
+        }
+    }
+
+    // 3. Custom model binder provider to auto-bind types with [SanitizeXSS]
+    public class SanitizeModelBinderProvider : ModelBinderProvider
+    {
+        public override IModelBinder GetBinder(HttpConfiguration config, Type modelType)
+        {
+            if (!modelType.IsClass || modelType == typeof(string))
+                return null;
+
+            // Check if model has any [SanitizeXSS] string properties
+            bool hasSanitizedProps = modelType
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Any(p => p.PropertyType == typeof(string) &&
+                          p.GetCustomAttribute<SanitizeXSSAttribute>() != null);
+
+            if (!hasSanitizedProps) return null;
+
+            var binderType = typeof(SanitizeModelBinder<>).MakeGenericType(modelType);
+            return (IModelBinder)Activator.CreateInstance(binderType);
+        }
+    }
+
+    // 4. Sample model
+    public class CommentModel
+    {
+        [SanitizeXSS]
+        public string Name { get; set; }
+
+        [SanitizeXSS]
+        public string Message { get; set; }
+
+        public string RawInput { get; set; } // Not sanitized
+    }
+
+    // 5. Sample controller
+    public class CommentsController : ApiController
+    {
+        [HttpPost]
+        [Route("api/comments")]
+        public IHttpActionResult PostComment(CommentModel model)
+        {
+            return Ok(model);
+        }
+    }
+
+    // 6. WebApiConfig - Global registration
+    public static class WebApiConfig
+    {
+        public static void Register(HttpConfiguration config)
+        {
+            // Register custom model binder provider
+            config.Services.Insert(typeof(ModelBinderProvider), 0, new SanitizeModelBinderProvider());
+
+            // Default routing
+            config.MapHttpAttributeRoutes();
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+        }
+    }
+}
