@@ -1,7 +1,12 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using System.Web; // For HttpUtility.HtmlEncode - in a real app, consider a dedicated XSS library
+using System.Web; // For HttpUtility.HtmlEncode (part of .NET Framework)
+using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.ModelBinding;
+using System.Web.Http.ModelBinding.Binders;
+using System.Net.Http.Formatting; // For JsonMediaTypeFormatter
 
 namespace XssSanitization
 {
@@ -13,7 +18,7 @@ namespace XssSanitization
     public class SanitizeXssAttribute : Attribute
     {
         // This attribute primarily acts as a marker.
-        // The sanitization logic is applied by a separate processor.
+        // The sanitization logic is applied by a separate processor (e.g., a Custom Model Binder).
     }
 
     /// <summary>
@@ -22,11 +27,12 @@ namespace XssSanitization
     public static class XssSanitizer
     {
         /// <summary>
-        /// A basic XSS sanitization function.
+        /// A basic XSS sanitization function using HttpUtility.HtmlEncode.
         /// In a real-world application, consider using a robust library like
-        /// Microsoft's AntiXSS Library or OWASP ESAPI for more comprehensive protection.
-        /// This example uses HttpUtility.HtmlEncode, which escapes HTML characters,
-        /// effectively preventing most XSS attacks by rendering scripts as text.
+        /// OWASP ESAPI or a dedicated HTML sanitization library (e.g., AntiXSS Library)
+        /// for more comprehensive protection, especially if you need to allow a safe subset of HTML.
+        /// HttpUtility.HtmlEncode escapes HTML characters, effectively preventing most XSS attacks
+        /// by rendering scripts as text.
         /// </summary>
         /// <param name="input">The string to sanitize.</param>
         /// <returns>The sanitized string.</returns>
@@ -37,11 +43,7 @@ namespace XssSanitization
                 return input;
             }
 
-            // This is a basic HTML encoding. For more advanced XSS prevention,
-            // especially if you need to allow *some* HTML, you'd use a dedicated
-            // sanitization library that parses and cleans HTML.
-            // For example, if you were in an ASP.NET Core context, you might use
-            // a library like HtmlSanitizer (from NuGet).
+            // HttpUtility.HtmlEncode is commonly used in .NET Framework applications.
             return HttpUtility.HtmlEncode(input);
         }
 
@@ -49,9 +51,8 @@ namespace XssSanitization
         /// Iterates through properties of an object marked with <see cref="SanitizeXssAttribute"/>
         /// and applies XSS sanitization to their string values.
         /// </summary>
-        /// <typeparam name="T">The type of the object to sanitize.</typeparam>
         /// <param name="obj">The object instance whose properties need sanitization.</param>
-        public static void SanitizeProperties<T>(T obj) where T : class
+        public static void SanitizeProperties(object obj)
         {
             if (obj == null)
             {
@@ -59,11 +60,11 @@ namespace XssSanitization
             }
 
             // Get all public instance properties of the object's type
-            PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo[] properties = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             foreach (PropertyInfo property in properties)
             {
-                // Check if the property is a string and has the SanitizeXssAttribute
+                // Check if the property is a string, can be read/written, and has the SanitizeXssAttribute
                 if (property.PropertyType == typeof(string) &&
                     property.CanRead && property.CanWrite &&
                     property.IsDefined(typeof(SanitizeXssAttribute), true))
@@ -84,8 +85,126 @@ namespace XssSanitization
         }
     }
 
-    // --- Example Usage ---
+    /// <summary>
+    /// A custom model binder for ASP.NET Web API that sanitizes properties
+    /// marked with <see cref="SanitizeXssAttribute"/> after the default model binding has occurred.
+    /// </summary>
+    public class SanitizingModelBinder : IModelBinder
+    {
+        private readonly IModelBinder _fallbackBinder;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SanitizingModelBinder"/> class.
+        /// </summary>
+        /// <param name="fallbackBinder">The default model binder to use for initial binding.</param>
+        public SanitizingModelBinder(IModelBinder fallbackBinder)
+        {
+            _fallbackBinder = fallbackBinder ?? throw new ArgumentNullException(nameof(fallbackBinder));
+        }
+
+        /// <summary>
+        /// Attempts to bind a model for the current request.
+        /// </summary>
+        /// <param name="actionContext">The context for the action.</param>
+        /// <param name="bindingContext">The model binding context.</param>
+        /// <returns>True if the model was successfully bound; otherwise, false.</returns>
+        public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+        {
+            if (actionContext == null)
+            {
+                throw new ArgumentNullException(nameof(actionContext));
+            }
+            if (bindingContext == null)
+            {
+                throw new ArgumentNullException(nameof(bindingContext));
+            }
+
+            // First, let the default model binder do its job.
+            // This will populate the model instance from the request body.
+            bool isBound = _fallbackBinder.BindModel(actionContext, bindingContext);
+
+            // If the model was successfully bound and is not null, proceed with sanitization.
+            if (isBound && bindingContext.Model != null)
+            {
+                try
+                {
+                    // Apply XSS sanitization to properties of the bound model.
+                    XssSanitizer.SanitizeProperties(bindingContext.Model);
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception if sanitization fails.
+                    Console.WriteLine($"Error during XSS sanitization for model {bindingContext.Model.GetType().Name}: {ex.Message}");
+                    // In Web API, you might add a model state error or re-throw if critical.
+                    // bindingContext.ModelState.AddModelError(bindingContext.ModelName, "Error during sanitization.");
+                }
+            }
+
+            return isBound;
+        }
+    }
+
+    /// <summary>
+    /// A model binder provider for ASP.NET Web API that supplies the <see cref="SanitizingModelBinder"/>
+    /// for types that contain properties marked with <see cref="SanitizeXssAttribute"/>.
+    /// </summary>
+    public class SanitizingModelBinderProvider : ModelBinderProvider
+    {
+        /// <summary>
+        /// Gets a model binder for the given model type.
+        /// </summary>
+        /// <param name="configuration">The HTTP configuration.</param>
+        /// <param name="modelType">The type of the model to bind.</param>
+        /// <returns>An <see cref="IModelBinder"/> instance or null if no binder can be provided.</returns>
+        public override IModelBinder GetBinder(HttpConfiguration configuration, Type modelType)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+            if (modelType == null)
+            {
+                throw new ArgumentNullException(nameof(modelType));
+            }
+
+            // Check if the model type has any properties marked with SanitizeXssAttribute.
+            // We only want to apply our custom binder if there's something to sanitize.
+            bool hasSanitizeXssProperties = modelType
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Any(p => p.PropertyType == typeof(string) && p.IsDefined(typeof(SanitizeXssAttribute), true));
+
+            if (!hasSanitizeXssProperties)
+            {
+                return null; // No properties to sanitize, let other providers handle it.
+            }
+
+            // Get the default JsonMediaTypeFormatter's model binder.
+            // This is typically what handles [FromBody] for JSON.
+            // You might need to adjust this if you're using other formatters (e.g., Xml).
+            var jsonFormatter = configuration.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();
+
+            if (jsonFormatter == null)
+            {
+                return null; // No JSON formatter found, so we can't proceed.
+            }
+
+            // Get the default binder for the current model type from the JSON formatter.
+            // This is equivalent to the fallback binder in ASP.NET Core.
+            IModelBinder fallbackBinder = new FormatterModelBinder(jsonFormatter, false); // 'false' for optional param
+
+            if (fallbackBinder == null)
+            {
+                return null; // No default binder found, so we can't proceed.
+            }
+
+            // Return our custom binder, wrapping the fallback binder.
+            return new SanitizingModelBinder(fallbackBinder);
+        }
+    }
+
+    // --- Example Usage in an ASP.NET Web API Application ---
+
+    // This would typically be in a separate file (e.g., UserInputModel.cs)
     public class UserInputModel
     {
         [SanitizeXss]
@@ -100,50 +219,68 @@ namespace XssSanitization
         public string Bio { get; set; }
     }
 
-    public class Program
+    // This would typically be in a separate file (e.g., DataController.cs)
+    // and part of an ASP.NET Web API project.
+    public class DataController : ApiController
     {
-        public static void Main(string[] args)
+        [HttpPost]
+        [Route("api/data/submit")] // Example route
+        public IHttpActionResult SubmitData([FromBody] UserInputModel model)
         {
-            Console.WriteLine("--- Demonstrating XSS Sanitization Attribute ---");
+            // At this point, the SanitizingModelBinder has already run,
+            // and properties marked with [SanitizeXss] in 'model' should be sanitized.
 
-            UserInputModel input = new UserInputModel
-            {
-                Comment = "Hello <script>alert('XSS!');</script> World!",
-                UserName = "User <img src='x' onerror='alert(\"evil\");'> Name",
-                Email = "test@example.com",
-                Bio = "<p>My bio with <b>some</b> allowed HTML (but script tags are removed).</p>"
-            };
+            Console.WriteLine($"Received Sanitized Comment: {model.Comment}");
+            Console.WriteLine($"Received Sanitized UserName: {model.UserName}");
+            Console.WriteLine($"Received Email (not sanitized): {model.Email}");
+            Console.WriteLine($"Received Sanitized Bio: {model.Bio}");
 
-            Console.WriteLine("\nOriginal Input:");
-            Console.WriteLine($"Comment: {input.Comment}");
-            Console.WriteLine($"UserName: {input.UserName}");
-            Console.WriteLine($"Email: {input.Email}");
-            Console.WriteLine($"Bio: {input.Bio}");
-
-            // Apply sanitization
-            XssSanitizer.SanitizeProperties(input);
-
-            Console.WriteLine("\nSanitized Input:");
-            Console.WriteLine($"Comment: {input.Comment}");
-            Console.WriteLine($"UserName: {input.UserName}");
-            Console.WriteLine($"Email: {input.Email}"); // Email remains unchanged as it's not marked
-            Console.WriteLine($"Bio: {input.Bio}");
-
-            // Another example
-            UserInputModel anotherInput = new UserInputModel
-            {
-                Comment = "<iframe src='malicious.com'></iframe>",
-                UserName = "Admin",
-                Bio = "Just a simple bio."
-            };
-
-            Console.WriteLine("\nOriginal Another Input:");
-            Console.WriteLine($"Comment: {anotherInput.Comment}");
-
-            XssSanitizer.SanitizeProperties(anotherInput);
-
-            Console.WriteLine("\nSanitized Another Input:");
-            Console.WriteLine($"Comment: {anotherInput.Comment}");
+            // You can return the sanitized model or process it further
+            return Ok(new { message = "Data received and sanitized.", sanitizedModel = model });
         }
     }
+
+    // --- Global.asax.cs or App_Start/WebApiConfig.cs ---
+    // This is where you would register the model binder provider.
+    // In a typical ASP.NET Web API project, this code goes into App_Start/WebApiConfig.cs
+    // within the Register method, or directly into Global.asax.cs Application_Start.
+
+    /*
+    // Example of WebApiConfig.cs
+    public static class WebApiConfig
+    {
+        public static void Register(HttpConfiguration config)
+        {
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            // Register the custom model binder provider
+            // Insert it at the beginning of the collection to ensure it's checked first.
+            config.Services.Insert(typeof(ModelBinderProvider), 0, new SanitizingModelBinderProvider());
+
+            // Optional: Remove default body model binder if you want to ensure only your custom binder handles it
+            // config.Services.RemoveAll(typeof(ModelBinderProvider),
+            //     p => p is BodyModelBinderProvider);
+        }
+    }
+
+    // Example of Global.asax.cs Application_Start
+    public class WebApiApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+    }
+    */
 }
