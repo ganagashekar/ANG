@@ -1,0 +1,149 @@
+using System;
+using System.Linq;
+using System.Reflection;
+using System.Web; // For HttpUtility.HtmlEncode - in a real app, consider a dedicated XSS library
+
+namespace XssSanitization
+{
+    /// <summary>
+    /// Attribute to mark string properties that should have XSS (Cross-Site Scripting)
+    /// strings removed or sanitized when processed.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
+    public class SanitizeXssAttribute : Attribute
+    {
+        // This attribute primarily acts as a marker.
+        // The sanitization logic is applied by a separate processor.
+    }
+
+    /// <summary>
+    /// Provides utility methods for XSS sanitization.
+    /// </summary>
+    public static class XssSanitizer
+    {
+        /// <summary>
+        /// A basic XSS sanitization function.
+        /// In a real-world application, consider using a robust library like
+        /// Microsoft's AntiXSS Library or OWASP ESAPI for more comprehensive protection.
+        /// This example uses HttpUtility.HtmlEncode, which escapes HTML characters,
+        /// effectively preventing most XSS attacks by rendering scripts as text.
+        /// </summary>
+        /// <param name="input">The string to sanitize.</param>
+        /// <returns>The sanitized string.</returns>
+        private static string SanitizeString(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return input;
+            }
+
+            // This is a basic HTML encoding. For more advanced XSS prevention,
+            // especially if you need to allow *some* HTML, you'd use a dedicated
+            // sanitization library that parses and cleans HTML.
+            // For example, if you were in an ASP.NET Core context, you might use
+            // a library like HtmlSanitizer (from NuGet).
+            return HttpUtility.HtmlEncode(input);
+        }
+
+        /// <summary>
+        /// Iterates through properties of an object marked with <see cref="SanitizeXssAttribute"/>
+        /// and applies XSS sanitization to their string values.
+        /// </summary>
+        /// <typeparam name="T">The type of the object to sanitize.</typeparam>
+        /// <param name="obj">The object instance whose properties need sanitization.</param>
+        public static void SanitizeProperties<T>(T obj) where T : class
+        {
+            if (obj == null)
+            {
+                return;
+            }
+
+            // Get all public instance properties of the object's type
+            PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (PropertyInfo property in properties)
+            {
+                // Check if the property is a string and has the SanitizeXssAttribute
+                if (property.PropertyType == typeof(string) &&
+                    property.CanRead && property.CanWrite &&
+                    property.IsDefined(typeof(SanitizeXssAttribute), true))
+                {
+                    // Get the current value of the property
+                    string originalValue = property.GetValue(obj) as string;
+
+                    if (originalValue != null)
+                    {
+                        // Sanitize the value
+                        string sanitizedValue = SanitizeString(originalValue);
+
+                        // Set the sanitized value back to the property
+                        property.SetValue(obj, sanitizedValue);
+                    }
+                }
+            }
+        }
+    }
+
+    // --- Example Usage ---
+
+    public class UserInputModel
+    {
+        [SanitizeXss]
+        public string Comment { get; set; }
+
+        [SanitizeXss]
+        public string UserName { get; set; }
+
+        public string Email { get; set; } // This property will not be sanitized
+
+        [SanitizeXss]
+        public string Bio { get; set; }
+    }
+
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("--- Demonstrating XSS Sanitization Attribute ---");
+
+            UserInputModel input = new UserInputModel
+            {
+                Comment = "Hello <script>alert('XSS!');</script> World!",
+                UserName = "User <img src='x' onerror='alert(\"evil\");'> Name",
+                Email = "test@example.com",
+                Bio = "<p>My bio with <b>some</b> allowed HTML (but script tags are removed).</p>"
+            };
+
+            Console.WriteLine("\nOriginal Input:");
+            Console.WriteLine($"Comment: {input.Comment}");
+            Console.WriteLine($"UserName: {input.UserName}");
+            Console.WriteLine($"Email: {input.Email}");
+            Console.WriteLine($"Bio: {input.Bio}");
+
+            // Apply sanitization
+            XssSanitizer.SanitizeProperties(input);
+
+            Console.WriteLine("\nSanitized Input:");
+            Console.WriteLine($"Comment: {input.Comment}");
+            Console.WriteLine($"UserName: {input.UserName}");
+            Console.WriteLine($"Email: {input.Email}"); // Email remains unchanged as it's not marked
+            Console.WriteLine($"Bio: {input.Bio}");
+
+            // Another example
+            UserInputModel anotherInput = new UserInputModel
+            {
+                Comment = "<iframe src='malicious.com'></iframe>",
+                UserName = "Admin",
+                Bio = "Just a simple bio."
+            };
+
+            Console.WriteLine("\nOriginal Another Input:");
+            Console.WriteLine($"Comment: {anotherInput.Comment}");
+
+            XssSanitizer.SanitizeProperties(anotherInput);
+
+            Console.WriteLine("\nSanitized Another Input:");
+            Console.WriteLine($"Comment: {anotherInput.Comment}");
+        }
+    }
+}
