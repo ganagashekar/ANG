@@ -1,74 +1,79 @@
-using System.Text.RegularExpressions;
-
-public static class XssSanitizer
-{
-    public static string Sanitize(string input)
-    {
-        if (string.IsNullOrEmpty(input))
-            return input;
-        // Remove HTML tags (basic)
-        return Regex.Replace(input, "<.*?>", string.Empty);
-    }
-}
-
 using System;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
-using System.Threading.Tasks;
-using System.Web.Http.Controllers;
-using System.Web.Http.ModelBinding;
-
-public class SanitizeXssModelBinder : IModelBinder
-{
-    public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
-    {
-        var modelType = bindingContext.ModelType;
-        var model = Activator.CreateInstance(modelType);
-
-        foreach (var property in modelType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
-        {
-            if (!property.CanWrite)
-                continue;
-
-            var valueProviderResult = bindingContext.ValueProvider.GetValue(property.Name);
-            if (valueProviderResult != null)
-            {
-                object value = valueProviderResult.AttemptedValue;
-                if (property.PropertyType == typeof(string) && value is string strValue)
-                {
-                    value = XssSanitizer.Sanitize(strValue);
-                }
-                else if (value != null)
-                {
-                    value = Convert.ChangeType(value, property.PropertyType);
-                }
-                property.SetValue(model, value);
-            }
-        }
-
-        bindingContext.Model = model;
-        return true;
-    }
-}
-
-using System.Web.Http.ModelBinding;
-
-[ModelBinder(typeof(SanitizeXssModelBinder))]
-public class Equities
-{
-    // Your properties here
-}
-
+using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
 
-public static class WebApiConfig
+namespace WebApiXSSSanitizer
 {
-    public static void Register(HttpConfiguration config)
+    // Property-level attribute
+    [AttributeUsage(AttributeTargets.Property)]
+    public class SanitizeXSSAttribute : Attribute
     {
-        // Other config...
+    }
 
-        var provider = new SimpleModelBinderProvider(typeof(Equities), new SanitizeXssModelBinder());
-        config.Services.Insert(typeof(ModelBinderProvider), 0, provider);
+    // Action filter that sanitizes properties marked with [SanitizeXSS]
+    public class SanitizeXSSPropertiesFilter : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(HttpActionContext actionContext)
+        {
+            foreach (var argument in actionContext.ActionArguments.Values)
+            {
+                if (argument == null) continue;
+
+                var props = argument.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+                foreach (var prop in props)
+                {
+                    if (prop.PropertyType != typeof(string) || !prop.CanRead || !prop.CanWrite)
+                        continue;
+
+                    var attr = prop.GetCustomAttribute<SanitizeXSSAttribute>();
+                    if (attr == null) continue;
+
+                    var value = (string)prop.GetValue(argument);
+                    if (!string.IsNullOrWhiteSpace(value))
+                    {
+                        var sanitized = HttpUtility.HtmlEncode(value.Trim());
+                        prop.SetValue(argument, sanitized);
+                    }
+                }
+            }
+
+            base.OnActionExecuting(actionContext);
+        }
+    }
+
+    // Sample input model
+    public class CommentModel
+    {
+        [SanitizeXSS]
+        public string Name { get; set; }
+
+        [SanitizeXSS]
+        public string Message { get; set; }
+
+        public string RawValue { get; set; } // Will NOT be sanitized
+    }
+
+    // Sample API controller
+    [SanitizeXSSPropertiesFilter] // Apply globally to this controller
+    public class CommentsController : ApiController
+    {
+        [HttpPost]
+        [Route("api/comments")]
+        public IHttpActionResult PostComment(CommentModel model)
+        {
+            // Only Name and Message will be sanitized
+            return Ok(new
+            {
+                SanitizedName = model.Name,
+                SanitizedMessage = model.Message,
+                Raw = model.RawValue
+            });
+        }
     }
 }
