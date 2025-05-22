@@ -1,112 +1,74 @@
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc;
-using System; // For ArgumentNullException
-using System.Reflection;
-using System.Collections.Generic; // For HashSet
-using System.Collections; // For IEnumerable
-using YourNamespace.Services; // Adjust namespace if needed
+using System.Text.RegularExpressions;
 
-namespace YourNamespace.Filters
+public static class XssSanitizer
 {
-    public class XssEncodingActionFilter : IAsyncActionFilter
+    public static string Sanitize(string input)
     {
-        private readonly IHtmlEncodingService _htmlEncodingService;
+        if (string.IsNullOrEmpty(input))
+            return input;
+        // Remove HTML tags (basic)
+        return Regex.Replace(input, "<.*?>", string.Empty);
+    }
+}
 
-        public XssEncodingActionFilter(IHtmlEncodingService htmlEncodingService)
+using System;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using System.Web.Http.Controllers;
+using System.Web.Http.ModelBinding;
+
+public class SanitizeXssModelBinder : IModelBinder
+{
+    public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+    {
+        var modelType = bindingContext.ModelType;
+        var model = Activator.CreateInstance(modelType);
+
+        foreach (var property in modelType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
         {
-            _htmlEncodingService = htmlEncodingService ?? throw new ArgumentNullException(nameof(htmlEncodingService));
-        }
+            if (!property.CanWrite)
+                continue;
 
-        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
-        {
-            if (context == null) throw new ArgumentNullException(nameof(context));
-            if (next == null) throw new ArgumentNullException(nameof(next));
-
-            // This method executes BEFORE the action method.
-            // Model binding has already occurred, so context.ActionArguments contains the bound models.
-
-            foreach (var arg in context.ActionArguments.Values)
+            var valueProviderResult = bindingContext.ValueProvider.GetValue(property.Name);
+            if (valueProviderResult != null)
             {
-                if (arg == null) continue;
-
-                // Recursively process the argument to find and encode string properties
-                EncodeStringProperties(arg);
-            }
-
-            // Continue to the action method
-            await next();
-        }
-
-        /// <summary>
-        /// Recursively HTML-encodes all public string properties of an object.
-        /// Handles nested objects and collections.
-        /// </summary>
-        /// <param name="obj">The object whose string properties should be encoded.</param>
-        /// <param name="visited">A set to track visited objects to prevent infinite loops with circular references.</param>
-        private void EncodeStringProperties(object obj, HashSet<object> visited = null)
-        {
-            if (obj == null) return;
-
-            // Initialize visited set for the top-level call if not already provided
-            if (visited == null)
-            {
-                visited = new HashSet<object>();
-            }
-
-            // Check for circular references to prevent infinite loops
-            if (visited.Contains(obj)) return;
-            visited.Add(obj);
-
-            var type = obj.GetType();
-
-            // Handle collections (Lists, Arrays, etc.) but exclude strings themselves
-            if (obj is IEnumerable enumerable && !(obj is string))
-            {
-                foreach (var item in enumerable)
+                object value = valueProviderResult.AttemptedValue;
+                if (property.PropertyType == typeof(string) && value is string strValue)
                 {
-                    // Only recurse for complex types within collections
-                    if (item != null && item.GetType().IsClass && item.GetType() != typeof(string))
-                    {
-                        EncodeStringProperties(item, visited);
-                    }
+                    value = XssSanitizer.Sanitize(strValue);
                 }
-            }
-
-            // Iterate through public instance properties of the current object
-            foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
-            {
-                if (prop.CanRead && prop.CanWrite) // Ensure property can be read and written to
+                else if (value != null)
                 {
-                    if (prop.PropertyType == typeof(string))
-                    {
-                        // It's a string property, get its value and encode it
-                        try
-                        {
-                            var value = (string)prop.GetValue(obj);
-                            if (!string.IsNullOrEmpty(value))
-                            {
-                                var encodedValue = _htmlEncodingService.EncodeHtml(value);
-                                prop.SetValue(obj, encodedValue);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            // Log errors without stopping execution, e.g., if a property cannot be accessed
-                            Console.WriteLine($"Error encoding property '{prop.Name}' of type '{type.Name}': {ex.Message}");
-                        }
-                    }
-                    else if (prop.PropertyType.IsClass && prop.PropertyType != typeof(string))
-                    {
-                        // It's a complex object (not a string), recurse into it
-                        var nestedObj = prop.GetValue(obj);
-                        if (nestedObj != null)
-                        {
-                            EncodeStringProperties(nestedObj, visited);
-                        }
-                    }
-                    // Primitive types (int, bool, etc.) don't need XSS encoding.
+                    value = Convert.ChangeType(value, property.PropertyType);
                 }
+                property.SetValue(model, value);
             }
         }
+
+        bindingContext.Model = model;
+        return true;
+    }
+}
+
+using System.Web.Http.ModelBinding;
+
+[ModelBinder(typeof(SanitizeXssModelBinder))]
+public class Equities
+{
+    // Your properties here
+}
+
+using System.Web.Http;
+using System.Web.Http.ModelBinding;
+
+public static class WebApiConfig
+{
+    public static void Register(HttpConfiguration config)
+    {
+        // Other config...
+
+        var provider = new SimpleModelBinderProvider(typeof(Equities), new SanitizeXssModelBinder());
+        config.Services.Insert(typeof(ModelBinderProvider), 0, provider);
     }
 }
